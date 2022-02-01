@@ -25,7 +25,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithDBData(value ={"data/remote.xml"}, remote = false)
+    @WithDBData(value ={"data/remote.xml"})
     public void importRemoteXmlDataTest() throws InterruptedException {
         given()
                 .pathParam("id", "GUID_1")
@@ -35,7 +35,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithDBData(value ={"data/test.xls"}, remote = false)
+    @WithDBData(value ={"data/test.xls"})
     public void importRemoteDataTest() throws InterruptedException {
         given()
                 .pathParam("id", "ID_1")

@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>models</module>
         <module>deployment</module>
         <module>runtime</module>
         <module>tests</module>

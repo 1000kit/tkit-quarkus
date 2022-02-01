@@ -43,12 +43,6 @@ public @interface WithDBData {
     String datasource() default "default";
 
     /**
-     * Import data with remote service.
-     * @return {@code true} if the remote import service should be use.
-     */
-    boolean remote() default false;
-
-    /**
      * Should the existing data be deleted in the table that is too imported?
      * @return true if data should be deleted, false otherwise
      */

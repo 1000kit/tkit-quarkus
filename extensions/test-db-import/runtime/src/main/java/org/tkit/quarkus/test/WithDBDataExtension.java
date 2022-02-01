@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.test.dbunit.FileType;
 import org.tkit.quarkus.test.dbunit.Database;
 import org.tkit.quarkus.test.dbunit.LocalDatabase;
-import org.tkit.quarkus.test.dbunit.RemoteDatabase;
 
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -36,7 +35,7 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
         // method annotation
         WithDBData an = method.getAnnotation(WithDBData.class);
         if (an != null) {
-            log.info("[DB-IMPORT] After method level data for {} data-source", method.getName());
+            log.debug("[DB-IMPORT] After method level data for {} data-source", method.getName());
             deleteAllData(an);
             return;
         }
@@ -70,7 +69,7 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
         Method method = context.getRequiredTestMethod();
         WithDBData an = method.getAnnotation(WithDBData.class);
         if (an != null) {
-            log.info("[DB-IMPORT] Init method level data for {}", method.getName());
+            log.debug("[DB-IMPORT] Init method level data for {}", method.getName());
             importAllData(an);
             return;
         }
@@ -101,7 +100,7 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
         if (an == null) {
             return;
         }
-        log.info("[DB-IMPORT] After class level data for {}", clazz.getName());
+        log.debug("[DB-IMPORT] After class level data for {}", clazz.getName());
         deleteAllData(an);
     }
 
@@ -128,9 +127,6 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
     }
 
     private Database createDatabase(WithDBData an) {
-        if (an.remote()) {
-            return new RemoteDatabase();
-        }
         return new LocalDatabase();
     }
 
@@ -144,7 +140,8 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
         for (int i = 0; i < an.value().length; i++) {
             String path = an.value()[i];
 
-            URL fileUrl = this.getClass().getClassLoader().getResource(path);
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            URL fileUrl = cl.getResource(path);
             if (fileUrl == null) {
                 log.warn("[DB-IMPORT] Missing database data resource {} in the class-path.", path);
                 continue;
@@ -152,7 +149,8 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
 
             FileType type = FileType.getDataType(path);
 
-            log.info("[DB-IMPORT] Import data via DBImport type {} file {}", type, fileUrl);
+            log.info("[DB-IMPORT] Import data type {} file {}", type, path);
+            log.debug("[DB-IMPORT] File URL: {}", fileUrl);
             db.insertData(an, type, path);
             log.info("[DB-IMPORT] Import data successfully type {} file {}", type, path);
         }
@@ -167,7 +165,7 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
         Database db = createDatabase(an);
         for (int i = 0; i < an.value().length; i++) {
             if (!an.deleteAfterTest()) {
-                log.info("[DB-IMPORT] no data deleted after test due to annotation value");
+                log.debug("[DB-IMPORT] no data deleted after test due to annotation value");
                 continue;
             }
 

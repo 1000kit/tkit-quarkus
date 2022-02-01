@@ -15,6 +15,9 @@
 
     <properties>
         <quarkus.version>2.2.5.Final</quarkus.version>
+        <jandex-plugin.version>1.1.0</jandex-plugin.version>
+        <hibernate-orm.version>5.5.8.Final</hibernate-orm.version>
+
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
@@ -77,6 +80,19 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jboss.jandex</groupId>
+                    <artifactId>jandex-maven-plugin</artifactId>
+                    <version>${jandex-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>make-index</id>
+                            <goals>
+                                <goal>jandex</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

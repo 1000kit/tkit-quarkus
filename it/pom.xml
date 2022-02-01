@@ -20,6 +20,8 @@
     <modules>
         <module>amqp</module>
         <module>jpa</module>
+        <module>panache</module>
+        <module>panache-reactive</module>
     </modules>
 
     <profiles>

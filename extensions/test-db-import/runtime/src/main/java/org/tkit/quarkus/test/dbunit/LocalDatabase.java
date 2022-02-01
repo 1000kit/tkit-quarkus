@@ -45,7 +45,7 @@ public class LocalDatabase implements Database {
             } else {
                 con = createConnection(dataSourceName);
             }
-            log.info("Create new database connection from datasource {}", dataSourceName);
+            log.debug("[DB-IMPORT] Create new database connection from datasource {}", dataSourceName);
             DatabaseConnection dbCon = new DatabaseConnection(con);
             dbCon.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
             // support only postgresql
@@ -64,15 +64,17 @@ public class LocalDatabase implements Database {
         String username = config.getValue(prefix + "username", String.class);
         String password = config.getValue(prefix + "password", String.class);
         String url = config.getValue(prefix + "jdbc.url", String.class);
+        log.debug("[DB-IMPORT] db url: {}", url);
         return DriverManager.getConnection(url, username, password);
     }
 
     protected IDataSet getDataSet(FileType type, String file) throws Exception {
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         switch (type) {
             case XML:
-                return new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream(file));
+                return new FlatXmlDataSetBuilder().build(cl.getResourceAsStream(file));
             case XLS:
-                return new XlsDataSet(getClass().getClassLoader().getResourceAsStream(file));
+                return new XlsDataSet(cl.getResourceAsStream(file));
         }
         throw new RuntimeException("No datasource found for the type " + type);
     }
