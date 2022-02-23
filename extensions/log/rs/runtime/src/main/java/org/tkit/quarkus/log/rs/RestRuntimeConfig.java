@@ -109,6 +109,11 @@ public class RestRuntimeConfig {
         @ConfigItem(name = "max-entity-size", defaultValue = "1048576")
         public int maxEntitySize = 1048576;
 
+        /**
+         * Regex log configuration.
+         */
+        @ConfigItem(name = "regex")
+        public RegexLog regex;
     }
 
     /**
@@ -260,6 +265,12 @@ public class RestRuntimeConfig {
          */
         @ConfigItem(name = "log")
         public Optional<Boolean> log;
+
+        /**
+         * Enable or disable rest controller payload
+         */
+        @ConfigItem(name = "payload")
+        public Optional<Boolean> payload;
 
     }
 

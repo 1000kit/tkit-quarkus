@@ -29,6 +29,20 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
         if (config.payload.enabled) {
 
             if (requestContext.getMethod().equals(HttpMethod.POST) || requestContext.getMethod().equals(HttpMethod.PUT)) {
+
+                // check regex exclude
+                if (config.payload.regex.enabled) {
+                    if (RestRecorder.excludePayloadUrl(requestContext.getUriInfo().getPath())) {
+                        return;
+                    }
+                }
+
+                // check annotation
+                RestServiceValue.Item ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
+                if (!ano.payload) {
+                    return;
+                }
+
                 Logger logger = LoggerFactory.getLogger(resourceInfo.getResourceClass());
                 InputStream stream = requestContext.getEntityStream();
                 if (!stream.markSupported()) {
@@ -50,7 +64,7 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
                     }
                 }
                 if (sb.length() > 0) {
-                    logger.info(String.format(config.payload.message, requestContext.getMethod(), requestContext.getUriInfo().getRequestUri(), sb));
+                    logger.info(String.format(config.payload.message, requestContext.getMethod(), requestContext.getUriInfo().getPath(), sb));
                 }
                 stream.reset();
                 requestContext.setEntityStream(stream);

@@ -91,6 +91,8 @@ public class RestServiceValue {
 
         public boolean log;
 
+        public boolean payload;
+
         public String configKey;
     }
 
@@ -104,6 +106,7 @@ public class RestServiceValue {
         Item item = new Item();
         item.id = id;
         item.log = true;
+        item.payload = true;
         item.configKey = null;
         return item;
     }

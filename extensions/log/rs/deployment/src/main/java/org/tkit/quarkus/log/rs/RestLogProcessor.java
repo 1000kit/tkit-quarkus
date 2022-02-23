@@ -23,7 +23,7 @@ public class RestLogProcessor {
     }
 
     @BuildStep
-    @Record(ExecutionTime.STATIC_INIT)
+    @Record(ExecutionTime.RUNTIME_INIT)
     void init(RestRecorder recorder, RestRuntimeConfig config, RestServiceBuildItem items) {
         recorder.init(config, items.value);
     }
@@ -73,6 +73,7 @@ public class RestLogProcessor {
 
     private static void updateValue(IndexView view, AnnotationInstance ano, RestServiceValue.Item item) {
         item.log = ano.valueWithDefault(view, "log").asBoolean();
+        item.payload = ano.valueWithDefault(view, "payload").asBoolean();
         String configKey = ano.valueWithDefault(view, "configKey").asString();
         if (!configKey.isBlank()) {
             item.configKey = configKey;

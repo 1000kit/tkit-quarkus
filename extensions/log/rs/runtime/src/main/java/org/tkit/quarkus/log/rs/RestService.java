@@ -24,4 +24,11 @@ public @interface RestService {
      */
     @Nonbinding boolean log() default true;
 
+    /**
+     * Log the method payload or class if the flag is {@code true}.
+     *
+     * @return the payload flag.
+     */
+    @Nonbinding boolean payload() default true;
+
 }

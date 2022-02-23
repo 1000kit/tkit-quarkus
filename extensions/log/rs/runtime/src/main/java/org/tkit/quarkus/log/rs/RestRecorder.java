@@ -24,22 +24,24 @@ public class RestRecorder {
 
     static List<Pattern> PATTERNS;
 
+    static List<Pattern> PAYLOAD_PATTERNS;
+
     public void init(RestRuntimeConfig config, RestServiceValue values) {
         CONFIG = config;
         if (config.regex.enabled) {
             List<String> items = config.regex.exclude.orElse(null);
-            if (items != null && !items.isEmpty()) {
-                PATTERNS = new ArrayList<>();
-                items.forEach(item -> {
-                    try {
-                        PATTERNS.add(Pattern.compile(item));
-                    } catch (PatternSyntaxException ex) {
-                        log.error("Error compile regex pattern '{}' error {}", item, ex.getMessage());
-                    }
-                });
-            } else {
+            PATTERNS = createPatterns (items);
+            if (PATTERNS == null) {
                 config.regex.enabled = false;
                 log.info("No exclude regex patterns found. Disable exclude regex patterns for rest log interceptor.");
+            }
+        }
+        if (config.payload.regex.enabled) {
+            List<String> items = config.payload.regex.exclude.orElse(null);
+            PAYLOAD_PATTERNS = createPatterns (items);
+            if (PAYLOAD_PATTERNS == null) {
+                config.payload.regex.enabled = false;
+                log.info("No exclude regex payload patterns found. Disable exclude regex patterns for rest payload interceptor.");
             }
         }
         REST_SERVICE = values;
@@ -49,9 +51,10 @@ public class RestRecorder {
                 if (items != null) {
 
                     // update class values from properties
-                    if (value.config.log.isPresent()) {
+                    if (value.config.log.isPresent() || value.config.payload.isPresent()) {
                         items.forEach(item -> {
                             value.config.log.ifPresent(x -> item.config.log = x);
+                            value.config.payload.ifPresent(x -> item.config.payload = x);
                         });
                     }
 
@@ -62,6 +65,7 @@ public class RestRecorder {
                             if (methods != null) {
                                 methods.forEach(method -> {
                                     mv.log.ifPresent(x -> method.log = x);
+                                    mv.payload.ifPresent(x -> method.payload = x);
                                 });
                             }
                         });
@@ -71,11 +75,34 @@ public class RestRecorder {
         }
     }
 
+    private static List<Pattern> createPatterns(List<String> items) {
+        if (items == null || items.isEmpty()) {
+            return null;
+        }
+        List<Pattern> tmp = new ArrayList<>();
+        items.forEach(item -> {
+            try {
+                tmp.add(Pattern.compile(item));
+            } catch (PatternSyntaxException ex) {
+                log.error("Error compile regex pattern '{}' error {}", item, ex.getMessage());
+            }
+        });
+        return tmp;
+    }
+
+    public static boolean excludePayloadUrl(String url) {
+        return excludeUrl(PAYLOAD_PATTERNS, url);
+    }
+
     public static boolean excludeUrl(String url) {
-        if (PATTERNS == null) {
+        return excludeUrl(PATTERNS, url);
+    }
+
+    private static boolean excludeUrl(List<Pattern> patterns, String url) {
+        if (patterns == null) {
             return false;
         }
-        for (Pattern pattern : PATTERNS) {
+        for (Pattern pattern : patterns) {
             if (pattern.matcher(url).matches()) {
                 return true;
             }
