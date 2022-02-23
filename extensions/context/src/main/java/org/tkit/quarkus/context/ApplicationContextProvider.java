@@ -1,4 +1,4 @@
-package org.tkit.quarkus.log.cdi.context;
+package org.tkit.quarkus.context;
 
 import org.eclipse.microprofile.context.spi.ThreadContextProvider;
 import org.eclipse.microprofile.context.spi.ThreadContextSnapshot;
@@ -8,32 +8,29 @@ import java.util.Map;
 /**
  * Microprofile context provider for propagation of correlation scope between threads.
  */
-public class TkitLogThreadContextProvider implements ThreadContextProvider {
-    private static final String TYPE = "Tkit Log";
+public class ApplicationContextProvider implements ThreadContextProvider {
+
+    private static final String TYPE = "tkit-application-context";
 
     @Override
     public ThreadContextSnapshot currentContext(Map<String, String> props) {
-        CorrelationScope captured = TkitLogContext.get();
+        Context captured = ApplicationContext.get();
         return () -> {
-            CorrelationScope current = restore(captured);
+            Context current = restore(captured);
             return () -> restore(current);
         };
     }
 
-    private CorrelationScope restore(CorrelationScope context) {
-        CorrelationScope currentContext = TkitLogContext.get();
-        if (context == null) {
-            TkitLogContext.set(null);
-        } else {
-            TkitLogContext.set(context);
-        }
+    private Context restore(Context context) {
+        Context currentContext = ApplicationContext.get();
+        ApplicationContext.set(context);
         return currentContext;
     }
 
     @Override
     public ThreadContextSnapshot clearedContext(Map<String, String> props) {
         return () -> {
-            CorrelationScope current = restore(null);
+            Context current = restore(null);
             return () -> restore(current);
         };
     }

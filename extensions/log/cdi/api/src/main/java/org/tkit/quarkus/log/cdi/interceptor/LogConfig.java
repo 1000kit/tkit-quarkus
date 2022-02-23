@@ -1,24 +1,14 @@
-/*
- * Copyright 2020 1000kit.org.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.tkit.quarkus.log.cdi.interceptor;
 
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
+import org.tkit.quarkus.log.cdi.LogService;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.text.MessageFormat;
+import java.util.Optional;
 
 /**
  * The logger configuration.
@@ -118,5 +108,62 @@ public class LogConfig {
         return mf.format(parameters, new StringBuffer(), null).toString();
     }
 
+    /**
+     * Gets the logger service annotation.
+     *
+     * @param clazz                  the class.
+     * @param method                 the method.
+     * @param enableProtectedMethod {@code true} to disable to log protected methods.
+     * @return the logger service annotation.
+     */
+    public static LogService getLoggerServiceAno(Class<?> clazz, String className, Method method, boolean enableProtectedMethod) {
+
+        if (!enableProtectedMethod && Modifier.isProtected(method.getModifiers())) {
+            return createLoggerService(false, false);
+        }
+        Config config = ConfigProvider.getConfig();
+        String mc = className + "." + method.getName() + "/tkit-log/";
+        String c = className + "/tkit-log/";
+
+        Optional<Boolean> log = config.getOptionalValue(mc + "log", Boolean.class);
+        Optional<Boolean> trace = config.getOptionalValue(mc + "trace", Boolean.class);
+        LogService anno = method.getAnnotation(LogService.class);
+        if (anno != null) {
+            return createLoggerService(log.orElse(anno.log()), trace.orElse(anno.stacktrace()));
+        }
+        Optional<Boolean> clog = config.getOptionalValue(c + "log", Boolean.class);
+        Optional<Boolean> ctrace = config.getOptionalValue(c + "trace", Boolean.class);
+        LogService canno = clazz.getAnnotation(LogService.class);
+        if (canno != null) {
+            return createLoggerService(log.orElse(clog.orElse(canno.log())), trace.orElse(ctrace.orElse(canno.stacktrace())));
+        }
+        return createLoggerService(log.orElse(clog.orElse(true)), trace.orElse(ctrace.orElse(true)));
+    }
+
+    /**
+     * Creates the logger service.
+     *
+     * @param log        the log flag.
+     * @param stacktrace the stacktrace flag.
+     * @return the corresponding logger service.
+     */
+    private static LogService createLoggerService(boolean log, boolean stacktrace) {
+        return new LogService() {
+            @Override
+            public boolean log() {
+                return log;
+            }
+
+            @Override
+            public boolean stacktrace() {
+                return stacktrace;
+            }
+
+            @Override
+            public Class<? extends Annotation> annotationType() {
+                return LogService.class;
+            }
+        };
+    }
 }
 

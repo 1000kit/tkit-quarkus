@@ -107,6 +107,6 @@ public class TraceableEntity extends AbstractTraceableEntity<String> {
      */
     @Override
     public String toString() {
-        return TraceableEntity.class.getSimpleName() + ":" + getId();
+        return this.getClass().getSimpleName() + ":" + getId();
     }
 }

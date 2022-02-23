@@ -1,7 +1,7 @@
 package org.tkit.quarkus.jpa.models;
 
-import org.tkit.quarkus.context.RequestData;
-import org.tkit.quarkus.context.RequestDataContext;
+import org.tkit.quarkus.context.Context;
+import org.tkit.quarkus.context.ApplicationContext;
 
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.CDI;
@@ -52,9 +52,9 @@ public class TraceableListener implements Serializable {
     }
     
     private String getPrincipal() {
-        final RequestData requestData = RequestDataContext.get();
-        if (requestData != null) {
-            return requestData.getPrincipal();
+        final Context context = ApplicationContext.get();
+        if (context != null) {
+            return context.principal;
         }
         
         Instance<Principal> principalInstance = CDI.current().select(Principal.class);

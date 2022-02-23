@@ -1,6 +1,7 @@
 package org.tkit.quarkus.test;
 
 
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.extension.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,6 @@ import java.net.URL;
  * This junit5 extension is using the db-import service to import data in the database.
  * The data to for the import needs to be in the class-path.
  * Only the excel and xml data formats are supported.
- * The db-import service configuration property: tkit.test.dbimport.url, default value: http://docker:8811/
  *
  * @see WithDBData
  */
@@ -149,8 +149,7 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
 
             FileType type = FileType.getDataType(path);
 
-            log.info("[DB-IMPORT] Import data type {} file {}", type, path);
-            log.debug("[DB-IMPORT] File URL: {}", fileUrl);
+            log.debug("[DB-IMPORT] Import data type {} file {} url {}", type, path, fileUrl);
             db.insertData(an, type, path);
             log.info("[DB-IMPORT] Import data successfully type {} file {}", type, path);
         }
@@ -183,9 +182,9 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
                 continue;
             }
 
-            log.info("[DB-IMPORT] Truncate data via DBImport type {} file {}", type, fileUrl);
+            log.debug("[DB-IMPORT] Truncate data via DBImport type {} file {} url {}", type, path, fileUrl);
             db.deleteData(an, type, path);
-            log.info("[DB-IMPORT] Truncate data successfully type {} file {}", type, fileUrl);
+            log.info("[DB-IMPORT] Truncate data successfully type {} file {}", type, path);
         }
     }
 

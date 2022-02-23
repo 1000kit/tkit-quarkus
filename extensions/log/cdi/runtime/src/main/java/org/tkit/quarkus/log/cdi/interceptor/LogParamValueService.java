@@ -1,26 +1,8 @@
-/*
- * Copyright 2020 1000kit.org.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.tkit.quarkus.log.cdi.interceptor;
 
-import org.tkit.quarkus.log.cdi.LogParamValue;
+import org.tkit.quarkus.log.cdi.LogParam;
+import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -28,7 +10,6 @@ import java.util.function.Function;
 /**
  * Logger builder service.
  */
-@Singleton
 public class LogParamValueService {
 
     /**
@@ -41,26 +22,34 @@ public class LogParamValueService {
      */
     public static Map<Class<?>, Function<Object, String>> ASSIGNABLE_FROM = new HashMap<>(JavaTypesLogParamValue.assignableFrom());
 
-    @Inject @Any
-    Instance<LogParamValue> services;
+    static LogRuntimeConfig CONFIG;
 
-    public void init() {
+    public static LogRuntimeConfig getConfig() {
+        return CONFIG;
+    }
+
+    public static void init(LogRuntimeConfig config, List<LogParam> services) {
+        CONFIG = config;
         if (services != null) {
-            Map<Class<?>, LogParamValue.Item> classes = new HashMap<>();
-            Map<Class<?>, LogParamValue.Item> assignable = new HashMap<>();
-            for (LogParamValue def : services) {
-                map(def.getClasses(), classes);
-                map(def.getAssignableFrom(), assignable);
+            Map<Class<?>, LogParam.Item> classes = new HashMap<>();
+            Map<Class<?>, LogParam.Item> assignable = new HashMap<>();
+            for (LogParam def : services) {
+                if (def.getClasses() != null) {
+                    map(def.getClasses(), classes);
+                }
+                if (def.getAssignableFrom() != null) {
+                    map(def.getAssignableFrom(), assignable);
+                }
             }
             classes.forEach((c, item) -> CLASSES.put(c, item.fn));
             assignable.forEach((c, item) -> ASSIGNABLE_FROM.put(c, item.fn));
         }
     }
 
-    private void map(List<LogParamValue.Item> items, Map<Class<?>, LogParamValue.Item> target) {
+    private static void map(List<LogParam.Item> items, Map<Class<?>, LogParam.Item> target) {
         if (items != null) {
-            for (LogParamValue.Item item : items) {
-                LogParamValue.Item tmp = target.get(item.clazz);
+            for (LogParam.Item item : items) {
+                LogParam.Item tmp = target.get(item.clazz);
                 if (tmp != null) {
                     if (item.priority > tmp.priority) {
                         target.put(item.clazz, item);
@@ -78,7 +67,7 @@ public class LogParamValueService {
      * @param parameter the method parameter.
      * @return the value from the parameter.
      */
-    public String getParameterValue(Object parameter) {
+    public static String getParameterValue(Object parameter) {
         if (parameter != null) {
             Class<?> clazz = parameter.getClass();
             Function<Object, String> fn = CLASSES.get(clazz);

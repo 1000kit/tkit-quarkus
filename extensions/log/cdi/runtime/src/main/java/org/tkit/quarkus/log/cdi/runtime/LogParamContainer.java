@@ -1,4 +1,6 @@
-package org.tkit.quarkus.log.cdi;
+package org.tkit.quarkus.log.cdi.runtime;
+
+import org.tkit.quarkus.log.cdi.LogParam;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Any;
@@ -14,7 +16,7 @@ public class LogParamContainer {
     @Any
     Instance<LogParam> parameters;
 
-    public List<LogParam> getJobHandlers() {
+    public List<LogParam> getParameters() {
         return parameters.stream().collect(Collectors.toList());
     }
 }

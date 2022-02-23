@@ -1,85 +1,32 @@
 package org.tkit.quarkus.log.rs;
 
-import org.eclipse.microprofile.config.Config;
-import org.eclipse.microprofile.config.ConfigProvider;
 import org.jboss.logging.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.Context;
 import org.tkit.quarkus.context.ApplicationContext;
-import org.tkit.quarkus.log.cdi.BusinessLoggingUtil;
-import org.tkit.quarkus.log.cdi.LogService;
-import org.tkit.quarkus.log.cdi.interceptor.LogConfig;
 
+import javax.annotation.Priority;
 import javax.ws.rs.container.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.tkit.quarkus.log.cdi.interceptor.LogConfig.PROP_DISABLE_PROTECTED_METHODS;
-import static org.tkit.quarkus.log.cdi.interceptor.LogConfig.getLoggerServiceAno;
-import static org.tkit.quarkus.log.rs.RestConfig.convert;
 
 /**
  * The rest log interceptor.
  */
 @Provider
-@LogService(log = false)
-public class RestControllerInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
+@Priority(1)
+public class RestLogInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
 
     /**
      * The context interceptor property.
      */
     private static final String CONTEXT = "context";
 
-    /**
-     * The message start.
-     */
-    private static final MessageFormat messageStart;
+    private static final Logger log = LoggerFactory.getLogger(RestLogInterceptor.class);
 
-    /**
-     * The message succeed.
-     */
-    private static final MessageFormat messageSucceed;
-
-    /**
-     * Add MDC parameters to the log.
-     */
-    private static final boolean mdcLog;
-
-    /**
-     * The rest logger interceptor disable flag.
-     */
-    private static final boolean disable;
-
-    /**
-     * Disable the protected methods to log.
-     */
-    private static final boolean disableProtectedMethod;
-
-    /**
-     * Headers log parameters
-     */
-    private static final Map<String, String> headersLog = new HashMap<>();
-
-
-    static {
-        Config config = ConfigProvider.getConfig();
-        messageStart = new MessageFormat(config.getOptionalValue("tkit.log.rs.start", String.class).orElse("{0} {1} [{2}] started."));
-        messageSucceed = new MessageFormat(config.getOptionalValue("tkit.log.rs.succeed", String.class).orElse("{0} {1} [{2}s] finished [{3}-{4},{5}]."));
-        disable = config.getOptionalValue("tkit.log.rs.disable", Boolean.class).orElse(false);
-        mdcLog = config.getOptionalValue("tkit.log.rs.mdc", Boolean.class).orElse(false);
-        disableProtectedMethod = config.getOptionalValue(PROP_DISABLE_PROTECTED_METHODS, Boolean.class).orElse(true);
-        String[] items = config.getOptionalValue("tkit.log.rs.header", String[].class).orElse(null);
-        headersLog.putAll(convert(items));
-    }
-
-    /**
-     * The resource info.
-     */
     @javax.ws.rs.core.Context
     ResourceInfo resourceInfo;
 
@@ -91,36 +38,52 @@ public class RestControllerInterceptor implements ContainerRequestFilter, Contai
      */
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        if (disable) {
+        RestRuntimeConfig config = RestRecorder.getConfig();
+        if (!config.enabled) {
             return;
         }
 
-        //start log scope/correlation id
-        String correlationId = requestContext.getHeaders().getFirst(RestConfig.HEADER_X_CORRELATION_ID);
-        ApplicationContext.start(Context.builder().correlationId(correlationId).build());
+        RestInterceptorContext restContext = new RestInterceptorContext();
 
-        // add header parameters to MDC
-        for (Map.Entry<String, String> e : headersLog.entrySet()) {
-            String tmp = requestContext.getHeaderString(e.getKey());
-            if (tmp != null && !tmp.isBlank()) {
-                MDC.put(e.getValue(), tmp);
+        // check regex exclude
+        if (config.regex.enabled) {
+            String url = requestContext.getUriInfo().getPath();
+            restContext.exclude = RestRecorder.excludeUrl(url);
+            if (restContext.exclude) {
+                requestContext.setProperty(CONTEXT, restContext);
+                return;
             }
         }
 
-        LogService ano = getLoggerServiceAno(resourceInfo.getResourceClass(), resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod(), disableProtectedMethod);
-        RestInterceptorContext context = new RestInterceptorContext(ano);
+        //start log scope/correlation id
+        String correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
+        ApplicationContext.start(Context.builder().correlationId(correlationId).build());
 
-        if (ano.log()) {
-            context.method = requestContext.getMethod();
-            context.uri = requestContext.getUriInfo().getRequestUri().toString();
+        // add header parameters to MDC
+        config.mdcHeaders.ifPresent(headers -> headers.forEach((k, v) -> {
+            String tmp = requestContext.getHeaderString(k);
+            if (tmp != null && !tmp.isBlank()) {
+                MDC.put(v, tmp);
+                restContext.mdcKeys.add(v);
+            }
+        }));
 
-            // create the logger
-            Logger logger = LoggerFactory.getLogger(resourceInfo.getResourceClass());
-            boolean hasEntity = requestContext.getMediaType() != null && requestContext.getLength() > 0;
-            logger.info("{}", LogConfig.msg(messageStart, new Object[]{context.method, requestContext.getUriInfo().getRequestUri(), hasEntity}));
+        restContext.ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
+
+        if (restContext.ano.log) {
+            UriInfo uriInfo = requestContext.getUriInfo();
+            restContext.method = requestContext.getMethod();
+            restContext.path = uriInfo.getPath();
+            restContext.uri = uriInfo.getRequestUri().toString();
+
+            // start message log
+            if (config.start.enabled) {
+                LoggerFactory.getLogger(resourceInfo.getResourceClass())
+                        .info(String.format(config.start.template, restContext.method, restContext.path, restContext.uri));
+            }
         }
 
-        requestContext.setProperty(CONTEXT, context);
+        requestContext.setProperty(CONTEXT, restContext);
     }
 
     /**
@@ -128,34 +91,35 @@ public class RestControllerInterceptor implements ContainerRequestFilter, Contai
      */
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
-        if (disable) {
+        RestRuntimeConfig config = RestRecorder.getConfig();
+        if (!config.enabled) {
             return;
         }
 
         try {
-            RestInterceptorContext context = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
-            if (context != null && context.ano.log()) {
-                try {
+            RestInterceptorContext restContext = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
+            if (restContext == null) {
+                if (config.error.enabled) {
                     Response.StatusType status = responseContext.getStatusInfo();
-                    Logger logger = LoggerFactory.getLogger(resourceInfo.getResourceClass());
-                    context.close();
-
-                    logger.info("{}", LogConfig.msg(messageSucceed,
-                            new Object[]{
-                                    context.method,
-                                    context.uri,
-                                    context.time,
-                                    status.getStatusCode(),
-                                    status.getReasonPhrase(),
-                                    responseContext.hasEntity()
-                            }));
-                } finally {
-                    // mdc log
-                    for (String e : headersLog.keySet()) {
-                        MDC.remove(e);
-                    }
-                    if (mdcLog) {
-                        BusinessLoggingUtil.removeAll();
+                    log.info(String.format(config.end.template, requestContext.getMethod(), requestContext.getUriInfo().getPath(), 0.000,
+                            status.getStatusCode(), status.getReasonPhrase(), requestContext.getUriInfo().getRequestUri()));
+                }
+            } else {
+                if (restContext.exclude) {
+                    return;
+                }
+                if (restContext.ano.log) {
+                    try {
+                        restContext.close();
+                        if (config.end.enabled) {
+                            Response.StatusType status = responseContext.getStatusInfo();
+                            LoggerFactory.getLogger(resourceInfo.getResourceClass())
+                                    .info(String.format(config.end.template, restContext.method, restContext.path,
+                                            restContext.time, status.getStatusCode(), status.getReasonPhrase(), restContext.uri));
+                        }
+                    } finally {
+                        // clean up MDC header keys
+                        restContext.mdcKeys.forEach(MDC::remove);
                     }
                 }
             }

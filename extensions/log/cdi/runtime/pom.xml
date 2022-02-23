@@ -26,6 +26,11 @@
             <artifactId>tkit-quarkus-log-cdi-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tkit.quarkus</groupId>
+            <artifactId>tkit-quarkus-context</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

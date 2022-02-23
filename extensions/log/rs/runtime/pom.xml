@@ -15,18 +15,17 @@
     <dependencies>
         <dependency>
             <groupId>org.tkit.quarkus</groupId>
-            <artifactId>tkit-quarkus-log-cdi</artifactId>
+            <artifactId>tkit-quarkus-context</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.tkit.quarkus</groupId>-->
+<!--            <artifactId>tkit-quarkus-log-cdi-api</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
@@ -63,10 +62,6 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jboss.jandex</groupId>
-                <artifactId>jandex-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

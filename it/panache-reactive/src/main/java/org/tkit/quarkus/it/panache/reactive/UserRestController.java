@@ -21,7 +21,6 @@ public class UserRestController {
     @GET
     @Path("{id}")
     public Uni<Response> get(@PathParam("id") String id) {
-
         return dao.findById(id)
                 .onItem().ifNotNull().transform(d -> Response.ok(dto(d)).build())
                 .onItem().ifNull().continueWith(Response.ok().status(NOT_FOUND)::build);

@@ -12,4 +12,11 @@
     <artifactId>tkit-quarkus-context</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>

@@ -10,11 +10,12 @@ import org.jboss.jandex.*;
 
 import java.lang.reflect.Modifier;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class RsLogProcessor {
+public class RestLogProcessor {
 
     static final String FEATURE_NAME = "tkit-log-rs";
+
+    static final DotName ANO_REST_SERVICE = DotName.createSimple(RestService.class.getName());
 
     @BuildStep
     void build(BuildProducer<FeatureBuildItem> feature) {
@@ -22,78 +23,84 @@ public class RsLogProcessor {
     }
 
     @BuildStep
-    @Record(ExecutionTime.RUNTIME_INIT)
+    @Record(ExecutionTime.STATIC_INIT)
     void init(RestRecorder recorder, RestRuntimeConfig config, RestServiceBuildItem items) {
         recorder.init(config, items.value);
     }
 
     @BuildStep
     void restServices(BeanArchiveIndexBuildItem index, BuildProducer<RestServiceBuildItem> producer) {
-
-        RestServiceValue g = new RestServiceValue();
-        Map<String, String> keys = new HashMap<>();
-
+        RestServiceValue values = new RestServiceValue();
         IndexView view = index.getIndex();
-        view.getAnnotations(DotName.createSimple(RestService.class.getName()))
-                .forEach(a -> createRestServiceValue(view, a, g, keys));
-
-        keys.forEach((id,key) -> g.keys.compute(key, (k, v) -> {
-            if (v == null) {
-                v = new HashSet<>();
-            }
-            v.add(id);
-            return v;
-        }));
-        producer.produce(new RestServiceBuildItem(g));
+        view.getAnnotations(ANO_REST_SERVICE).forEach(a -> createRestServiceValue(view, a, values));
+        values.updateMapping();
+        producer.produce(new RestServiceBuildItem(values));
     }
 
-    private static void createRestServiceValue(IndexView view, AnnotationInstance ano, RestServiceValue g, Map<String, String> keys) {
-        RestServiceValue.Item r = RestServiceValue.createItem();
-        r.log = ano.valueWithDefault(view, "log").asBoolean();
-
-
-        String key = ano.valueWithDefault(view, "key").asString();
-
+    private static void createRestServiceValue(IndexView view, AnnotationInstance ano, RestServiceValue values) {
         if (ano.target().kind() == AnnotationTarget.Kind.CLASS) {
-            ClassInfo c = ano.target().asClass();
-            r.id = c.asClass().name().toString();
-            if (key != null && !key.isBlank()) {
-                keys.put(r.id, key);
-                addClassInfoKeys(r.id, view, c, key + ".",  keys);
+            ClassInfo classInfo = ano.target().asClass();
+            String className = classInfo.name().toString();
+            if (!Modifier.isAbstract(classInfo.flags()) && !Modifier.isInterface(classInfo.flags())) {
+                RestServiceValue.ClassItem clazz = values.getOrCreate(className);
+                updateValue(view, ano, clazz.config);
             }
-        } else {
-            MethodInfo mi = ano.target().asMethod();
-            r.id = mi.declaringClass().name().toString() + "." + mi.name();
-            if (key != null && !key.isBlank()) {
-                keys.put(r.id, key);
+            if (Modifier.isInterface(classInfo.flags())) {
+                checkSubClasses(view.getAllKnownImplementors(classInfo.name()), view, ano, values);
+            } else {
+                checkSubClasses(view.getAllKnownSubclasses(classInfo.name()), view, ano, values);
+            }
+        } else if (ano.target().kind() == AnnotationTarget.Kind.METHOD) {
+            MethodInfo methodInfo = ano.target().asMethod();
+            String methodName = methodInfo.name();
+            if (!Modifier.isPublic(methodInfo.flags())) {
+                return;
+            }
+            ClassInfo classInfo = methodInfo.declaringClass();
+            String className = classInfo.name().toString();
+            if (!Modifier.isAbstract(classInfo.flags()) && !Modifier.isInterface(classInfo.flags())) {
+                RestServiceValue.ClassItem clazz = values.getOrCreate(className);
+                RestServiceValue.Item item = clazz.getOrCreate(methodName);
+                updateValue(view, ano, item);
+            }
+            if (Modifier.isInterface(classInfo.flags())) {
+                checkSubClassesMethod(view.getAllKnownImplementors(classInfo.name()), methodName, view, ano, values);
+            } else {
+                checkSubClassesMethod(view.getAllKnownSubclasses(classInfo.name()), methodName, view, ano, values);
             }
         }
-
-
-       System.out.println("### -> " + r.id + "/" + key + "/" + r.log);
-       g.services.put(r.id, r);
     }
 
-    private static void addClassInfoKeys(String clazz, IndexView view, ClassInfo c, String key, Map<String, String> keys) {
-        if (c == null) {
-            return;
+    private static void updateValue(IndexView view, AnnotationInstance ano, RestServiceValue.Item item) {
+        item.log = ano.valueWithDefault(view, "log").asBoolean();
+        String configKey = ano.valueWithDefault(view, "configKey").asString();
+        if (!configKey.isBlank()) {
+            item.configKey = configKey;
         }
-        String prefix = clazz + ".";
-        c.methods().forEach(m -> {
-            String name = m.name();
-            if (!"<init>".equals(name) && Modifier.isPublic(m.flags()) && !Modifier.isStatic(m.flags())) {
-                keys.putIfAbsent(prefix + name, key + name);
+    }
+
+    private static void checkSubClasses(Collection<ClassInfo> classes, IndexView view, AnnotationInstance ano, RestServiceValue values) {
+        classes.forEach(subclass -> {
+            if (!Modifier.isAbstract(subclass.flags()) && !Modifier.isInterface(subclass.flags())) {
+                String subClassName = subclass.name().toString();
+                if (!values.exists(subClassName)) {
+                    RestServiceValue.ClassItem clazz = values.getOrCreate(subClassName);
+                    updateValue(view, ano, clazz.config);
+                }
             }
         });
-        if (!c.superName().equals(DotName.createSimple(Object.class.getName()))) {
-            addClassInfoKeys(clazz, view, view.getClassByName(c.superName()), key, keys);
-        }
-        c.interfaceNames().forEach(i -> {
-            ClassInfo ci = view.getClassByName(i);
-            ci.methods().forEach(m -> {
-                System.out.println("KINF " + m.name() + " - " + m.flags());
-            });
+    }
 
+    private static void checkSubClassesMethod(Collection<ClassInfo> classes, String methodName, IndexView view, AnnotationInstance ano, RestServiceValue values) {
+        classes.forEach(subclass -> {
+            if (!Modifier.isAbstract(subclass.flags()) && !Modifier.isInterface(subclass.flags())) {
+                String subClassName = subclass.name().toString();
+                RestServiceValue.ClassItem clazz = values.getOrCreate(subClassName);
+                if (!clazz.exists(methodName)) {
+                    RestServiceValue.Item item = clazz.getOrCreate(methodName);
+                    updateValue(view, ano, item);
+                }
+            }
         });
     }
 

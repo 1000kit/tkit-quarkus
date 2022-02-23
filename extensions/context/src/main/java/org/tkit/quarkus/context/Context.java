@@ -1,10 +1,8 @@
 package org.tkit.quarkus.context;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
-public class ApplicationContext {
+public class Context {
 
 
 
@@ -28,11 +26,14 @@ public class ApplicationContext {
      */
     public final Map<String, String> meta;
 
-    private ApplicationContext(String correlationId, String businessContext, String principal, Map<String, String> meta) {
+    final Set<String> businessParams;
+
+    private Context(String correlationId, String businessContext, String principal, Map<String, String> meta) {
         this.correlationId = correlationId;
         this.businessContext = businessContext;
         this.meta = meta;
         this.principal = principal;
+        this.businessParams = new HashSet<>();
     }
 
     @Override
@@ -72,8 +73,8 @@ public class ApplicationContext {
             return this;
         }
 
-        public ApplicationContext build() {
-            return new ApplicationContext(correlationId, businessContext, principal, meta);
+        public Context build() {
+            return new Context(correlationId, businessContext, principal, meta);
         }
     }
 }
