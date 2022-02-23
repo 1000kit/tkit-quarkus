@@ -14,9 +14,32 @@ import static io.restassured.RestAssured.given;
 public class UserRestControllerTest extends AbstractTest {
 
     @Test
+    public void ping() {
+        given()
+                .get("users/ping")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Test
+    public void test() {
+        given()
+                .get("users/test")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Test
+    public void notfound() {
+        given()
+                .get("not-found")
+                .then()
+                .statusCode(Response.Status.NOT_FOUND.getStatusCode());
+    }
+
+    @Test
     @WithDBData(value ={"data/test.xml"})
     public void importDataTest() throws InterruptedException {
-
         given()
                 .pathParam("id", "GUID_3")
                 .get("users/{id}")

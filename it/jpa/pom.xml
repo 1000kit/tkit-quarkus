@@ -14,6 +14,16 @@
     <packaging>jar</packaging>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.tkit.quarkus</groupId>-->
+<!--            <artifactId>tkit-quarkus-log-cdi</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.tkit.quarkus</groupId>
+            <artifactId>tkit-quarkus-log-rs</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
@@ -38,35 +48,6 @@
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.dbunit</groupId>-->
-<!--            <artifactId>dbunit</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>postgresql</artifactId>-->
-<!--                    <groupId>postgresql</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; XLS db import &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.poi</groupId>-->
-<!--            <artifactId>poi</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>log4j</artifactId>-->
-<!--                    <groupId>log4j</groupId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>commons-logging</artifactId>-->
-<!--                    <groupId>commons-logging</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>

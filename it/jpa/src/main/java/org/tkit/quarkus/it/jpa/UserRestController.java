@@ -1,14 +1,17 @@
 package org.tkit.quarkus.it.jpa;
 
+import org.tkit.quarkus.log.rs.RestService;
+
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@RestService(configKey = "user")
 @Path("users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class UserRestController {
+public class UserRestController extends TestAbstract implements TestInterface {
 
     @Inject
     UserDAO dao;
@@ -28,6 +31,7 @@ public class UserRestController {
     }
 
     @POST
+    @RestService(configKey = "create")
     public Response create(UserDTO dto) {
         User user = new User();
         user.username = dto.username;
@@ -35,5 +39,11 @@ public class UserRestController {
         dao.create(user);
 
         return Response.ok(user).build();
+    }
+
+    @GET
+    @Path("ping2")
+    public Response ping2() {
+        return Response.ok().build();
     }
 }

@@ -30,8 +30,8 @@ public class LogBuildTimeConfig {
     /**
      * Enable java types.
      */
-    @ConfigItem(name = "disable", defaultValue = "false")
-    public boolean disable;
+    @ConfigItem(name = "auto-discover", defaultValue = "false")
+    public boolean autoDiscover;
 
     /**
      * Binding includes packages.

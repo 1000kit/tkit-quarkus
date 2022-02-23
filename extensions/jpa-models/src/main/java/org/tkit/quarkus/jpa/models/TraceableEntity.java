@@ -15,57 +15,48 @@
  */
 package org.tkit.quarkus.jpa.models;
 
+import java.util.Objects;
+import java.util.UUID;
+
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.util.Objects;
 
 /**
- * Abstract base class for entities with businessId primary key. Entity class which is extending this abstract class must define
- * SequenceGenerator. As guid is no more primary key you must create index for it.
- * 
- * <pre>
- * {@code
- *  {@literal @}Table(name = "TABLE_NAME", indexes = {@literal @}Index(name = "TABLE_NAME_GUID_IDX", columnList = "GUID", unique = true))
- *  {@literal @}SequenceGenerator(name = "GEN_TABLE_NAME", sequenceName = "SEQ_TABLE_NAME_BID", allocationSize = 1, initialValue = 1)
- * }
- * </pre>
+ * The persistent entity with string GUID.
  *
- *
- * @deprecated use {@link TraceableEntity}
  */
-@Deprecated(forRemoval = true, since = "2.8.0")
 @MappedSuperclass
-public class BusinessTraceableEntity extends AbstractTraceableEntity<Long> {
+public class TraceableEntity extends AbstractTraceableEntity<String> {
 
     /**
      * The UID for this class.
      */
-    private static final long serialVersionUID = 2102461206948885441L;
-
+    private static final long serialVersionUID = 3699279519938221976L;
+    
+    /**
+     * String ID of entity
+     */
     @Id
-    @Column(name = "BID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_BUSINESS_ID")
-    private Long id;
+    @Column(name = "GUID")
+    private String id = UUID.randomUUID().toString();
 
     /**
-     * Gets the businessId.
+     * Gets the GUID.
      *
-     * @return the businessId.
+     * @return the GUID.
      */
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * Sets the GUID.
      *
-     * @param businessId the new GUID.
+     * @param id the new GUID.
      */
-    public void setId(Long businessId) {
-        this.id = businessId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -84,7 +75,7 @@ public class BusinessTraceableEntity extends AbstractTraceableEntity<Long> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        BusinessTraceableEntity other = (BusinessTraceableEntity) obj;
+        TraceableEntity other = (TraceableEntity) obj;
         Object guid = getId();
         Object otherGuid = other.getId();
 
@@ -116,7 +107,6 @@ public class BusinessTraceableEntity extends AbstractTraceableEntity<Long> {
      */
     @Override
     public String toString() {
-        return BusinessTraceableEntity.class.getSimpleName() + ":" + getId();
+        return this.getClass().getSimpleName() + ":" + getId();
     }
-
 }
