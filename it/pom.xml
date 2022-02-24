@@ -22,6 +22,7 @@
         <module>jpa</module>
         <module>panache</module>
         <module>panache-reactive</module>
+        <module>rs-client</module>
     </modules>
 
     <profiles>

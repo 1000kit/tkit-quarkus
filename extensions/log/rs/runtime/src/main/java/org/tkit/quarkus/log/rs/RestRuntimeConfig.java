@@ -17,6 +17,12 @@ public class RestRuntimeConfig {
     public boolean enabled;
 
     /**
+     * Enabled or disable the correlation ID
+     */
+    @ConfigItem(name = "correlation-id-enabled", defaultValue = "true")
+    public boolean correlationIdEnabled;
+
+    /**
      * The correlation ID header
      */
     @ConfigItem(name = "correlation-id-header", defaultValue = "X-Correlation-ID")
@@ -215,6 +221,18 @@ public class RestRuntimeConfig {
         public boolean enabled;
 
         /**
+         * Regex log configuration.
+         */
+        @ConfigItem(name = "regex")
+        public RegexLog regex;
+
+        /**
+         * Payload log configuration.
+         */
+        @ConfigItem(name = "payload")
+        public PayloadLog payload;
+
+        /**
          * Map of MDC headers
          */
         @ConfigItem(name = "mdc-headers")
@@ -232,6 +250,11 @@ public class RestRuntimeConfig {
         @ConfigItem(name = "end")
         public RestClientEndLogMessage end;
 
+        /**
+         * Error log configuration.
+         */
+        @ConfigItem(name = "error")
+        public ErrorLog error;
     }
 
     /**

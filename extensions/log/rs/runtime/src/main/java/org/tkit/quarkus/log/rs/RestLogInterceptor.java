@@ -56,7 +56,10 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
         }
 
         //start log scope/correlation id
-        String correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
+        String correlationId = null;
+        if (config.correlationIdEnabled) {
+            correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
+        }
         ApplicationContext.start(Context.builder().correlationId(correlationId).build());
 
         // add header parameters to MDC

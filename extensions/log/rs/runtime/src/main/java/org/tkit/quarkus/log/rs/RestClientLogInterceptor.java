@@ -42,7 +42,7 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             return;
         }
         //propagate our log context if present
-        if (!ApplicationContext.isEmpty()) {
+        if (!ApplicationContext.isEmpty() && config.correlationIdEnabled) {
             requestContext.getHeaders().add(config.correlationIdHeader, ApplicationContext.get().correlationId);
         }
 
@@ -59,10 +59,10 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             }
         }));
 
-        requestContext.setProperty(CONTEXT, context);
         if (config.client.start.enabled) {
-            log.info(String.format(config.client.start.template, requestContext.getMethod(), requestContext.getUri()));
+            log.info(String.format(config.client.start.template, context.method,context.uri));
         }
+        requestContext.setProperty(CONTEXT, context);
     }
 
     /**
@@ -77,19 +77,26 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
         }
 
         RestInterceptorContext context = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
-        if (context != null) {
-            try {
+        if (context == null) {
+            if (config.client.error.enabled) {
                 Response.StatusType status = responseContext.getStatusInfo();
-                context.close();
-
-                if (config.client.end.enabled) {
-                    log.info(String.format(config.client.end.template, context.method, context.uri,
-                            context.time, status.getStatusCode(), status.getReasonPhrase()));
-                }
-            } finally {
-                // clean up MDC header keys
-                context.mdcKeys.forEach(MDC::remove);
+                log.info(String.format(config.client.end.template, requestContext.getMethod(), requestContext.getUri().getPath(), 0.000,
+                        status.getStatusCode(), status.getReasonPhrase()));
             }
+            return;
+        }
+
+        try {
+            Response.StatusType status = responseContext.getStatusInfo();
+            context.close();
+
+            if (config.client.end.enabled) {
+                log.info(String.format(config.client.end.template, context.method, context.uri,
+                        context.time, status.getStatusCode(), status.getReasonPhrase()));
+            }
+        } finally {
+            // clean up MDC header keys
+            context.mdcKeys.forEach(MDC::remove);
         }
     }
 }
