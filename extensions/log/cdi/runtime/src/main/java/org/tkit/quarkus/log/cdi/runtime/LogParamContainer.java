@@ -1,5 +1,6 @@
 package org.tkit.quarkus.log.cdi.runtime;
 
+import io.quarkus.arc.Unremovable;
 import org.tkit.quarkus.log.cdi.LogParam;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
+@Unremovable
 public class LogParamContainer {
 
     @Inject

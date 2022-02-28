@@ -29,6 +29,12 @@ import java.lang.annotation.*;
 public @interface LogService {
 
     /**
+     * Configuration key.
+     * @return rest controller configuration key.
+     */
+    String configKey() default "";
+
+    /**
      * Log the method or class if the flag is {@code true}.
      *
      * @return the log flag.

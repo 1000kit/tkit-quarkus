@@ -9,14 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tkit-quarkus-log-cdi-api</artifactId>
-    <name>tkit-quarkus-log-cdi-api</name>
+    <artifactId>tkit-quarkus-log-cdi-test</artifactId>
+    <name>tkit-quarkus-log-cdi-test</name>
 
     <dependencies>
         <dependency>
+            <groupId>org.tkit.quarkus</groupId>
+            <artifactId>tkit-quarkus-log-cdi</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- TEST -->
+        <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc</artifactId>
-            <scope>provided</scope>
+            <artifactId>quarkus-junit5</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>

@@ -15,9 +15,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>api</module>
         <module>deployment</module>
         <module>runtime</module>
+        <module>test</module>
     </modules>
 
 </project>

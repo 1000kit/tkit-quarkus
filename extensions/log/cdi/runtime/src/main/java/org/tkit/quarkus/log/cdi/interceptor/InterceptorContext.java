@@ -18,12 +18,7 @@ public class InterceptorContext {
     /**
      * The list of method parameters.
      */
-    public final String parameters;
-
-    /**
-     * The result value.
-     */
-    public String result;
+    public String parameters;
 
     /**
      * The execution time.
@@ -33,21 +28,17 @@ public class InterceptorContext {
     /**
      * The default constructor.
      * @param method the method.
-     * @param parameters the method parameters.
      */
-    public InterceptorContext(String method, String parameters) {
+    public InterceptorContext(String method) {
         this.startTime = System.currentTimeMillis();
         this.method = method;
-        this.parameters = parameters;
     }
 
     /**
      * Close the context.
-     * @param result the result.
      */
-    public void closeContext(String result) {
+    public void close() {
         time = String.format("%.3f", (System.currentTimeMillis() - startTime) / 1000f);
-        this.result = result;
     }
 
 }

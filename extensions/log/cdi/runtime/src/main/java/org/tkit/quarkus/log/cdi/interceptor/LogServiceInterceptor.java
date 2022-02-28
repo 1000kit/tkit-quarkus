@@ -1,21 +1,18 @@
 package org.tkit.quarkus.log.cdi.interceptor;
 
-import org.jboss.logging.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.ApplicationContext;
-import org.tkit.quarkus.log.cdi.LogExclude;
-import org.tkit.quarkus.log.cdi.LogFriendlyException;
+import org.tkit.quarkus.log.cdi.LogRecorder;
 import org.tkit.quarkus.log.cdi.LogService;
+import org.tkit.quarkus.log.cdi.ServiceValue;
+import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 import javax.annotation.Priority;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import java.lang.reflect.*;
-import java.util.concurrent.CompletionStage;
-
-import static org.tkit.quarkus.log.cdi.interceptor.LogConfig.getLoggerServiceAno;
 
 /**
  * The logger service interceptor.
@@ -66,110 +63,98 @@ public class LogServiceInterceptor {
      */
     @AroundInvoke
     public Object methodExecution(final InvocationContext ic) throws Exception {
-        Object result;
+
+        LogRuntimeConfig config = LogRecorder.getConfig();
+        if (!config.enabled) {
+            return ic.proceed();
+        }
+
         Method method = ic.getMethod();
+        String methodName = method.getName();
         String className = getObjectClassName(ic.getTarget());
 
-
-        LogService ano = getLoggerServiceAno(ic.getTarget().getClass(), className, method, LogParamValueService.getConfig().enableProtectedMethod);
-        if (ano.log()) {
-            boolean isEntrypoint = false;
-            if (ApplicationContext.isEmpty()) {
-                isEntrypoint = true;
-                ApplicationContext.start();
-            }
-
-            Logger logger = LoggerFactory.getLogger(className);
-            String parameters = getValuesString(ic.getParameters(), method.getParameters());
-
-            InterceptorContext context = new InterceptorContext(method.getName(), parameters);
-
-            try {
-                logger.info(LogConfig.msgStart(context));
-                result = ic.proceed();
-
-                if (result instanceof CompletionStage) {
-
-                    logger.info(LogConfig.msgFutureStart(context));
-                    CompletionStage cs = (CompletionStage) result;
-                    cs.toCompletableFuture().whenComplete((u, eex) -> {
-                        if (eex != null) {
-                            handleException(context, logger, ano, (Throwable) eex);
-                        } else {
-                            String contextResult = LogConfig.RESULT_VOID;
-                            if (u != Void.TYPE) {
-                                contextResult = getValue(u);
-                            }
-                            context.closeContext(contextResult);
-                            // log the success message
-                            logger.info(LogConfig.msgSucceed(context));
-                        }
-                    });
-                } else {
-                    String contextResult = LogConfig.RESULT_VOID;
-                    if (method.getReturnType() != Void.TYPE) {
-                        contextResult = getValue(result);
-                    }
-                    context.closeContext(contextResult);
-
-                    // log the success message
-                    logger.info(LogConfig.msgSucceed(context));
-                }
-            } catch (InvocationTargetException ie) {
-                handleException(context, logger, ano, ie.getCause());
-                throw ie;
-            } catch (Exception ex) {
-                handleException(context, logger, ano, ex);
-                throw ex;
-            } finally {
-                if (isEntrypoint){
-                    ApplicationContext.close();
-                }
-            }
-        } else {
-            result = ic.proceed();
+        ServiceValue.MethodItem methodItem = LogRecorder.getService(className, methodName);
+        if (methodItem == null) {
+            return ic.proceed();
         }
-        return result;
-    }
+        if (!methodItem.config.log) {
+            return ic.proceed();
+        }
 
-    /**
-     * Handles the exception.
-     *
-     * @param context the interceptor context.
-     * @param logger  the logger.
-     * @param ano     the annotation.
-     * @param ex      the exception.
-     */
-    private void handleException(InterceptorContext context, Logger logger, LogService ano, Throwable ex) {
-        context.closeContext(getValue(ex));
-        logger.error(LogConfig.msgFailed(context));
-        boolean stacktrace = ano.stacktrace();
+        final boolean isEntrypoint = ApplicationContext.isEmpty();
+        if (isEntrypoint) {
+            ApplicationContext.start();
+        }
 
-        if (ex instanceof LogFriendlyException) {
-            if (stacktrace && ((LogFriendlyException) ex).shouldLogStacktrace()) {
+
+        Logger logger = LoggerFactory.getLogger(className);
+        String parameters = null;
+        long startTime = System.currentTimeMillis();
+
+        try {
+            if (config.start.enabled) {
+                parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
+                logger.info(String.format(config.start.template, methodName, parameters));
+            }
+            Object result = ic.proceed();
+
+            String returnValue = config.returnVoidTemplate;
+            if (method.getReturnType() != Void.TYPE) {
+                returnValue = getReturnValue(methodItem, result);
+            }
+
+            // log the success message
+            if (config.succeed.enabled) {
+                if (parameters == null) {
+                    parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
+                }
+                logger.info(String.format(config.succeed.template, methodName, parameters, returnValue, (System.currentTimeMillis() - startTime) / 1000f));
+            }
+
+            return result;
+
+        } catch (Exception ex) {
+            if (!config.failed.enabled) {
+                throw ex;
+            }
+            Throwable error = ex;
+            if (ex instanceof InvocationTargetException) {
+                error = ex.getCause();
+            }
+            if (parameters == null) {
+                parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
+            }
+            String er = getReturnValue(methodItem, error);
+            logger.error(String.format(config.failed.template, methodName, parameters, er, (System.currentTimeMillis() - startTime) / 1000f));
+
+            if (methodItem.config.stacktrace) {
                 logger.error("Error ", ex);
             }
-        } else if (stacktrace) {
-            logger.error("Error ", ex);
+
+            throw ex;
+        } finally {
+            if (isEntrypoint){
+                ApplicationContext.close();
+            }
         }
     }
 
     /**
      * Gets the list of string corresponding to the list of parameters.
      *
-     * @param value      the list of parameters.
+     * @param values     the list of parameters.
      * @param parameters the list of method parameters.
      * @return the list of string corresponding to the list of parameters.
      */
-    private String getValuesString(Object[] value, Parameter[] parameters) {
-        if (value != null && value.length > 0) {
+    private String getValuesString(ServiceValue.MethodItem methodItem, Object[] values, Parameter[] parameters) {
+        if (values != null && values.length > 0) {
             StringBuilder sb = new StringBuilder();
             int index = 0;
-            sb.append(getValue(value[index], parameters[index]));
+            sb.append(getValue(methodItem, index, values, parameters));
             index++;
-            for (; index < value.length; index++) {
+            for (; index < values.length; index++) {
                 sb.append(',');
-                sb.append(getValue(value[index], parameters[index]));
+                sb.append(getValue(methodItem, index, values, parameters));
             }
             return sb.toString();
         }
@@ -179,19 +164,21 @@ public class LogServiceInterceptor {
     /**
      * Get the parameter log value.
      *
-     * @param value     the parameter value.
-     * @param parameter the method parameter.
+     * @param methodItem method item configuration.
+     * @param index index of the parameter.
+     * @param values     the parameter values.
+     * @param parameters the method parameters.
      * @return the corresponding log value.
      */
-    private String getValue(Object value, Parameter parameter) {
-        LogExclude pa = parameter.getAnnotation(LogExclude.class);
-        if (pa != null) {
-            if (!pa.mask().isEmpty()) {
-                return pa.mask();
+    private String getValue(ServiceValue.MethodItem methodItem, int index, Object[] values, Parameter[] parameters) {
+        if (methodItem.params != null && methodItem.params.containsKey((short) index)) {
+            String mask = methodItem.params.get((short) index);
+            if (mask != null) {
+                return mask;
             }
-            return parameter.getName();
+            return parameters[index].getName();
         }
-        return getValue(value);
+        return LogParamValueService.getParameterValue(values[index]);
     }
 
     /**
@@ -200,7 +187,10 @@ public class LogServiceInterceptor {
      * @param parameter the method parameter.
      * @return the string corresponding to the parameter.
      */
-    private String getValue(Object parameter) {
-        return LogParamValueService.getParameterValue(parameter);
+    private String getReturnValue(ServiceValue.MethodItem methodItem, Object parameter) {
+        if (methodItem.returnMask == null) {
+            return LogParamValueService.getParameterValue(parameter);
+        }
+        return methodItem.returnMask;
     }
 }

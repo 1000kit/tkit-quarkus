@@ -4,8 +4,6 @@ import java.util.*;
 
 public class Context {
 
-
-
     /**
      * User principal
      */
