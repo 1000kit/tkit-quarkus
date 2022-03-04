@@ -22,15 +22,8 @@ public class LogParamValueService {
      */
     public static Map<Class<?>, Function<Object, String>> ASSIGNABLE_FROM = new HashMap<>(JavaTypesLogParamValue.assignableFrom());
 
-    static LogRuntimeConfig CONFIG;
-
-    public static LogRuntimeConfig getConfig() {
-        return CONFIG;
-    }
-
-    public static void init(LogRuntimeConfig config, List<LogParam> services) {
-        CONFIG = config;
-        if (services != null) {
+    public static void init(List<LogParam> services) {
+        if (services != null && !services.isEmpty()) {
             Map<Class<?>, LogParam.Item> classes = new HashMap<>();
             Map<Class<?>, LogParam.Item> assignable = new HashMap<>();
             for (LogParam def : services) {
@@ -68,21 +61,24 @@ public class LogParamValueService {
      * @return the value from the parameter.
      */
     public static String getParameterValue(Object parameter) {
-        if (parameter != null) {
-            Class<?> clazz = parameter.getClass();
-            Function<Object, String> fn = CLASSES.get(clazz);
-            if (fn != null) {
-                return fn.apply(parameter);
-            }
+        if (parameter == null) {
+            return null;
+        }
 
-            for (Map.Entry<Class<?>, Function<Object, String>> entry : ASSIGNABLE_FROM.entrySet()) {
-                if (entry.getKey().isAssignableFrom(clazz)) {
-                    Function<Object, String> fn2 = entry.getValue();
-                    CLASSES.put(clazz, fn2);
-                    return fn2.apply(parameter);
-                }
+        Class<?> clazz = parameter.getClass();
+        Function<Object, String> fn = CLASSES.get(clazz);
+        if (fn != null) {
+            return fn.apply(parameter);
+        }
+
+        for (Map.Entry<Class<?>, Function<Object, String>> entry : ASSIGNABLE_FROM.entrySet()) {
+            if (entry.getKey().isAssignableFrom(clazz)) {
+                Function<Object, String> fn2 = entry.getValue();
+                CLASSES.put(clazz, fn2);
+                return fn2.apply(parameter);
             }
         }
+
         return "" + parameter;
     }
 

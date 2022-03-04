@@ -14,7 +14,7 @@
     </modules>
 
     <properties>
-        <quarkus.version>2.2.5.Final</quarkus.version>
+        <quarkus.version>2.7.3.Final</quarkus.version>
         <jandex-plugin.version>1.1.0</jandex-plugin.version>
         <hibernate-orm.version>5.5.8.Final</hibernate-orm.version>
 

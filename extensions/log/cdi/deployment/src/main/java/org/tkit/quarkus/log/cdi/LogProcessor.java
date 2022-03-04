@@ -1,7 +1,7 @@
 package org.tkit.quarkus.log.cdi;
 
 import io.quarkus.arc.deployment.AnnotationsTransformerBuildItem;
-import io.quarkus.arc.deployment.BeanArchiveIndexBuildItem;
+import io.quarkus.arc.deployment.BeanDiscoveryFinishedBuildItem;
 import io.quarkus.arc.processor.AnnotationsTransformer;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
@@ -9,33 +9,36 @@ import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import org.jboss.jandex.*;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
 import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Singleton;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 public class LogProcessor {
 
     static final String FEATURE_NAME = "tkit-log-cdi";
 
-    private static final Logger log = Logger.getLogger(LogProcessor.class);
-
-    private static final DotName ANO_LOG_SERVICE = DotName.createSimple(LogService.class.getName());
-
-    private static final DotName ANO_LOG_EXCLUDE = DotName.createSimple(LogExclude.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(LogProcessor.class);
 
     private static final String LOG_BUILDER_SERVICE = LogParamValueService.class.getName();
+
+    private static final Set<String> EXCLUDE_METHODS = Arrays.stream(Object.class.getMethods()).map(Method::getName).collect(Collectors.toSet());
 
     private static final List<DotName> ANNOTATION_DOT_NAMES = List.of(
             DotName.createSimple(ApplicationScoped.class.getName()),
@@ -55,119 +58,87 @@ public class LogProcessor {
     }
 
     @BuildStep
-    void restServices(BeanArchiveIndexBuildItem index, BuildProducer<ServiceBuildItem> producer, LogBuildTimeConfig buildConfig) {
+    void restServices(BeanDiscoveryFinishedBuildItem beanDiscoveryFinishedBuildItem,
+                      BuildProducer<ServiceBuildItem> producer) {
+
         ServiceValue values = new ServiceValue();
-        IndexView view = index.getIndex();
-        view.getAnnotations(ANO_LOG_SERVICE).forEach(a -> createClassServiceValue(view, a, values));
-        view.getAnnotations(ANO_LOG_SERVICE).forEach(a -> createMethodServiceValue(view, a, values));
+        beanDiscoveryFinishedBuildItem.beanStream()
+                .forEach(x -> {
+                    try {
+                        ClassInfo ci = x.getImplClazz();
+                        Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(ci.name().toString());
+
+                        ServiceValue.ClassItem classItem = null;
+                        LogService classLogService = clazz.getAnnotation(LogService.class);
+                        if (classLogService != null) {
+                            classItem = values.getOrCreate(ci.name().toString());
+                            classItem.config = ServiceValue.createConfig();
+                            updateValue(classLogService, classItem.config);
+                        }
+
+                        for (Method method : clazz.getMethods()) {
+                            if (Modifier.isPublic(method.getModifiers()) && !EXCLUDE_METHODS.contains(method.getName())) {
+
+                                LogService methodLogService = method.getAnnotation(LogService.class);
+                                if (methodLogService != null) {
+                                    if (classItem == null) {
+                                        classItem = values.getOrCreate(ci.name().toString());
+                                    }
+                                }
+
+                                if (methodLogService != null || classLogService != null) {
+
+                                    ServiceValue.MethodItem methodItem = classItem.getOrCreate(method.getName());
+                                    if (methodLogService != null) {
+                                        methodItem.config = ServiceValue.createConfig();
+                                        updateValue(methodLogService, methodItem.config);
+                                    }
+
+                                    // check return LogExclude
+                                    LogExclude returnLogExclude = method.getAnnotation(LogExclude.class);
+                                    if (returnLogExclude != null) {
+                                        methodItem.returnMask = returnLogExclude.mask();
+                                    }
+
+                                    // check parameter LogExclude
+                                    Annotation[][] annotations = method.getParameterAnnotations();
+                                    for (int i=0; i<annotations.length; i++) {
+                                        Annotation[] annotationList = annotations[i];
+                                        if (annotationList != null && annotationList.length > 0) {
+                                            for (Annotation annotation : annotationList) {
+                                                if (annotation instanceof LogExclude) {
+                                                    LogExclude e = (LogExclude) annotation;
+                                                    if (methodItem.params == null) {
+                                                        methodItem.params = new HashMap<>();
+                                                    }
+                                                    String mask = e.mask();
+                                                    if (mask.isBlank()) {
+                                                        mask = null;
+                                                    }
+                                                    methodItem.params.put((short) i, mask);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch (Exception ex) {
+                        throw new RuntimeException("Error load class " + x.getImplClazz(), ex);
+                    }
+                });
         values.updateMapping();
-        view.getAnnotations(ANO_LOG_EXCLUDE).forEach(a -> createExcludeParam(view, a, values));
         producer.produce(new ServiceBuildItem(values));
     }
 
-    private static void createExcludeParam(IndexView view, AnnotationInstance ano, ServiceValue values) {
-        if (ano.target().kind() == AnnotationTarget.Kind.METHOD) {
-            MethodInfo methodInfo = ano.target().asMethod();
-            ServiceValue.ClassItem clazz = values.get(methodInfo.declaringClass().name().toString());
-            if (clazz == null) {
-                return;
-            }
-            ServiceValue.MethodItem method = clazz.getOrCreate(methodInfo.name(), clazz);
-            method.returnMask = ano.valueWithDefault(view, "mask").asString();
-        }
-        if (ano.target().kind() == AnnotationTarget.Kind.METHOD_PARAMETER) {
-            MethodParameterInfo methodParameterInfo = ano.target().asMethodParameter();
-            MethodInfo methodInfo = methodParameterInfo.method();
-            ServiceValue.ClassItem clazz = values.get(methodInfo.declaringClass().name().toString());
-            if (clazz == null) {
-                return;
-            }
-            ServiceValue.MethodItem method = clazz.getOrCreate(methodInfo.name(), clazz);
-            if (method.params == null) {
-                method.params = new HashMap<>();
-            }
-            String mask = ano.valueWithDefault(view, "mask").asString();
-            if (mask.isBlank()) {
-                mask = null;
-            }
-            method.params.put(methodParameterInfo.position(), mask);
-        }
-    }
 
-    private static void createClassServiceValue(IndexView view, AnnotationInstance ano, ServiceValue values) {
-        if (ano.target().kind() != AnnotationTarget.Kind.CLASS) {
-            return;
-        }
-        ClassInfo classInfo = ano.target().asClass();
-        String className = classInfo.name().toString();
-        if (!Modifier.isAbstract(classInfo.flags()) && !Modifier.isInterface(classInfo.flags())) {
-            ServiceValue.ClassItem clazz = values.getOrCreate(className);
-            updateValue(view, ano, clazz.config);
-        }
-        if (Modifier.isInterface(classInfo.flags())) {
-            checkSubClasses(view.getAllKnownImplementors(classInfo.name()), view, ano, values);
-        } else {
-            checkSubClasses(view.getAllKnownSubclasses(classInfo.name()), view, ano, values);
-        }
-    }
-
-    private static void createMethodServiceValue(IndexView view, AnnotationInstance ano, ServiceValue values) {
-         if (ano.target().kind() != AnnotationTarget.Kind.METHOD) {
-             return;
-         }
-
-        MethodInfo methodInfo = ano.target().asMethod();
-        if (!Modifier.isPublic(methodInfo.flags())) {
-            return;
-        }
-
-        String methodName = methodInfo.name();
-        ClassInfo classInfo = methodInfo.declaringClass();
-        String className = classInfo.name().toString();
-        if (!Modifier.isAbstract(classInfo.flags()) && !Modifier.isInterface(classInfo.flags())) {
-            ServiceValue.ClassItem clazz = values.getOrCreate(className, ServiceValue.DEFAULT_ANO);
-            ServiceValue.MethodItem item = clazz.getOrCreate(methodName);
-            updateValue(view, ano, item.config);
-        }
-        if (Modifier.isInterface(classInfo.flags())) {
-            checkSubClassesMethod(view.getAllKnownImplementors(classInfo.name()), methodName, view, ano, values);
-        } else {
-            checkSubClassesMethod(view.getAllKnownSubclasses(classInfo.name()), methodName, view, ano, values);
-        }
-    }
-
-    private static void updateValue(IndexView view, AnnotationInstance ano, ServiceValue.LogServiceAnnotation item) {
-        item.log = ano.valueWithDefault(view, "log").asBoolean();
-        item.stacktrace = ano.valueWithDefault(view, "stacktrace").asBoolean();
-        String configKey = ano.valueWithDefault(view, "configKey").asString();
+    private static void updateValue(LogService ano, ServiceValue.LogServiceAnnotation item) {
+        item.log = ano.log();
+        item.stacktrace = ano.stacktrace();
+        String configKey = ano.configKey();
         if (!configKey.isBlank()) {
             item.configKey = configKey;
         }
-    }
-
-    private static void checkSubClasses(Collection<ClassInfo> classes, IndexView view, AnnotationInstance ano, ServiceValue values) {
-        classes.forEach(subclass -> {
-            if (!Modifier.isAbstract(subclass.flags()) && !Modifier.isInterface(subclass.flags())) {
-                String subClassName = subclass.name().toString();
-                if (!values.exists(subClassName)) {
-                    ServiceValue.ClassItem clazz = values.getOrCreate(subClassName);
-                    updateValue(view, ano, clazz.config);
-                }
-            }
-        });
-    }
-
-    private static void checkSubClassesMethod(Collection<ClassInfo> classes, String methodName, IndexView view, AnnotationInstance ano, ServiceValue values) {
-        classes.forEach(subclass -> {
-            if (!Modifier.isAbstract(subclass.flags()) && !Modifier.isInterface(subclass.flags())) {
-                String subClassName = subclass.name().toString();
-                ServiceValue.ClassItem clazz = values.getOrCreate(subClassName);
-                if (!clazz.exists(methodName)) {
-                    ServiceValue.MethodItem item = clazz.getOrCreate(methodName);
-                    updateValue(view, ano, item.config);
-                }
-            }
-        });
     }
 
     /**
@@ -210,7 +181,7 @@ public class LogProcessor {
                 }
                 boolean matches = ignorePattern.matcher(name).matches();
                 if (matches) {
-                    log.infof("Disabling tkit logs on: {%s} because it matches the ignore pattern: '%s' (set via 'tkit.log.ignore.pattern')", name,
+                    log.info("Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.ignore.pattern')", name,
                             buildConfig.autoDiscover.ignorePattern);
                 }
                 return matches;

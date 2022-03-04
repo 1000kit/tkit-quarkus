@@ -32,7 +32,7 @@ public @interface LogService {
      * Configuration key.
      * @return rest controller configuration key.
      */
-    String configKey() default "";
+    @Nonbinding String configKey() default "";
 
     /**
      * Log the method or class if the flag is {@code true}.

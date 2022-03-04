@@ -1,13 +1,18 @@
 package org.tkit.quarkus.log.cdi;
 
 import io.quarkus.arc.Arc;
+import io.quarkus.arc.InjectableInstance;
 import io.quarkus.runtime.annotations.Recorder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.log.cdi.ServiceValue;
 import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
 import org.tkit.quarkus.log.cdi.runtime.LogParamContainer;
 import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
+import javax.enterprise.inject.Any;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The logger builder interface.
@@ -15,46 +20,71 @@ import java.util.List;
 @Recorder
 public class LogRecorder {
 
+    private static final Logger log = LoggerFactory.getLogger(LogRecorder.class);
+
     static LogRuntimeConfig CONFIG;
 
     static ServiceValue SERVICE;
 
     public void init(ServiceValue values, LogRuntimeConfig config) {
+
+        InjectableInstance<LogParam> it = Arc.container().select(LogParam.class, Any.Literal.INSTANCE);
+        LogParamValueService.init(it.stream().collect(Collectors.toList()));
+
         CONFIG = config;
         SERVICE = values;
 
-        LogParamContainer con = Arc.container().instance(LogParamContainer.class).get();
-        LogParamValueService.init(config, con.getParameters());
-        if (config.service != null) {
-            config.service.forEach((key, value) -> {
-                List<ServiceValue.ClassItem> items = values.getByConfig(key);
-                if (items != null) {
+        if (config.service == null) {
+            return;
+        }
 
-                    // update class values from properties
-                    if (value.config.log.isPresent() || value.config.stacktrace.isPresent()) {
-                        items.forEach(item -> {
-                            value.config.log.ifPresent(x -> item.config.log = x);
-                            value.config.stacktrace.ifPresent(x -> item.config.stacktrace = x);
-                        });
+        config.service.forEach((key, value) -> {
+            List<ServiceValue.ClassItem> items = values.getByConfig(key);
+            if (items == null) {
+                log.warn("No @LogService annotation found for key `quarkus.tkit.log.cdi.service.\"{}\"`. Key will be ignored", key);
+                return;
+            }
+
+            // update class values from properties
+            if (value.config.log.isPresent() || value.config.stacktrace.isPresent()) {
+                items.forEach(item -> {
+                    // update class config from properties
+                    if (item.config != null) {
+                        value.config.log.ifPresent(x -> item.config.log = x);
+                        value.config.stacktrace.ifPresent(x -> item.config.stacktrace = x);
+                    } else {
+                        log.warn("No @LogService annotation found for class {}. Key `quarkus.tkit.log.cdi.service.\"{}\"` will be ignored", item.id, key);
                     }
+                });
+            }
 
-                    value.method.forEach((mk, mv) -> {
-
-                        items.forEach(item -> {
-                            List<ServiceValue.MethodItem> methods = item.getByConfig(mk);
-                            if (methods != null) {
-                                methods.forEach(method -> {
-                                    mv.config.log.ifPresent(x -> method.config.log = x);
-                                    mv.config.stacktrace.ifPresent(x -> method.config.stacktrace = x);
-                                    mv.params.ifPresent(map -> method.params.putAll(map));
-                                    mv.returnMask.ifPresent(x -> method.returnMask = x);
-                                });
+            // update method values from properties
+            value.method.forEach((mk, mv) -> {
+                items.forEach(item -> {
+                    List<ServiceValue.MethodItem> methods = item.getByConfig(mk);
+                    if (methods != null) {
+                        methods.forEach(method -> {
+                            // update config from class if method config found
+                            if (method.config == null && item.config != null) {
+                                method.config = item.config;
+                            }
+                            // update method config from properties
+                            if (method.config != null) {
+                                mv.config.log.ifPresent(x -> method.config.log = x);
+                                mv.config.stacktrace.ifPresent(x -> method.config.stacktrace = x);
+                                mv.params.ifPresent(map -> method.params.putAll(map));
+                                mv.returnMask.ifPresent(x -> method.returnMask = x);
+                            } else {
+                                log.warn("No @LogService annotation found for method `{}.{}`. Key `quarkus.tkit.log.cdi.service.\"{}\".method.{}` will be ignored", item.id, method.id, key, mk);
                             }
                         });
-                    });
-                }
+                    }
+                });
             });
-        }
+        });
+
+        // update method empty config from Class
+        values.updateConfig();
     }
 
     public static ServiceValue.MethodItem getService(String clazz, String method) {
@@ -62,12 +92,7 @@ public class LogRecorder {
         if (classItem == null) {
             return null;
         }
-        ServiceValue.MethodItem m = classItem.methods.get(method);
-        if (m == null) {
-            m = new ServiceValue.MethodItem();
-            m.config = classItem.config;
-        }
-        return m;
+        return classItem.methods.get(method);
     }
 
     public static LogRuntimeConfig getConfig() {

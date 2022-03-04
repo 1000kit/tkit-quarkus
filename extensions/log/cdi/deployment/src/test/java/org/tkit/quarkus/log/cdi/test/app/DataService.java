@@ -1,4 +1,4 @@
-package org.tkit.quarkus.log.cdi.test;
+package org.tkit.quarkus.log.cdi.test.app;
 
 import org.tkit.quarkus.log.cdi.LogExclude;
 import org.tkit.quarkus.log.cdi.LogService;

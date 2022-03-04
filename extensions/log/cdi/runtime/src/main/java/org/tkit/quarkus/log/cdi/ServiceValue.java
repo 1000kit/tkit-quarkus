@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 
 public class ServiceValue {
 
-    static final LogServiceAnnotation DEFAULT_ANO = createLogServiceAnnotation();
-
     public Map<String, ClassItem> classes = new HashMap<>();
 
     public Map<String, Set<String>> mapping = new HashMap<>();
@@ -39,47 +37,40 @@ public class ServiceValue {
     }
 
     ClassItem getOrCreate(String clazz) {
-        return classes.computeIfAbsent(clazz, c -> createClass(null));
-    }
-
-    ClassItem getOrCreate(String clazz, LogServiceAnnotation a) {
-        return classes.computeIfAbsent(clazz, c -> createClass(a));
-    }
-
-    boolean exists(String clazz) {
-        return classes.containsKey(clazz);
+        return classes.computeIfAbsent(clazz, c -> createClass(clazz));
     }
 
     void updateMapping() {
         classes.forEach((k,v) -> {
-            if (v.config.configKey != null) {
+            if (v.config != null && v.config.configKey != null) {
                 mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
             }
             v.updateMapping();
         });
     }
 
+    void updateConfig() {
+        classes.forEach((k,v) -> v.methods.forEach((mk, mv) -> {
+            if (mv.config == null) {
+                mv.config = v.config;
+            }
+        }));
+    }
+
     public static class ClassItem {
         public LogServiceAnnotation config;
+        public String id;
         public Map<String, MethodItem> methods = new HashMap<>();
 
         public Map<String, Set<String>> mapping = new HashMap<>();
 
         MethodItem getOrCreate(String method) {
-            return methods.computeIfAbsent(method, c -> createMethod(null));
-        }
-
-        MethodItem getOrCreate(String method, ClassItem parent) {
-            return methods.computeIfAbsent(method, c -> createMethod(parent.config));
-        }
-
-        boolean exists(String method) {
-            return methods.containsKey(method);
+            return methods.computeIfAbsent(method, c -> createMethod(method));
         }
 
         void updateMapping() {
             methods.forEach((k,v) -> {
-                if (v.config.configKey != null) {
+                if (v.config != null && v.config.configKey != null) {
                     mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
                 }
             });
@@ -109,23 +100,26 @@ public class ServiceValue {
 
     public static class MethodItem {
         public LogServiceAnnotation config;
+        public String id;
         public String returnMask;
         public Map<Short, String> params;
     }
 
-    static MethodItem createMethod(LogServiceAnnotation a) {
+    static MethodItem createMethod(String id) {
         MethodItem c = new MethodItem();
-        c.config = Objects.requireNonNullElseGet(a, ServiceValue::createLogServiceAnnotation);
+        c.id = id;
+        c.config = null;
         return c;
     }
 
-    static ClassItem createClass(LogServiceAnnotation a) {
+    static ClassItem createClass(String id) {
         ClassItem c = new ClassItem();
-        c.config = Objects.requireNonNullElseGet(a, ServiceValue::createLogServiceAnnotation);
+        c.id = id;
+        c.config = null;
         return c;
     }
 
-    static LogServiceAnnotation createLogServiceAnnotation() {
+    static LogServiceAnnotation createConfig() {
         LogServiceAnnotation item = new LogServiceAnnotation();
         item.log = false;
         item.stacktrace = false;
