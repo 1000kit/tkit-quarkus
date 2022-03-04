@@ -3,6 +3,7 @@ package org.tkit.quarkus.log.cdi.interceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.ApplicationContext;
+import org.tkit.quarkus.context.Context;
 import org.tkit.quarkus.log.cdi.LogRecorder;
 import org.tkit.quarkus.log.cdi.LogService;
 import org.tkit.quarkus.log.cdi.ServiceValue;
@@ -117,6 +118,8 @@ public class LogServiceInterceptor {
             if (!config.failed.enabled) {
                 throw ex;
             }
+            Context.ApplicationError aex = ApplicationContext.get().addError(ex);
+
             Throwable error = ex;
             if (ex instanceof InvocationTargetException) {
                 error = ex.getCause();
@@ -127,8 +130,9 @@ public class LogServiceInterceptor {
             String er = getReturnValue(methodItem, error);
             logger.error(String.format(config.failed.template, methodName, parameters, er, (System.currentTimeMillis() - startTime) / 1000f));
 
-            if (methodItem.config.stacktrace) {
-                logger.error("Error ", ex);
+            if (methodItem.config.stacktrace && !aex.stacktrace) {
+                logger.error("", ex);
+                aex.stacktrace = true;
             }
 
             throw ex;

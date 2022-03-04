@@ -26,12 +26,18 @@ public class Context {
 
     final Set<String> businessParams;
 
-    private Context(String correlationId, String businessContext, String principal, Map<String, String> meta) {
+    /**
+     * Stack of errors, which happens in the execution context.
+     */
+    final Stack<ApplicationError> errors;
+
+    Context(String correlationId, String businessContext, String principal, Map<String, String> meta) {
         this.correlationId = correlationId;
         this.businessContext = businessContext;
         this.meta = meta;
         this.principal = principal;
         this.businessParams = new HashSet<>();
+        this.errors = new Stack<>();
     }
 
     @Override
@@ -39,8 +45,31 @@ public class Context {
         return "correlationId=" + correlationId;
     }
 
+    public ApplicationError getError() {
+        return errors.peek();
+    }
+
+    public ApplicationError addError(Throwable throwable) {
+        if (errors.isEmpty() || !errors.peek().throwable.equals(throwable)) {
+            errors.push(new ApplicationError(throwable));
+        }
+        return errors.peek();
+    }
+
     public static ApplicationContextBuilder builder() {
         return new ApplicationContextBuilder();
+    }
+
+    public static class ApplicationError {
+
+        public Throwable throwable;
+
+        public boolean stacktrace;
+
+        ApplicationError(Throwable throwable) {
+            this.throwable = throwable;
+        }
+
     }
 
     public static class ApplicationContextBuilder {
