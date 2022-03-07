@@ -17,6 +17,6 @@ public class DbImportDevServicesBuildTimeConfig {
     /**
      * The db image to use.
      */
-    @ConfigItem(defaultValue = "postgres")
+    @ConfigItem(defaultValue = "docker.io/postgres")
     public String dbImageName;
 }

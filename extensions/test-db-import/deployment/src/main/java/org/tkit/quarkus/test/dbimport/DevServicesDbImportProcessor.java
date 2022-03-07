@@ -13,12 +13,16 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.DevServicesConfigResultBuildItem;
 import io.quarkus.deployment.builditem.DevServicesSharedNetworkBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
+import io.quarkus.deployment.console.ConsoleInstalledBuildItem;
+import io.quarkus.deployment.console.StartupLogCompressor;
 import io.quarkus.deployment.dev.devservices.GlobalDevServicesConfig;
+import io.quarkus.deployment.logging.LoggingSetupBuildItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.DockerClientFactory;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.testcontainers.DockerClientFactory.SESSION_ID;
@@ -36,9 +40,10 @@ public class DevServicesDbImportProcessor {
             DevServicesDatasourceResultBuildItem devServiceDatasource,
             LaunchModeBuildItem launchMode,
             DbImportBuildTimeConfig dbImportClientBuildTimeConfig,
-            Optional<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem,
-            BuildProducer<DevServicesConfigResultBuildItem> devServicePropertiesProducer) {
-       //TODO: LoggingSetupBuildItem loggingSetupBuildItem, GlobalDevServicesConfig devServicesConfig
+            List<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem,
+            Optional<ConsoleInstalledBuildItem> consoleInstalledBuildItem,
+            BuildProducer<DevServicesConfigResultBuildItem> devServicePropertiesProducer,
+            LoggingSetupBuildItem loggingSetupBuildItem) {
 
         // create dev service config
         DbImportDevServicesBuildTimeConfig configuration = dbImportClientBuildTimeConfig.devservices;
@@ -54,33 +59,50 @@ public class DevServicesDbImportProcessor {
             return null;
         }
 
-        InspectContainerResponse dbInspect = null;
-        final Optional<Container> postgresql = DockerClientFactory.lazyClient().listContainersCmd().exec().stream()
-                .filter(c -> (SESSION_ID.equals(c.getLabels().get(TESTCONTAINERS_SESSION_ID_LABEL))
-                        && c.getImage().startsWith(configuration.dbImageName)))
-                .findAny();
-        if (postgresql.isPresent()) {
-            Container dbContainer = postgresql.get();
-            dbInspect = DockerClientFactory.lazyClient().inspectContainerCmd(dbContainer.getId()).exec();
-        }
+        StartupLogCompressor compressor = new StartupLogCompressor(
+                (launchMode.isTest() ? "(test) " : "") + "Zeebe Dev Services Starting:", consoleInstalledBuildItem,
+                loggingSetupBuildItem);
 
-        // update system properties for local connection
-        setupDbResultSystemProperties(dbResult);
-        devServiceDatasource.getNamedDatasources().forEach((k, v) -> setupDbResultSystemProperties(v));
+        try {
 
-        if (devServicesSharedNetworkBuildItem.isPresent()) {
-            if (dbInspect != null ) {
-                Ports.Binding[] binding = dbInspect.getNetworkSettings().getPorts().getBindings().get(new ExposedPort(POSTGRESQL_PORT));
-                if (binding != null) {
-                    String port = binding[0].getHostPortSpec();
-                    String url = dbResult.getConfigProperties().get(DATASOURCE_DEFAULT_URL);
-                    url = url.substring(url.lastIndexOf("/"));
-                    url = String.format("jdbc:postgresql://%s:%s%s", DockerClientFactory.instance().dockerHostIpAddress(),port,url);
-                    System.setProperty(DATASOURCE_DEFAULT_URL, url);
-                    log.info("Local jdbc {}={}", DATASOURCE_DEFAULT_URL, url);
+            // update system properties for local connection for integration tests
+            setupDbResultSystemProperties(dbResult);
+            devServiceDatasource.getNamedDatasources().forEach((k, v) -> setupDbResultSystemProperties(v));
+
+            if (!devServicesSharedNetworkBuildItem.isEmpty()) {
+
+                InspectContainerResponse dbInspect = null;
+                final Optional<Container> postgresql = DockerClientFactory.lazyClient().listContainersCmd().exec().stream()
+                        .filter(c -> (SESSION_ID.equals(c.getLabels().get(TESTCONTAINERS_SESSION_ID_LABEL))
+                                && c.getImage().startsWith(configuration.dbImageName)))
+                        .findAny();
+                if (postgresql.isPresent()) {
+                    Container dbContainer = postgresql.get();
+                    dbInspect = DockerClientFactory.lazyClient().inspectContainerCmd(dbContainer.getId()).exec();
+                }
+
+                if (dbInspect != null) {
+
+                    // db local port
+                    Ports.Binding[] binding = dbInspect.getNetworkSettings().getPorts().getBindings().get(new ExposedPort(POSTGRESQL_PORT));
+                    if (binding != null) {
+                        String port = binding[0].getHostPortSpec();
+                        String url = dbResult.getConfigProperties().get(DATASOURCE_DEFAULT_URL);
+                        url = url.substring(url.lastIndexOf("/"));
+                        url = String.format("jdbc:postgresql://%s:%s%s", DockerClientFactory.instance().dockerHostIpAddress(), port, url);
+                        System.setProperty(DATASOURCE_DEFAULT_URL, url);
+                        log.info("Local jdbc {}={}", DATASOURCE_DEFAULT_URL, url);
+                    }
+                } else {
+                    log.error("No postgres image found.");
                 }
             }
+            compressor.close();
+        } catch (Throwable t) {
+            compressor.closeAndDumpCaptured();
+            throw new RuntimeException(t);
         }
+
         return null;
     }
 

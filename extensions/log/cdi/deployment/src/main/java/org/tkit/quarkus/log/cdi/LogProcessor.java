@@ -102,7 +102,7 @@ public class LogProcessor {
 
                                     // check parameter LogExclude
                                     Annotation[][] annotations = method.getParameterAnnotations();
-                                    for (int i=0; i<annotations.length; i++) {
+                                    for (int i = 0; i < annotations.length; i++) {
                                         Annotation[] annotationList = annotations[i];
                                         if (annotationList != null && annotationList.length > 0) {
                                             for (Annotation annotation : annotationList) {
@@ -123,6 +123,8 @@ public class LogProcessor {
                                 }
                             }
                         }
+                    } catch (ClassNotFoundException cnfe) {
+                        // ignore
                     } catch (Exception ex) {
                         throw new RuntimeException("Error load class " + x.getImplClazz(), ex);
                     }
