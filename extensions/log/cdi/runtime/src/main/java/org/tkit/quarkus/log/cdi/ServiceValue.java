@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -103,6 +102,12 @@ public class ServiceValue {
         public String id;
         public String returnMask;
         public Map<Short, String> params;
+
+        public void copyConfig(LogServiceAnnotation config) {
+            this.config = createConfig();
+            this.config.log = config.log;
+            this.config.stacktrace = config.stacktrace;
+        }
     }
 
     static MethodItem createMethod(String id) {

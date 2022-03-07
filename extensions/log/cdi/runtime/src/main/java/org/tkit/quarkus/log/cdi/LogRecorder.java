@@ -66,7 +66,7 @@ public class LogRecorder {
                         methods.forEach(method -> {
                             // update config from class if method config found
                             if (method.config == null && item.config != null) {
-                                method.config = item.config;
+                                method.copyConfig(item.config);
                             }
                             // update method config from properties
                             if (method.config != null) {

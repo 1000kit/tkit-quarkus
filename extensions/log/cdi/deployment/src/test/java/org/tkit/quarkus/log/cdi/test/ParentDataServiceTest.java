@@ -13,7 +13,7 @@ public class ParentDataServiceTest extends AbstractTest {
     static final QuarkusUnitTest config = new QuarkusUnitTest()
             .withApplicationRoot((jar) -> jar
                     .addClass(ParentDataService.class)
-                    .addAsResource("application.properties", "application.properties"));
+                    .addAsResource("default.properties", "application.properties"));
 
     @Inject
     ParentDataService service;

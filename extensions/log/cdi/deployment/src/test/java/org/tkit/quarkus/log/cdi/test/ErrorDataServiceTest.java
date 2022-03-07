@@ -15,7 +15,7 @@ public class ErrorDataServiceTest extends AbstractTest {
     static final QuarkusUnitTest config = new QuarkusUnitTest()
             .withApplicationRoot((jar) -> jar
                     .addClasses(ErrorDataService.class, ErrorWrapperService.class)
-                    .addAsResource("application.properties", "application.properties"));
+                    .addAsResource("default.properties", "application.properties"));
 
     @Inject
     ErrorDataService service;

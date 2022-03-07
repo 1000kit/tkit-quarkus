@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class RestInterceptorContext {
 
-    RestServiceValue.Item ano;
+    RestServiceValue.MethodItem ano;
 
     String method;
 

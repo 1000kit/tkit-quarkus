@@ -73,7 +73,7 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
 
         restContext.ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
 
-        if (restContext.ano.log) {
+        if (restContext.ano != null && restContext.ano.config.log) {
             UriInfo uriInfo = requestContext.getUriInfo();
             restContext.method = requestContext.getMethod();
             restContext.path = uriInfo.getPath();
@@ -94,12 +94,12 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
      */
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
-        RestRuntimeConfig config = RestRecorder.getConfig();
-        if (!config.enabled) {
-            return;
-        }
-
         try {
+            RestRuntimeConfig config = RestRecorder.getConfig();
+            if (!config.enabled) {
+                return;
+            }
+
             RestInterceptorContext restContext = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
             if (restContext == null) {
                 if (config.error.enabled) {
@@ -111,7 +111,10 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
                 if (restContext.exclude) {
                     return;
                 }
-                if (restContext.ano.log) {
+                if (restContext.ano == null) {
+                    return;
+                }
+                if (restContext.ano.config.log) {
                     try {
                         restContext.close();
                         if (config.end.enabled) {

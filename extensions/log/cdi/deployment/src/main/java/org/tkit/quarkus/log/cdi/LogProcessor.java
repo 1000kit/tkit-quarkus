@@ -125,6 +125,7 @@ public class LogProcessor {
                         }
                     } catch (ClassNotFoundException cnfe) {
                         // ignore
+                        log.debug("Missing class in current class-loader. Class: {}", cnfe.getMessage());
                     } catch (Exception ex) {
                         throw new RuntimeException("Error load class " + x.getImplClazz(), ex);
                     }

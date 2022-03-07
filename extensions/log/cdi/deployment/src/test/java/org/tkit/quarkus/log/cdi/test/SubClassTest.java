@@ -14,7 +14,7 @@ public class SubClassTest extends AbstractTest {
     static final QuarkusUnitTest config = new QuarkusUnitTest()
             .withApplicationRoot((jar) -> jar
                     .addClasses(AbstractService.class, SubClassService.class)
-                    .addAsResource("application.properties", "application.properties"));
+                    .addAsResource("default.properties", "application.properties"));
 
     @Inject
     SubClassService service;

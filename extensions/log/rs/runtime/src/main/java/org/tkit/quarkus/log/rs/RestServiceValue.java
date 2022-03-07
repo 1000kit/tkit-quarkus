@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 
 public class RestServiceValue {
 
-    static final Item DEFAULT = createItem(null);
-
     public Map<String, ClassItem> classes = new HashMap<>();
 
     public Map<String, Set<String>> mapping = new HashMap<>();
@@ -33,46 +31,50 @@ public class RestServiceValue {
         return mapClasses.stream().map(x -> classes.get(x)).collect(Collectors.toList());
     }
 
+    ClassItem get(String clazz) {
+        return classes.get(clazz);
+    }
+
     ClassItem getOrCreate(String clazz) {
         return classes.computeIfAbsent(clazz, c -> createClass(clazz));
     }
 
-    boolean exists(String clazz) {
-        return classes.containsKey(clazz);
-    }
-
     void updateMapping() {
         classes.forEach((k,v) -> {
-            if (v.config.configKey != null) {
+            if (v.config != null && v.config.configKey != null) {
                 mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
             }
             v.updateMapping();
         });
     }
 
-    public static class ClassItem {
-        public Item config;
-        public Map<String, Item> methods = new HashMap<>();
+    void updateConfig() {
+        classes.forEach((k,v) -> v.methods.forEach((mk, mv) -> {
+            if (mv.config == null) {
+                mv.config = v.config;
+            }
+        }));
+    }
 
+    public static class ClassItem {
+        public RestServiceAnnotation config;
+        public String id;
+        public Map<String, MethodItem> methods = new HashMap<>();
         public Map<String, Set<String>> mapping = new HashMap<>();
 
-        Item getOrCreate(String method) {
-            return methods.computeIfAbsent(method, c -> createItem(method));
-        }
-
-        boolean exists(String method) {
-            return methods.containsKey(method);
+        MethodItem getOrCreate(String method) {
+            return methods.computeIfAbsent(method, c -> createMethod(method));
         }
 
         void updateMapping() {
             methods.forEach((k,v) -> {
-                if (v.configKey != null) {
-                    mapping.computeIfAbsent(v.configKey, t -> new HashSet<>()).add(k);
+                if (v.config != null && v.config.configKey != null) {
+                    mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
                 }
             });
         }
 
-        List<Item> getByConfig(String key) {
+        List<MethodItem> getByConfig(String key) {
             Set<String> mapMethods = mapping.get(key);
 
             // no config key
@@ -85,9 +87,7 @@ public class RestServiceValue {
         }
     }
 
-    public static class Item {
-
-        public String id;
+    public static class RestServiceAnnotation {
 
         public boolean log;
 
@@ -96,17 +96,34 @@ public class RestServiceValue {
         public String configKey;
     }
 
-    static ClassItem createClass(String clazz) {
-        ClassItem c = new ClassItem();
-        c.config = createItem(clazz);
+    public static class MethodItem {
+        public RestServiceAnnotation config;
+        public String id;
+        public void copyConfig(RestServiceAnnotation config) {
+            this.config = createConfig();
+            this.config.log = config.log;
+            this.config.payload = config.payload;
+        }
+    }
+
+    static MethodItem createMethod(String id) {
+        MethodItem c = new MethodItem();
+        c.id = id;
+        c.config = null;
         return c;
     }
 
-    static Item createItem(String id) {
-        Item item = new Item();
-        item.id = id;
+    static ClassItem createClass(String id) {
+        ClassItem c = new ClassItem();
+        c.id = id;
+        c.config = null;
+        return c;
+    }
+
+    static RestServiceAnnotation createConfig() {
+        RestServiceAnnotation item = new RestServiceAnnotation();
         item.log = true;
-        item.payload = true;
+        item.payload = false;
         item.configKey = null;
         return item;
     }

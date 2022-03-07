@@ -1,4 +1,4 @@
-package org.tkit.quarkus.log.cdi.test;
+package org.tkit.quarkus.log.rs.test;
 
 import io.quarkus.bootstrap.logging.InitialConfigurator;
 import org.jboss.logmanager.handlers.WriterHandler;

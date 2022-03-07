@@ -45,34 +45,52 @@ public class RestRecorder {
             }
         }
         REST_SERVICE = values;
-        if (config.controller != null) {
-            config.controller.forEach((key, value) -> {
-                List<RestServiceValue.ClassItem> items = values.getByConfig(key);
-                if (items != null) {
 
-                    // update class values from properties
-                    if (value.config.log.isPresent() || value.config.payload.isPresent()) {
-                        items.forEach(item -> {
-                            value.config.log.ifPresent(x -> item.config.log = x);
-                            value.config.payload.ifPresent(x -> item.config.payload = x);
-                        });
+        config.controller.forEach((key, value) -> {
+            List<RestServiceValue.ClassItem> items = values.getByConfig(key);
+            if (items == null) {
+                log.warn("No @RestService annotation found for key `quarkus.tkit.log.rs.controller.\"{}\"`. Key will be ignored", key);
+                return;
+            }
+
+            // update class values from properties
+            if (value.config.log.isPresent() || value.config.payload.isPresent()) {
+                items.forEach(item -> {
+                    // update class config from properties
+                    if (item.config != null) {
+                        value.config.log.ifPresent(x -> item.config.log = x);
+                        value.config.payload.ifPresent(x -> item.config.payload = x);
+                    } else {
+                        log.warn("No @RestService annotation found for class {}. Key `quarkus.tkit.log.rs.controller.\"{}\"` will be ignored", item.id, key);
                     }
+                });
+            }
 
-                    value.method.forEach((mk, mv) -> {
-
-                        items.forEach(item -> {
-                            List<RestServiceValue.Item> methods = item.getByConfig(mk);
-                            if (methods != null) {
-                                methods.forEach(method -> {
-                                    mv.log.ifPresent(x -> method.log = x);
-                                    mv.payload.ifPresent(x -> method.payload = x);
-                                });
+            // update method values from properties
+            value.method.forEach((mk, mv) -> {
+                items.forEach(item -> {
+                    List<RestServiceValue.MethodItem> methods = item.getByConfig(mk);
+                    if (methods != null) {
+                        methods.forEach(method -> {
+                            // update config from class if method config found
+                            if (method.config == null && item.config != null) {
+                                method.copyConfig(item.config);
+                            }
+                            // update method config from properties
+                            if (method.config != null) {
+                                mv.log.ifPresent(x -> method.config.log = x);
+                                mv.payload.ifPresent(x -> method.config.payload = x);
+                            } else {
+                                log.warn("No @RestService annotation found for method `{}.{}`. Key `quarkus.tkit.log.rs.controller.\"{}\".method.{}` will be ignored", item.id, method.id, key, mk);
                             }
                         });
-                    });
-                }
+                    }
+                });
             });
-        }
+        });
+
+        // update method empty config from Class
+        values.updateConfig();
     }
 
     private static List<Pattern> createPatterns(List<String> items) {
@@ -114,17 +132,12 @@ public class RestRecorder {
         return CONFIG;
     }
 
-
-    public static RestServiceValue.Item getRestService(String clazz, String method) {
-        RestServiceValue.ClassItem c = REST_SERVICE.classes.get(clazz);
-        if (c == null) {
-            return RestServiceValue.DEFAULT;
+    public static RestServiceValue.MethodItem getRestService(String clazz, String method) {
+        RestServiceValue.ClassItem classItem = REST_SERVICE.get(clazz);
+        if (classItem == null) {
+            return null;
         }
-        RestServiceValue.Item m = c.methods.get(method);
-        if (m == null) {
-            return c.config;
-        }
-        return m;
+        return classItem.methods.get(method);
     }
 
 }

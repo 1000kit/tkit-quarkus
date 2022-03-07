@@ -1,21 +1,30 @@
 package org.tkit.quarkus.log.rs;
 
 import io.quarkus.arc.deployment.BeanArchiveIndexBuildItem;
+import io.quarkus.arc.deployment.BeanDiscoveryFinishedBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import org.jboss.jandex.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RestLogProcessor {
 
     static final String FEATURE_NAME = "tkit-log-rs";
 
     static final DotName ANO_REST_SERVICE = DotName.createSimple(RestService.class.getName());
+
+    private static final Set<String> EXCLUDE_METHODS = Arrays.stream(Object.class.getMethods()).map(Method::getName).collect(Collectors.toSet());
+
+    private static final Logger log = LoggerFactory.getLogger(RestLogProcessor.class);
 
     @BuildStep
     void build(BuildProducer<FeatureBuildItem> feature) {
@@ -29,80 +38,65 @@ public class RestLogProcessor {
     }
 
     @BuildStep
-    void restServices(BeanArchiveIndexBuildItem index, BuildProducer<RestServiceBuildItem> producer) {
+    void restServices(BeanArchiveIndexBuildItem index,
+                      BeanDiscoveryFinishedBuildItem beanDiscoveryFinishedBuildItem,
+                      BuildProducer<RestServiceBuildItem> producer) {
+
         RestServiceValue values = new RestServiceValue();
-        IndexView view = index.getIndex();
-        view.getAnnotations(ANO_REST_SERVICE).forEach(a -> createRestServiceValue(view, a, values));
+        beanDiscoveryFinishedBuildItem.beanStream()
+                .forEach(x -> {
+                    try {
+                        ClassInfo ci = x.getImplClazz();
+                        Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(ci.name().toString());
+
+                        RestServiceValue.ClassItem classItem = null;
+                        RestService classRestService = clazz.getAnnotation(RestService.class);
+                        if (classRestService != null) {
+                            classItem = values.getOrCreate(ci.name().toString());
+                            classItem.config = RestServiceValue.createConfig();
+                            updateValue(classRestService, classItem.config);
+                        }
+
+                        for (Method method : clazz.getMethods()) {
+                            if (Modifier.isPublic(method.getModifiers()) && !EXCLUDE_METHODS.contains(method.getName())) {
+
+                                RestService methodLogService = method.getAnnotation(RestService.class);
+                                if (methodLogService != null) {
+                                    if (classItem == null) {
+                                        classItem = values.getOrCreate(ci.name().toString());
+                                    }
+                                }
+
+                                if (methodLogService != null || classRestService != null) {
+
+                                    RestServiceValue.MethodItem methodItem = classItem.getOrCreate(method.getName());
+                                    if (methodLogService != null) {
+                                        methodItem.config = RestServiceValue.createConfig();
+                                        updateValue(methodLogService, methodItem.config);
+                                    }
+                                }
+                            }
+                        }
+
+                    } catch (ClassNotFoundException cnfe) {
+                        // ignore
+                        log.debug("Missing class in current class-loader. Class: {}", cnfe.getMessage());
+                    } catch (Exception ex) {
+                        throw new RuntimeException("Error load class " + x.getImplClazz(), ex);
+                    }
+
+                });
         values.updateMapping();
         producer.produce(new RestServiceBuildItem(values));
     }
 
-    private static void createRestServiceValue(IndexView view, AnnotationInstance ano, RestServiceValue values) {
-        if (ano.target().kind() == AnnotationTarget.Kind.CLASS) {
-            ClassInfo classInfo = ano.target().asClass();
-            String className = classInfo.name().toString();
-            if (!Modifier.isAbstract(classInfo.flags()) && !Modifier.isInterface(classInfo.flags())) {
-                RestServiceValue.ClassItem clazz = values.getOrCreate(className);
-                updateValue(view, ano, clazz.config);
-            }
-            if (Modifier.isInterface(classInfo.flags())) {
-                checkSubClasses(view.getAllKnownImplementors(classInfo.name()), view, ano, values);
-            } else {
-                checkSubClasses(view.getAllKnownSubclasses(classInfo.name()), view, ano, values);
-            }
-        } else if (ano.target().kind() == AnnotationTarget.Kind.METHOD) {
-            MethodInfo methodInfo = ano.target().asMethod();
-            String methodName = methodInfo.name();
-            if (!Modifier.isPublic(methodInfo.flags())) {
-                return;
-            }
-            ClassInfo classInfo = methodInfo.declaringClass();
-            String className = classInfo.name().toString();
-            if (!Modifier.isAbstract(classInfo.flags()) && !Modifier.isInterface(classInfo.flags())) {
-                RestServiceValue.ClassItem clazz = values.getOrCreate(className);
-                RestServiceValue.Item item = clazz.getOrCreate(methodName);
-                updateValue(view, ano, item);
-            }
-            if (Modifier.isInterface(classInfo.flags())) {
-                checkSubClassesMethod(view.getAllKnownImplementors(classInfo.name()), methodName, view, ano, values);
-            } else {
-                checkSubClassesMethod(view.getAllKnownSubclasses(classInfo.name()), methodName, view, ano, values);
-            }
-        }
-    }
-
-    private static void updateValue(IndexView view, AnnotationInstance ano, RestServiceValue.Item item) {
-        item.log = ano.valueWithDefault(view, "log").asBoolean();
-        item.payload = ano.valueWithDefault(view, "payload").asBoolean();
-        String configKey = ano.valueWithDefault(view, "configKey").asString();
+    private static void updateValue(RestService ano, RestServiceValue.RestServiceAnnotation item) {
+        item.log = ano.log();
+        item.payload = ano.payload();
+        String configKey = ano.configKey();
         if (!configKey.isBlank()) {
             item.configKey = configKey;
         }
-    }
-
-    private static void checkSubClasses(Collection<ClassInfo> classes, IndexView view, AnnotationInstance ano, RestServiceValue values) {
-        classes.forEach(subclass -> {
-            if (!Modifier.isAbstract(subclass.flags()) && !Modifier.isInterface(subclass.flags())) {
-                String subClassName = subclass.name().toString();
-                if (!values.exists(subClassName)) {
-                    RestServiceValue.ClassItem clazz = values.getOrCreate(subClassName);
-                    updateValue(view, ano, clazz.config);
-                }
-            }
-        });
-    }
-
-    private static void checkSubClassesMethod(Collection<ClassInfo> classes, String methodName, IndexView view, AnnotationInstance ano, RestServiceValue values) {
-        classes.forEach(subclass -> {
-            if (!Modifier.isAbstract(subclass.flags()) && !Modifier.isInterface(subclass.flags())) {
-                String subClassName = subclass.name().toString();
-                RestServiceValue.ClassItem clazz = values.getOrCreate(subClassName);
-                if (!clazz.exists(methodName)) {
-                    RestServiceValue.Item item = clazz.getOrCreate(methodName);
-                    updateValue(view, ano, item);
-                }
-            }
-        });
     }
 
 }

@@ -295,6 +295,11 @@ public class RestRuntimeConfig {
         @ConfigItem(name = "payload")
         public Optional<Boolean> payload;
 
+        /**
+         * Map of MDC headers
+         */
+        @ConfigItem(name = "mdc-headers")
+        public Optional<Map<String, String>> mdcHeaders;
     }
 
     /**

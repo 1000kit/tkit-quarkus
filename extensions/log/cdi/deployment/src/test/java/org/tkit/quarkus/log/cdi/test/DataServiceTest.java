@@ -13,7 +13,7 @@ public class DataServiceTest extends AbstractTest {
     static final QuarkusUnitTest config = new QuarkusUnitTest()
             .withApplicationRoot((jar) -> jar
                     .addClasses(DataService.class)
-                    .addAsResource("application.properties", "application.properties"));
+                    .addAsResource("default.properties", "application.properties"));
 
     @Inject
     DataService service;

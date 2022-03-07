@@ -2,6 +2,7 @@ package org.tkit.quarkus.log.rs;
 
 import javax.enterprise.util.Nonbinding;
 import java.lang.annotation.*;
+import java.util.Set;
 
 /**
  * The rest service annotation.
@@ -29,6 +30,6 @@ public @interface RestService {
      *
      * @return the payload flag.
      */
-    @Nonbinding boolean payload() default true;
+    @Nonbinding boolean payload() default false;
 
 }

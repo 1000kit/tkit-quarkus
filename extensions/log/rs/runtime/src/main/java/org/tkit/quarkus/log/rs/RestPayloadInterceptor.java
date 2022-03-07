@@ -38,8 +38,8 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
                 }
 
                 // check annotation
-                RestServiceValue.Item ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
-                if (!ano.payload) {
+                RestServiceValue.MethodItem ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
+                if (ano != null && !ano.config.payload) {
                     return;
                 }
 
