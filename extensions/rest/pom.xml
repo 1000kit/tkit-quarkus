@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>org.tkit.quarkus</groupId>
-            <artifactId>tkit-quarkus-log-cdi-api</artifactId>
+            <artifactId>tkit-quarkus-log-cdi</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
