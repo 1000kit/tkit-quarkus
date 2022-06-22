@@ -23,6 +23,7 @@
         <module>panache</module>
         <module>panache-reactive</module>
         <module>rs-client</module>
+        <module>rs-client-reactive</module>
     </modules>
 
     <profiles>

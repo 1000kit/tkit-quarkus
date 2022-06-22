@@ -26,50 +26,52 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         RestRuntimeConfig config = RestRecorder.getConfig();
-        if (config.payload.enabled) {
+        if (!config.payload.enabled) {
+            return;
+        }
+        if (!(requestContext.getMethod().equals(HttpMethod.POST) || requestContext.getMethod().equals(HttpMethod.PUT))) {
+            return;
+        }
 
-            if (requestContext.getMethod().equals(HttpMethod.POST) || requestContext.getMethod().equals(HttpMethod.PUT)) {
-
-                // check regex exclude
-                if (config.payload.regex.enabled) {
-                    if (RestRecorder.excludePayloadUrl(requestContext.getUriInfo().getPath())) {
-                        return;
-                    }
-                }
-
-                // check annotation
-                RestServiceValue.MethodItem ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
-                if (ano != null && !ano.config.payload) {
-                    return;
-                }
-
-                Logger logger = LoggerFactory.getLogger(resourceInfo.getResourceClass());
-                InputStream stream = requestContext.getEntityStream();
-                if (!stream.markSupported()) {
-                    stream = new BufferedInputStream(stream);
-                }
-                stream.mark(config.payload.maxEntitySize + 1);
-                StringBuilder sb = new StringBuilder();
-                stream.mark(config.payload.maxEntitySize + 1);
-                final byte[] entity = new byte[config.payload.maxEntitySize + 1];
-                final int entitySize = stream.read(entity);
-                if (entitySize <= 0) {
-                    if (config.payload.emptyBodyEnabled) {
-                        sb.append(config.payload.emptyBodyMessage);
-                    }
-                } else {
-                    sb.append(new String(entity, 0, Math.min(entitySize, config.payload.maxEntitySize), StandardCharsets.UTF_8));
-                    if (entitySize > config.payload.maxEntitySize) {
-                        sb.append(config.payload.pageMessage);
-                    }
-                }
-                if (sb.length() > 0) {
-                    logger.info(String.format(config.payload.message, requestContext.getMethod(), requestContext.getUriInfo().getPath(), sb));
-                }
-                stream.reset();
-                requestContext.setEntityStream(stream);
+        // check regex exclude
+        if (config.payload.regex.enabled) {
+            if (RestRecorder.excludePayloadUrl(requestContext.getUriInfo().getPath())) {
+                return;
             }
         }
 
+        // check annotation
+        RestServiceValue.MethodItem ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
+        if (ano != null && !ano.config.payload) {
+            return;
+        }
+
+        //TODO: https://github.com/quarkusio/quarkus/issues/23263
+
+        Logger logger = LoggerFactory.getLogger(resourceInfo.getResourceClass());
+        InputStream stream = requestContext.getEntityStream();
+        if (!stream.markSupported()) {
+            stream = new BufferedInputStream(stream);
+        }
+        stream.mark(config.payload.maxEntitySize + 1);
+        StringBuilder sb = new StringBuilder();
+        stream.mark(config.payload.maxEntitySize + 1);
+        final byte[] entity = new byte[config.payload.maxEntitySize + 1];
+        final int entitySize = stream.read(entity);
+        if (entitySize <= 0) {
+            if (config.payload.emptyBodyEnabled) {
+                sb.append(config.payload.emptyBodyMessage);
+            }
+        } else {
+            sb.append(new String(entity, 0, Math.min(entitySize, config.payload.maxEntitySize), StandardCharsets.UTF_8));
+            if (entitySize > config.payload.maxEntitySize) {
+                sb.append(config.payload.pageMessage);
+            }
+        }
+        if (sb.length() > 0) {
+            logger.info(String.format(config.payload.message, requestContext.getMethod(), requestContext.getUriInfo().getPath(), sb));
+        }
+        stream.reset();
+        requestContext.setEntityStream(stream);
     }
 }
