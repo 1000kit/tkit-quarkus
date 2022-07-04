@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>tkit-quarkus-bom</artifactId>
-    <version>999-SNAPSHOT</version>
     <name>tkit-quarkus-bom</name>
     <packaging>pom</packaging>
 
