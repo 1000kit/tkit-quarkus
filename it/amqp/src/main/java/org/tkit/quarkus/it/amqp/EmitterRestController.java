@@ -32,8 +32,9 @@ public class EmitterRestController {
                 .withApplicationProperty("TEST", "KEY")
                 .build();
 
-        emitter.send(Message.of(UUID.randomUUID().toString(), Metadata.of(metadata)));
-        return Response.ok().build();
+        Message<String> message = Message.of(UUID.randomUUID().toString(), Metadata.of(metadata));
+        emitter.send(message);
+        return Response.ok(message).build();
     }
 
 }
