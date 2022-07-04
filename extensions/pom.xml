@@ -19,7 +19,6 @@
         <module>jpa</module>
         <module>rest</module>
         <module>test-db-import</module>
-        <module>test-docker-compose</module>
     </modules>
 
 </project>
