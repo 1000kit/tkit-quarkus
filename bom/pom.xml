@@ -8,5 +8,49 @@
     <name>tkit-quarkus-bom</name>
     <packaging>pom</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-context</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-jpa</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-jpa-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-log-cdi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-log-json</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-log-rs</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus</groupId>
+                <artifactId>tkit-quarkus-test-db-import</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
