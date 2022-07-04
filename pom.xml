@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>bom</module>
         <module>extensions</module>
         <module>it</module>
     </modules>
