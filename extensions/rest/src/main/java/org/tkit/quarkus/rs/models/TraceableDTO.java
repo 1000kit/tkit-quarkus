@@ -15,10 +15,10 @@
  */
 package org.tkit.quarkus.rs.models;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 import java.util.Objects;
 import java.util.UUID;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
  * The persistent entity with string GUID.

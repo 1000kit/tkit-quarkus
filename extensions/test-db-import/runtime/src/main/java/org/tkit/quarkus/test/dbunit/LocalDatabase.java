@@ -1,5 +1,7 @@
 package org.tkit.quarkus.test.dbunit;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
@@ -13,9 +15,6 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.test.WithDBData;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 public class LocalDatabase implements Database {
 
@@ -55,6 +54,7 @@ public class LocalDatabase implements Database {
             throw new RuntimeException("Error create database connection", ex);
         }
     }
+
     protected Connection createConnection(String name) throws Exception {
         String prefix = "quarkus.datasource.";
         if (name != null) {

@@ -1,9 +1,9 @@
 package org.tkit.quarkus.jpa.test;
 
-import org.tkit.quarkus.jpa.models.TraceableEntity;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "ADDRESS")

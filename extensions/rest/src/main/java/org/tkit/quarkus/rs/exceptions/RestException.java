@@ -15,12 +15,13 @@
  */
 package org.tkit.quarkus.rs.exceptions;
 
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.ws.rs.core.Response;
 
 /**
  * The REST exception. The DTO for this class {@link org.tkit.quarkus.rs.models.RestExceptionDTO}
@@ -61,7 +62,7 @@ public class RestException extends RuntimeException {
      * The default constructor.
      *
      * @param errorCode the error code.
-     * @param status    the response status.
+     * @param status the response status.
      */
     public RestException(Enum<?> errorCode, Response.Status status) {
         super(requireNonNull(errorCode));
@@ -73,8 +74,8 @@ public class RestException extends RuntimeException {
      * The default constructor.
      *
      * @param errorCode the error code.
-     * @param status    the response status.
-     * @param cause     the cause.
+     * @param status the response status.
+     * @param cause the cause.
      */
     public RestException(Enum<?> errorCode, Response.Status status, Throwable cause) {
         super(requireNonNull(errorCode), cause);
@@ -86,7 +87,7 @@ public class RestException extends RuntimeException {
      * The default constructor.
      *
      * @param errorCode the error code.
-     * @param cause     the cause.
+     * @param cause the cause.
      */
     public RestException(Enum<?> errorCode, Throwable cause) {
         this(errorCode, Response.Status.INTERNAL_SERVER_ERROR, cause);
@@ -96,9 +97,9 @@ public class RestException extends RuntimeException {
      * The default constructor.
      *
      * @param errorCode the error code.
-     * @param status    the response status.
-     * @param cause     the cause.
-     * @param params    the list of parameters
+     * @param status the response status.
+     * @param cause the cause.
+     * @param params the list of parameters
      */
     public RestException(Enum<?> errorCode, Response.Status status, Throwable cause, Object... params) {
         this(errorCode, status, cause);
@@ -111,8 +112,8 @@ public class RestException extends RuntimeException {
      * The default constructor.
      *
      * @param errorCode the error code.
-     * @param cause     the cause.
-     * @param params    the list of parameters
+     * @param cause the cause.
+     * @param params the list of parameters
      */
     public RestException(Enum<?> errorCode, Throwable cause, Object... params) {
         this(errorCode, Response.Status.INTERNAL_SERVER_ERROR, cause, params);
@@ -122,8 +123,8 @@ public class RestException extends RuntimeException {
      * The default constructor.
      *
      * @param errorCode the error code.
-     * @param status    the response status.
-     * @param params    the list of parameters
+     * @param status the response status.
+     * @param params the list of parameters
      */
     public RestException(Enum<?> errorCode, Response.Status status, Object... params) {
         this(errorCode, status);
@@ -136,7 +137,7 @@ public class RestException extends RuntimeException {
      * The default constructor.
      *
      * @param errorCode the error code.
-     * @param params    the list of parameters
+     * @param params the list of parameters
      */
     public RestException(Enum<?> errorCode, Object... params) {
         this(errorCode, Response.Status.INTERNAL_SERVER_ERROR, params);
@@ -145,7 +146,7 @@ public class RestException extends RuntimeException {
     /**
      * Adds the parameter with name.
      *
-     * @param name  the name of the parameter.
+     * @param name the name of the parameter.
      * @param value the value of the parameter.
      * @return this instance.
      */

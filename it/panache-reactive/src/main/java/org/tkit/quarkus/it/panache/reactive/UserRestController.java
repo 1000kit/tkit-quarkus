@@ -1,16 +1,20 @@
 package org.tkit.quarkus.it.panache.reactive;
 
-import io.quarkus.hibernate.reactive.panache.common.runtime.ReactiveTransactional;
-import io.smallrye.mutiny.Uni;
+import static javax.ws.rs.core.Response.Status.*;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static javax.ws.rs.core.Response.Status.*;
+import io.quarkus.hibernate.reactive.panache.common.runtime.ReactiveTransactional;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+import io.smallrye.mutiny.Uni;
 
 @Path("users")
+@ApplicationScoped
+@RegisterForReflection
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserRestController {
@@ -20,7 +24,7 @@ public class UserRestController {
 
     @GET
     @Path("{id}")
-    public Uni<Response> get(@PathParam("id") String id) {
+    public Uni<Response> load(@PathParam("id") String id) {
         return dao.findById(id)
                 .onItem().ifNotNull().transform(d -> Response.ok(dto(d)).build())
                 .onItem().ifNull().continueWith(Response.ok().status(NOT_FOUND)::build);

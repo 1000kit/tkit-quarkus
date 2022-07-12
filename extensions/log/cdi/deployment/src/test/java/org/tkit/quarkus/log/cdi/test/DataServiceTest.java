@@ -1,11 +1,12 @@
 package org.tkit.quarkus.log.cdi.test;
 
-import io.quarkus.test.QuarkusUnitTest;
+import javax.inject.Inject;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.tkit.quarkus.log.cdi.test.app.DataService;
 
-import javax.inject.Inject;
+import io.quarkus.test.QuarkusUnitTest;
 
 public class DataServiceTest extends AbstractTest {
 

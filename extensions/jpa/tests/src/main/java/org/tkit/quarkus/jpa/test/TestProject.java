@@ -1,10 +1,11 @@
 package org.tkit.quarkus.jpa.test;
 
-import org.tkit.quarkus.jpa.models.AbstractTraceableEntity;
+import java.util.UUID;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.util.UUID;
+
+import org.tkit.quarkus.jpa.models.AbstractTraceableEntity;
 
 @MappedSuperclass
 public class TestProject extends AbstractTraceableEntity<String> {

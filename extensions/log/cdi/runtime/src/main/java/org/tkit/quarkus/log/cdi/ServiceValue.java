@@ -40,7 +40,7 @@ public class ServiceValue {
     }
 
     void updateMapping() {
-        classes.forEach((k,v) -> {
+        classes.forEach((k, v) -> {
             if (v.config != null && v.config.configKey != null) {
                 mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
             }
@@ -49,7 +49,7 @@ public class ServiceValue {
     }
 
     void updateConfig() {
-        classes.forEach((k,v) -> v.methods.forEach((mk, mv) -> {
+        classes.forEach((k, v) -> v.methods.forEach((mk, mv) -> {
             if (mv.config == null) {
                 mv.config = v.config;
             }
@@ -68,7 +68,7 @@ public class ServiceValue {
         }
 
         void updateMapping() {
-            methods.forEach((k,v) -> {
+            methods.forEach((k, v) -> {
                 if (v.config != null && v.config.configKey != null) {
                     mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
                 }

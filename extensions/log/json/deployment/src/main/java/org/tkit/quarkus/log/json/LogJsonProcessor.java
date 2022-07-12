@@ -37,9 +37,9 @@ public class LogJsonProcessor {
         feature.produce(new FeatureBuildItem(FEATURE_NAME));
     }
 
-     @BuildStep
-     @Record(ExecutionTime.RUNTIME_INIT)
-     public LogConsoleFormatBuildItem setUpFormatter(LogJsonRecorder recorder, LogJsonConfig config) {
-          return new LogConsoleFormatBuildItem(recorder.initializeJsonLogging(config));
-     }
+    @BuildStep
+    @Record(ExecutionTime.RUNTIME_INIT)
+    public LogConsoleFormatBuildItem setUpFormatter(LogJsonRecorder recorder, LogJsonConfig config) {
+        return new LogConsoleFormatBuildItem(recorder.initializeJsonLogging(config));
+    }
 }

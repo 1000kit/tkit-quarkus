@@ -1,10 +1,5 @@
 package org.tkit.quarkus.log.rs;
 
-import org.jboss.logging.MDC;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.context.ApplicationContext;
-
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.ClientResponseContext;
@@ -12,6 +7,10 @@ import javax.ws.rs.client.ClientResponseFilter;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
+import org.jboss.logging.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.context.ApplicationContext;
 
 /**
  * The rest client log interceptor
@@ -29,7 +28,6 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
      * The context interceptor property.
      */
     private static final String CONTEXT = "context";
-
 
     /**
      * {@inheritDoc }
@@ -60,7 +58,7 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
         }));
 
         if (config.client.start.enabled) {
-            log.info(String.format(config.client.start.template, context.method,context.uri));
+            log.info(String.format(config.client.start.template, context.method, context.uri));
         }
         requestContext.setProperty(CONTEXT, context);
     }
@@ -80,7 +78,8 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
         if (context == null) {
             if (config.client.error.enabled) {
                 Response.StatusType status = responseContext.getStatusInfo();
-                log.info(String.format(config.client.end.template, requestContext.getMethod(), requestContext.getUri().getPath(), 0.000,
+                log.info(String.format(config.client.end.template, requestContext.getMethod(),
+                        requestContext.getUri().getPath(), 0.000,
                         status.getStatusCode(), status.getReasonPhrase()));
             }
             return;

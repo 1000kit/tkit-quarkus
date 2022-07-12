@@ -1,13 +1,13 @@
 package org.tkit.quarkus.log.rs.test;
 
-import io.quarkus.test.QuarkusUnitTest;
-import io.restassured.RestAssured;
+import static org.hamcrest.Matchers.is;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.tkit.quarkus.log.rs.test.app.PropertiesRestController;
 import org.tkit.quarkus.log.rs.test.app.RegexRestController;
 
-import static org.hamcrest.Matchers.is;
+import io.quarkus.test.QuarkusUnitTest;
+import io.restassured.RestAssured;
 
 public class RegexTest extends AbstractTest {
 
@@ -22,7 +22,8 @@ public class RegexTest extends AbstractTest {
         RestAssured.get("/regex/load").then()
                 .body(is("OK"));
         assertLogs().assertLines(1)
-                .assertContains(0, "NFO  [org.tki.qua.log.rs.tes.app.RegexRestController] (executor-thread-0) GET /regex/load [200] [");
+                .assertContains(0,
+                        "NFO  [org.tki.qua.log.rs.tes.app.RegexRestController] (executor-thread-0) GET /regex/load [200] [");
     }
 
     @Test

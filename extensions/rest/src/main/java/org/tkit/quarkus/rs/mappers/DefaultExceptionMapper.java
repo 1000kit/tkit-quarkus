@@ -15,12 +15,9 @@
  */
 package org.tkit.quarkus.rs.mappers;
 
-import org.eclipse.microprofile.config.ConfigProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.rs.exceptions.RestException;
-import org.tkit.quarkus.rs.models.RestExceptionDTO;
-import org.tkit.quarkus.rs.resources.ResourceManager;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 import javax.annotation.Priority;
 import javax.ws.rs.WebApplicationException;
@@ -31,9 +28,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.rs.exceptions.RestException;
+import org.tkit.quarkus.rs.models.RestExceptionDTO;
+import org.tkit.quarkus.rs.resources.ResourceManager;
 
 /**
  * The default exception mapper with priority {@code PRIORITY}.

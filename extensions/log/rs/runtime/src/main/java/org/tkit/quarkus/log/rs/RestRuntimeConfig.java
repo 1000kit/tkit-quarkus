@@ -1,13 +1,13 @@
 package org.tkit.quarkus.log.rs;
 
-import io.quarkus.runtime.annotations.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@ConfigRoot(name= "tkit.log.rs", phase = ConfigPhase.RUN_TIME)
+import io.quarkus.runtime.annotations.*;
+
+@ConfigRoot(name = "tkit.log.rs", phase = ConfigPhase.RUN_TIME)
 public class RestRuntimeConfig {
 
     /**

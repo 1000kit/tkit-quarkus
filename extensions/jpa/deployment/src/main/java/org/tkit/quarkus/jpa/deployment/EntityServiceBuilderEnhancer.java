@@ -15,15 +15,15 @@
  */
 package org.tkit.quarkus.jpa.deployment;
 
+import java.util.function.BiFunction;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import java.util.function.BiFunction;
-
 /**
- * The abstract  entity builder enhancer
+ * The abstract entity builder enhancer
  */
 public class EntityServiceBuilderEnhancer implements BiFunction<String, ClassVisitor, ClassVisitor> {
 
@@ -45,7 +45,7 @@ public class EntityServiceBuilderEnhancer implements BiFunction<String, ClassVis
     /**
      * The default constructor.
      *
-     * @param entityName  entity name.
+     * @param entityName entity name.
      * @param entityClass entity class.
      */
     public EntityServiceBuilderEnhancer(String entityName, String entityClass, String idAttributeName) {
@@ -59,7 +59,8 @@ public class EntityServiceBuilderEnhancer implements BiFunction<String, ClassVis
      */
     @Override
     public ClassVisitor apply(String className, ClassVisitor outputClassVisitor) {
-        return new EntityServiceBuilderEnhancerClassVisitor(className, outputClassVisitor, entityName, entityClass, idAttributeName);
+        return new EntityServiceBuilderEnhancerClassVisitor(className, outputClassVisitor, entityName, entityClass,
+                idAttributeName);
     }
 
     /**
@@ -80,7 +81,8 @@ public class EntityServiceBuilderEnhancer implements BiFunction<String, ClassVis
          */
         private String idAttributeName;
 
-        public EntityServiceBuilderEnhancerClassVisitor(String className, ClassVisitor outputClassVisitor, String entityName, String entityClass, String idAttributeName) {
+        public EntityServiceBuilderEnhancerClassVisitor(String className, ClassVisitor outputClassVisitor, String entityName,
+                String entityClass, String idAttributeName) {
             super(Opcodes.ASM7, outputClassVisitor);
             this.entityClass = entityClass.replace('.', '/');
             this.entityName = entityName;

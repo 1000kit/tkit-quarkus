@@ -1,14 +1,13 @@
 package org.tkit.quarkus.log.cdi.runtime;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import io.quarkus.runtime.annotations.ConfigGroup;
 import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @ConfigRoot(name = "tkit.log.cdi", phase = ConfigPhase.RUN_TIME)
 public class LogRuntimeConfig {

@@ -15,10 +15,10 @@
  */
 package org.tkit.quarkus.rs.models;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
  * The persistent entity interface.
@@ -69,6 +69,7 @@ public abstract class AbstractTraceableDTO<T> implements Serializable {
 
     /**
      * Overwrite the {@code toString} method for the logger.
+     *
      * @return the className:Id
      */
     @Override

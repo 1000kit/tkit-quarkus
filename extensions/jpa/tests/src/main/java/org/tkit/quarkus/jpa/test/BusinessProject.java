@@ -1,15 +1,12 @@
 package org.tkit.quarkus.jpa.test;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-import org.tkit.quarkus.jpa.models.AbstractTraceableEntity;
-import org.tkit.quarkus.jpa.models.TraceableEntity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.UUID;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "BUSINESS_PROJECT")

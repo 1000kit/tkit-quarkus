@@ -1,16 +1,15 @@
 package org.tkit.quarkus.rs.resources;
 
-
-import org.eclipse.microprofile.config.ConfigProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.rs.exceptions.RestException;
-
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.rs.exceptions.RestException;
 
 /**
  * The resource manager for messages.
@@ -31,13 +30,12 @@ public class ResourceManager {
     private static final Locale DEFAULT_LOCALE = new Locale(
             ConfigProvider.getConfig()
                     .getOptionalValue(QUARKUS_DEFAULT_LOCALE, String.class)
-                    .orElse(Locale.ENGLISH.getLanguage())
-    );
+                    .orElse(Locale.ENGLISH.getLanguage()));
 
     /**
      * Gets the message for the enum key and parameters
      *
-     * @param key    the {@link RestException}
+     * @param key the {@link RestException}
      * @param locale the locale
      * @param params the list of parameters.
      * @return the corresponding message.
@@ -72,8 +70,8 @@ public class ResourceManager {
      * Gets the resource bundle for the bundle name and locale.
      *
      * @param bundleName the bundle name.
-     * @param locale     the locale.
-     * @param loader     the class-loader.
+     * @param locale the locale.
+     * @param loader the class-loader.
      * @return corresponding resoruce bundle or {@code null}.
      */
     private static ResourceBundle getBundle(final String bundleName, final Locale locale, final ClassLoader loader) {
@@ -90,6 +88,5 @@ public class ResourceManager {
         }
         return null;
     }
-
 
 }

@@ -1,10 +1,10 @@
 package org.tkit.quarkus.log.cdi.interceptor;
 
-import org.tkit.quarkus.log.cdi.LogService;
-
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.tkit.quarkus.log.cdi.LogService;
 
 public class LogServiceContainer {
 

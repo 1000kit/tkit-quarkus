@@ -31,9 +31,9 @@ public class ConstraintException extends DAOException {
      * The default constructor.
      *
      * @param constraints the constraints message.
-     * @param messageKey  the message key.
-     * @param cause       the cause exception.
-     * @param params      the exception parameters.
+     * @param messageKey the message key.
+     * @param cause the cause exception.
+     * @param params the exception parameters.
      */
     public ConstraintException(String constraints, Enum<?> messageKey, Throwable cause, Serializable... params) {
         super(messageKey, cause, params);

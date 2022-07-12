@@ -1,11 +1,11 @@
 package org.tkit.quarkus.it.jpa;
 
-import org.tkit.quarkus.log.rs.RestService;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.tkit.quarkus.log.rs.RestService;
 
 @RestService(configKey = "user")
 @Path("users")

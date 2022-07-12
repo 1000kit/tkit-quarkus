@@ -11,6 +11,7 @@ public class ApplicationContext {
 
     /**
      * Get current value of application context. Can be null.
+     *
      * @return current context or null if empty.
      */
     public static Context get() {
@@ -19,6 +20,7 @@ public class ApplicationContext {
 
     /**
      * Set the context value.
+     *
      * @param ctx the new context to set.
      */
     static void set(Context ctx) {
@@ -49,7 +51,8 @@ public class ApplicationContext {
         }
     }
 
-    private static final String BUSINESS_DATA_PREFIX = ConfigProvider.getConfig().getOptionalValue("quarkus.tkit.log.customdata.prefix", String.class).orElse("business_information_");
+    private static final String BUSINESS_DATA_PREFIX = ConfigProvider.getConfig()
+            .getOptionalValue("quarkus.tkit.log.customdata.prefix", String.class).orElse("business_information_");
 
     public static void addBusinessLogParam(String key, String value) {
         String k = BUSINESS_DATA_PREFIX + key;
@@ -63,7 +66,7 @@ public class ApplicationContext {
         MDC.remove(k);
     }
 
-    public static void removeAllBusinessLogParams(){
+    public static void removeAllBusinessLogParams() {
         get().businessParams.forEach(MDC::remove);
         get().businessParams.clear();
     }

@@ -1,7 +1,9 @@
 package org.tkit.quarkus.log.rs;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -9,10 +11,9 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Provider
 public class RestPayloadInterceptor implements ContainerRequestFilter {
@@ -41,7 +42,8 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
         }
 
         // check annotation
-        RestServiceValue.MethodItem ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
+        RestServiceValue.MethodItem ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(),
+                resourceInfo.getResourceMethod().getName());
         if (ano != null && !ano.config.payload) {
             return;
         }
@@ -69,7 +71,8 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
             }
         }
         if (sb.length() > 0) {
-            logger.info(String.format(config.payload.message, requestContext.getMethod(), requestContext.getUriInfo().getPath(), sb));
+            logger.info(String.format(config.payload.message, requestContext.getMethod(), requestContext.getUriInfo().getPath(),
+                    sb));
         }
         stream.reset();
         requestContext.setEntityStream(stream);

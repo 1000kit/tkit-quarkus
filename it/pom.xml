@@ -36,6 +36,17 @@
                 <quarkus.docker.dockerfile-jvm-path>${project.basedir}/src/main/docker/Dockerfile</quarkus.docker.dockerfile-jvm-path>
             </properties>
         </profile>
+        <profile>
+            <id>native</id>
+            <activation>
+                <property>
+                    <name>native</name>
+                </property>
+            </activation>
+            <properties>
+                <quarkus.package.type>native</quarkus.package.type>
+            </properties>
+        </profile>
     </profiles>
 
 </project>

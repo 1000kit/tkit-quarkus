@@ -1,17 +1,19 @@
 package org.tkit.quarkus.it.amqp;
 
-import io.smallrye.reactive.messaging.amqp.OutgoingAmqpMetadata;
-import io.vertx.core.json.JsonObject;
-import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
-import org.eclipse.microprofile.reactive.messaging.Message;
-import org.eclipse.microprofile.reactive.messaging.Metadata;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import java.util.UUID;
+
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Metadata;
+
+import io.smallrye.reactive.messaging.amqp.OutgoingAmqpMetadata;
+import io.vertx.core.json.JsonObject;
 
 @Path("emitter")
 public class EmitterRestController {

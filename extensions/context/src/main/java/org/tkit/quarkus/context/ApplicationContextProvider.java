@@ -1,9 +1,9 @@
 package org.tkit.quarkus.context;
 
+import java.util.Map;
+
 import org.eclipse.microprofile.context.spi.ThreadContextProvider;
 import org.eclipse.microprofile.context.spi.ThreadContextSnapshot;
-
-import java.util.Map;
 
 /**
  * Microprofile context provider for propagation of correlation scope between threads.
@@ -34,7 +34,6 @@ public class ApplicationContextProvider implements ThreadContextProvider {
             return () -> restore(current);
         };
     }
-
 
     @Override
     public String getThreadContextType() {

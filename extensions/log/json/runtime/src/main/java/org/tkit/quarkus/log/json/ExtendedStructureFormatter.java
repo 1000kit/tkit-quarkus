@@ -1,12 +1,5 @@
 package org.tkit.quarkus.log.json;
 
-import org.jboss.logmanager.ExtFormatter;
-import org.jboss.logmanager.ExtLogRecord;
-import org.jboss.logmanager.PropertyValues;
-import org.jboss.logmanager.formatters.StructuredFormatter;
-import org.tkit.quarkus.log.json.tagging.TaggedMessage;
-import org.tkit.quarkus.log.json.util.ClassNameAbbreviationUtil;
-
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.time.Instant;
@@ -15,11 +8,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.LogRecord;
 
+import org.jboss.logmanager.ExtFormatter;
+import org.jboss.logmanager.ExtLogRecord;
+import org.jboss.logmanager.PropertyValues;
+import org.jboss.logmanager.formatters.StructuredFormatter;
+import org.tkit.quarkus.log.json.tagging.TaggedMessage;
+import org.tkit.quarkus.log.json.util.ClassNameAbbreviationUtil;
+
 /**
  * Custom structured formatter because the original {@link StructuredFormatter} has final format methods, sigh
  *
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings({ "unused", "WeakerAccess" })
 public abstract class ExtendedStructureFormatter extends ExtFormatter {
 
     /**
@@ -91,7 +91,8 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
          */
         FORMATTED,
         /**
-         * The cause, if present, will be a string representation of the stack trace in a {@code stackTrace} property, with classnames abbreviated.
+         * The cause, if present, will be a string representation of the stack trace in a {@code stackTrace} property, with
+         * classnames abbreviated.
          * The property value is a string created by {@link Throwable#printStackTrace() with classnames abbreviated}.
          */
         FORMATTED_BRIEF,
@@ -121,7 +122,6 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
     private Set<String> printEnvVarKeys = new HashSet<>();
     //number of characters, after which we split the stacktraces and create linked messages
     private int splitStacktracesAfter;
-
 
     protected ExtendedStructureFormatter() {
         this(null, null);
@@ -157,7 +157,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
      * Invoked before the structured data is added to the generator.
      *
      * @param generator the generator to use
-     * @param record    the log record
+     * @param record the log record
      */
     protected void before(final Generator generator, final ExtLogRecord record) throws Exception {
         // do nothing
@@ -167,7 +167,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
      * Invoked after the structured data has been added to the generator.
      *
      * @param generator the generator to use
-     * @param record    the log record
+     * @param record the log record
      */
     protected void after(final Generator generator, final ExtLogRecord record) throws Exception {
         // do nothing
@@ -186,7 +186,6 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         }
         return defaultKey.getKey();
     }
-
 
     @Override
     public final synchronized String format(final ExtLogRecord record) {
@@ -280,11 +279,12 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
                 if (upperBound > stacktrace.length()) {
                     upperBound = stacktrace.length();
                 }
-                result[i] = "PART " + (i + 1) + " of " + partCount + " : " + stacktrace.substring(i * splitStacktracesAfter, upperBound);
+                result[i] = "PART " + (i + 1) + " of " + partCount + " : "
+                        + stacktrace.substring(i * splitStacktracesAfter, upperBound);
             }
             return result;
         } else {
-            return new String[]{stacktrace};
+            return new String[] { stacktrace };
         }
     }
 
@@ -324,7 +324,8 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         }
     }
 
-    private void printStackTraceWithAbbreviatedClasses(Throwable throwable, StringBuilderWriter w, final Map<Throwable, Integer> seen) {
+    private void printStackTraceWithAbbreviatedClasses(Throwable throwable, StringBuilderWriter w,
+            final Map<Throwable, Integer> seen) {
         if (throwable == null) {
             return;
         }
@@ -367,7 +368,6 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
     private boolean isFormattedBriefExceptionType() {
         return exceptionOutputType == ExceptionOutputType.FORMATTED_BRIEF;
     }
-
 
     protected void addAbbreviatedStackTraceElements(StringBuilderWriter w, StackTraceElement[] elements) {
         for (StackTraceElement e : elements) {
@@ -500,13 +500,12 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         return exceptionOutputType;
     }
 
-
     public String getPrintEnvVars() {
         return printEnvVars;
     }
 
     public void setPrintEnvVars(String printEnvVars) {
-        System.out.println("JSONLOGGER set printEnvVars: " + printEnvVars );
+        System.out.println("JSONLOGGER set printEnvVars: " + printEnvVars);
         this.printEnvVars = printEnvVars;
         if (printEnvVars != null) {
             printEnvVarKeys.addAll(Arrays.asList(printEnvVars.split(",")));
@@ -518,10 +517,9 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
     }
 
     public void setSplitStacktracesAfter(int splitStacktracesAfter) {
-        System.out.println("JSONLOGGER set stacktraceSplitting: " + splitStacktracesAfter );
+        System.out.println("JSONLOGGER set stacktraceSplitting: " + splitStacktracesAfter);
         this.splitStacktracesAfter = splitStacktracesAfter;
     }
-
 
     /**
      * Set the output type for exceptions. The default is {@link ExceptionOutputType#DETAILED DETAILED}.
@@ -559,7 +557,8 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
                 exceptionOutputType == ExceptionOutputType.DETAILED_AND_FORMATTED;
     }
 
-    private void addException(final Generator generator, final Throwable throwable, final Map<Throwable, Integer> seen) throws Exception {
+    private void addException(final Generator generator, final Throwable throwable, final Map<Throwable, Integer> seen)
+            throws Exception {
         if (throwable == null) {
             return;
         }
@@ -653,7 +652,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         /**
          * Writes an integer value.
          *
-         * @param key   they key
+         * @param key they key
          * @param value the value
          *
          * @return the generator
@@ -668,7 +667,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         /**
          * Writes a long value.
          *
-         * @param key   they key
+         * @param key they key
          * @param value the value
          *
          * @return the generator
@@ -683,7 +682,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         /**
          * Writes a map value
          *
-         * @param key   the key for the map
+         * @param key the key for the map
          * @param value the map
          *
          * @return the generator
@@ -695,7 +694,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         /**
          * Writes a string value.
          *
-         * @param key   the key for the value
+         * @param key the key for the value
          * @param value the string value
          *
          * @return the generator
@@ -741,8 +740,8 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
          * </p>
          *
          * @param key they key for the object, or {@code null} if this object was
-         *            {@linkplain #startArray(String) started in an array} and the {@link #wrapArrays()} is
-         *            {@code false}
+         *        {@linkplain #startArray(String) started in an array} and the {@link #wrapArrays()} is
+         *        {@code false}
          *
          * @return the generator
          *
@@ -792,7 +791,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
          * special handling for attributes, for example an attribute on an XML element, this method can be overridden.
          * </p>
          *
-         * @param name  the name of the attribute
+         * @param name the name of the attribute
          * @param value the value of the attribute
          *
          * @return the generator
@@ -810,7 +809,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
          * special handling for attributes, for example an attribute on an XML element, this method can be overridden.
          * </p>
          *
-         * @param name  the name of the attribute
+         * @param name the name of the attribute
          * @param value the value of the attribute
          *
          * @return the generator

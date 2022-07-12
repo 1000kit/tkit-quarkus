@@ -15,13 +15,13 @@
  */
 package org.tkit.quarkus.log.json;
 
-import io.quarkus.runtime.annotations.ConfigItem;
-import io.quarkus.runtime.annotations.ConfigPhase;
-import io.quarkus.runtime.annotations.ConfigRoot;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import io.quarkus.runtime.annotations.ConfigItem;
+import io.quarkus.runtime.annotations.ConfigPhase;
+import io.quarkus.runtime.annotations.ConfigRoot;
 
 @ConfigRoot(phase = ConfigPhase.RUN_TIME, name = "tkit.log.console.json")
 public class LogJsonConfig {
@@ -109,6 +109,6 @@ public class LogJsonConfig {
     /**
      * Number of characters after which the stacktrace is split and we produce linked messages
      */
-    @ConfigItem(name="splitStacktracesAfter",defaultValue = "12000")
+    @ConfigItem(name = "splitStacktracesAfter", defaultValue = "12000")
     Optional<Integer> splitStacktracesAfter;
 }

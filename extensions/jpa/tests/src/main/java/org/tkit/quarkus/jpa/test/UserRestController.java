@@ -1,8 +1,5 @@
 package org.tkit.quarkus.jpa.test;
 
-import org.tkit.quarkus.jpa.daos.Page;
-import org.tkit.quarkus.jpa.daos.PageResult;
-
 import javax.inject.Inject;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
@@ -15,6 +12,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.tkit.quarkus.jpa.daos.Page;
+import org.tkit.quarkus.jpa.daos.PageResult;
 
 @Path("users")
 @Consumes(MediaType.APPLICATION_JSON)

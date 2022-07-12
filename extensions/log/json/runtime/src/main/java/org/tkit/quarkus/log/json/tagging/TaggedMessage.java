@@ -3,7 +3,6 @@ package org.tkit.quarkus.log.json.tagging;
 import static org.tkit.quarkus.log.json.tagging.MessageTypeTag.CUSTOM_ATTRIBUTE_JSON_STRING_MESSAGE;
 import static org.tkit.quarkus.log.json.tagging.MessageTypeTag.CUSTOM_ATTRIBUTE_STRING_MESSAGE;
 
-
 /**
  * Log record message wrapper, which parses (if correctly structured)
  * 2 tags from very beginning of string message. First tag is interpreted as
@@ -11,6 +10,7 @@ import static org.tkit.quarkus.log.json.tagging.MessageTypeTag.CUSTOM_ATTRIBUTE_
  * log output.
  * If message does not contain tags or tags are not correctly structured,
  * this is interpreted as Regular message type with name of attribute 'message'.
+ *
  * @author brano kalas
  */
 public class TaggedMessage {
@@ -26,10 +26,12 @@ public class TaggedMessage {
             this.messageTypeTag = MessageTypeTag.fromString(parseBeginningTagFromString(logRecordMessage));
             if (CUSTOM_ATTRIBUTE_JSON_STRING_MESSAGE == messageTypeTag ||
                     CUSTOM_ATTRIBUTE_STRING_MESSAGE == messageTypeTag) {
-                this.nameOfAttributeTag = parseBeginningTagFromString(logRecordMessage.substring(messageTypeTag.getTagName().length() + 2));
+                this.nameOfAttributeTag = parseBeginningTagFromString(
+                        logRecordMessage.substring(messageTypeTag.getTagName().length() + 2));
                 if (this.nameOfAttributeTag != null) {
                     tagsFound = true;
-                    this.messageAfterTagsRemoval = logRecordMessage.substring(messageTypeTag.getTagName().length() + nameOfAttributeTag.length() + 4);
+                    this.messageAfterTagsRemoval = logRecordMessage
+                            .substring(messageTypeTag.getTagName().length() + nameOfAttributeTag.length() + 4);
                 }
 
             }

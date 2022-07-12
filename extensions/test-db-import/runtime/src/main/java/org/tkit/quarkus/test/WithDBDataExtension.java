@@ -1,16 +1,14 @@
 package org.tkit.quarkus.test;
 
+import java.lang.reflect.Method;
+import java.net.URL;
 
-import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.extension.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.test.dbunit.FileType;
 import org.tkit.quarkus.test.dbunit.Database;
+import org.tkit.quarkus.test.dbunit.FileType;
 import org.tkit.quarkus.test.dbunit.LocalDatabase;
-
-import java.lang.reflect.Method;
-import java.net.URL;
 
 /**
  * This junit5 extension is using the db-import service to import data in the database.
@@ -19,7 +17,8 @@ import java.net.URL;
  *
  * @see WithDBData
  */
-public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback, BeforeAllCallback, AfterAllCallback {
+public class WithDBDataExtension
+        implements BeforeTestExecutionCallback, AfterTestExecutionCallback, BeforeAllCallback, AfterAllCallback {
 
     /**
      * The logger for this class.
@@ -111,7 +110,8 @@ public class WithDBDataExtension implements BeforeTestExecutionCallback, AfterTe
     public void beforeAll(ExtensionContext context) throws Exception {
         Object tmp = context.getStore(ExtensionContext.Namespace.GLOBAL).get(WithDBDataExtension.class.getName());
         if (tmp == null) {
-            context.getStore(ExtensionContext.Namespace.GLOBAL).put(WithDBDataExtension.class.getName(), Boolean.TRUE.toString());
+            context.getStore(ExtensionContext.Namespace.GLOBAL).put(WithDBDataExtension.class.getName(),
+                    Boolean.TRUE.toString());
             context.getStore(ExtensionContext.Namespace.GLOBAL).put(WithDBData.class.getName(), Boolean.TRUE.toString());
             return;
         }

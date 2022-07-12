@@ -37,9 +37,9 @@ public class PageResult<T> {
     /**
      * The default constructor.
      *
-     * @param totalElements  the count of all items.
+     * @param totalElements the count of all items.
      * @param stream the data stream.
-     * @param page   the page.
+     * @param page the page.
      */
     public PageResult(long totalElements, Stream<T> stream, Page page) {
         this.totalElements = totalElements;

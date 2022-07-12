@@ -22,6 +22,7 @@ public abstract class EntityService<T> {
 
     /**
      * The entity class.
+     *
      * @return the entity class.
      */
     protected Class<T> getEntityClass() {
@@ -30,6 +31,7 @@ public abstract class EntityService<T> {
 
     /**
      * The entity name.
+     *
      * @return the entity name.
      */
     protected String getEntityName() {
@@ -38,6 +40,7 @@ public abstract class EntityService<T> {
 
     /**
      * The entity id attribute name.
+     *
      * @return the entity name.
      */
     protected String getIdAttributeName() {

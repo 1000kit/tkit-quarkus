@@ -1,16 +1,17 @@
 package org.tkit.quarkus.it.rs.client.reactive.test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import static io.restassured.RestAssured.given;
+import static org.mockserver.model.HttpRequest.request;
+import static org.mockserver.model.HttpResponse.response;
+
+import javax.ws.rs.core.Response;
+
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
 import org.tkit.quarkus.it.rs.client.reactive.AbstractTest;
 import org.tkit.quarkus.it.rs.client.reactive.InjectMockServerClient;
 
-import javax.ws.rs.core.Response;
-
-import static io.restassured.RestAssured.given;
-import static org.mockserver.model.HttpRequest.request;
-import static org.mockserver.model.HttpResponse.response;
+import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 public class UserRestClientTest extends AbstractTest {

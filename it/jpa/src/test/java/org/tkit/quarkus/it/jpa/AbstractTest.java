@@ -3,7 +3,7 @@ package org.tkit.quarkus.it.jpa;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import io.quarkus.test.common.DevServicesContext;
+
 import io.restassured.RestAssured;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -18,9 +18,7 @@ public class AbstractTest {
                             objectMapper.registerModule(new JavaTimeModule());
                             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
                             return objectMapper;
-                        }
-                )
-        );
+                        }));
     }
 
 }

@@ -15,9 +15,9 @@
  */
 package org.tkit.quarkus.rs.models;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 import java.util.Objects;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 public class BusinessTraceableDTO extends AbstractTraceableDTO<Long> {

@@ -1,11 +1,12 @@
 package org.tkit.quarkus.log.cdi.test;
 
-import io.quarkus.test.QuarkusUnitTest;
+import javax.inject.Inject;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.tkit.quarkus.log.cdi.test.app.DataPropertiesService;
 
-import javax.inject.Inject;
+import io.quarkus.test.QuarkusUnitTest;
 
 public class DataPropertiesServiceTest extends AbstractTest {
 
@@ -20,8 +21,8 @@ public class DataPropertiesServiceTest extends AbstractTest {
 
     @Test
     public void noAnnotationTest() {
-       service.noAnnotationMethod("no-annotation");
-       assertLogs().assertNoLogs();
+        service.noAnnotationMethod("no-annotation");
+        assertLogs().assertNoLogs();
     }
 
     @Test

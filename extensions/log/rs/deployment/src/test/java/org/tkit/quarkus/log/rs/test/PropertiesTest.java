@@ -1,13 +1,13 @@
 package org.tkit.quarkus.log.rs.test;
 
-import io.quarkus.test.QuarkusUnitTest;
-import io.restassured.RestAssured;
+import static org.hamcrest.Matchers.is;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.tkit.quarkus.log.rs.test.app.ConfigKeyRestController;
 import org.tkit.quarkus.log.rs.test.app.PropertiesRestController;
 
-import static org.hamcrest.Matchers.is;
+import io.quarkus.test.QuarkusUnitTest;
+import io.restassured.RestAssured;
 
 public class PropertiesTest extends AbstractTest {
 
@@ -29,7 +29,8 @@ public class PropertiesTest extends AbstractTest {
         RestAssured.get("/properties/test2").then()
                 .body(is("OK"));
         assertLogs().assertLines(1)
-                .assertContains(0, "INFO  [org.tki.qua.log.rs.tes.app.PropertiesRestController] (executor-thread-0) GET /properties/test2 [200] [");
+                .assertContains(0,
+                        "INFO  [org.tki.qua.log.rs.tes.app.PropertiesRestController] (executor-thread-0) GET /properties/test2 [200] [");
     }
 
 }

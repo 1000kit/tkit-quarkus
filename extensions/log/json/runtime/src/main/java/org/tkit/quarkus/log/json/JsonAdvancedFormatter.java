@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import javax.json.Json;
 import javax.json.JsonValue;
 import javax.json.stream.JsonGenerator;
@@ -38,7 +39,9 @@ import org.jboss.logmanager.PropertyValues;
  * <p>
  * Note that including details can be expensive in terms of calculating the caller.
  * </p>
- * <p>The details include;</p>
+ * <p>
+ * The details include;
+ * </p>
  * <ul>
  * <li>{@link org.jboss.logmanager.ExtLogRecord#getSourceClassName() source class name}</li>
  * <li>{@link org.jboss.logmanager.ExtLogRecord#getSourceFileName() source file name}</li>
@@ -50,24 +53,24 @@ import org.jboss.logmanager.PropertyValues;
  *
  * @author <a href="mailto:jperkins@redhat.com">James R. Perkins</a>
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings({ "unused", "WeakerAccess" })
 public class JsonAdvancedFormatter extends ExtendedStructureFormatter {
 
     private final Map<String, Object> config;
 
     private JsonGeneratorFactory factory;
 
-    private final Map<String,String> mdcKeys = new HashMap<>();
+    private final Map<String, String> mdcKeys = new HashMap<>();
 
-    private final Map<String,String> mdcPrefix = new HashMap<>();
+    private final Map<String, String> mdcPrefix = new HashMap<>();
 
-    private final Map<String,String> overrideKeys = new HashMap<>();
+    private final Map<String, String> overrideKeys = new HashMap<>();
 
-    private final Map<String,String> typeKeys = new HashMap<>();
+    private final Map<String, String> typeKeys = new HashMap<>();
 
     private final Set<String> ignoreKeys = new HashSet<>();
 
-    private final Map<String,String> envKeys = new HashMap<>();
+    private final Map<String, String> envKeys = new HashMap<>();
 
     /**
      * Creates a new JSON formatter.
@@ -144,7 +147,9 @@ public class JsonAdvancedFormatter extends ExtendedStructureFormatter {
      */
     public boolean isPrettyPrint() {
         synchronized (config) {
-            return (config.containsKey(javax.json.stream.JsonGenerator.PRETTY_PRINTING) ? (Boolean) config.get(javax.json.stream.JsonGenerator.PRETTY_PRINTING) : false);
+            return (config.containsKey(javax.json.stream.JsonGenerator.PRETTY_PRINTING)
+                    ? (Boolean) config.get(javax.json.stream.JsonGenerator.PRETTY_PRINTING)
+                    : false);
         }
     }
 
@@ -166,7 +171,7 @@ public class JsonAdvancedFormatter extends ExtendedStructureFormatter {
 
     protected void after(final Generator generator, final ExtLogRecord record) throws Exception {
         if (!envKeys.isEmpty()) {
-            for (Map.Entry<String,String> item : envKeys.entrySet()) {
+            for (Map.Entry<String, String> item : envKeys.entrySet()) {
                 generator.add(item.getKey(), System.getenv(item.getValue()));
             }
         }
@@ -231,8 +236,8 @@ public class JsonAdvancedFormatter extends ExtendedStructureFormatter {
                         String k = e.getKey();
                         int length = k.length();
 
-                        Map<String,Object> data = new HashMap<>();
-                        Map<String,Object> tmp = new HashMap<>(value);
+                        Map<String, Object> data = new HashMap<>();
+                        Map<String, Object> tmp = new HashMap<>(value);
                         for (String pk : tmp.keySet()) {
                             if (pk.startsWith(k)) {
                                 data.put(pk.substring(length), value.remove(pk));
@@ -250,7 +255,7 @@ public class JsonAdvancedFormatter extends ExtendedStructureFormatter {
 
         @Override
         public Generator addJsonString(final String key, final String value) {
-            try (StringReader reader = new StringReader(value)){
+            try (StringReader reader = new StringReader(value)) {
                 generator.write(key, Json.createReader(reader).readValue());
             } catch (Exception e) {
                 //write it at least as string
@@ -341,13 +346,12 @@ public class JsonAdvancedFormatter extends ExtendedStructureFormatter {
                         obj = Double.valueOf((String) obj);
                         break;
                     default:
-                        System.out.println("tkit-quarkus-log-json wrong field format override key: "  + key + " type: " + type);
+                        System.out.println("tkit-quarkus-log-json wrong field format override key: " + key + " type: " + type);
                 }
             }
 
             // override key name
             key = overrideKeys.getOrDefault(key, key);
-
 
             if (obj == null) {
                 if (key == null) {

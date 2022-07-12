@@ -1,12 +1,11 @@
 package org.tkit.quarkus.log.cdi.test.app;
 
-import org.tkit.quarkus.log.cdi.LogService;
-
 import javax.enterprise.context.ApplicationScoped;
+
+import org.tkit.quarkus.log.cdi.LogService;
 
 @ApplicationScoped
 public class SubClassService extends AbstractService {
-
 
     @LogService(log = false)
     public void testAnnotation() {

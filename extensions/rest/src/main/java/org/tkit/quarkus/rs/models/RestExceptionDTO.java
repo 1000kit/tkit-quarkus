@@ -15,11 +15,11 @@
  */
 package org.tkit.quarkus.rs.models;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
  * The rest exception DTO model.
@@ -79,4 +79,3 @@ public class RestExceptionDTO {
         this.namedParameters = namedParameters;
     }
 }
-

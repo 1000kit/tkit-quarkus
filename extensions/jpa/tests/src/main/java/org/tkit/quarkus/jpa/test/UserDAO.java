@@ -1,8 +1,7 @@
 package org.tkit.quarkus.jpa.test;
 
-import org.tkit.quarkus.jpa.daos.AbstractDAO;
-import org.tkit.quarkus.jpa.daos.Page;
-import org.tkit.quarkus.jpa.daos.PagedQuery;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,12 +10,13 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.tkit.quarkus.jpa.daos.AbstractDAO;
+import org.tkit.quarkus.jpa.daos.Page;
+import org.tkit.quarkus.jpa.daos.PagedQuery;
 
 @ApplicationScoped
 public class UserDAO extends AbstractDAO<User> {
-
 
     public PagedQuery<User> pageUsersAndSortByName(Page page) {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();

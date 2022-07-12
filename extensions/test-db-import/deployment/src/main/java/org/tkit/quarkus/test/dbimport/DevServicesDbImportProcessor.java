@@ -1,10 +1,20 @@
 package org.tkit.quarkus.test.dbimport;
 
+import static org.testcontainers.DockerClientFactory.SESSION_ID;
+import static org.testcontainers.DockerClientFactory.TESTCONTAINERS_SESSION_ID_LABEL;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testcontainers.DockerClientFactory;
+
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Container;
-import com.github.dockerjava.api.model.ContainerNetwork;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Ports;
+
 import io.quarkus.datasource.common.runtime.DatabaseKind;
 import io.quarkus.datasource.deployment.spi.DevServicesDatasourceResultBuildItem;
 import io.quarkus.deployment.IsNormal;
@@ -17,16 +27,6 @@ import io.quarkus.deployment.console.ConsoleInstalledBuildItem;
 import io.quarkus.deployment.console.StartupLogCompressor;
 import io.quarkus.deployment.dev.devservices.GlobalDevServicesConfig;
 import io.quarkus.deployment.logging.LoggingSetupBuildItem;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testcontainers.DockerClientFactory;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.testcontainers.DockerClientFactory.SESSION_ID;
-import static org.testcontainers.DockerClientFactory.TESTCONTAINERS_SESSION_ID_LABEL;
 
 public class DevServicesDbImportProcessor {
 
@@ -84,12 +84,14 @@ public class DevServicesDbImportProcessor {
                 if (dbInspect != null) {
 
                     // db local port
-                    Ports.Binding[] binding = dbInspect.getNetworkSettings().getPorts().getBindings().get(new ExposedPort(POSTGRESQL_PORT));
+                    Ports.Binding[] binding = dbInspect.getNetworkSettings().getPorts().getBindings()
+                            .get(new ExposedPort(POSTGRESQL_PORT));
                     if (binding != null) {
                         String port = binding[0].getHostPortSpec();
                         String url = dbResult.getConfigProperties().get(DATASOURCE_DEFAULT_URL);
                         url = url.substring(url.lastIndexOf("/"));
-                        url = String.format("jdbc:postgresql://%s:%s%s", DockerClientFactory.instance().dockerHostIpAddress(), port, url);
+                        url = String.format("jdbc:postgresql://%s:%s%s", DockerClientFactory.instance().dockerHostIpAddress(),
+                                port, url);
                         System.setProperty(DATASOURCE_DEFAULT_URL, url);
                         log.info("Local jdbc {}={}", DATASOURCE_DEFAULT_URL, url);
                     }

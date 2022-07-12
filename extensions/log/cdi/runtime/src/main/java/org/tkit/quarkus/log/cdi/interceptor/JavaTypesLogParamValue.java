@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 public class JavaTypesLogParamValue {
 
-
     public static Map<Class<?>, Function<Object, String>> assignableFrom() {
         Map<Class<?>, Function<Object, String>> result = new HashMap<>();
         result.put(Collection.class, JavaTypesLogParamValue::collection);

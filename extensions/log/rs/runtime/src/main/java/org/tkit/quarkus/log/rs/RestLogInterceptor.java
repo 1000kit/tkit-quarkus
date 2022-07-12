@@ -1,17 +1,17 @@
 package org.tkit.quarkus.log.rs;
 
-import org.jboss.logging.MDC;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.context.Context;
-import org.tkit.quarkus.context.ApplicationContext;
-
 import javax.annotation.Priority;
 import javax.ws.rs.container.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
+
+import org.jboss.logging.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.context.ApplicationContext;
+import org.tkit.quarkus.context.Context;
 
 /**
  * The rest log interceptor.
@@ -71,7 +71,8 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             }
         }));
 
-        restContext.ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(), resourceInfo.getResourceMethod().getName());
+        restContext.ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(),
+                resourceInfo.getResourceMethod().getName());
 
         if (restContext.ano != null && restContext.ano.config.log) {
             UriInfo uriInfo = requestContext.getUriInfo();
@@ -104,7 +105,8 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             if (restContext == null) {
                 if (config.error.enabled) {
                     Response.StatusType status = responseContext.getStatusInfo();
-                    log.info(String.format(config.end.template, requestContext.getMethod(), requestContext.getUriInfo().getPath(), 0.000,
+                    log.info(String.format(config.end.template, requestContext.getMethod(),
+                            requestContext.getUriInfo().getPath(), 0.000,
                             status.getStatusCode(), status.getReasonPhrase(), requestContext.getUriInfo().getRequestUri()));
                 }
             } else {
@@ -121,7 +123,8 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
                             Response.StatusType status = responseContext.getStatusInfo();
                             LoggerFactory.getLogger(resourceInfo.getResourceClass())
                                     .info(String.format(config.end.template, restContext.method, restContext.path,
-                                            restContext.time, status.getStatusCode(), status.getReasonPhrase(), restContext.uri));
+                                            restContext.time, status.getStatusCode(), status.getReasonPhrase(),
+                                            restContext.uri));
                         }
                     } finally {
                         // clean up MDC header keys

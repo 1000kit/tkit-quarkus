@@ -1,13 +1,13 @@
 package org.tkit.quarkus.log.rs.test;
 
-import io.quarkus.test.QuarkusUnitTest;
-import io.restassured.RestAssured;
+import static org.hamcrest.Matchers.is;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.tkit.quarkus.log.rs.test.app.AnnotationRestController;
 import org.tkit.quarkus.log.rs.test.app.NoAnnotationRestController;
 
-import static org.hamcrest.Matchers.is;
+import io.quarkus.test.QuarkusUnitTest;
+import io.restassured.RestAssured;
 
 public class NoAnnotationTest extends AbstractTest {
 
@@ -16,7 +16,6 @@ public class NoAnnotationTest extends AbstractTest {
             .withApplicationRoot((jar) -> jar
                     .addClasses(NoAnnotationRestController.class)
                     .addAsResource("default.properties", "application.properties"));
-
 
     @Test
     public void test1Test() {

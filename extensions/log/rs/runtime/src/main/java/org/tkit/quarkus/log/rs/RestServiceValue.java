@@ -40,7 +40,7 @@ public class RestServiceValue {
     }
 
     void updateMapping() {
-        classes.forEach((k,v) -> {
+        classes.forEach((k, v) -> {
             if (v.config != null && v.config.configKey != null) {
                 mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
             }
@@ -49,7 +49,7 @@ public class RestServiceValue {
     }
 
     void updateConfig() {
-        classes.forEach((k,v) -> v.methods.forEach((mk, mv) -> {
+        classes.forEach((k, v) -> v.methods.forEach((mk, mv) -> {
             if (mv.config == null) {
                 mv.config = v.config;
             }
@@ -67,7 +67,7 @@ public class RestServiceValue {
         }
 
         void updateMapping() {
-            methods.forEach((k,v) -> {
+            methods.forEach((k, v) -> {
                 if (v.config != null && v.config.configKey != null) {
                     mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
                 }
@@ -99,6 +99,7 @@ public class RestServiceValue {
     public static class MethodItem {
         public RestServiceAnnotation config;
         public String id;
+
         public void copyConfig(RestServiceAnnotation config) {
             this.config = createConfig();
             this.config.log = config.log;

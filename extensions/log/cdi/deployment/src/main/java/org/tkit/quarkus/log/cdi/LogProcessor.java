@@ -1,22 +1,5 @@
 package org.tkit.quarkus.log.cdi;
 
-import io.quarkus.arc.deployment.AnnotationsTransformerBuildItem;
-import io.quarkus.arc.deployment.BeanDiscoveryFinishedBuildItem;
-import io.quarkus.arc.processor.AnnotationsTransformer;
-import io.quarkus.deployment.annotations.BuildProducer;
-import io.quarkus.deployment.annotations.BuildStep;
-import io.quarkus.deployment.annotations.ExecutionTime;
-import io.quarkus.deployment.annotations.Record;
-import io.quarkus.deployment.builditem.FeatureBuildItem;
-import org.jboss.jandex.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
-import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Singleton;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -29,6 +12,24 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Singleton;
+
+import org.jboss.jandex.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
+import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
+
+import io.quarkus.arc.deployment.AnnotationsTransformerBuildItem;
+import io.quarkus.arc.deployment.BeanDiscoveryFinishedBuildItem;
+import io.quarkus.arc.processor.AnnotationsTransformer;
+import io.quarkus.deployment.annotations.BuildProducer;
+import io.quarkus.deployment.annotations.BuildStep;
+import io.quarkus.deployment.annotations.ExecutionTime;
+import io.quarkus.deployment.annotations.Record;
+import io.quarkus.deployment.builditem.FeatureBuildItem;
 
 public class LogProcessor {
 
@@ -38,13 +39,13 @@ public class LogProcessor {
 
     private static final String LOG_BUILDER_SERVICE = LogParamValueService.class.getName();
 
-    private static final Set<String> EXCLUDE_METHODS = Arrays.stream(Object.class.getMethods()).map(Method::getName).collect(Collectors.toSet());
+    private static final Set<String> EXCLUDE_METHODS = Arrays.stream(Object.class.getMethods()).map(Method::getName)
+            .collect(Collectors.toSet());
 
     private static final List<DotName> ANNOTATION_DOT_NAMES = List.of(
             DotName.createSimple(ApplicationScoped.class.getName()),
             DotName.createSimple(Singleton.class.getName()),
-            DotName.createSimple(RequestScoped.class.getName())
-    );
+            DotName.createSimple(RequestScoped.class.getName()));
 
     @BuildStep
     void build(BuildProducer<FeatureBuildItem> feature) {
@@ -59,7 +60,7 @@ public class LogProcessor {
 
     @BuildStep
     void restServices(BeanDiscoveryFinishedBuildItem beanDiscoveryFinishedBuildItem,
-                      BuildProducer<ServiceBuildItem> producer) {
+            BuildProducer<ServiceBuildItem> producer) {
 
         ServiceValue values = new ServiceValue();
         beanDiscoveryFinishedBuildItem.beanStream()
@@ -134,7 +135,6 @@ public class LogProcessor {
         producer.produce(new ServiceBuildItem(values));
     }
 
-
     private static void updateValue(LogService ano, ServiceValue.LogServiceAnnotation item) {
         item.log = ano.log();
         item.stacktrace = ano.stacktrace();
@@ -176,7 +176,8 @@ public class LogProcessor {
             }
 
             private boolean matchesIgnorePattern(String name) {
-                if (buildConfig.autoDiscover.ignorePattern.isEmpty() || buildConfig.autoDiscover.ignorePattern.get().isBlank()) {
+                if (buildConfig.autoDiscover.ignorePattern.isEmpty()
+                        || buildConfig.autoDiscover.ignorePattern.get().isBlank()) {
                     return false;
                 }
                 if (ignorePattern == null) {
@@ -184,7 +185,9 @@ public class LogProcessor {
                 }
                 boolean matches = ignorePattern.matcher(name).matches();
                 if (matches) {
-                    log.info("Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.ignore.pattern')", name,
+                    log.info(
+                            "Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.ignore.pattern')",
+                            name,
                             buildConfig.autoDiscover.ignorePattern);
                 }
                 return matches;
@@ -193,4 +196,3 @@ public class LogProcessor {
     }
 
 }
-

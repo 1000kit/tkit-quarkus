@@ -16,20 +16,21 @@
 
 package org.tkit.quarkus.jpa.deployment;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.Id;
+
+import org.jboss.jandex.*;
+import org.tkit.quarkus.jpa.daos.AbstractDAO;
+
 import io.quarkus.arc.deployment.UnremovableBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.BytecodeTransformerBuildItem;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
-import org.jboss.jandex.*;
-import org.tkit.quarkus.jpa.daos.AbstractDAO;
-
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.Id;
-import java.util.List;
-
 
 /**
  * The JPA build extension.
@@ -76,12 +77,12 @@ public class JPABuild {
     /**
      * Update entity dao services to have entity class name and entity name.
      *
-     * @param index        the index.
+     * @param index the index.
      * @param transformers the transformer
      */
     @BuildStep
     void build(CombinedIndexBuildItem index,
-               BuildProducer<BytecodeTransformerBuildItem> transformers) {
+            BuildProducer<BytecodeTransformerBuildItem> transformers) {
 
         IndexView view = index.getIndex();
         for (ClassInfo classInfo : view.getAllKnownSubclasses(DOT_NAME_REPOSITORY)) {
@@ -103,7 +104,8 @@ public class JPABuild {
                 }
 
                 String idAttributeName = getIdAttributeName(view, ec);
-                transformers.produce(new BytecodeTransformerBuildItem(classInfo.name().toString(), new EntityServiceBuilderEnhancer(name, entity.name().toString(), idAttributeName)));
+                transformers.produce(new BytecodeTransformerBuildItem(classInfo.name().toString(),
+                        new EntityServiceBuilderEnhancer(name, entity.name().toString(), idAttributeName)));
             }
         }
     }

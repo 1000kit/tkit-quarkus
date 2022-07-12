@@ -15,11 +15,11 @@
  */
 package org.tkit.quarkus.jpa.daos;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.jpa.exceptions.ConstraintException;
-import org.tkit.quarkus.jpa.exceptions.DAOException;
-import org.tkit.quarkus.jpa.models.AbstractTraceableEntity;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -33,11 +33,12 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.jpa.exceptions.ConstraintException;
+import org.tkit.quarkus.jpa.exceptions.DAOException;
+import org.tkit.quarkus.jpa.models.AbstractTraceableEntity;
 
 /**
  * The abstract EAO service class using an entity type.
@@ -93,7 +94,8 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
         if (tmp != null && !tmp.isEmpty()) {
             idAttributeName = tmp;
         }
-        log.info("Initialize the entity service {} for entity {}/{}/{}", serviceClass, entityClass, entityName, idAttributeName);
+        log.info("Initialize the entity service {} for entity {}/{}/{}", serviceClass, entityClass, entityName,
+                idAttributeName);
     }
 
     /**
@@ -109,7 +111,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      * Creates the page query of the DAO {@code <T>} type.
      *
      * @param query the criteria query
-     * @param page  the page for the query
+     * @param page the page for the query
      * @return the new page query instance
      */
     public PagedQuery<T> createPageQuery(CriteriaQuery<T> query, Page page) {
@@ -119,7 +121,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     /**
      * Creates the page query of the DAO {@code <T>} type.
      *
-     * @param page  the page for the query
+     * @param page the page for the query
      * @return the new page query instance
      */
     public PagedQuery<T> createPageQuery(Page page) {
@@ -132,8 +134,8 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      * Creates the page query of the custom {@code <E>} type
      *
      * @param query the criteria query
-     * @param page  the page for the query
-     * @param <E>   the entity type of the paged query.
+     * @param page the page for the query
+     * @param <E> the entity type of the paged query.
      * @return the new page query instance
      */
     public <E> PagedQuery<E> createPageQueryCustom(CriteriaQuery<E> query, Page page) {
@@ -168,7 +170,8 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
             }
             return query.getResultStream();
         } catch (Exception e) {
-            throw new DAOException(Errors.FIND_ALL_ENTITIES_FAILED, e, entityName, entityGraph == null ? null : entityGraph.getName());
+            throw new DAOException(Errors.FIND_ALL_ENTITIES_FAILED, e, entityName,
+                    entityGraph == null ? null : entityGraph.getName());
         }
     }
 
@@ -191,7 +194,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     /**
      * Finds the entity by ID and entity graph name.
      *
-     * @param id          the ID.
+     * @param id the ID.
      * @param entityGraph the entity graph.
      * @return the entity.
      * @throws DAOException if the method fails.
@@ -201,7 +204,8 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
         try {
             return getEntityManager().find(entityClass, id, Collections.singletonMap(HINT_LOAD_GRAPH, entityGraph));
         } catch (Exception e) {
-            throw new DAOException(Errors.FIND_ENTITY_BY_ID_FAILED, e, entityName, id, entityGraph == null ? null : entityGraph.getName());
+            throw new DAOException(Errors.FIND_ENTITY_BY_ID_FAILED, e, entityName, id,
+                    entityGraph == null ? null : entityGraph.getName());
         }
     }
 
@@ -220,7 +224,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     /**
      * Loads all entities.
      *
-     * @param ids         the set of GUIDs.
+     * @param ids the set of GUIDs.
      * @param entityGraph the entity graph.
      * @return the list loaded entities.
      * @throws DAOException if the method fails.
@@ -238,7 +242,8 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
             }
             return Stream.empty();
         } catch (Exception e) {
-            throw new DAOException(Errors.FAILED_TO_GET_ENTITY_BY_IDS, e, entityName, entityGraph == null ? null : entityGraph.getName());
+            throw new DAOException(Errors.FAILED_TO_GET_ENTITY_BY_IDS, e, entityName,
+                    entityGraph == null ? null : entityGraph.getName());
         }
     }
 
@@ -332,7 +337,6 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
         }
         return Stream.empty();
     }
-
 
     /**
      * Updates the entities.
@@ -459,8 +463,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
                 CriteriaDelete<T> cq = deleteQuery();
                 cq.where(
                         getEntityManager().getCriteriaBuilder()
-                                .equal(cq.from(entityClass).get(idAttributeName), id)
-                );
+                                .equal(cq.from(entityClass).get(idAttributeName), id));
                 int count = getEntityManager().createQuery(cq).executeUpdate();
                 getEntityManager().flush();
                 return count == 1;
@@ -521,7 +524,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     /**
      * Lock Entity in EntityManager.
      *
-     * @param entity   the entity
+     * @param entity the entity
      * @param lockMode the lock mode
      */
     protected void lock(T entity, LockModeType lockMode) {
@@ -531,7 +534,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     /**
      * Handle the JPA constraint exception.
      *
-     * @param ex  the exception.
+     * @param ex the exception.
      * @param key the error key.
      * @return the corresponding service exception.
      */

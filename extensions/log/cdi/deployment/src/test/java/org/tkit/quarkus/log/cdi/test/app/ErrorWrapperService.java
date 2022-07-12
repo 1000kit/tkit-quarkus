@@ -1,9 +1,9 @@
 package org.tkit.quarkus.log.cdi.test.app;
 
-import org.tkit.quarkus.log.cdi.LogService;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
+import org.tkit.quarkus.log.cdi.LogService;
 
 @LogService
 @ApplicationScoped

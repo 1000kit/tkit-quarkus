@@ -1,7 +1,6 @@
 package org.tkit.quarkus.rs.mappers;
 
-//import org.mapstruct.Mapper;
-
+// import org.mapstruct.Mapper;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;

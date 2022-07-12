@@ -1,12 +1,12 @@
 package org.tkit.quarkus.jpa.test;
 
-import org.tkit.quarkus.jpa.models.TraceableEntity;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "TEST_USER")
@@ -44,4 +44,3 @@ public class User extends TraceableEntity {
         this.email = email;
     }
 }
-

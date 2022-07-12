@@ -1,8 +1,8 @@
 package org.tkit.quarkus.log.json.tagging;
+
 /**
  * Supported message types used as mainTag attribute of {@link TaggedMessage}
  */
-
 
 public enum MessageTypeTag {
     /**

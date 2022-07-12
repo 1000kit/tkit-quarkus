@@ -15,9 +15,9 @@
  */
 package org.tkit.quarkus.rs.models;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 import java.util.List;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 public class PageResultDTO<T> {

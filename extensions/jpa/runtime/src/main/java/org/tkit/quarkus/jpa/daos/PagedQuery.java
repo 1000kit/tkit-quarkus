@@ -1,12 +1,13 @@
 package org.tkit.quarkus.jpa.daos;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.jpa.exceptions.DAOException;
+import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
-import java.util.stream.Stream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.jpa.exceptions.DAOException;
 
 /**
  * The page query.
@@ -41,9 +42,9 @@ public class PagedQuery<T> {
     /**
      * Default constructor.
      *
-     * @param em       the entity manager.
+     * @param em the entity manager.
      * @param criteria the search criteria
-     * @param page     the start page.
+     * @param page the start page.
      */
     public PagedQuery(EntityManager em, CriteriaQuery<T> criteria, Page page, String idAttributeName) {
         this.em = em;
@@ -74,7 +75,8 @@ public class PagedQuery<T> {
         try {
             CriteriaBuilder builder = em.getCriteriaBuilder();
             if (criteria.getOrderList().isEmpty()) {
-                log.warn("Paged query used without explicit orderBy. Ordering of results between pages not guaranteed. Please add an orderBy clause to your query.");
+                log.warn(
+                        "Paged query used without explicit orderBy. Ordering of results between pages not guaranteed. Please add an orderBy clause to your query.");
                 root = findRoot(criteria, criteria.getResultType());
                 if (root != null) {
                     criteria.orderBy(builder.asc(root.get(idAttributeName)));
@@ -150,9 +152,9 @@ public class PagedQuery<T> {
     /**
      * Create a row count CriteriaQuery from a CriteriaQuery
      *
-     * @param em       entity manager
+     * @param em entity manager
      * @param criteria source criteria
-     * @param <T>      the entity type.
+     * @param <T> the entity type.
      * @return row count CriteriaQuery
      */
     public static <T> CriteriaQuery<Long> createCountCriteria(EntityManager em, CriteriaQuery<T> criteria) {
@@ -171,11 +173,12 @@ public class PagedQuery<T> {
      * Creates count criteria query base on the {@code from} criteria query..
      *
      * @param builder the criteria builder.
-     * @param from    source Criteria.
+     * @param from source Criteria.
      * @param fetches copy fetches queries.
      * @return count criteria query.
      */
-    public static CriteriaQuery<Long> createCountCriteriaQuery(CriteriaBuilder builder, CriteriaQuery<?> from, boolean fetches) {
+    public static CriteriaQuery<Long> createCountCriteriaQuery(CriteriaBuilder builder, CriteriaQuery<?> from,
+            boolean fetches) {
         CriteriaQuery<Long> result = builder.createQuery(Long.class);
 
         AliasCounter counter = new AliasCounter();
@@ -230,7 +233,7 @@ public class PagedQuery<T> {
      * Copy Joins
      *
      * @param from source Join
-     * @param to   destination Join
+     * @param to destination Join
      */
     public static void copyJoins(From<?, ?> from, From<?, ?> to, AliasCounter counter) {
         from.getJoins().forEach(join -> {
@@ -244,7 +247,7 @@ public class PagedQuery<T> {
      * Copy Fetches
      *
      * @param from source From
-     * @param to   destination From
+     * @param to destination From
      */
     public static void copyFetches(From<?, ?> from, From<?, ?> to) {
         from.getFetches().forEach(fetch -> {
@@ -257,7 +260,7 @@ public class PagedQuery<T> {
      * Copy Fetches
      *
      * @param from source From
-     * @param to   destination From
+     * @param to destination From
      */
     public static void copyFetches(Fetch<?, ?> from, Fetch<?, ?> to) {
         from.getFetches().forEach(fetch -> {

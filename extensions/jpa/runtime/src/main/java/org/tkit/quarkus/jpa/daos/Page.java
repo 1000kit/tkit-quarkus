@@ -19,7 +19,7 @@ public class Page {
      * Default constructor.
      *
      * @param number the number of the page.
-     * @param size  the size of the page.
+     * @param size the size of the page.
      */
     private Page(int number, int size) {
         this.number = number;
@@ -48,7 +48,7 @@ public class Page {
      * Creates page for the index and size.
      *
      * @param number the page number.
-     * @param size  the page size.
+     * @param size the page size.
      * @return the corresponding page.
      */
     public static Page of(int number, int size) {

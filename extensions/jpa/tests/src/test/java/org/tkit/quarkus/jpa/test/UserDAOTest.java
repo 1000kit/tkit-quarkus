@@ -1,6 +1,15 @@
 package org.tkit.quarkus.jpa.test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.inject.Inject;
+import javax.persistence.criteria.Order;
+import javax.transaction.Transactional;
+
 import org.hibernate.query.criteria.internal.path.SingularAttributePath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,15 +22,7 @@ import org.tkit.quarkus.jpa.daos.PagedQuery;
 import org.tkit.quarkus.jpa.exceptions.DAOException;
 import org.tkit.quarkus.jpa.models.TraceableEntity;
 
-import javax.inject.Inject;
-import javax.persistence.OptimisticLockException;
-import javax.persistence.criteria.Order;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 @DisplayName("User DAO tests")
@@ -67,7 +68,7 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void userDefaultSortingPagingTest(){
+    public void userDefaultSortingPagingTest() {
         // create 150 users
         userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(150));
         PagedQuery<User> query = userDAO.createPageQuery(Page.of(0, 10));
@@ -80,7 +81,7 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void userSortByNamePagingTest(){
+    public void userSortByNamePagingTest() {
         // create 150 users
         userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(150));
         PagedQuery<User> query = userDAO.pageUsersAndSortByName(Page.of(0, 10));

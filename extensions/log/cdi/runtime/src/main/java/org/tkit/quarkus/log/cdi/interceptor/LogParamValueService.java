@@ -1,11 +1,10 @@
 package org.tkit.quarkus.log.cdi.interceptor;
 
-import org.tkit.quarkus.log.cdi.LogParam;
-import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
-
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+
+import org.tkit.quarkus.log.cdi.LogParam;
 
 /**
  * Logger builder service.
@@ -20,7 +19,8 @@ public class LogParamValueService {
     /**
      * Gets the map of the mapping function for the assignable class.
      */
-    public static Map<Class<?>, Function<Object, String>> ASSIGNABLE_FROM = new HashMap<>(JavaTypesLogParamValue.assignableFrom());
+    public static Map<Class<?>, Function<Object, String>> ASSIGNABLE_FROM = new HashMap<>(
+            JavaTypesLogParamValue.assignableFrom());
 
     public static void init(List<LogParam> services) {
         if (services != null && !services.isEmpty()) {
@@ -81,6 +81,5 @@ public class LogParamValueService {
 
         return "" + parameter;
     }
-
 
 }

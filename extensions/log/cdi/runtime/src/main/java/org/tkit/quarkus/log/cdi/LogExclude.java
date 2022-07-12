@@ -24,13 +24,14 @@ import java.lang.annotation.Target;
 /**
  * If present, do not include this parameter value in the logger.
  */
-@Target({ElementType.PARAMETER, ElementType.METHOD})
+@Target({ ElementType.PARAMETER, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogExclude {
 
     /**
      * If this flag is empty the parameter name will be used to log
      * otherwise the value of this attribute will be use.
+     *
      * @return the mask flag.
      */
     String mask() default "";

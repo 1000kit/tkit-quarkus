@@ -1,5 +1,12 @@
 package org.tkit.quarkus.log.cdi.interceptor;
 
+import java.lang.reflect.*;
+
+import javax.annotation.Priority;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.ApplicationContext;
@@ -8,12 +15,6 @@ import org.tkit.quarkus.log.cdi.LogRecorder;
 import org.tkit.quarkus.log.cdi.LogService;
 import org.tkit.quarkus.log.cdi.ServiceValue;
 import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
-
-import javax.annotation.Priority;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
-import java.lang.reflect.*;
 
 /**
  * The logger service interceptor.
@@ -87,7 +88,6 @@ public class LogServiceInterceptor {
             ApplicationContext.start();
         }
 
-
         Logger logger = LoggerFactory.getLogger(className);
         String parameters = null;
         long startTime = System.currentTimeMillis();
@@ -109,7 +109,8 @@ public class LogServiceInterceptor {
                 if (parameters == null) {
                     parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
                 }
-                logger.info(String.format(config.succeed.template, methodName, parameters, returnValue, (System.currentTimeMillis() - startTime) / 1000f));
+                logger.info(String.format(config.succeed.template, methodName, parameters, returnValue,
+                        (System.currentTimeMillis() - startTime) / 1000f));
             }
 
             return result;
@@ -128,7 +129,8 @@ public class LogServiceInterceptor {
                 parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
             }
             String er = getReturnValue(methodItem, error);
-            logger.error(String.format(config.failed.template, methodName, parameters, er, (System.currentTimeMillis() - startTime) / 1000f));
+            logger.error(String.format(config.failed.template, methodName, parameters, er,
+                    (System.currentTimeMillis() - startTime) / 1000f));
 
             if (methodItem.config.stacktrace && !aex.stacktrace) {
                 logger.error("", ex);
@@ -137,7 +139,7 @@ public class LogServiceInterceptor {
 
             throw ex;
         } finally {
-            if (isEntrypoint){
+            if (isEntrypoint) {
                 ApplicationContext.close();
             }
         }
@@ -146,7 +148,7 @@ public class LogServiceInterceptor {
     /**
      * Gets the list of string corresponding to the list of parameters.
      *
-     * @param values     the list of parameters.
+     * @param values the list of parameters.
      * @param parameters the list of method parameters.
      * @return the list of string corresponding to the list of parameters.
      */
@@ -170,7 +172,7 @@ public class LogServiceInterceptor {
      *
      * @param methodItem method item configuration.
      * @param index index of the parameter.
-     * @param values     the parameter values.
+     * @param values the parameter values.
      * @param parameters the method parameters.
      * @return the corresponding log value.
      */

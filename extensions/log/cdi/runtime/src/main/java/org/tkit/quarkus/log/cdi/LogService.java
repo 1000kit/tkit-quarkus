@@ -15,9 +15,10 @@
  */
 package org.tkit.quarkus.log.cdi;
 
+import java.lang.annotation.*;
+
 import javax.enterprise.util.Nonbinding;
 import javax.interceptor.InterceptorBinding;
-import java.lang.annotation.*;
 
 /**
  * The logger service annotation.
@@ -25,27 +26,31 @@ import java.lang.annotation.*;
 @Inherited
 @InterceptorBinding
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.METHOD, ElementType.TYPE })
 public @interface LogService {
 
     /**
      * Configuration key.
+     *
      * @return rest controller configuration key.
      */
-    @Nonbinding String configKey() default "";
+    @Nonbinding
+    String configKey() default "";
 
     /**
      * Log the method or class if the flag is {@code true}.
      *
      * @return the log flag.
      */
-    @Nonbinding boolean log() default true;
+    @Nonbinding
+    boolean log() default true;
 
     /**
      * Log the exception stacktrace if the flag is {@code true}
      *
      * @return the stacktrace flag.
      */
-    @Nonbinding boolean stacktrace() default true;
+    @Nonbinding
+    boolean stacktrace() default true;
 
 }

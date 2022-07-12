@@ -1,18 +1,18 @@
 package org.tkit.quarkus.log.cdi;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.enterprise.inject.Any;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
+import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
+
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.InjectableInstance;
 import io.quarkus.runtime.annotations.Recorder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.log.cdi.ServiceValue;
-import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
-import org.tkit.quarkus.log.cdi.runtime.LogParamContainer;
-import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
-
-import javax.enterprise.inject.Any;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The logger builder interface.
@@ -41,7 +41,8 @@ public class LogRecorder {
         config.service.forEach((key, value) -> {
             List<ServiceValue.ClassItem> items = values.getByConfig(key);
             if (items == null) {
-                log.warn("No @LogService annotation found for key `quarkus.tkit.log.cdi.service.\"{}\"`. Key will be ignored", key);
+                log.warn("No @LogService annotation found for key `quarkus.tkit.log.cdi.service.\"{}\"`. Key will be ignored",
+                        key);
                 return;
             }
 
@@ -53,7 +54,9 @@ public class LogRecorder {
                         value.config.log.ifPresent(x -> item.config.log = x);
                         value.config.stacktrace.ifPresent(x -> item.config.stacktrace = x);
                     } else {
-                        log.warn("No @LogService annotation found for class {}. Key `quarkus.tkit.log.cdi.service.\"{}\"` will be ignored", item.id, key);
+                        log.warn(
+                                "No @LogService annotation found for class {}. Key `quarkus.tkit.log.cdi.service.\"{}\"` will be ignored",
+                                item.id, key);
                     }
                 });
             }
@@ -75,7 +78,9 @@ public class LogRecorder {
                                 mv.params.ifPresent(map -> method.params.putAll(map));
                                 mv.returnMask.ifPresent(x -> method.returnMask = x);
                             } else {
-                                log.warn("No @LogService annotation found for method `{}.{}`. Key `quarkus.tkit.log.cdi.service.\"{}\".method.{}` will be ignored", item.id, method.id, key, mk);
+                                log.warn(
+                                        "No @LogService annotation found for method `{}.{}`. Key `quarkus.tkit.log.cdi.service.\"{}\".method.{}` will be ignored",
+                                        item.id, method.id, key, mk);
                             }
                         });
                     }

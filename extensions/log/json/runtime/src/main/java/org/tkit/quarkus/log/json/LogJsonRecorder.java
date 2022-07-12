@@ -15,20 +15,18 @@
  */
 package org.tkit.quarkus.log.json;
 
-import io.quarkus.runtime.RuntimeValue;
-import io.quarkus.runtime.annotations.Recorder;
+import static org.tkit.quarkus.log.json.LogJsonConfig.EMPTY_LIST;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Formatter;
 
-
-import java.util.Optional;
-
-import static org.tkit.quarkus.log.json.LogJsonConfig.EMPTY_LIST;
+import io.quarkus.runtime.RuntimeValue;
+import io.quarkus.runtime.annotations.Recorder;
 
 @Recorder
 public class LogJsonRecorder {
@@ -83,7 +81,7 @@ public class LogJsonRecorder {
         return value.size() == 1 && EMPTY_LIST.equals(value.get(0));
     }
 
-    private Map<String,String> convertToMap(List<String> value) {
+    private Map<String, String> convertToMap(List<String> value) {
         if (empty(value)) {
             return Collections.emptyMap();
         }

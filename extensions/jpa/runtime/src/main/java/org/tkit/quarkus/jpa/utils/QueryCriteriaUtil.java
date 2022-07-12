@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
@@ -49,7 +50,7 @@ public class QueryCriteriaUtil {
 
     /**
      * Wildcard the search string. Replace * to % and ? to _
-     * 
+     *
      * @param searchString the search string.
      * @param caseInsensitive the case insensitive flag.
      * @return the corresponding search string.
@@ -128,7 +129,8 @@ public class QueryCriteriaUtil {
      * @param parameters the parameters to be added from the IN clause
      * @return the query string with the IN clause
      */
-    public static String inClause(String attribute, String attributeName, Collection<?> values, Map<String, Object> parameters) {
+    public static String inClause(String attribute, String attributeName, Collection<?> values,
+            Map<String, Object> parameters) {
         StringBuilder sb = new StringBuilder();
         sb.append("(").append(attribute).append(" IN (:").append(attributeName).append(")");
         List<?> valuesList = new ArrayList<>(values);
@@ -157,7 +159,8 @@ public class QueryCriteriaUtil {
      * @param parameters the parameters to be added from the NOT IN clause
      * @return the query string with the NOT IN clause
      */
-    public static String notInClause(String attribute, String attributeName, Collection<?> values, Map<String, Object> parameters) {
+    public static String notInClause(String attribute, String attributeName, Collection<?> values,
+            Map<String, Object> parameters) {
         StringBuilder sb = new StringBuilder();
         sb.append("(").append(attribute).append(" NOT IN (:").append(attributeName).append(")");
         List<?> valuesList = new ArrayList<>(values);

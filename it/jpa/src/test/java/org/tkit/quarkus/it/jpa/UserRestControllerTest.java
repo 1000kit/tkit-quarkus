@@ -1,14 +1,15 @@
 package org.tkit.quarkus.it.jpa;
 
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.given;
+
+import javax.ws.rs.core.Response;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.tkit.quarkus.test.WithDBData;
 
-import javax.ws.rs.core.Response;
-
-import static io.restassured.RestAssured.given;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 @QuarkusTest
 public class UserRestControllerTest extends AbstractTest {
@@ -38,7 +39,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithDBData(value ={"data/test.xml"})
+    @WithDBData(value = { "data/test.xml" })
     public void importDataTest() throws InterruptedException {
         given()
                 .pathParam("id", "GUID_3")
@@ -48,7 +49,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithDBData(value ={"data/remote.xml"})
+    @WithDBData(value = { "data/remote.xml" })
     public void importRemoteXmlDataTest() throws InterruptedException {
         given()
                 .pathParam("id", "GUID_1")
@@ -58,7 +59,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithDBData(value ={"data/test.xls"})
+    @WithDBData(value = { "data/test.xls" })
     public void importRemoteDataTest() throws InterruptedException {
         given()
                 .pathParam("id", "ID_1")

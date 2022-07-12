@@ -1,11 +1,12 @@
 package org.tkit.quarkus.it.rs.client;
 
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.util.Map;
+
 import org.mockserver.client.MockServerClient;
 import org.testcontainers.containers.MockServerContainer;
 import org.testcontainers.utility.DockerImageName;
 
-import java.util.Map;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
 public class MockTestResource implements QuarkusTestResourceLifecycleManager {
 
@@ -20,8 +21,7 @@ public class MockTestResource implements QuarkusTestResourceLifecycleManager {
         CLIENT = new MockServerClient(MOCK_SERVER.getHost(), MOCK_SERVER.getServerPort());
         return Map.of(
                 "quarkus.rest-client.users.url", MOCK_SERVER.getEndpoint(),
-                "user/mp-rest/url", MOCK_SERVER.getEndpoint()
-        );
+                "user/mp-rest/url", MOCK_SERVER.getEndpoint());
     }
 
     @Override

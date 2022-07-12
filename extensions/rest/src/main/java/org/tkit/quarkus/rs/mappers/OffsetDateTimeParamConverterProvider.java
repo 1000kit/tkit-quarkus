@@ -1,14 +1,15 @@
 package org.tkit.quarkus.rs.mappers;
 
-import org.tkit.quarkus.log.cdi.LogService;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.time.OffsetDateTime;
 
 import javax.inject.Singleton;
 import javax.ws.rs.ext.ParamConverter;
 import javax.ws.rs.ext.ParamConverterProvider;
 import javax.ws.rs.ext.Provider;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.time.OffsetDateTime;
+
+import org.tkit.quarkus.log.cdi.LogService;
 
 @Provider
 @Singleton

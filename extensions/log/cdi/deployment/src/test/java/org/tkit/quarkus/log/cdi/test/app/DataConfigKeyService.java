@@ -1,8 +1,8 @@
 package org.tkit.quarkus.log.cdi.test.app;
 
-import org.tkit.quarkus.log.cdi.LogService;
-
 import javax.enterprise.context.ApplicationScoped;
+
+import org.tkit.quarkus.log.cdi.LogService;
 
 @LogService(configKey = "data")
 @ApplicationScoped

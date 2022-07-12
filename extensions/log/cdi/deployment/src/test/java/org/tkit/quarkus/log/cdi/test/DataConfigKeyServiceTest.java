@@ -1,11 +1,12 @@
 package org.tkit.quarkus.log.cdi.test;
 
-import io.quarkus.test.QuarkusUnitTest;
+import javax.inject.Inject;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.tkit.quarkus.log.cdi.test.app.DataConfigKeyService;
 
-import javax.inject.Inject;
+import io.quarkus.test.QuarkusUnitTest;
 
 public class DataConfigKeyServiceTest extends AbstractTest {
 
@@ -20,10 +21,11 @@ public class DataConfigKeyServiceTest extends AbstractTest {
 
     @Test
     public void noAnnotationTest() {
-       service.noAnnotationMethod("no-annotation");
-       assertLogs()
-          .assertNoEmpty()
-          .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataConfigKeyService] (main) noAnnotationMethod(no-annotation):out no-annotation");
+        service.noAnnotationMethod("no-annotation");
+        assertLogs()
+                .assertNoEmpty()
+                .assertContains(0,
+                        "INFO  [org.tki.qua.log.cdi.tes.app.DataConfigKeyService] (main) noAnnotationMethod(no-annotation):out no-annotation");
     }
 
     @Test

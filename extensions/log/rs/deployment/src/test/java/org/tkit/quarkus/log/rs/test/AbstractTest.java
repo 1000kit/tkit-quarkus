@@ -1,15 +1,16 @@
 package org.tkit.quarkus.log.rs.test;
 
-import io.quarkus.bootstrap.logging.InitialConfigurator;
-import org.jboss.logmanager.handlers.WriterHandler;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.StringWriter;
 import java.util.logging.Formatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.jboss.logmanager.handlers.WriterHandler;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+
+import io.quarkus.bootstrap.logging.InitialConfigurator;
 
 public class AbstractTest {
 
@@ -35,7 +36,7 @@ public class AbstractTest {
         handler.flush();
         String tmp = writer.toString();
         if (tmp.isBlank()) {
-            return new String[]{};
+            return new String[] {};
         }
         return tmp.split("\n");
     }
@@ -43,7 +44,6 @@ public class AbstractTest {
     protected AssertLogs assertLogs() {
         return AssertLogs.build(logLines());
     }
-
 
     public static class AssertLogs {
 
@@ -73,7 +73,8 @@ public class AbstractTest {
         }
 
         public AssertLogs assertContains(int line, String text) {
-            assertTrue(data[line].contains(text), "Assert log line contains \n ==> text: `" + text + "` \n ==> line["+ line+ "]: `" + data[line] + "`\n");
+            assertTrue(data[line].contains(text),
+                    "Assert log line contains \n ==> text: `" + text + "` \n ==> line[" + line + "]: `" + data[line] + "`\n");
             return this;
         }
     }

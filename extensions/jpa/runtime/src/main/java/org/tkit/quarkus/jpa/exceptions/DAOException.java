@@ -44,9 +44,9 @@ public class DAOException extends RuntimeException {
     /**
      * The constructor with the resource key and cause.
      *
-     * @param key        the resource key.
+     * @param key the resource key.
      * @param parameters the resource key arguments.
-     * @param cause      the throw able cause.
+     * @param cause the throw able cause.
      */
     public DAOException(final Enum<?> key, final Throwable cause, Object... parameters) {
         super(cause);
@@ -58,11 +58,13 @@ public class DAOException extends RuntimeException {
 
     /**
      * Overwrite the message "key-simple-name,key,parameters"
+     *
      * @return the message "key-simple-name,key-name,parameters,namedParameters"
      */
     @Override
     public String getMessage() {
-        return key.getClass().getSimpleName() + ",key:" + key.name() + ",parameters:" + parameters + ",namedParameters:" + namedParameters;
+        return key.getClass().getSimpleName() + ",key:" + key.name() + ",parameters:" + parameters + ",namedParameters:"
+                + namedParameters;
     }
 
     /**
@@ -85,6 +87,7 @@ public class DAOException extends RuntimeException {
 
     /**
      * Add the list of parameters.
+     *
      * @param parameters the list of parameters.
      */
     public final void addParameter(List<Object> parameters) {
@@ -96,7 +99,7 @@ public class DAOException extends RuntimeException {
     /**
      * Adds the named parameter.
      *
-     * @param name      the named parameter key.
+     * @param name the named parameter key.
      * @param parameter the parameter value.
      */
     public final void addParameter(String name, Object parameter) {
