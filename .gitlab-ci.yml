@@ -38,6 +38,8 @@ mvn:build:
   extends:
     - .mvn_config
   stage: build
+  services:
+    - docker:19.03.8-dind
   script:
     - VERSION=$(samo project version)
     - mvn versions:set -DnewVersion=$VERSION
