@@ -39,7 +39,7 @@ mvn:build:
     - .mvn_config
   stage: build
   script:
-    - VERSION=$(samo project version --version release)
+    - VERSION=$(samo project version)
     - mvn versions:set -DnewVersion=$VERSION
     - mvn $MAVEN_CLI_OPTS -B -Pnative impsort:check formatter:validate verify --file pom.xml
   rules:
