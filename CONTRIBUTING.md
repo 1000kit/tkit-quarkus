@@ -32,7 +32,7 @@ cd tkit-quarkus
 export MAVEN_OPTS="-Xmx4g"
 mvn -B impsort:check formatter:validate verify --file pom.xml
 ```
-or native build and tests
+or use native profile `-Pnative` for native build and tests
 ```
 mvn -B -Pnative impsort:check formatter:validate verify --file pom.xml
 ```
