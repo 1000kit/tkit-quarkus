@@ -43,7 +43,7 @@ Wait for a bit and you're done.
 
 ### Updating the version
 
-When using the `main` branch, you need to use the group id `org.tkit.quarkus` and version `999-SNAPSHOT` of the 1000kit Quarkus BOM.
+When using the `main` branch, you need to use the group id `org.tkit.quarkus.lib` and version `999-SNAPSHOT` of the 1000kit Quarkus BOM.
 
 You can now test your application.
 

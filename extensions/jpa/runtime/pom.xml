@@ -2,7 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.tkit.quarkus</groupId>
+        <groupId>org.tkit.quarkus.lib</groupId>
         <artifactId>tkit-quarkus-jpa-parent</artifactId>
         <version>999-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -22,30 +22,15 @@
             <artifactId>quarkus-arc</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.tkit.quarkus</groupId>
+            <groupId>org.tkit.quarkus.lib</groupId>
             <artifactId>tkit-quarkus-jpa-models</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tkit.quarkus</groupId>
+            <groupId>org.tkit.quarkus.lib</groupId>
             <artifactId>tkit-quarkus-context</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-jpamodelgen</artifactId>-->
-<!--            &lt;!&ndash; Exclude these dependencies, since they are banned &ndash;&gt;-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>javax.xml.bind</groupId>-->
-<!--                    <artifactId>jaxb-api</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>javax.activation</groupId>-->
-<!--                    <artifactId>javax.activation-api</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>
