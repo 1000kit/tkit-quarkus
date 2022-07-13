@@ -11,7 +11,7 @@
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>org.tkit.quarkus</groupId>
+            <groupId>org.tkit.quarkus.lib</groupId>
             <artifactId>tkit-quarkus-bom</artifactId>
             <version>${tkit.quarkus.version}</version>
             <type>pom</type>
@@ -24,7 +24,7 @@
 ## Context
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-context</artifactId>
 </dependency>
 ```
@@ -38,7 +38,7 @@
 ### JPA models
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-jpa-models</artifactId>
 </dependency>
 ```
@@ -50,7 +50,7 @@
 ### JPA DAO
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-jpa</artifactId>
 </dependency>
 ```
@@ -64,7 +64,7 @@
 Quarkus common log extension
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-log-cdi</artifactId>
 </dependency>
 ```
@@ -78,7 +78,7 @@ Quarkus common log extension
 JSON log extension
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-log-json</artifactId>
 </dependency>
 ```
@@ -91,7 +91,7 @@ JSON log extension
 Log extension for the rest-service.
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-log-rs</artifactId>
 </dependency>
 ```
@@ -104,7 +104,7 @@ Log extension for the rest-service.
 
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-rest</artifactId>
 </dependency>
 ```
@@ -116,7 +116,7 @@ Log extension for the rest-service.
 ## Database import for test
 ```xml
 <dependency>
-    <groupId>org.tkit.quarkus</groupId>
+    <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-test-db-import</artifactId>
     <scope>test</scope>
 </dependency>

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.tkit.quarkus</groupId>
+        <groupId>org.tkit.quarkus.lib</groupId>
         <artifactId>tkit-quarkus-parent</artifactId>
         <version>999-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -16,42 +16,42 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-context</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-jpa-models</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-log-cdi</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-log-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-log-rs</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tkit.quarkus</groupId>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-test-db-import</artifactId>
                 <version>${project.version}</version>
             </dependency>
