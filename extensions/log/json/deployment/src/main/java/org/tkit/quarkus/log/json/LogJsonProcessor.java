@@ -19,18 +19,12 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
-import io.quarkus.deployment.builditem.CapabilityBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.LogConsoleFormatBuildItem;
 
 public class LogJsonProcessor {
 
     static final String FEATURE_NAME = "tkit-json-log";
-
-    @BuildStep
-    CapabilityBuildItem capability() {
-        return new CapabilityBuildItem(FEATURE_NAME);
-    }
 
     @BuildStep
     void build(BuildProducer<FeatureBuildItem> feature) {
