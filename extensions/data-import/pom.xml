@@ -4,22 +4,18 @@
 
     <parent>
         <groupId>org.tkit.quarkus.lib</groupId>
-        <artifactId>tkit-quarkus-parent</artifactId>
+        <artifactId>tkit-quarkus-extensions-parent</artifactId>
         <version>999-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>tkit-quarkus-extensions-parent</artifactId>
+    <artifactId>tkit-quarkus-data-import-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>context</module>
-        <module>log</module>
-        <module>jpa-models</module>
-        <module>jpa</module>
-        <module>data-import</module>
-        <module>rest</module>
-        <module>test-db-import</module>
+        <module>deployment</module>
+        <module>runtime</module>
+        <module>tests</module>
     </modules>
 
 </project>
