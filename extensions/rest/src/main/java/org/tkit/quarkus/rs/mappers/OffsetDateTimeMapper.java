@@ -1,12 +1,13 @@
 package org.tkit.quarkus.rs.mappers;
 
-// import org.mapstruct.Mapper;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-//@Mapper
-public abstract class OffsetDateTimeMapper {
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class OffsetDateTimeMapper {
 
     public OffsetDateTime map(LocalDateTime dateTime) {
         if (dateTime == null) {

@@ -9,11 +9,8 @@ import javax.ws.rs.ext.ParamConverter;
 import javax.ws.rs.ext.ParamConverterProvider;
 import javax.ws.rs.ext.Provider;
 
-import org.tkit.quarkus.log.cdi.LogService;
-
 @Provider
 @Singleton
-@LogService(log = false)
 public class OffsetDateTimeParamConverterProvider implements ParamConverterProvider {
 
     @Override

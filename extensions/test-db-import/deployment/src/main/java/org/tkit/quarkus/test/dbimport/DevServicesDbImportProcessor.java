@@ -6,6 +6,8 @@ import static org.testcontainers.DockerClientFactory.TESTCONTAINERS_SESSION_ID_L
 import java.util.List;
 import java.util.Optional;
 
+import com.github.dockerjava.api.DockerClient;
+import io.quarkus.deployment.builditem.DevServicesResultBuildItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.DockerClientFactory;
@@ -42,7 +44,7 @@ public class DevServicesDbImportProcessor {
             DbImportBuildTimeConfig dbImportClientBuildTimeConfig,
             List<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem,
             Optional<ConsoleInstalledBuildItem> consoleInstalledBuildItem,
-            BuildProducer<DevServicesConfigResultBuildItem> devServicePropertiesProducer,
+            BuildProducer<DevServicesResultBuildItem> devServicePropertiesProducer,
             LoggingSetupBuildItem loggingSetupBuildItem) {
 
         // create dev service config
@@ -72,13 +74,15 @@ public class DevServicesDbImportProcessor {
             if (!devServicesSharedNetworkBuildItem.isEmpty()) {
 
                 InspectContainerResponse dbInspect = null;
-                final Optional<Container> postgresql = DockerClientFactory.lazyClient().listContainersCmd().exec().stream()
-                        .filter(c -> (SESSION_ID.equals(c.getLabels().get(TESTCONTAINERS_SESSION_ID_LABEL))
-                                && c.getImage().startsWith(configuration.dbImageName)))
-                        .findAny();
-                if (postgresql.isPresent()) {
-                    Container dbContainer = postgresql.get();
-                    dbInspect = DockerClientFactory.lazyClient().inspectContainerCmd(dbContainer.getId()).exec();
+                try (DockerClient dockerClient = DockerClientFactory.lazyClient()) {
+                    final Optional<Container> postgresql = dockerClient.listContainersCmd().exec().stream()
+                            .filter(c -> (SESSION_ID.equals(c.getLabels().get(TESTCONTAINERS_SESSION_ID_LABEL))
+                                    && c.getImage().startsWith(configuration.dbImageName)))
+                            .findAny();
+                    if (postgresql.isPresent()) {
+                        Container dbContainer = postgresql.get();
+                        dbInspect = dockerClient.inspectContainerCmd(dbContainer.getId()).exec();
+                    }
                 }
 
                 if (dbInspect != null) {
