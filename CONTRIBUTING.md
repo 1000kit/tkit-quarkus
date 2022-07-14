@@ -85,5 +85,6 @@ Also don't forget the documentation (reference documentation, javadoc...).
 
 Be sure to test your pull request in:
 
-1. Java mode `mvn -B impsort:check formatter:validate verify --file pom.xml`
-2. Native mode `mvn -B -Pnative impsort:check formatter:validate verify --file pom.xml`
+1. Update imports and format `mvn -B clean impsort:sort formatter:format`
+2. Java mode `mvn -B impsort:check formatter:validate verify --file pom.xml`
+3. Native mode `mvn -B -Pnative impsort:check formatter:validate verify --file pom.xml`

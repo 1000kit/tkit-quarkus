@@ -6,12 +6,11 @@ import static org.testcontainers.DockerClientFactory.TESTCONTAINERS_SESSION_ID_L
 import java.util.List;
 import java.util.Optional;
 
-import com.github.dockerjava.api.DockerClient;
-import io.quarkus.deployment.builditem.DevServicesResultBuildItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.DockerClientFactory;
 
+import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
@@ -22,7 +21,7 @@ import io.quarkus.datasource.deployment.spi.DevServicesDatasourceResultBuildItem
 import io.quarkus.deployment.IsNormal;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
-import io.quarkus.deployment.builditem.DevServicesConfigResultBuildItem;
+import io.quarkus.deployment.builditem.DevServicesResultBuildItem;
 import io.quarkus.deployment.builditem.DevServicesSharedNetworkBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.console.ConsoleInstalledBuildItem;
@@ -62,7 +61,7 @@ public class DevServicesDbImportProcessor {
         }
 
         StartupLogCompressor compressor = new StartupLogCompressor(
-                (launchMode.isTest() ? "(test) " : "") + "Zeebe Dev Services Starting:", consoleInstalledBuildItem,
+                (launchMode.isTest() ? "(test) " : "") + "Database Import Dev Services Starting:", consoleInstalledBuildItem,
                 loggingSetupBuildItem);
 
         try {
