@@ -39,6 +39,15 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
     @Override
     public void filter(ContainerRequestContext requestContext) {
         RestRuntimeConfig config = RestRecorder.getConfig();
+
+        //start log scope/correlation id
+        String correlationId = null;
+        if (config.correlationIdEnabled) {
+            correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
+        }
+
+        ApplicationContext.start(Context.builder().correlationId(correlationId).build());
+
         if (!config.enabled) {
             return;
         }
@@ -54,13 +63,6 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
                 return;
             }
         }
-
-        //start log scope/correlation id
-        String correlationId = null;
-        if (config.correlationIdEnabled) {
-            correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
-        }
-        ApplicationContext.start(Context.builder().correlationId(correlationId).build());
 
         // add header parameters to MDC
         if (config.mdcHeaders != null && !config.mdcHeaders.isEmpty()) {

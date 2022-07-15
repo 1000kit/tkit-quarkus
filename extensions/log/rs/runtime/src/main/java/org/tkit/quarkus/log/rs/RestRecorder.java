@@ -48,7 +48,7 @@ public class RestRecorder {
             List<RestServiceValue.ClassItem> items = values.getByConfig(key);
             if (items == null) {
                 log.warn(
-                        "No @RestService annotation found for key `quarkus.tkit.log.rs.controller.\"{}\"`. Key will be ignored",
+                        "No @RestService annotation found for key `tkit.log.rs.controller.\"{}\"`. Key will be ignored",
                         key);
                 return;
             }
@@ -62,7 +62,7 @@ public class RestRecorder {
                         value.config.payload.ifPresent(x -> item.config.payload = x);
                     } else {
                         log.warn(
-                                "No @RestService annotation found for class {}. Key `quarkus.tkit.log.rs.controller.\"{}\"` will be ignored",
+                                "No @RestService annotation found for class {}. Key `tkit.log.rs.controller.\"{}\"` will be ignored",
                                 item.id, key);
                     }
                 });
@@ -84,7 +84,7 @@ public class RestRecorder {
                                 mv.payload.ifPresent(x -> method.config.payload = x);
                             } else {
                                 log.warn(
-                                        "No @RestService annotation found for method `{}.{}`. Key `quarkus.tkit.log.rs.controller.\"{}\".method.{}` will be ignored",
+                                        "No @RestService annotation found for method `{}.{}`. Key `tkit.log.rs.controller.\"{}\".method.{}` will be ignored",
                                         item.id, method.id, key, mk);
                             }
                         });

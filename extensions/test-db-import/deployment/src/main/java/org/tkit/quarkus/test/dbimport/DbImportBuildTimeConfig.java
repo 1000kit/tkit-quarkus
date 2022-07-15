@@ -4,7 +4,7 @@ import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
-@ConfigRoot(name = "tkit.db-import", phase = ConfigPhase.BUILD_TIME)
+@ConfigRoot(prefix = "tkit", name = "db-import", phase = ConfigPhase.BUILD_TIME)
 public class DbImportBuildTimeConfig {
 
     /**
