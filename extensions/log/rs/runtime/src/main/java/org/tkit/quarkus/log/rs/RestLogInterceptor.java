@@ -63,13 +63,15 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
         ApplicationContext.start(Context.builder().correlationId(correlationId).build());
 
         // add header parameters to MDC
-        config.mdcHeaders.ifPresent(headers -> headers.forEach((k, v) -> {
-            String tmp = requestContext.getHeaderString(k);
-            if (tmp != null && !tmp.isBlank()) {
-                MDC.put(v, tmp);
-                restContext.mdcKeys.add(v);
-            }
-        }));
+        if (config.mdcHeaders != null && !config.mdcHeaders.isEmpty()) {
+            config.mdcHeaders.forEach((k, v) -> {
+                String tmp = requestContext.getHeaderString(k);
+                if (tmp != null && !tmp.isBlank()) {
+                    MDC.put(v, tmp);
+                    restContext.mdcKeys.add(v);
+                }
+            });
+        }
 
         restContext.ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(),
                 resourceInfo.getResourceMethod().getName());

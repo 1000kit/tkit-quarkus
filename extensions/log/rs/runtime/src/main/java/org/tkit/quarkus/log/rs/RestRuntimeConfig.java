@@ -32,7 +32,7 @@ public class RestRuntimeConfig {
      * Map of MDC headers
      */
     @ConfigItem(name = "mdc-headers")
-    public Optional<Map<String, String>> mdcHeaders;
+    public Map<String, String> mdcHeaders;
 
     /**
      * Start message
@@ -236,7 +236,7 @@ public class RestRuntimeConfig {
          * Map of MDC headers
          */
         @ConfigItem(name = "mdc-headers")
-        public Optional<Map<String, String>> mdcHeaders;
+        public Map<String, String> mdcHeaders;
 
         /**
          * Start message

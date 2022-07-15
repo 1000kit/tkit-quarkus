@@ -49,13 +49,15 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
         context.uri = requestContext.getUri().toString();
 
         // add header parameters to MDC
-        config.client.mdcHeaders.ifPresent(headers -> headers.forEach((k, v) -> {
-            String tmp = requestContext.getHeaderString(k);
-            if (tmp != null && !tmp.isBlank()) {
-                MDC.put(v, tmp);
-                context.mdcKeys.add(v);
-            }
-        }));
+        if (config.client.mdcHeaders != null && !config.client.mdcHeaders.isEmpty()) {
+            config.client.mdcHeaders.forEach((k, v) -> {
+                String tmp = requestContext.getHeaderString(k);
+                if (tmp != null && !tmp.isBlank()) {
+                    MDC.put(v, tmp);
+                    context.mdcKeys.add(v);
+                }
+            });
+        }
 
         if (config.client.start.enabled) {
             log.info(String.format(config.client.start.template, context.method, context.uri));
