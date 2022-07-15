@@ -71,7 +71,7 @@ public class LogRuntimeConfig {
          * 0 - method
          * 1 - parameters
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s %2$s started.")
+        @ConfigItem(name = "template", defaultValue = "%1$s(%2$s) started.")
         public String template;
     }
 
