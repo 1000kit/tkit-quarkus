@@ -15,6 +15,8 @@ public class RestInterceptorContext {
 
     String time;
 
+    Long duration;
+
     boolean exclude = false;
 
     Set<String> mdcKeys = new HashSet<>();
@@ -26,6 +28,7 @@ public class RestInterceptorContext {
     }
 
     public void close() {
-        time = String.format("%.3f", (System.currentTimeMillis() - startTime) / 1000f);
+        duration = (System.currentTimeMillis() - startTime);
+        time = String.format("%.3f", duration / 1000f);
     }
 }

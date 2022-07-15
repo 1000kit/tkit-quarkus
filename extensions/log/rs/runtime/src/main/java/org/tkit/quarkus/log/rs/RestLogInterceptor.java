@@ -132,6 +132,11 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
                     log = restContext.ano.config.log;
                 }
                 if (config.end.enabled && log) {
+
+                    if (config.end.mdc.duration) {
+                        MDC.put("tkit_time", restContext.duration);
+                        restContext.mdcKeys.add("tkit_time");
+                    }
                     Response.StatusType status = responseContext.getStatusInfo();
                     LoggerFactory.getLogger(resourceInfo.getResourceClass())
                             .info(String.format(config.end.template, restContext.method, restContext.path,

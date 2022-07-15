@@ -78,5 +78,12 @@ public class AbstractTest {
                     "Assert log line contains \n ==> text: `" + text + "` \n ==> line[" + line + "]: `" + data[line] + "`\n");
             return this;
         }
+
+        public AssertLogs assertMatches(int line, String regex) {
+            assertTrue(data[line].matches(regex),
+                    "Assert log line does not match \n ==> regex: `" + regex + "` \n ==> line[" + line + "]: `" + data[line]
+                            + "`\n");
+            return this;
+        }
     }
 }
