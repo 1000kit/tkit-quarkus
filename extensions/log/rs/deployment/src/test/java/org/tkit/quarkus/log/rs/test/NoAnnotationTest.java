@@ -21,7 +21,9 @@ public class NoAnnotationTest extends AbstractTest {
     public void test1Test() {
         RestAssured.get("/no-anno/test1").then()
                 .body(is("OK"));
-        assertLogs().assertNoLogs();
+        assertLogs().assertLines(1)
+                .assertContains(0,
+                        "INFO  [org.tki.qua.log.rs.tes.app.NoAnnotationRestController] (executor-thread-0) GET /no-anno/test1 [200] [");
     }
 
 }

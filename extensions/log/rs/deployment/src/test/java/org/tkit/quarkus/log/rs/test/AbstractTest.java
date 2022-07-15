@@ -68,7 +68,8 @@ public class AbstractTest {
         }
 
         public AssertLogs assertNoLogs() {
-            assertEquals(0, data.length, "Log is not empty. Lines count " + data.length);
+            assertEquals(0, data.length,
+                    "Log is not empty. Lines count " + data.length + ". Lines: \n" + String.join("\t\n", data));
             return this;
         }
 
