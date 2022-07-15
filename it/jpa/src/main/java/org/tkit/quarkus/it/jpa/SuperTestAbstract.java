@@ -4,18 +4,18 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import org.tkit.quarkus.log.rs.RestService;
+import org.tkit.quarkus.log.rs.LogRestService;
 
 public class SuperTestAbstract {
 
-    @RestService(log = false)
+    @LogRestService(log = false)
     @GET
     @Path("test21")
     public Response test21() {
         return Response.ok().build();
     }
 
-    @RestService(log = true)
+    @LogRestService(log = true)
     @GET
     @Path("test")
     public Response test() {

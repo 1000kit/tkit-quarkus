@@ -21,7 +21,7 @@ public class RestLogProcessor {
 
     static final String FEATURE_NAME = "tkit-log-rs";
 
-    static final DotName ANO_REST_SERVICE = DotName.createSimple(RestService.class.getName());
+    static final DotName ANO_REST_SERVICE = DotName.createSimple(LogRestService.class.getName());
 
     private static final Set<String> EXCLUDE_METHODS = Arrays.stream(Object.class.getMethods()).map(Method::getName)
             .collect(Collectors.toSet());
@@ -52,7 +52,7 @@ public class RestLogProcessor {
                         Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(ci.name().toString());
 
                         RestServiceValue.ClassItem classItem = null;
-                        RestService classRestService = clazz.getAnnotation(RestService.class);
+                        LogRestService classRestService = clazz.getAnnotation(LogRestService.class);
                         if (classRestService != null) {
                             classItem = values.getOrCreate(ci.name().toString());
                             classItem.config = RestServiceValue.createConfig();
@@ -62,7 +62,7 @@ public class RestLogProcessor {
                         for (Method method : clazz.getMethods()) {
                             if (Modifier.isPublic(method.getModifiers()) && !EXCLUDE_METHODS.contains(method.getName())) {
 
-                                RestService methodLogService = method.getAnnotation(RestService.class);
+                                LogRestService methodLogService = method.getAnnotation(LogRestService.class);
                                 if (methodLogService != null) {
                                     if (classItem == null) {
                                         classItem = values.getOrCreate(ci.name().toString());
@@ -92,7 +92,7 @@ public class RestLogProcessor {
         producer.produce(new RestServiceBuildItem(values));
     }
 
-    private static void updateValue(RestService ano, RestServiceValue.RestServiceAnnotation item) {
+    private static void updateValue(LogRestService ano, RestServiceValue.RestServiceAnnotation item) {
         item.log = ano.log();
         item.payload = ano.payload();
         String configKey = ano.configKey();

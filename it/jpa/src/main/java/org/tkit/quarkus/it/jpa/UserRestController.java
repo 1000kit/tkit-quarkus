@@ -5,9 +5,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.tkit.quarkus.log.rs.RestService;
+import org.tkit.quarkus.log.rs.LogRestService;
 
-@RestService(configKey = "user")
+@LogRestService(configKey = "user")
 @Path("users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,7 +31,7 @@ public class UserRestController extends TestAbstract implements TestInterface {
     }
 
     @POST
-    @RestService(configKey = "create")
+    @LogRestService(configKey = "create")
     public Response create(UserDTO dto) {
         User user = new User();
         user.username = dto.username;
