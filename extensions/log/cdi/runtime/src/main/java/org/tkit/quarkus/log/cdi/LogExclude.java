@@ -28,11 +28,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogExclude {
 
+    public static String MASK = "";
+
     /**
      * If this flag is empty the parameter name will be used to log
      * otherwise the value of this attribute will be use.
      *
      * @return the mask flag.
      */
-    String mask() default "";
+    String mask() default MASK;
 }

@@ -9,11 +9,13 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import org.tkit.quarkus.log.cdi.LogParam;
+import org.tkit.quarkus.log.cdi.LogService;
 
 import io.quarkus.arc.Unremovable;
 
 @ApplicationScoped
 @Unremovable
+@LogService(log = false)
 public class LogParamContainer {
 
     @Inject
