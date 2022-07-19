@@ -7,9 +7,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.tkit.quarkus.log.rs.RestService;
+import org.tkit.quarkus.log.rs.LogRestService;
 
-@RestService
+@LogRestService
 @Path("anno")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,7 +21,7 @@ public class AnnotationRestController {
         return Response.ok("OK").build();
     }
 
-    @RestService(log = false)
+    @LogRestService(log = false)
     @GET
     @Path("test2")
     public Response test2() {

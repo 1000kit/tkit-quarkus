@@ -8,9 +8,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.tkit.quarkus.log.rs.RestService;
+import org.tkit.quarkus.log.rs.LogRestService;
 
-@RestService
+@LogRestService
 @Path("regex")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

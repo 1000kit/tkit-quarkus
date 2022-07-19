@@ -11,7 +11,7 @@ import io.quarkus.runtime.annotations.ConfigRoot;
 /**
  * Build configuration.
  */
-@ConfigRoot(name = "tkit.log.cdi", phase = ConfigPhase.BUILD_TIME)
+@ConfigRoot(prefix = "tkit", name = "log.cdi", phase = ConfigPhase.BUILD_TIME)
 public class LogBuildTimeConfig {
 
     /**

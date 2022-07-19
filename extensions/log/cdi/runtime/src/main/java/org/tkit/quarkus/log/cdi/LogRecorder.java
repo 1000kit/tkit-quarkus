@@ -41,7 +41,7 @@ public class LogRecorder {
         config.service.forEach((key, value) -> {
             List<ServiceValue.ClassItem> items = values.getByConfig(key);
             if (items == null) {
-                log.warn("No @LogService annotation found for key `quarkus.tkit.log.cdi.service.\"{}\"`. Key will be ignored",
+                log.warn("No @LogService annotation found for key `tkit.log.cdi.service.\"{}\"`. Key will be ignored",
                         key);
                 return;
             }
@@ -55,7 +55,7 @@ public class LogRecorder {
                         value.config.stacktrace.ifPresent(x -> item.config.stacktrace = x);
                     } else {
                         log.warn(
-                                "No @LogService annotation found for class {}. Key `quarkus.tkit.log.cdi.service.\"{}\"` will be ignored",
+                                "No @LogService annotation found for class {}. Key `tkit.log.cdi.service.\"{}\"` will be ignored",
                                 item.id, key);
                     }
                 });
@@ -79,7 +79,7 @@ public class LogRecorder {
                                 mv.returnMask.ifPresent(x -> method.returnMask = x);
                             } else {
                                 log.warn(
-                                        "No @LogService annotation found for method `{}.{}`. Key `quarkus.tkit.log.cdi.service.\"{}\".method.{}` will be ignored",
+                                        "No @LogService annotation found for method `{}.{}`. Key `tkit.log.cdi.service.\"{}\".method.{}` will be ignored",
                                         item.id, method.id, key, mk);
                             }
                         });

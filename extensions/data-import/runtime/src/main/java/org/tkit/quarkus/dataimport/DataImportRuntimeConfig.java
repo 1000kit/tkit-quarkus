@@ -7,7 +7,7 @@ import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
-@ConfigRoot(name = "tkit.dataimport", phase = ConfigPhase.BOOTSTRAP)
+@ConfigRoot(prefix = "tkit", name = "dataimport", phase = ConfigPhase.BOOTSTRAP)
 public class DataImportRuntimeConfig {
 
     /**

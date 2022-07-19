@@ -52,7 +52,7 @@ public class ApplicationContext {
     }
 
     private static final String BUSINESS_DATA_PREFIX = ConfigProvider.getConfig()
-            .getOptionalValue("quarkus.tkit.log.customdata.prefix", String.class).orElse("business_information_");
+            .getOptionalValue("tkit.log.customdata.prefix", String.class).orElse("business_information_");
 
     public static void addBusinessLogParam(String key, String value) {
         String k = BUSINESS_DATA_PREFIX + key;

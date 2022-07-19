@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import io.quarkus.runtime.annotations.*;
 
-@ConfigRoot(name = "tkit.log.rs", phase = ConfigPhase.RUN_TIME)
+@ConfigRoot(prefix = "tkit", name = "log.rs", phase = ConfigPhase.RUN_TIME)
 public class RestRuntimeConfig {
 
     /**
@@ -32,7 +32,7 @@ public class RestRuntimeConfig {
      * Map of MDC headers
      */
     @ConfigItem(name = "mdc-headers")
-    public Optional<Map<String, String>> mdcHeaders;
+    public Map<String, String> mdcHeaders;
 
     /**
      * Start message
@@ -200,6 +200,22 @@ public class RestRuntimeConfig {
          */
         @ConfigItem(name = "template", defaultValue = "%1$s %2$s [%4$s] [%3$ss]")
         public String template;
+
+        /**
+         * Default MDC parameters
+         */
+        @ConfigItem(name = "mdc")
+        public RestMdcLogConfig mdc;
+    }
+
+    @ConfigGroup
+    public static class RestMdcLogConfig {
+
+        /**
+         * Enable duration time as MDC parameter
+         */
+        @ConfigItem(name = "duration", defaultValue = "true")
+        public boolean duration;
     }
 
     /**
@@ -236,7 +252,7 @@ public class RestRuntimeConfig {
          * Map of MDC headers
          */
         @ConfigItem(name = "mdc-headers")
-        public Optional<Map<String, String>> mdcHeaders;
+        public Map<String, String> mdcHeaders;
 
         /**
          * Start message

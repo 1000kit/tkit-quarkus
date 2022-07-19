@@ -13,29 +13,29 @@ Maven dependency
 Configuration
 ```properties
 # enable or disable the data import. Default `true`
-quarkus.tkit.dataimport.enabled=true|false 
+tkit.dataimport.enabled=true|false 
 # file to import
-quarkus.tkit.dataimport.configurations.<KEY>.file=
+tkit.dataimport.configurations.<KEY>.file=
 # bean key defined in the @DataImport annotation. Default empty and <KEY> 
 # value will be used for mapping the configuration to the bean.
-quarkus.tkit.dataimport.configurations.<KEY>.bean=
+tkit.dataimport.configurations.<KEY>.bean=
 # metadata string-string map
-quarkus.tkit.dataimport.configurations.<KEY>.metadata=
+tkit.dataimport.configurations.<KEY>.metadata=
 # enable or disable the data import for the key. Default `true`
-quarkus.tkit.dataimport.configurations.<KEY>.enabled=true|false
+tkit.dataimport.configurations.<KEY>.enabled=true|false
 # stop at error. Default `false` 
-quarkus.tkit.dataimport.configurations.<KEY>.stop-at-error=true|false
+tkit.dataimport.configurations.<KEY>.stop-at-error=true|false
 ```
 
 
 Example configuration
 ```properties
-quarkus.tkit.dataimport.enabled=true
-quarkus.tkit.dataimport.configurations.key1.file=/data/example_data.json
-quarkus.tkit.dataimport.configurations.key1.metadata.operation=UPDATE
-quarkus.tkit.dataimport.configurations.key1.metadata.check=FALSE
-quarkus.tkit.dataimport.configurations.key1.enabled=true
-quarkus.tkit.dataimport.configurations.key1.stop-at-error=false
+tkit.dataimport.enabled=true
+tkit.dataimport.configurations.key1.file=/data/example_data.json
+tkit.dataimport.configurations.key1.metadata.operation=UPDATE
+tkit.dataimport.configurations.key1.metadata.check=FALSE
+tkit.dataimport.configurations.key1.enabled=true
+tkit.dataimport.configurations.key1.stop-at-error=false
 ```
 
 The log of the data import changes is stored in the `dataimportlog` table. To create this table copy and paste these liquibase changes to your project.

@@ -68,13 +68,21 @@ public class AbstractTest {
         }
 
         public AssertLogs assertNoLogs() {
-            assertEquals(0, data.length, "Log is not empty. Lines count " + data.length);
+            assertEquals(0, data.length,
+                    "Log is not empty. Lines count " + data.length + ". Lines: \n" + String.join("\t\n", data));
             return this;
         }
 
         public AssertLogs assertContains(int line, String text) {
             assertTrue(data[line].contains(text),
                     "Assert log line contains \n ==> text: `" + text + "` \n ==> line[" + line + "]: `" + data[line] + "`\n");
+            return this;
+        }
+
+        public AssertLogs assertMatches(int line, String regex) {
+            assertTrue(data[line].matches(regex),
+                    "Assert log line does not match \n ==> regex: `" + regex + "` \n ==> line[" + line + "]: `" + data[line]
+                            + "`\n");
             return this;
         }
     }

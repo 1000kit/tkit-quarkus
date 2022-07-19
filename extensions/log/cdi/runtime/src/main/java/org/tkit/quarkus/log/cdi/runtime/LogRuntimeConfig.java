@@ -9,7 +9,7 @@ import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
-@ConfigRoot(name = "tkit.log.cdi", phase = ConfigPhase.RUN_TIME)
+@ConfigRoot(prefix = "tkit", name = "log.cdi", phase = ConfigPhase.RUN_TIME)
 public class LogRuntimeConfig {
 
     /**
@@ -71,7 +71,7 @@ public class LogRuntimeConfig {
          * 0 - method
          * 1 - parameters
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s %2$s started.")
+        @ConfigItem(name = "template", defaultValue = "%1$s(%2$s) started.")
         public String template;
     }
 

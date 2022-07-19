@@ -7,9 +7,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.tkit.quarkus.log.rs.RestService;
+import org.tkit.quarkus.log.rs.LogRestService;
 
-@RestService(configKey = "test")
+@LogRestService(configKey = "test")
 @Path("configkey")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,14 +21,14 @@ public class ConfigKeyRestController {
         return Response.ok("OK").build();
     }
 
-    @RestService(log = false)
+    @LogRestService(log = false)
     @GET
     @Path("test2")
     public Response test2() {
         return Response.ok("OK").build();
     }
 
-    @RestService(configKey = "test", log = false)
+    @LogRestService(configKey = "test", log = false)
     @GET
     @Path("test3")
     public Response test3() {

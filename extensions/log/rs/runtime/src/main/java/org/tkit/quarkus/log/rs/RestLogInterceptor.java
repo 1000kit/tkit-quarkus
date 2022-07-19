@@ -39,6 +39,15 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
     @Override
     public void filter(ContainerRequestContext requestContext) {
         RestRuntimeConfig config = RestRecorder.getConfig();
+
+        //start log scope/correlation id
+        String correlationId = null;
+        if (config.correlationIdEnabled) {
+            correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
+        }
+
+        ApplicationContext.start(Context.builder().correlationId(correlationId).build());
+
         if (!config.enabled) {
             return;
         }
@@ -55,38 +64,34 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             }
         }
 
-        //start log scope/correlation id
-        String correlationId = null;
-        if (config.correlationIdEnabled) {
-            correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
-        }
-        ApplicationContext.start(Context.builder().correlationId(correlationId).build());
-
         // add header parameters to MDC
-        config.mdcHeaders.ifPresent(headers -> headers.forEach((k, v) -> {
-            String tmp = requestContext.getHeaderString(k);
-            if (tmp != null && !tmp.isBlank()) {
-                MDC.put(v, tmp);
-                restContext.mdcKeys.add(v);
-            }
-        }));
+        if (config.mdcHeaders != null && !config.mdcHeaders.isEmpty()) {
+            config.mdcHeaders.forEach((k, v) -> {
+                String tmp = requestContext.getHeaderString(k);
+                if (tmp != null && !tmp.isBlank()) {
+                    MDC.put(v, tmp);
+                    restContext.mdcKeys.add(v);
+                }
+            });
+        }
 
         restContext.ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(),
                 resourceInfo.getResourceMethod().getName());
 
-        if (restContext.ano != null && restContext.ano.config.log) {
-            UriInfo uriInfo = requestContext.getUriInfo();
-            restContext.method = requestContext.getMethod();
-            restContext.path = uriInfo.getPath();
-            restContext.uri = uriInfo.getRequestUri().toString();
+        UriInfo uriInfo = requestContext.getUriInfo();
+        restContext.method = requestContext.getMethod();
+        restContext.path = uriInfo.getPath();
+        restContext.uri = uriInfo.getRequestUri().toString();
 
-            // start message log
-            if (config.start.enabled) {
-                LoggerFactory.getLogger(resourceInfo.getResourceClass())
-                        .info(String.format(config.start.template, restContext.method, restContext.path, restContext.uri));
-            }
+        // start message log
+        boolean log = true;
+        if (restContext.ano != null) {
+            log = restContext.ano.config.log;
         }
-
+        if (config.start.enabled && log) {
+            LoggerFactory.getLogger(resourceInfo.getResourceClass())
+                    .info(String.format(config.start.template, restContext.method, restContext.path, restContext.uri));
+        }
         requestContext.setProperty(CONTEXT, restContext);
     }
 
@@ -102,6 +107,8 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             }
 
             RestInterceptorContext restContext = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
+
+            // if we do not have context we are in error mode
             if (restContext == null) {
                 if (config.error.enabled) {
                     Response.StatusType status = responseContext.getStatusInfo();
@@ -109,28 +116,38 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
                             requestContext.getUriInfo().getPath(), 0.000,
                             status.getStatusCode(), status.getReasonPhrase(), requestContext.getUriInfo().getRequestUri()));
                 }
-            } else {
+                return;
+            }
+
+            try {
+                // stop if we need to exclude
                 if (restContext.exclude) {
                     return;
                 }
-                if (restContext.ano == null) {
-                    return;
+
+                // close rest context
+                restContext.close();
+
+                // log end message
+                boolean log = true;
+                if (restContext.ano != null) {
+                    log = restContext.ano.config.log;
                 }
-                if (restContext.ano.config.log) {
-                    try {
-                        restContext.close();
-                        if (config.end.enabled) {
-                            Response.StatusType status = responseContext.getStatusInfo();
-                            LoggerFactory.getLogger(resourceInfo.getResourceClass())
-                                    .info(String.format(config.end.template, restContext.method, restContext.path,
-                                            restContext.time, status.getStatusCode(), status.getReasonPhrase(),
-                                            restContext.uri));
-                        }
-                    } finally {
-                        // clean up MDC header keys
-                        restContext.mdcKeys.forEach(MDC::remove);
+                if (config.end.enabled && log) {
+
+                    if (config.end.mdc.duration) {
+                        MDC.put("tkit_time", restContext.duration);
+                        restContext.mdcKeys.add("tkit_time");
                     }
+                    Response.StatusType status = responseContext.getStatusInfo();
+                    LoggerFactory.getLogger(resourceInfo.getResourceClass())
+                            .info(String.format(config.end.template, restContext.method, restContext.path,
+                                    restContext.time, status.getStatusCode(), status.getReasonPhrase(),
+                                    restContext.uri));
                 }
+            } finally {
+                // clean up MDC header keys
+                restContext.mdcKeys.forEach(MDC::remove);
             }
         } finally {
             //we are exiting server context, close the application context

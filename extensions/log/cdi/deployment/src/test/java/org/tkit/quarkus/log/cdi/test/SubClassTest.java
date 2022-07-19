@@ -30,8 +30,7 @@ public class SubClassTest extends AbstractTest {
     @Test
     public void noAnnotationTest() {
         service.testNoAnnotation();
-        assertLogs().assertLines(1)
-                .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.SubClassService] (main) testNoAnnotation():void");
+        assertLogs().assertNoLogs();
     }
 
     @Test
