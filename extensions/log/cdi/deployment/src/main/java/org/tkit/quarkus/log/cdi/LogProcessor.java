@@ -213,7 +213,7 @@ public class LogProcessor {
                 boolean matches = ignorePattern.matcher(name).matches();
                 if (matches) {
                     log.info(
-                            "Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.cdi.auto-discover.ignore.pattern')",
+                            "Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.cdi.auto-discovery.ignore.pattern')",
                             name,
                             buildConfig.autoDiscover.ignorePattern);
                 }
