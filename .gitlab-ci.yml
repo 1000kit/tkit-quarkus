@@ -41,6 +41,8 @@ mvn:build:
   stage: build
   services:
     - docker:19.03.8-dind
+  before_script:
+    - git clone $GIT_RESOURCE_URL .scripts
   script:
     - VERSION=$(samo project version)
     - mvn versions:set -DnewVersion=$VERSION
