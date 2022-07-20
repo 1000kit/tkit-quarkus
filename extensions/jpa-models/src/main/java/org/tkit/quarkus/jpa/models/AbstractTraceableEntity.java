@@ -135,7 +135,7 @@ public abstract class AbstractTraceableEntity<T> implements Serializable {
     /**
      * Sets the opt lock version/modification counter. Should not be normally used by app programers.
      *
-     * @param version actual Version
+     * @param modificationCount actual Version
      */
     public void setModificationCount(Integer modificationCount) {
         this.modificationCount = modificationCount;
