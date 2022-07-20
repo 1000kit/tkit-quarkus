@@ -22,7 +22,7 @@ public abstract class AbstractTraceableEntity<T> implements Serializable {
      */
     @Version
     @Column(name = "OPTLOCK", nullable = false)
-    private Integer version;
+    private Integer modificationCount;
 
     /**
      * The creation date.
@@ -124,21 +124,21 @@ public abstract class AbstractTraceableEntity<T> implements Serializable {
     }
 
     /**
-     * Gets the optimistic lock version.
+     * Gets the optimistic lock version/modification counter value.
      *
      * @return the optimistic lock version.
      */
-    public Integer getVersion() {
-        return this.version;
+    public Integer getModificationCount() {
+        return this.modificationCount;
     }
 
     /**
-     * Sets the version.
+     * Sets the opt lock version/modification counter. Should not be normally used by app programers.
      *
      * @param version actual Version
      */
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setModificationCount(Integer modificationCount) {
+        this.modificationCount = modificationCount;
     }
 
     /**

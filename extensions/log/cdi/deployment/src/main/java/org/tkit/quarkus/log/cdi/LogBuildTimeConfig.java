@@ -15,9 +15,9 @@ import io.quarkus.runtime.annotations.ConfigRoot;
 public class LogBuildTimeConfig {
 
     /**
-     * Auto-discover configuration.
+     * Auto-discovery configuration.
      */
-    @ConfigItem(name = "auto-discover")
+    @ConfigItem(name = "auto-discovery")
     public AutoDiscoverBuildTimeConfig autoDiscover;
 
     /**
