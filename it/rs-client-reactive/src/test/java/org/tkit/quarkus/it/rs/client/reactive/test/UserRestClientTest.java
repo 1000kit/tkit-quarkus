@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
 import org.tkit.quarkus.it.rs.client.reactive.AbstractTest;
-import org.tkit.quarkus.it.rs.client.reactive.InjectMockServerClient;
 
+import io.quarkiverse.mockserver.test.InjectMockServerClient;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
