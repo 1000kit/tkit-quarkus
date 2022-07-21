@@ -6,7 +6,7 @@ include:
 variables:
   MVN_BUILD_IMAGE: harbor.1000kit.org/1000kit/mvn-build:v3.8
   GIT_RESOURCE_URL: https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/1000kit/config/gitlab-ci-template.git
-  MAVEN_CLI_OPTS: "-s .scripts/.m2/gitlab-ci-maven-lib.xml --batch-mode"
+  MAVEN_CLI_OPTS: "-s .scripts/.m2/gitlab-ci-maven-lib.xml --batch-mode --no-transfer-progress"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true -XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 cache:
@@ -46,7 +46,7 @@ mvn:build:
     - git clone $GIT_RESOURCE_URL .scripts
   script:
     - VERSION=$(samo project version)
-    - mvn versions:set -DnewVersion=$VERSION
+    - mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$VERSION
     - mvn $MAVEN_CLI_OPTS -B -Pnative impsort:check formatter:validate verify --file pom.xml
   rules:
     - if: '$CI_COMMIT_TAG == null'
@@ -62,7 +62,7 @@ mvn:deploy:
     - gpg --list-keys
   script:
     - VERSION=$(samo project version --version release)
-    - mvn versions:set -DnewVersion=$VERSION
+    - mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$VERSION
     - mvn $MAVEN_CLI_OPTS clean deploy -DskipTests -Dmaven.test.skip=true -Prelease
   rules:
     - if: $CI_COMMIT_TAG

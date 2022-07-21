@@ -8,6 +8,38 @@
     <name>tkit-quarkus-parent</name>
     <packaging>pom</packaging>
 
+    <description>Tkit-Quarkus : Productivity extensions for Quarkus</description>
+    <url>https://gitlab.com/1000kit/libs/quarkus/tkit-quarkus</url>
+
+    <organization>
+        <name>tkit</name>
+        <url>https://www.tkit.org</url>
+    </organization>
+
+
+    <developers>
+        <developer>
+            <id>tkit</id>
+            <name>Tkit community</name>
+            <organization>tkit</organization>
+            <organizationUrl>https://www.tkit.org</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:https://gitlab.com/1000kit/libs/quarkus/tkit-quarkus.git</connection>
+        <developerConnection>scm:git:git@gitlab.com:1000kit/libs/quarkus/tkit-quarkus.git</developerConnection>
+        <url>https://gitlab.com/1000kit/libs/quarkus/tkit-quarkus</url>
+    </scm>
+
     <modules>
         <module>bom</module>
         <module>extensions</module>
@@ -33,11 +65,11 @@
         <jandex-plugin.version>1.2.2</jandex-plugin.version>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
-        <nexus.staging-plugin.version>1.6.8</nexus.staging-plugin.version>
+        <nexus.staging-plugin.version>1.6.9</nexus.staging-plugin.version>
         <source-plugin.version>3.2.0</source-plugin.version>
         <javadoc-plugin.version>3.2.0</javadoc-plugin.version>
         <gpg-plugin.version>1.6</gpg-plugin.version>
-
+        <deploy-plugin.version>2.7</deploy-plugin.version>
 
         <dbunit.version>2.7.2</dbunit.version>
         <poi.version>4.1.0</poi.version>
@@ -167,6 +199,11 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${deploy-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
