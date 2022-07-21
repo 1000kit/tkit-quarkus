@@ -6,7 +6,7 @@ include:
 variables:
   MVN_BUILD_IMAGE: harbor.1000kit.org/1000kit/mvn-build:v3.8
   GIT_RESOURCE_URL: https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/1000kit/config/gitlab-ci-template.git
-  MAVEN_CLI_OPTS: "-T2C -s .scripts/.m2/gitlab-ci-maven-lib.xml --batch-mode --no-transfer-progress"
+  MAVEN_CLI_OPTS: " -s .scripts/.m2/gitlab-ci-maven-lib.xml --batch-mode --no-transfer-progress"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true -XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 cache:
