@@ -32,7 +32,7 @@ import io.quarkus.runtime.annotations.Recorder;
 public class LogJsonRecorder {
 
     public RuntimeValue<Optional<Formatter>> initializeJsonLogging(final LogJsonConfig config) {
-        if (!config.enable) {
+        if (!config.enabled) {
             return new RuntimeValue<>(Optional.empty());
         }
         final JsonAdvancedFormatter formatter = new JsonAdvancedFormatter();

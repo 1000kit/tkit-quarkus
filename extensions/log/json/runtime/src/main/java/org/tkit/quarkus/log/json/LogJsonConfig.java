@@ -23,7 +23,7 @@ import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
-@ConfigRoot(prefix = "tkit", phase = ConfigPhase.RUN_TIME, name = "log.console.json")
+@ConfigRoot(prefix = "tkit", phase = ConfigPhase.RUN_TIME, name = "log.json")
 public class LogJsonConfig {
 
     /**
@@ -34,8 +34,8 @@ public class LogJsonConfig {
     /**
      * Determine whether to enable the JSON console formatting extension, which disables "normal" console formatting.
      */
-    @ConfigItem(name = ConfigItem.PARENT, defaultValue = "true")
-    boolean enable;
+    @ConfigItem(name = "enabled", defaultValue = "true")
+    boolean enabled;
     /**
      * Enable "pretty printing" of the JSON record. Note that some JSON parsers will fail to read pretty printed output.
      */
