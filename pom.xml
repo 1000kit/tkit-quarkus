@@ -65,11 +65,10 @@
         <jandex-plugin.version>1.2.2</jandex-plugin.version>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
-        <nexus.staging-plugin.version>1.6.9</nexus.staging-plugin.version>
+        <nexus.staging-plugin.version>1.6.13</nexus.staging-plugin.version>
         <source-plugin.version>3.2.0</source-plugin.version>
         <javadoc-plugin.version>3.2.0</javadoc-plugin.version>
         <gpg-plugin.version>1.6</gpg-plugin.version>
-        <deploy-plugin.version>2.7</deploy-plugin.version>
 
         <dbunit.version>2.7.2</dbunit.version>
         <poi.version>4.1.0</poi.version>
@@ -199,11 +198,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${deploy-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -362,4 +356,16 @@
             </build>
         </profile>
     </profiles>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
 </project>
