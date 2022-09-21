@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <description>Tkit-Quarkus : Productivity extensions for Quarkus</description>
-    <url>https://gitlab.com/1000kit/libs/quarkus/tkit-quarkus</url>
+    <url>https://github.com/1000kit/tkit-quarkus</url>
 
     <organization>
         <name>tkit</name>
@@ -35,9 +35,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:https://gitlab.com/1000kit/libs/quarkus/tkit-quarkus.git</connection>
-        <developerConnection>scm:git:git@gitlab.com:1000kit/libs/quarkus/tkit-quarkus.git</developerConnection>
-        <url>https://gitlab.com/1000kit/libs/quarkus/tkit-quarkus</url>
+        <connection>scm:git:git@github.com:1000kit/tkit-quarkus.git</connection>
+        <developerConnection>scm:git:git@github.com:1000kit/tkit-quarkus.git</developerConnection>
+        <url>https://github.com/1000kit/tkit-quarkus</url>
     </scm>
 
     <modules>
