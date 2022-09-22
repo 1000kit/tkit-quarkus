@@ -27,7 +27,7 @@ public class AbstractTest {
     }
 
     @BeforeEach
-    private void resetLog() {
+    protected void resetLog() {
         writer = new StringWriter();
         handler.setWriter(writer);
     }
