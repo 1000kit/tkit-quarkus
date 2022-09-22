@@ -47,8 +47,8 @@
     </modules>
 
     <properties>
-        <quarkus.version>2.10.1.Final</quarkus.version>
-        <hibernate-orm.version>5.6.9.Final</hibernate-orm.version>
+        <quarkus.version>2.12.3.Final</quarkus.version>
+        <hibernate-orm.version>5.6.10.Final</hibernate-orm.version>
         <!-- Code format -->
         <version.formatter.plugin>2.20.0</version.formatter.plugin>
         <version.impsort.plugin>1.7.0</version.impsort.plugin>
