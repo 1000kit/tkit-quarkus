@@ -22,7 +22,7 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
      * The resource info.
      */
     @Context
-    private ResourceInfo resourceInfo;
+    ResourceInfo resourceInfo;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -71,8 +71,9 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
             }
         }
         if (sb.length() > 0) {
-            logger.info(String.format(config.payload.message, requestContext.getMethod(), requestContext.getUriInfo().getPath(),
-                    sb));
+            logger.info(
+                    String.format(config.payload.template, requestContext.getMethod(), requestContext.getUriInfo().getPath(),
+                            sb));
         }
         stream.reset();
         requestContext.setEntityStream(stream);
