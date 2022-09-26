@@ -88,8 +88,8 @@ public class RestRuntimeConfig {
          * 2 - URL
          * 3 - payload
          */
-        @ConfigItem(name = "message", defaultValue = "%1$s %2$s payload: %3$s")
-        public String message;
+        @ConfigItem(name = "template", defaultValue = "%1$s %2$s payload: %3$s")
+        public String template;
 
         /**
          * Empty body enabled or disabled
@@ -135,7 +135,7 @@ public class RestRuntimeConfig {
         public boolean enabled;
 
         /**
-         * Exclude patterns
+         * Exclude request path patterns
          */
         @ConfigItem(name = "exclude")
         public Optional<List<String>> exclude;
@@ -170,8 +170,8 @@ public class RestRuntimeConfig {
 
         /**
          * Message template
-         * 0 - HTTP method
-         * 1 - URI
+         * 1 - HTTP method
+         * 2 - URI
          */
         @ConfigItem(name = "template", defaultValue = "%1$s %2$s started.")
         public String template;
@@ -214,8 +214,14 @@ public class RestRuntimeConfig {
         /**
          * Enable duration time as MDC parameter
          */
-        @ConfigItem(name = "duration", defaultValue = "true")
-        public boolean duration;
+        @ConfigItem(name = "duration.enabled", defaultValue = "true")
+        public boolean durationEnabled;
+
+        /**
+         * Duration MDC key name
+         */
+        @ConfigItem(name = "duration.name", defaultValue = "tkit_time")
+        public String durationName;
     }
 
     /**

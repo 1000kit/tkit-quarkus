@@ -29,7 +29,7 @@ public class RestClientPayloadInterceptor implements ClientRequestFilter {
                     }
                 }
                 log.info(
-                        String.format(config.payload.message,
+                        String.format(config.client.payload.template,
                                 requestContext.getMethod(),
                                 requestContext.getUri().getPath(),
                                 requestContext.getEntity()));

@@ -39,27 +39,27 @@ public class LogJsonConfig {
     /**
      * Enable "pretty printing" of the JSON record. Note that some JSON parsers will fail to read pretty printed output.
      */
-    @ConfigItem
+    @ConfigItem(name = "pretty-print", defaultValue = "false")
     boolean prettyPrint;
     /**
      * The date format to use. The special string "default" indicates that the default format should be used.
      */
-    @ConfigItem(defaultValue = "default")
+    @ConfigItem(name = "date-format", defaultValue = "default")
     String dateFormat;
     /**
      * The special end-of-record delimiter to be used. By default, no delimiter is used.
      */
-    @ConfigItem
+    @ConfigItem(name = "record-delimiter")
     Optional<String> recordDelimiter;
     /**
      * The zone ID to use. The special string "default" indicates that the default zone should be used.
      */
-    @ConfigItem(defaultValue = "default")
+    @ConfigItem(name = "zone-id", defaultValue = "default")
     String zoneId;
     /**
      * The exception output type to specify.
      */
-    @ConfigItem(defaultValue = "formatted")
+    @ConfigItem(name = "exception-output-type", defaultValue = "formatted")
     ExtendedStructureFormatter.ExceptionOutputType exceptionOutputType;
     /**
      * Enable printing of more details in the log.
@@ -67,7 +67,7 @@ public class LogJsonConfig {
      * Printing the details can be expensive as the values are retrieved from the caller. The details include the
      * source class name, source file name, source method name and source line number.
      */
-    @ConfigItem
+    @ConfigItem(name = "print-details", defaultValue = "false")
     boolean printDetails;
 
     /**
@@ -107,8 +107,8 @@ public class LogJsonConfig {
     List<String> envKeys = new ArrayList<>();
 
     /**
-     * Number of characters after which the stacktrace is split and we produce linked messages
+     * Number of characters after which the stacktrace is split. We produce linked messages.
      */
-    @ConfigItem(name = "splitStacktracesAfter", defaultValue = "12000")
-    Optional<Integer> splitStacktracesAfter;
+    @ConfigItem(name = "split-stacktrace-after", defaultValue = "12000")
+    Optional<Integer> splitStacktraceAfter;
 }
