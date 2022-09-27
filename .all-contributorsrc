@@ -14,6 +14,16 @@
         "code",
         "maintenance"
       ]
+    },
+    {
+      "login": "yntelectual",
+      "name": "matus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1354787?v=4",
+      "profile": "https://github.com/yntelectual",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
