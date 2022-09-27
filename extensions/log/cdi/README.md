@@ -17,9 +17,9 @@ Build time configuration.
 # Enable or disable autodiscovery
 tkit.log.cdi.auto-discovery.enabled=false
 # Binding includes packages. (list)
-tkit.log.cdi.packages=org.tkit
+tkit.log.cdi.auto-discovery.packages=org.tkit
 # Specify ignore pattern. (optional)
-tkit.log.cdi.ignore.pattern=
+tkit.log.cdi.auto-discovery.ignore.pattern=
 ```
 
 Runtime configuration.
