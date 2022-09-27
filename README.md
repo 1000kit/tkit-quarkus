@@ -121,6 +121,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center"><a href="https://www.lorislab.org"><img src="https://avatars.githubusercontent.com/u/828045?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrej Petras</b></sub></a><br /><a href="https://github.com/1000kit/tkit-quarkus/commits?author=andrejpetras" title="Code">💻</a> <a href="#maintenance-andrejpetras" title="Maintenance">🚧</a></td>
+      <td align="center"><a href="https://github.com/yntelectual"><img src="https://avatars.githubusercontent.com/u/1354787?v=4?s=100" width="100px;" alt=""/><br /><sub><b>matus</b></sub></a><br /><a href="https://github.com/1000kit/tkit-quarkus/commits?author=yntelectual" title="Code">💻</a> <a href="#maintenance-yntelectual" title="Maintenance">🚧</a></td>
       <td align="center"><a href="http://adroste.com"><img src="https://avatars.githubusercontent.com/u/18649298?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexander Droste</b></sub></a><br /><a href="https://github.com/1000kit/tkit-quarkus/commits?author=adroste" title="Documentation">📖</a></td>
     </tr>
   </tbody>

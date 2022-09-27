@@ -16,6 +16,16 @@
       ]
     },
     {
+      "login": "yntelectual",
+      "name": "matus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1354787?v=4",
+      "profile": "https://github.com/yntelectual",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
+    },
+    {
       "login": "adroste",
       "name": "Alexander Droste",
       "avatar_url": "https://avatars.githubusercontent.com/u/18649298?v=4",
@@ -23,7 +33,7 @@
       "contributions": [
         "doc"
       ]
-    }
+    }    
   ],
   "contributorsPerLine": 7,
   "projectName": "tkit-quarkus",
