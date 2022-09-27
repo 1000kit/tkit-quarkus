@@ -108,6 +108,8 @@ New behavior:
 [com.acme.dom.dao.SomeBean] someMethod(param):SomeResultClass [0.035s]
 ```
 
+5. Use `modificationCount` instead of `version` when working with `TraceableEntity`. Therefore, annotations like `@Mapping(target = "version", ignore = true)` should be changed to `@Mapping(target = "modificationCount", ignore = true)`.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
