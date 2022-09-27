@@ -7,7 +7,7 @@
 [![Supported JVM Versions](https://img.shields.io/badge/JVM-17-brightgreen.svg?style=for-the-badge&logo=Java)](https://openjdk.org/projects/jdk/17/)
 [![GitHub Actions Status](https://img.shields.io/github/workflow/status/1000kit/tkit-quarkus/build?logo=GitHub&style=for-the-badge)](https://github.com/1000kit/tkit-quarkus/actions/workflows/build.yml)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=for-the-badge)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Set of Quarkus extensions and libraries to speed up development of backend microservices.  
 
@@ -118,9 +118,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://www.lorislab.org"><img src="https://avatars2.githubusercontent.com/u/828045?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrej Petras</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkiverse-unleash/commits?author=andrejpetras" title="Code">💻</a> <a href="#maintenance-andrejpetras" title="Maintenance">🚧</a></td>
-  </tr>  
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.lorislab.org"><img src="https://avatars.githubusercontent.com/u/828045?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrej Petras</b></sub></a><br /><a href="https://github.com/1000kit/tkit-quarkus/commits?author=andrejpetras" title="Code">💻</a> <a href="#maintenance-andrejpetras" title="Maintenance">🚧</a></td>
+      <td align="center"><a href="http://adroste.com"><img src="https://avatars.githubusercontent.com/u/18649298?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexander Droste</b></sub></a><br /><a href="https://github.com/1000kit/tkit-quarkus/commits?author=adroste" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
