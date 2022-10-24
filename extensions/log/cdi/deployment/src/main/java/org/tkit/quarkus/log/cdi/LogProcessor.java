@@ -60,6 +60,7 @@ public class LogProcessor {
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
     @Consume(RuntimeConfigSetupCompleteBuildItem.class)
+    @Produce(LogConfigReadyBuiltItem.class)
     void configureRuntimeProperties(LogRecorder recorder, LogRuntimeConfig config, ServiceBuildItem items) {
         recorder.init(items.values, config);
     }

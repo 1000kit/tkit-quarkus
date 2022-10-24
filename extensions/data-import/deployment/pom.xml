@@ -30,6 +30,11 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-hibernate-orm-deployment</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.tkit.quarkus.lib</groupId>
+            <artifactId>tkit-quarkus-log-cdi-deployment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- TEST -->
         <dependency>
@@ -37,6 +42,7 @@
             <artifactId>quarkus-junit5-internal</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>

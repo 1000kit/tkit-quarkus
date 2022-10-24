@@ -16,6 +16,7 @@ import org.tkit.quarkus.dataimport.DataImport;
 import org.tkit.quarkus.dataimport.DataImportRecorder;
 import org.tkit.quarkus.dataimport.DataImportRuntimeConfig;
 import org.tkit.quarkus.dataimport.DataImportService;
+import org.tkit.quarkus.log.cdi.LogConfigReadyBuiltItem;
 
 import io.quarkus.agroal.spi.JdbcDataSourceSchemaReadyBuildItem;
 import io.quarkus.arc.deployment.AutoAddScopeBuildItem;
@@ -105,6 +106,7 @@ class QuarkusImportProcessor {
     @BuildStep
     @Record(RUNTIME_INIT)
     @Consume(SyntheticBeansRuntimeInitBuildItem.class)
+    @Consume(LogConfigReadyBuiltItem.class)
     public void build(@SuppressWarnings("unused") List<PersistenceProviderSetUpBuildItem> persistenceUnitsStarted,
             @SuppressWarnings("unused") List<JdbcDataSourceSchemaReadyBuildItem> schemaReadyBuildItems,
             DataImportRuntimeConfig config, DataImportRecorder recorder,
