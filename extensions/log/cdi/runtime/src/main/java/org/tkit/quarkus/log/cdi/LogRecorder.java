@@ -1,7 +1,6 @@
 package org.tkit.quarkus.log.cdi;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.enterprise.inject.Any;
 
@@ -22,14 +21,14 @@ public class LogRecorder {
 
     private static final Logger log = LoggerFactory.getLogger(LogRecorder.class);
 
-    static LogRuntimeConfig CONFIG;
+    static LogRuntimeConfig CONFIG = new LogRuntimeConfig();
 
-    static ServiceValue SERVICE;
+    static ServiceValue SERVICE = new ServiceValue();
 
     public void init(ServiceValue values, LogRuntimeConfig config) {
 
         InjectableInstance<LogParam> it = Arc.container().select(LogParam.class, Any.Literal.INSTANCE);
-        LogParamValueService.init(it.stream().collect(Collectors.toList()));
+        LogParamValueService.init(it.stream());
 
         CONFIG = config;
         SERVICE = values;
