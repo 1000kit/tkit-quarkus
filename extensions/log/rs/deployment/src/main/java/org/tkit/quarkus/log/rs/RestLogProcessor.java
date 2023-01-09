@@ -49,32 +49,33 @@ public class RestLogProcessor {
                 .forEach(x -> {
                     try {
                         ClassInfo ci = x.getImplClazz();
-                        Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(ci.name().toString());
+                        if (ci != null) {
+                            Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(ci.name().toString());
+                            RestServiceValue.ClassItem classItem = null;
+                            LogRestService classRestService = clazz.getAnnotation(LogRestService.class);
+                            if (classRestService != null) {
+                                classItem = values.getOrCreate(ci.name().toString());
+                                classItem.config = RestServiceValue.createConfig();
+                                updateValue(classRestService, classItem.config);
+                            }
 
-                        RestServiceValue.ClassItem classItem = null;
-                        LogRestService classRestService = clazz.getAnnotation(LogRestService.class);
-                        if (classRestService != null) {
-                            classItem = values.getOrCreate(ci.name().toString());
-                            classItem.config = RestServiceValue.createConfig();
-                            updateValue(classRestService, classItem.config);
-                        }
+                            for (Method method : clazz.getMethods()) {
+                                if (Modifier.isPublic(method.getModifiers()) && !EXCLUDE_METHODS.contains(method.getName())) {
 
-                        for (Method method : clazz.getMethods()) {
-                            if (Modifier.isPublic(method.getModifiers()) && !EXCLUDE_METHODS.contains(method.getName())) {
-
-                                LogRestService methodLogService = method.getAnnotation(LogRestService.class);
-                                if (methodLogService != null) {
-                                    if (classItem == null) {
-                                        classItem = values.getOrCreate(ci.name().toString());
-                                    }
-                                }
-
-                                if (methodLogService != null || classRestService != null) {
-
-                                    RestServiceValue.MethodItem methodItem = classItem.getOrCreate(method.getName());
+                                    LogRestService methodLogService = method.getAnnotation(LogRestService.class);
                                     if (methodLogService != null) {
-                                        methodItem.config = RestServiceValue.createConfig();
-                                        updateValue(methodLogService, methodItem.config);
+                                        if (classItem == null) {
+                                            classItem = values.getOrCreate(ci.name().toString());
+                                        }
+                                    }
+
+                                    if (methodLogService != null || classRestService != null) {
+
+                                        RestServiceValue.MethodItem methodItem = classItem.getOrCreate(method.getName());
+                                        if (methodLogService != null) {
+                                            methodItem.config = RestServiceValue.createConfig();
+                                            updateValue(methodLogService, methodItem.config);
+                                        }
                                     }
                                 }
                             }
