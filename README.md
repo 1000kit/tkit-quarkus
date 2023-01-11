@@ -5,7 +5,7 @@
 [![Release version](https://img.shields.io/maven-central/v/org.tkit.quarkus.lib/tkit-quarkus-bom?logo=apache-maven&style=for-the-badge&label=Release)](https://search.maven.org/artifact/org.tkit.quarkus.lib/tkit-quarkus-bom)
 [![Quarkus version](https://img.shields.io/maven-central/v/io.quarkus/quarkus-bom?logo=apache-maven&style=for-the-badge&label=Quarkus)](https://search.maven.org/artifact/io.quarkus/quarkus-bom)
 [![Supported JVM Versions](https://img.shields.io/badge/JVM-17-brightgreen.svg?style=for-the-badge&logo=Java)](https://openjdk.org/projects/jdk/17/)
-[![GitHub Actions Status](https://img.shields.io/github/workflow/status/1000kit/tkit-quarkus/build?logo=GitHub&style=for-the-badge)](https://github.com/1000kit/tkit-quarkus/actions/workflows/build.yml)
+[![GitHub Actions Status](https://img.shields.io/github/actions/workflow/status/1000kit/tkit-quarkus/build.yml?logo=GitHub&style=for-the-badge)](https://github.com/1000kit/tkit-quarkus/actions/workflows/build.yml)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
