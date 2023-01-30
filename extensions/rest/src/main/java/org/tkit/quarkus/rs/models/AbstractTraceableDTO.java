@@ -34,7 +34,7 @@ public abstract class AbstractTraceableDTO<T> implements Serializable {
     /**
      * Optimistic lock version
      */
-    private Integer version;
+    private Integer modificationCount;
 
     /**
      * The creation date.
@@ -77,12 +77,22 @@ public abstract class AbstractTraceableDTO<T> implements Serializable {
         return this.getClass().getSimpleName() + ":" + getId();
     }
 
-    public Integer getVersion() {
-        return version;
+    /**
+     * Gets the optimistic lock version/modification counter value.
+     *
+     * @return the optimistic lock version.
+     */
+    public Integer getModificationCount() {
+        return this.modificationCount;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    /**
+     * Sets the opt lock version/modification counter. Should not be normally used by app programers.
+     *
+     * @param modificationCount actual Version
+     */
+    public void setModificationCount(Integer modificationCount) {
+        this.modificationCount = modificationCount;
     }
 
     public OffsetDateTime getCreationDate() {
