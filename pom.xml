@@ -52,7 +52,7 @@
         <!-- Code format -->
         <version.formatter.plugin>2.22.0</version.formatter.plugin>
         <version.impsort.plugin>1.8.0</version.impsort.plugin>
-        <version.quarkus.ide-config>2.13.3.Final</version.quarkus.ide-config>
+        <version.quarkus.ide-config>2.16.5.Final</version.quarkus.ide-config>
         <format.skip>false</format.skip>
 
         <maven.compiler.source>17</maven.compiler.source>
@@ -63,7 +63,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jandex-plugin.version>3.0.5</jandex-plugin.version>
-        <surefire-plugin.version>3.0.0-M9</surefire-plugin.version>
+        <surefire-plugin.version>3.0.0</surefire-plugin.version>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
         <nexus.staging-plugin.version>1.6.13</nexus.staging-plugin.version>
         <source-plugin.version>3.2.1</source-plugin.version>
@@ -97,7 +97,7 @@
             <dependency>
                 <groupId>io.quarkiverse.mockserver</groupId>
                 <artifactId>quarkus-mockserver-test</artifactId>
-                <version>0.5.0</version>
+                <version>0.6.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
