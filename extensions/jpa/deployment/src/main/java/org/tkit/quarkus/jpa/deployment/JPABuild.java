@@ -17,6 +17,7 @@
 package org.tkit.quarkus.jpa.deployment;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -91,8 +92,9 @@ public class JPABuild {
                 ClassInfo ec = view.getClassByName(entity.name());
                 String name = entity.name().withoutPackagePrefix();
 
-                if (ec.annotations() != null) {
-                    List<AnnotationInstance> annotations = ec.annotations().get(ENTITY);
+                Map<DotName, List<AnnotationInstance>> am = ec.annotationsMap();
+                if (am != null) {
+                    List<AnnotationInstance> annotations = am.get(ENTITY);
                     if (annotations != null && !annotations.isEmpty()) {
                         AnnotationInstance annotationInstance = annotations.get(0);
                         for (AnnotationValue a : annotationInstance.values()) {

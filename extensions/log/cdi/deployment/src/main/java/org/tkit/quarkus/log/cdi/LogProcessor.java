@@ -183,13 +183,13 @@ public class LogProcessor {
                 ClassInfo target = context.getTarget().asClass();
 
                 // skip if annotation @LogService exists
-                AnnotationInstance classLogService = target.classAnnotation(LOG_SERVICE);
+                AnnotationInstance classLogService = target.declaredAnnotation(LOG_SERVICE);
                 if (classLogService != null) {
                     return;
                 }
 
                 // skip for none Bean class
-                Map<DotName, List<AnnotationInstance>> tmp = target.annotations();
+                Map<DotName, List<AnnotationInstance>> tmp = target.annotationsMap();
                 Optional<DotName> dot = ANNOTATION_DOT_NAMES.stream().filter(tmp::containsKey).findFirst();
                 if (dot.isEmpty()) {
                     return;
