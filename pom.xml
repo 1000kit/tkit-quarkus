@@ -51,7 +51,7 @@
         <quarkus.version>3.0.1.Final</quarkus.version>
         <quarkus.hibernate-orm.version>6.2.1.Final</quarkus.hibernate-orm.version>
         <quarkiverse.mockserver.version>1.0.0</quarkiverse.mockserver.version>
-        <quarkus.jandex-plugin.version>3.0.5</quarkus.jandex-plugin.version>
+        <quarkus.jandex-plugin.version>3.1.1</quarkus.jandex-plugin.version>
 
         <!-- build -->
         <format.skip>false</format.skip>
