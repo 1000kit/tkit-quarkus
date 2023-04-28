@@ -2,7 +2,7 @@ package org.tkit.quarkus.log.cdi;
 
 import java.util.List;
 
-import javax.enterprise.inject.Any;
+import jakarta.enterprise.inject.Any;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -30,7 +30,7 @@ public class ConfigKeyTest extends AbstractTest {
                 .body(is("OK"));
         assertLogs().assertLines(1)
                 .assertContains(0,
-                        "INFO  [org.tki.qua.log.rs.tes.app.ConfigKeyRestController] (executor-thread-0) GET /configkey/test2 [200] [");
+                        "INFO  [org.tki.qua.log.rs.tes.app.ConfigKeyRestController] (executor-thread-1) GET /configkey/test2 [200] [");
     }
 
     @Test
@@ -39,6 +39,6 @@ public class ConfigKeyTest extends AbstractTest {
                 .body(is("OK"));
         assertLogs().assertLines(1)
                 .assertContains(0,
-                        "INFO  [org.tki.qua.log.rs.tes.app.ConfigKeyRestController] (executor-thread-0) GET /configkey/test3 [200] [");
+                        "INFO  [org.tki.qua.log.rs.tes.app.ConfigKeyRestController] (executor-thread-1) GET /configkey/test3 [200] [");
     }
 }

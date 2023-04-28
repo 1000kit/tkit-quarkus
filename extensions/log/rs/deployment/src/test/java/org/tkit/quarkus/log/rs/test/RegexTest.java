@@ -23,7 +23,7 @@ public class RegexTest extends AbstractTest {
                 .body(is("OK"));
         assertLogs().assertLines(1)
                 .assertContains(0,
-                        "NFO  [org.tki.qua.log.rs.tes.app.RegexRestController] (executor-thread-0) GET /regex/load [200] [");
+                        "NFO  [org.tki.qua.log.rs.tes.app.RegexRestController] (executor-thread-1) GET /regex/load [200] [");
     }
 
     @Test

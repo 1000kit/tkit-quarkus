@@ -2,7 +2,7 @@ package org.tkit.quarkus.it.jpa;
 
 import static io.restassured.RestAssured.given;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

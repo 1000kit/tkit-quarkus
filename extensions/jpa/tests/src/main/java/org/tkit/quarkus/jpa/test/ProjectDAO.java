@@ -1,6 +1,6 @@
 package org.tkit.quarkus.jpa.test;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.tkit.quarkus.jpa.daos.AbstractDAO;
 

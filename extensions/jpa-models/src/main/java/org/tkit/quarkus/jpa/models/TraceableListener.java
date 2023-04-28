@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.spi.CDI;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.spi.CDI;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 
 import org.tkit.quarkus.context.ApplicationContext;
 import org.tkit.quarkus.context.Context;

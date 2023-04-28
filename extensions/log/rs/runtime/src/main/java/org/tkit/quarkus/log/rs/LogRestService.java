@@ -2,7 +2,7 @@ package org.tkit.quarkus.log.rs;
 
 import java.lang.annotation.*;
 
-import javax.enterprise.util.Nonbinding;
+import jakarta.enterprise.util.Nonbinding;
 
 /**
  * The rest service annotation.

@@ -1,6 +1,6 @@
 package org.tkit.quarkus.log.cdi.test.app;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.tkit.quarkus.log.cdi.LogExclude;
 import org.tkit.quarkus.log.cdi.LogService;

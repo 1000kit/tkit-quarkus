@@ -2,7 +2,7 @@ package org.tkit.quarkus.dataimport;
 
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.jboss.logging.Logger;
 

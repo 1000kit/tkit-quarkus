@@ -704,7 +704,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
         Generator add(String key, String value) throws Exception;
 
         /**
-         * Writes string value containing json structure as {@link javax.json.JsonValue}
+         * Writes string value containing json structure as {@link jakarta.json.JsonValue}
          *
          * @param key the key for the value
          * @param value the value containing json structure

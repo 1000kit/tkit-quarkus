@@ -3,8 +3,8 @@ package org.tkit.quarkus.dataimport.tests;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import org.tkit.quarkus.dataimport.DataImport;
 import org.tkit.quarkus.dataimport.DataImportConfig;

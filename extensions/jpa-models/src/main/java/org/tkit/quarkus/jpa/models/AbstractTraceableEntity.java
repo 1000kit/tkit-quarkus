@@ -3,7 +3,7 @@ package org.tkit.quarkus.jpa.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * The persistent entity interface.

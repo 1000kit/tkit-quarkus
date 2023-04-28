@@ -3,9 +3,9 @@ package org.tkit.quarkus.jpa.models;
 import java.util.Objects;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
 /**
  * The persistent entity with string GUID.

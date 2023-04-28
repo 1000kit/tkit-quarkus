@@ -31,13 +31,14 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>org.hibernate</groupId>
+                            <groupId>org.hibernate.orm</groupId>
                             <artifactId>hibernate-jpamodelgen</artifactId>
-                            <version>${hibernate-orm.version}</version>
+                            <version>${quarkus.hibernate-orm.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

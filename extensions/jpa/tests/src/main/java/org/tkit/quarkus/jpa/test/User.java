@@ -1,10 +1,6 @@
 package org.tkit.quarkus.jpa.test;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 import org.tkit.quarkus.jpa.models.TraceableEntity;
 

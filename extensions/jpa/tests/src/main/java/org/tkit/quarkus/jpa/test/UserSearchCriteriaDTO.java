@@ -1,7 +1,7 @@
 package org.tkit.quarkus.jpa.test;
 
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.QueryParam;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.QueryParam;
 
 public class UserSearchCriteriaDTO {
 

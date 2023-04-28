@@ -1,6 +1,6 @@
 package org.tkit.quarkus.log.cdi.test;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -30,7 +30,7 @@ public class DataServiceTest extends AbstractTest {
     public void excludeParamTest() {
         service.excludeParam("input1");
         assertLogs().assertLines(1)
-                .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) excludeParam(arg0):data1 input1");
+                .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) excludeParam(input):data1 input1");
     }
 
     @Test

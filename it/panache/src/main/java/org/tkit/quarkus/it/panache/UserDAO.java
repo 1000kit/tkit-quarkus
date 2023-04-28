@@ -1,6 +1,6 @@
 package org.tkit.quarkus.it.panache;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 

@@ -20,9 +20,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Predicate;
 
 /**
  * Query criteria Utility class.
@@ -52,7 +52,7 @@ public class QueryCriteriaUtil {
      * Wildcard the search string. Replace * to % and ? to _
      *
      * @param searchString the search string.
-     * @param caseInsensitive the case insensitive flag.
+     * @param caseInsensitive the case-insensitive flag.
      * @return the corresponding search string.
      */
     public static String wildcard(final String searchString, final boolean caseInsensitive) {

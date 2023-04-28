@@ -1,11 +1,11 @@
 package org.tkit.quarkus.log.rs;
 
-import javax.annotation.Priority;
-import javax.ws.rs.container.*;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.ext.Provider;
+import jakarta.annotation.Priority;
+import jakarta.ws.rs.container.*;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.ext.Provider;
 
 import org.jboss.logging.MDC;
 import org.slf4j.Logger;
@@ -27,10 +27,10 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
 
     private static final Logger log = LoggerFactory.getLogger(RestLogInterceptor.class);
 
-    @javax.ws.rs.core.Context
+    @jakarta.ws.rs.core.Context
     ResourceInfo resourceInfo;
 
-    @javax.ws.rs.core.Context
+    @jakarta.ws.rs.core.Context
     HttpHeaders headers;
 
     /**

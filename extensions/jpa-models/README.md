@@ -41,7 +41,7 @@ public class BusinessProject extends TraceableEntity {
 ```
 ### Generic sequence implementation.
 ```java
-import javax.persistence.Column;
+import jakarta.persistence.Column;
 
 import org.my.group.BusinessId;
 

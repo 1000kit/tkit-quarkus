@@ -1,6 +1,6 @@
 package org.tkit.quarkus.rs.jackson;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

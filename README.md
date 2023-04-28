@@ -11,6 +11,17 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Set of Quarkus extensions and libraries to speed up development of backend microservices.  
 
+## Compatibility
+
+Tkit-Quarkus provides two different version streams, one compatible with Quarkus 2.x and the other compatible with Quarkus 3.x.
+
+| Quarkus | Tkit-Quarkus |
+|---------|--------------|
+| 2.x     | 0.x          |
+| 3.x     | 1.x (main)   |
+
+Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://search.maven.org/artifact/org.tkit.quarkus.lib/tkit-quarkus-bom).
+
 ## Getting started
 
 Include the following bom artifact into your pom or parent pom and then pick the components you need. 

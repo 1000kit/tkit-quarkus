@@ -17,8 +17,8 @@ package org.tkit.quarkus.log.cdi;
 
 import java.lang.annotation.*;
 
-import javax.enterprise.util.Nonbinding;
-import javax.interceptor.InterceptorBinding;
+import jakarta.enterprise.util.Nonbinding;
+import jakarta.interceptor.InterceptorBinding;
 
 /**
  * The logger service annotation.

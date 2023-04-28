@@ -1,6 +1,6 @@
 package org.tkit.quarkus.dataimport;
 
-import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
+import static jakarta.persistence.LockModeType.PESSIMISTIC_WRITE;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,11 +11,11 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-import javax.xml.bind.DatatypeConverter;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+import jakarta.xml.bind.DatatypeConverter;
 
 import org.jboss.logging.Logger;
 import org.tkit.quarkus.dataimport.log.DataImportLog;

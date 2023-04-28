@@ -27,6 +27,6 @@ public class MdcServiceTest extends AbstractTest {
 
         assertLogs().assertLines(1)
                 .assertContains(0,
-                        "INFO  Value1 [org.tki.qua.log.rs.tes.app.NoAnnotationRestController] (executor-thread-0) GET /no-anno/test1 [200] [");
+                        "INFO  Value1 [org.tki.qua.log.rs.tes.app.NoAnnotationRestController] (executor-thread-1) GET /no-anno/test1 [200] [");
     }
 }

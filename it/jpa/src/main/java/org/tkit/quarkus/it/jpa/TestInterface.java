@@ -1,8 +1,8 @@
 package org.tkit.quarkus.it.jpa;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 
 import org.tkit.quarkus.log.rs.LogRestService;
 

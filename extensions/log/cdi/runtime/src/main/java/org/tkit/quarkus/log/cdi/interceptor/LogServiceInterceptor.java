@@ -2,10 +2,10 @@ package org.tkit.quarkus.log.cdi.interceptor;
 
 import java.lang.reflect.*;
 
-import javax.annotation.Priority;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

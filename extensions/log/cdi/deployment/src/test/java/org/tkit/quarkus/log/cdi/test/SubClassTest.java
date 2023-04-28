@@ -1,6 +1,6 @@
 package org.tkit.quarkus.log.cdi.test;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;

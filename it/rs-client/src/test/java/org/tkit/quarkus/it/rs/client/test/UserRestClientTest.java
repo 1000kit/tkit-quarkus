@@ -4,7 +4,7 @@ import static io.restassured.RestAssured.given;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;

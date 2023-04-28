@@ -3,13 +3,8 @@ package org.tkit.quarkus.jpa.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.criteria.*;
 
 import org.tkit.quarkus.jpa.daos.AbstractDAO;
 import org.tkit.quarkus.jpa.daos.Page;

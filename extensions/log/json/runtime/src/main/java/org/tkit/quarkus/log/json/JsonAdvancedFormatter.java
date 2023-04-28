@@ -26,10 +26,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.json.Json;
-import javax.json.JsonValue;
-import javax.json.stream.JsonGenerator;
-import javax.json.stream.JsonGeneratorFactory;
+import jakarta.json.Json;
+import jakarta.json.JsonValue;
+import jakarta.json.stream.JsonGenerator;
+import jakarta.json.stream.JsonGeneratorFactory;
 
 import org.jboss.logmanager.ExtLogRecord;
 import org.jboss.logmanager.PropertyValues;
@@ -147,8 +147,8 @@ public class JsonAdvancedFormatter extends ExtendedStructureFormatter {
      */
     public boolean isPrettyPrint() {
         synchronized (config) {
-            return (config.containsKey(javax.json.stream.JsonGenerator.PRETTY_PRINTING)
-                    ? (Boolean) config.get(javax.json.stream.JsonGenerator.PRETTY_PRINTING)
+            return (config.containsKey(jakarta.json.stream.JsonGenerator.PRETTY_PRINTING)
+                    ? (Boolean) config.get(jakarta.json.stream.JsonGenerator.PRETTY_PRINTING)
                     : false);
         }
     }

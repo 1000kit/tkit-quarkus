@@ -24,7 +24,7 @@ public class AnnotationTest extends AbstractTest {
         assertLogs()
                 .assertLines(1)
                 .assertContains(0,
-                        "INFO  [org.tki.qua.log.rs.tes.app.AnnotationRestController] (executor-thread-0) GET /anno/test1 [200] [");
+                        "INFO  [org.tki.qua.log.rs.tes.app.AnnotationRestController] (executor-thread-1) GET /anno/test1 [200] [");
     }
 
     @Test

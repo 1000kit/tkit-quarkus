@@ -2,8 +2,8 @@ package org.tkit.quarkus.jpa.daos;
 
 import java.util.stream.Stream;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -183,7 +183,7 @@ public class PagedQuery<T> {
 
         AliasCounter counter = new AliasCounter();
 
-        // copy the roots and they joins and fetches
+        // copy the roots and they join and fetches
         from.getRoots().forEach(root -> {
             Root<?> dest = result.from(root.getJavaType());
             dest.alias(createAlias(root, counter));

@@ -2,8 +2,8 @@ package org.tkit.quarkus.jpa.test;
 
 import java.util.UUID;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
 import org.tkit.quarkus.jpa.models.AbstractTraceableEntity;
 

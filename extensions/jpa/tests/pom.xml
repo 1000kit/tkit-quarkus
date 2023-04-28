@@ -21,7 +21,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
         </dependency>
 
@@ -79,8 +79,8 @@
         </resources>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
                 <configuration>
                     <systemProperties>
                         <com.arjuna.ats.arjuna.objectstore.objectStoreDir>${project.build.directory}/jta</com.arjuna.ats.arjuna.objectstore.objectStoreDir>
@@ -92,7 +92,6 @@
             <plugin>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
-                <version>${quarkus.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -107,7 +106,6 @@
                 <plugin>
                     <groupId>io.quarkus</groupId>
                     <artifactId>quarkus-maven-plugin</artifactId>
-                    <version>${quarkus.version}</version>
                     <configuration>
                         <noDeps>true</noDeps>
                     </configuration>

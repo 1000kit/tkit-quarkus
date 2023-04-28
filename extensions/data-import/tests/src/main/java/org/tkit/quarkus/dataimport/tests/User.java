@@ -1,8 +1,8 @@
 package org.tkit.quarkus.dataimport.tests;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import org.tkit.quarkus.jpa.models.TraceableEntity;
 
