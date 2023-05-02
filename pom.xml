@@ -168,7 +168,7 @@
                     <dependency>
                         <artifactId>quarkus-ide-config</artifactId>
                         <groupId>io.quarkus</groupId>
-                        <version>${project.version}</version>
+                        <version>${quarkus.version}</version>
                     </dependency>
                 </dependencies>
                 <configuration>
