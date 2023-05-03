@@ -16,7 +16,7 @@
         <module>context</module>
         <module>log</module>
         <module>jpa-models</module>
-<!--        <module>jpa</module>-->
+        <module>jpa</module>
         <module>data-import</module>
         <module>rest</module>
         <module>test-db-import</module>

@@ -41,7 +41,9 @@ public class UserDAO extends AbstractDAO<User> {
             }
             if (!predicates.isEmpty()) {
                 cq.where(predicates.toArray(new Predicate[0]));
+                cq.orderBy(cb.asc(root.get(User_.CREATION_DATE)));
             }
+
         }
         return createPageQuery(cq, page);
     }

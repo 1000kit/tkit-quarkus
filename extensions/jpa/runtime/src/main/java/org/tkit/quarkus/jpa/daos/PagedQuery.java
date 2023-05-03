@@ -3,8 +3,13 @@ package org.tkit.quarkus.jpa.daos;
 import java.util.stream.Stream;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 
+import org.hibernate.query.sqm.internal.QuerySqmImpl;
+import org.hibernate.query.sqm.tree.SqmCopyContext;
+import org.hibernate.query.sqm.tree.select.SqmSelectStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.jpa.exceptions.DAOException;
@@ -56,7 +61,19 @@ public class PagedQuery<T> {
     public PageResult<T> getPageResult() {
         try {
             // get count
-            Long count = em.createQuery(countCriteria).getSingleResult();
+            Long count = 0L;
+            try {
+                count = em.createQuery(countCriteria).getSingleResult();
+            } catch (NoResultException noex) {
+                // ignore
+            }
+
+            TypedQuery<T> tmnp = em.createQuery(criteria);
+            QuerySqmImpl<?> tmp = tmnp.unwrap(QuerySqmImpl.class);
+
+            System.out.println("##");
+            System.out.println("## " + criteria);
+            System.out.println("##");
             // get stream
             Stream<T> stream = em.createQuery(criteria)
                     .setFirstResult(page.number() * page.size())
@@ -159,14 +176,15 @@ public class PagedQuery<T> {
      */
     public static <T> CriteriaQuery<Long> createCountCriteria(EntityManager em, CriteriaQuery<T> criteria) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery<Long> countCriteria = createCountCriteriaQuery(builder, criteria, false);
+        CriteriaQuery<Long> countCriteria = createCountCriteriaQuery(builder, criteria);
         Expression<Long> countExpression;
+        Root<T> root = findRoot(countCriteria, criteria.getResultType());
         if (criteria.isDistinct()) {
-            countExpression = builder.countDistinct(findRoot(countCriteria, criteria.getResultType()));
+            countExpression = builder.countDistinct(root);
         } else {
-            countExpression = builder.count(findRoot(countCriteria, criteria.getResultType()));
+            countExpression = builder.count(root);
         }
-        return countCriteria.select(countExpression);
+        return countCriteria.select(countExpression).groupBy(root);
     }
 
     /**
@@ -174,41 +192,14 @@ public class PagedQuery<T> {
      *
      * @param builder the criteria builder.
      * @param from source Criteria.
-     * @param fetches copy fetches queries.
      * @return count criteria query.
      */
-    public static CriteriaQuery<Long> createCountCriteriaQuery(CriteriaBuilder builder, CriteriaQuery<?> from,
-            boolean fetches) {
+    @SuppressWarnings("unchecked")
+    public static <T> CriteriaQuery<Long> createCountCriteriaQuery(CriteriaBuilder builder, CriteriaQuery<T> from) {
         CriteriaQuery<Long> result = builder.createQuery(Long.class);
-
-        AliasCounter counter = new AliasCounter();
-
-        // copy the roots and they join and fetches
-        from.getRoots().forEach(root -> {
-            Root<?> dest = result.from(root.getJavaType());
-            dest.alias(createAlias(root, counter));
-            copyJoins(root, dest, counter);
-            if (fetches) {
-                copyFetches(root, dest);
-            }
-        });
-
-        // add the group by
-        result.groupBy(from.getGroupList());
-
-        // add the distinct
-        result.distinct(from.isDistinct());
-
-        // add the group restriction
-        if (from.getGroupRestriction() != null) {
-            result.having(from.getGroupRestriction());
-        }
-
-        // add the predicate
-        Predicate predicate = from.getRestriction();
-        if (predicate != null) {
-            result.where(predicate);
-        }
+        SqmSelectStatement<T> copy = ((SqmSelectStatement<T>) from).copy(SqmCopyContext.simpleContext());
+        SqmSelectStatement<T> r = (SqmSelectStatement<T>) result;
+        r.setQueryPart(copy.getQueryPart());
         return result;
     }
 
@@ -220,10 +211,11 @@ public class PagedQuery<T> {
      * @param <T> the type of the root class.
      * @return the root of the criteria query or {@code null} if none
      */
+    @SuppressWarnings("unchecked")
     public static <T> Root<T> findRoot(CriteriaQuery<?> query, Class<T> clazz) {
         for (Root<?> r : query.getRoots()) {
             if (clazz.equals(r.getJavaType())) {
-                return (Root<T>) r.as(clazz);
+                return (Root<T>) r;
             }
         }
         return null;

@@ -20,11 +20,11 @@
                 <artifactId>tkit-quarkus-context</artifactId>
                 <version>${project.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.tkit.quarkus.lib</groupId>-->
-<!--                <artifactId>tkit-quarkus-jpa</artifactId>-->
-<!--                <version>${project.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.tkit.quarkus.lib</groupId>
+                <artifactId>tkit-quarkus-jpa</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-jpa-models</artifactId>

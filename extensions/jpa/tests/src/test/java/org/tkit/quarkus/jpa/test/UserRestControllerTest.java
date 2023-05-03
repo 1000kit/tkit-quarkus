@@ -101,18 +101,18 @@ public class UserRestControllerTest extends AbstractTest {
                 .contentType(ContentType.JSON)
                 .body(user)
                 .post("users")
-                .then()
+                .then().log().all()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .extract().body().as(User.class);
 
         given()
                 .contentType(ContentType.JSON)
-                .queryParam("name", "email")
-                .queryParam("email", "PageRest")
-                .queryParam("index", 1)
+                .queryParam("name", "PageRest")
+                .queryParam("email", "email")
+                .queryParam("index", 0)
                 .queryParam("size", 10)
                 .get("users/search")
-                .then()
+                .then().log().all()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 }

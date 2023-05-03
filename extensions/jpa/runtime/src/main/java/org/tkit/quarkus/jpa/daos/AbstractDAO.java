@@ -115,7 +115,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      * @return the new page query instance
      */
     public PagedQuery<T> createPageQuery(CriteriaQuery<T> query, Page page) {
-        return new PagedQuery<>(em, query, page, idAttributeName);
+        return new PagedQuery<>(getEntityManager(), query, page, idAttributeName);
     }
 
     /**
@@ -326,7 +326,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     /**
      * Creates the entities.
      *
-     * @param entities the list of enties.
+     * @param entities the list of entities.
      * @return list of created entities.
      * @throws DAOException if the method fails.
      */

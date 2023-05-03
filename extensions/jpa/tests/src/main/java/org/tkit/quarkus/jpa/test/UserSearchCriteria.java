@@ -43,4 +43,14 @@ public class UserSearchCriteria {
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public String toString() {
+        return "UserSearchCriteria{" +
+                "creationDate=" + creationDate +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

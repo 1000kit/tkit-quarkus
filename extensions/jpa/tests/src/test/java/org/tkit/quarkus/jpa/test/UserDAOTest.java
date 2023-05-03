@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.criteria.Order;
 import jakarta.transaction.Transactional;
 
+import org.hibernate.query.sqm.tree.domain.SqmBasicValuedSimplePath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,7 +61,7 @@ public class UserDAOTest extends AbstractTest {
         for (int i = 0; i < 10; i++) {
             PagedQuery<User> query = userDAO.createPageQuery(Page.of(i, 500));
             PageResult<User> page = query.getPageResult();
-            userIds.addAll(page.getStream().map(TraceableEntity::getId).collect(Collectors.toList()));
+            userIds.addAll(page.getStream().map(TraceableEntity::getId).toList());
         }
         Assertions.assertEquals(5000, userIds.size());
         Assertions.assertEquals(5000, userIds.stream().distinct().count());
@@ -74,10 +75,9 @@ public class UserDAOTest extends AbstractTest {
         PageResult<User> page = query.getPageResult();
         Assertions.assertEquals(1, query.criteria().getOrderList().size());
         Order order = query.criteria().getOrderList().get(0);
-        System.out.println("TODO: " + order.getExpression().getClass());
-        //        SingularAttributePath<?> expression = (SingularAttributePath<?>) order.getExpression();
-        //        Assertions.assertEquals("id", expression.getAttribute().getName());
-        //        Assertions.assertEquals(10, (int) page.getStream().map(TraceableEntity::getId).count());
+        SqmBasicValuedSimplePath<?> expression = (SqmBasicValuedSimplePath<?>) order.getExpression();
+        Assertions.assertEquals("id", expression.getNavigablePath().getLocalName());
+        Assertions.assertEquals(10, (int) page.getStream().map(TraceableEntity::getId).count());
     }
 
     @Test
@@ -88,9 +88,9 @@ public class UserDAOTest extends AbstractTest {
         PageResult<User> page = query.getPageResult();
         Assertions.assertEquals(1, query.criteria().getOrderList().size());
         Order order = query.criteria().getOrderList().get(0);
-        //        SingularAttributePath<?> expression = (SingularAttributePath<?>) order.getExpression();
-        //        Assertions.assertEquals("name", expression.getAttribute().getName());
-        //        Assertions.assertEquals(10, (int) page.getStream().map(TraceableEntity::getId).count());
+        SqmBasicValuedSimplePath<?> expression = (SqmBasicValuedSimplePath<?>) order.getExpression();
+        Assertions.assertEquals("name", expression.getNavigablePath().getLocalName());
+        Assertions.assertEquals(10, (int) page.getStream().map(TraceableEntity::getId).count());
     }
 
     @Test

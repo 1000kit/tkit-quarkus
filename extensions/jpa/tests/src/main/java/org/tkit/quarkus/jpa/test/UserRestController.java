@@ -1,6 +1,7 @@
 package org.tkit.quarkus.jpa.test;
 
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -23,6 +24,11 @@ public class UserRestController {
 
     @Inject
     UserDAO userDAO;
+
+    @GET
+    public Response all() {
+        return Response.ok(userDAO.findAll()).build();
+    }
 
     @GET
     @Path("search")
@@ -65,6 +71,7 @@ public class UserRestController {
     }
 
     @POST
+    @Transactional
     public Response create(User user) {
         return Response.ok(userDAO.create(user)).build();
     }
