@@ -1,5 +1,6 @@
 package org.tkit.quarkus.test.dbunit;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -56,7 +57,7 @@ public class LocalDatabase implements Database {
     }
 
     protected Connection createConnection(String name) throws Exception {
-        String prefix = "quarkus.datasource.";
+        String prefix = "tkit-db-import.quarkus.datasource.";
         if (name != null) {
             prefix = prefix + name + ".";
         }
@@ -70,11 +71,12 @@ public class LocalDatabase implements Database {
 
     protected IDataSet getDataSet(FileType type, String file) throws Exception {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        InputStream stream = cl.getResourceAsStream(file);
         switch (type) {
             case XML:
-                return new FlatXmlDataSetBuilder().build(cl.getResourceAsStream(file));
+                return new FlatXmlDataSetBuilder().build(stream);
             case XLS:
-                return new XlsDataSet(cl.getResourceAsStream(file));
+                return new XlsDataSet(stream);
         }
         throw new RuntimeException("No datasource found for the type " + type);
     }
