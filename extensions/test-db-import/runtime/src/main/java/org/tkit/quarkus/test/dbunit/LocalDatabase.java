@@ -56,7 +56,7 @@ public class LocalDatabase implements Database {
     }
 
     protected Connection createConnection(String name) throws Exception {
-        String prefix = "quarkus.datasource.";
+        String prefix = "tkit-db-import.quarkus.datasource.";
         if (name != null) {
             prefix = prefix + name + ".";
         }
