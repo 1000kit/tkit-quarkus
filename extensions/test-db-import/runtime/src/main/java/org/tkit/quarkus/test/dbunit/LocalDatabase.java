@@ -23,13 +23,13 @@ public class LocalDatabase implements Database {
 
     @Override
     public void deleteData(WithDBData ano, FileType type, String file) throws Exception {
-        IDataSet dataSet = getDataSet(type, file);
+        IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
         DatabaseOperation.DELETE_ALL.execute(getConnection(ano.datasource()), dataSet);
     }
 
     @Override
     public void insertData(WithDBData ano, FileType type, String file) throws Exception {
-        IDataSet dataSet = getDataSet(type, file);
+        IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
         DatabaseOperation op = DatabaseOperation.INSERT;
         if (ano.deleteBeforeInsert()) {
             op = DatabaseOperation.CLEAN_INSERT;
@@ -69,13 +69,26 @@ public class LocalDatabase implements Database {
         return DriverManager.getConnection(url, username, password);
     }
 
-    protected IDataSet getDataSet(FileType type, String file) throws Exception {
+    protected IDataSet getDataSet(FileType type, String file, boolean columnSensing) throws Exception {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         InputStream stream = cl.getResourceAsStream(file);
         switch (type) {
             case XML:
-                return new FlatXmlDataSetBuilder().build(stream);
+                return new FlatXmlDataSetBuilder().setColumnSensing(columnSensing).build(stream);
             case XLS:
+                log.warn("\n" +
+                        """
+
+                                        ##################################
+                                        File: {}
+                                        
+                                        !!! Excel XLS format is deprecated and will be removed in next release. Use flat xml format to import data
+                                        https://www.dbunit.org/apidocs/org/dbunit/dataset/xml/FlatXmlDataSet.html
+                                        
+                                        Free excel to xml tool https://github.com/lorislab/dbx2x
+                                        ##################################
+                                """,
+                        file);
                 return new XlsDataSet(stream);
         }
         throw new RuntimeException("No datasource found for the type " + type);
