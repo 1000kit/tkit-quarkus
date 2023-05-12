@@ -78,7 +78,6 @@
 
         <!-- Other -->
         <dbunit.version>2.7.3</dbunit.version>
-        <poi.version>5.2.3</poi.version>
     </properties>
 
 
@@ -95,11 +94,6 @@
                 <groupId>org.dbunit</groupId>
                 <artifactId>dbunit</artifactId>
                 <version>${dbunit.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi</artifactId>
-                <version>${poi.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.quarkiverse.mockserver</groupId>
