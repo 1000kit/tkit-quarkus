@@ -59,16 +59,6 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithDBData(value = { "data/test.xls" })
-    public void importRemoteDataTest() throws InterruptedException {
-        given()
-                .pathParam("id", "ID_1")
-                .get("users/{id}")
-                .then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
-
-    @Test
     public void createUserTest() {
         given()
                 .pathParam("id", "1234")

@@ -71,4 +71,10 @@ public @interface WithDBData {
      */
     boolean rinseAndRepeat() default false;
 
+    /**
+     * "column sensing" which basically reads in the whole XML into a buffer and dynamically adds new columns as they appear.
+     *
+     * @return true if column sensing is activated.
+     */
+    boolean columnSensing() default true;
 }

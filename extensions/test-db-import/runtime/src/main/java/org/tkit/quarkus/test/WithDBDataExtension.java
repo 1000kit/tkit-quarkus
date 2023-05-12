@@ -147,7 +147,7 @@ public class WithDBDataExtension
                 continue;
             }
 
-            FileType type = FileType.getDataType(path);
+            FileType type = getDataType(path);
 
             log.debug("[DB-IMPORT] Import data type {} file {} url {}", type, path, fileUrl);
             db.insertData(an, type, path);
@@ -176,7 +176,7 @@ public class WithDBDataExtension
                 continue;
             }
 
-            FileType type = FileType.getDataType(path);
+            FileType type = getDataType(path);
             if (type == null) {
                 log.warn("[DB-IMPORT] Not supported type for file {}.", path);
                 continue;
@@ -188,4 +188,34 @@ public class WithDBDataExtension
         }
     }
 
+    /**
+     * Returns {@code DataType} of the path.
+     *
+     * @param file the url of the file.
+     * @return {@code DataType} of the path.
+     */
+    private static FileType getDataType(String file) {
+        if (file == null) {
+            return null;
+        }
+        if (file.endsWith(".xml")) {
+            return FileType.XML;
+        }
+        if (file.endsWith(".xls") || file.endsWith(".xlsx")) {
+            log.warn("\n" +
+                    """
+
+                                    ##################################
+                                    File: {}
+
+                                    !!! Excel XLS/XLSX format is not supported. Use flat xml format to import data
+                                    https://www.dbunit.org/apidocs/org/dbunit/dataset/xml/FlatXmlDataSet.html
+
+                                    Free excel to xml tool https://github.com/lorislab/dbx2x
+                                    ##################################
+                            """,
+                    file);
+        }
+        throw new RuntimeException("Not supported file type!");
+    }
 }

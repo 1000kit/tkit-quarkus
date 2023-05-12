@@ -2,12 +2,12 @@ package org.tkit.quarkus.test.dbunit;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Objects;
 
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.excel.XlsDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.eclipse.microprofile.config.Config;
@@ -22,13 +22,13 @@ public class LocalDatabase implements Database {
 
     @Override
     public void deleteData(WithDBData ano, FileType type, String file) throws Exception {
-        IDataSet dataSet = getDataSet(type, file);
+        IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
         DatabaseOperation.DELETE_ALL.execute(getConnection(ano.datasource()), dataSet);
     }
 
     @Override
     public void insertData(WithDBData ano, FileType type, String file) throws Exception {
-        IDataSet dataSet = getDataSet(type, file);
+        IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
         DatabaseOperation op = DatabaseOperation.INSERT;
         if (ano.deleteBeforeInsert()) {
             op = DatabaseOperation.CLEAN_INSERT;
@@ -68,13 +68,10 @@ public class LocalDatabase implements Database {
         return DriverManager.getConnection(url, username, password);
     }
 
-    protected IDataSet getDataSet(FileType type, String file) throws Exception {
+    protected IDataSet getDataSet(FileType type, String file, boolean columnSensing) throws Exception {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        switch (type) {
-            case XML:
-                return new FlatXmlDataSetBuilder().build(cl.getResourceAsStream(file));
-            case XLS:
-                return new XlsDataSet(cl.getResourceAsStream(file));
+        if (Objects.requireNonNull(type) == FileType.XML) {
+            return new FlatXmlDataSetBuilder().setColumnSensing(columnSensing).build(cl.getResourceAsStream(file));
         }
         throw new RuntimeException("No datasource found for the type " + type);
     }
