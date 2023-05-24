@@ -71,9 +71,6 @@ public class PagedQuery<T> {
             TypedQuery<T> tmnp = em.createQuery(criteria);
             QuerySqmImpl<?> tmp = tmnp.unwrap(QuerySqmImpl.class);
 
-            System.out.println("##");
-            System.out.println("## " + criteria);
-            System.out.println("##");
             // get stream
             Stream<T> stream = em.createQuery(criteria)
                     .setFirstResult(page.number() * page.size())
