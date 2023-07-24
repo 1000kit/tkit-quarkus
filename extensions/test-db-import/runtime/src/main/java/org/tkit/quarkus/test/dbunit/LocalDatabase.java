@@ -24,7 +24,14 @@ public class LocalDatabase implements Database {
     @Override
     public void deleteData(WithDBData ano, FileType type, String file) throws Exception {
         IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
-        DatabaseOperation.DELETE_ALL.execute(getConnection(ano.datasource()), dataSet);
+        IDatabaseConnection conn = null;
+        try {
+            conn = getConnection(ano.datasource());
+            DatabaseOperation.DELETE_ALL.execute(conn, dataSet);
+        } finally {
+            if (conn != null)
+                conn.close();
+        }
     }
 
     @Override
@@ -34,7 +41,15 @@ public class LocalDatabase implements Database {
         if (ano.deleteBeforeInsert()) {
             op = DatabaseOperation.CLEAN_INSERT;
         }
-        op.execute(getConnection(ano.datasource()), dataSet);
+        IDatabaseConnection conn = null;
+        try {
+            conn = getConnection(ano.datasource());
+            op.execute(getConnection(ano.datasource()), dataSet);
+        } finally {
+            if (conn != null)
+                conn.close();
+        }
+
     }
 
     protected IDatabaseConnection getConnection(String dataSourceName) {
@@ -81,10 +96,10 @@ public class LocalDatabase implements Database {
 
                                         ##################################
                                         File: {}
-                                        
+
                                         !!! Excel XLS format is deprecated and will be removed in next release. Use flat xml format to import data
                                         https://www.dbunit.org/apidocs/org/dbunit/dataset/xml/FlatXmlDataSet.html
-                                        
+
                                         Free excel to xml tool https://github.com/lorislab/dbx2x
                                         ##################################
                                 """,
