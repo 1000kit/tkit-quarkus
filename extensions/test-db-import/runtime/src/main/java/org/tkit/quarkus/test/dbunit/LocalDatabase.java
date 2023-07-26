@@ -23,7 +23,14 @@ public class LocalDatabase implements Database {
     @Override
     public void deleteData(WithDBData ano, FileType type, String file) throws Exception {
         IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
-        DatabaseOperation.DELETE_ALL.execute(getConnection(ano.datasource()), dataSet);
+        IDatabaseConnection conn = null;
+        try {
+            conn = getConnection(ano.datasource());
+            DatabaseOperation.DELETE_ALL.execute(conn, dataSet);
+        } finally {
+            if (conn != null)
+                conn.close();
+        }
     }
 
     @Override
@@ -33,7 +40,14 @@ public class LocalDatabase implements Database {
         if (ano.deleteBeforeInsert()) {
             op = DatabaseOperation.CLEAN_INSERT;
         }
-        op.execute(getConnection(ano.datasource()), dataSet);
+        IDatabaseConnection conn = null;
+        try {
+            conn = getConnection(ano.datasource());
+            op.execute(getConnection(ano.datasource()), dataSet);
+        } finally {
+            if (conn != null)
+                conn.close();
+        }
     }
 
     protected IDatabaseConnection getConnection(String dataSourceName) {
