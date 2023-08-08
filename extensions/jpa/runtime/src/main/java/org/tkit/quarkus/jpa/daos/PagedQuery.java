@@ -4,11 +4,10 @@ import java.util.stream.Stream;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 
-import org.hibernate.query.sqm.internal.QuerySqmImpl;
 import org.hibernate.query.sqm.tree.SqmCopyContext;
+import org.hibernate.query.sqm.tree.select.SqmQueryPart;
 import org.hibernate.query.sqm.tree.select.SqmSelectStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,16 +67,13 @@ public class PagedQuery<T> {
                 // ignore
             }
 
-            TypedQuery<T> tmnp = em.createQuery(criteria);
-            QuerySqmImpl<?> tmp = tmnp.unwrap(QuerySqmImpl.class);
-
             // get stream
             Stream<T> stream = em.createQuery(criteria)
                     .setFirstResult(page.number() * page.size())
                     .setMaxResults(page.size())
                     .getResultStream();
             // create page result
-            return new PageResult<T>(count, stream, page);
+            return new PageResult<>(count, stream, page);
         } catch (Exception ex) {
             String entityClass = criteria.getResultType() != null ? criteria.getResultType().getName() : null;
             throw new DAOException(Errors.GET_PAGE_RESULT_ERROR, ex, page.number(), page.size(), entityClass);
@@ -181,7 +177,7 @@ public class PagedQuery<T> {
         } else {
             countExpression = builder.count(root);
         }
-        return countCriteria.select(countExpression).groupBy(root);
+        return countCriteria.select(countExpression);
     }
 
     /**
@@ -196,7 +192,11 @@ public class PagedQuery<T> {
         CriteriaQuery<Long> result = builder.createQuery(Long.class);
         SqmSelectStatement<T> copy = ((SqmSelectStatement<T>) from).copy(SqmCopyContext.simpleContext());
         SqmSelectStatement<T> r = (SqmSelectStatement<T>) result;
-        r.setQueryPart(copy.getQueryPart());
+        SqmQueryPart<T> part = copy.getQueryPart();
+        // remove group by from the count
+        part.setOrderByClause(null);
+        r.setQueryPart(part);
+        r.getOrderList().clear();
         return result;
     }
 
