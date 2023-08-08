@@ -439,7 +439,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = DAOException.class)
     public int deleteQueryAll() throws DAOException {
         try {
-            CriteriaQuery<T> cq = criteriaQuery();
+            CriteriaDelete<T> cq = deleteQuery();
             cq.from(entityClass);
             int result = getEntityManager().createQuery(cq).executeUpdate();
             getEntityManager().flush();
