@@ -19,6 +19,7 @@
         <module>jpa</module>
         <module>data-import</module>
         <module>rest</module>
+        <module>rest-dto</module>
         <module>test-db-import</module>
     </modules>
 
