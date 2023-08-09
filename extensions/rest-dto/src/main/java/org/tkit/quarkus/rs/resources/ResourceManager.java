@@ -14,7 +14,6 @@ import org.tkit.quarkus.rs.exceptions.RestException;
 /**
  * The resource manager for messages.
  */
-@Deprecated
 public class ResourceManager {
 
     private static final Logger log = LoggerFactory.getLogger(ResourceManager.class);
@@ -31,6 +30,9 @@ public class ResourceManager {
             ConfigProvider.getConfig()
                     .getOptionalValue(QUARKUS_DEFAULT_LOCALE, String.class)
                     .orElse(Locale.ENGLISH.getLanguage()));
+
+    private ResourceManager() {
+    }
 
     /**
      * Gets the message for the enum key and parameters
