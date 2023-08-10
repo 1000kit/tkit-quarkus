@@ -60,11 +60,10 @@ public class PagedQuery<T> {
     public PageResult<T> getPageResult() {
         try {
             // get count
-            Long count = 0L;
-            try {
-                count = em.createQuery(countCriteria).getSingleResult();
-            } catch (NoResultException noex) {
-                // ignore
+            Long count = em.createQuery(countCriteria).getSingleResult();
+            // return empty page for count zero
+            if (count == 0) {
+                return PageResult.empty();
             }
 
             // get stream
@@ -74,6 +73,9 @@ public class PagedQuery<T> {
                     .getResultStream();
             // create page result
             return new PageResult<>(count, stream, page);
+        } catch (NoResultException nex) {
+            // return empty page for getSingleResult() throws NoResultException
+            return PageResult.empty();
         } catch (Exception ex) {
             String entityClass = criteria.getResultType() != null ? criteria.getResultType().getName() : null;
             throw new DAOException(Errors.GET_PAGE_RESULT_ERROR, ex, page.number(), page.size(), entityClass);
