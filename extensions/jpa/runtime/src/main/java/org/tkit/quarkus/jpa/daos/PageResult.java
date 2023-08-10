@@ -10,6 +10,16 @@ import java.util.stream.Stream;
 public class PageResult<T> {
 
     /**
+     * Creates empty page result.
+     *
+     * @return empty page result.
+     * @param <T> the page results type.
+     */
+    public static <T> PageResult<T> empty() {
+        return new PageResult<>(0, Stream.empty(), Page.of(0, 1));
+    }
+
+    /**
      * The total elements in the database.
      */
     private long totalElements;
@@ -65,6 +75,15 @@ public class PageResult<T> {
      */
     public long getSize() {
         return size;
+    }
+
+    /**
+     * Returns {@code true} if the PageResult is empty.
+     *
+     * @return {@code true} for empty pare result, {@code totalElements == 0}.
+     */
+    public boolean isEmpty() {
+        return totalElements <= 0;
     }
 
     /**
