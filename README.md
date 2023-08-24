@@ -18,7 +18,8 @@ Tkit-Quarkus provides two different version streams, one compatible with Quarkus
 | Quarkus | Tkit-Quarkus |
 |---------|--------------|
 | 2.x     | 0.x          |
-| 3.x     | 1.x (main)   |
+| 3.2.x   | 1.x          |
+| > 3.3.x | 2.x (main)   |
 
 Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://search.maven.org/artifact/org.tkit.quarkus.lib/tkit-quarkus-bom).
 
