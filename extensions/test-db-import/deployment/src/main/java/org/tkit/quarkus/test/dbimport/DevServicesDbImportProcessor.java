@@ -105,8 +105,28 @@ public class DevServicesDbImportProcessor {
 
     private static void setupDbResultSystemProperties(HashMap<String, String> data,
             DevServicesDatasourceResultBuildItem.DbResult dbResult) {
+
+        String jdbcUrlKey = null;
+        String reactiveUrlKey = null;
+        String reactiveUrlValue = null;
         if (dbResult != null && DatabaseKind.POSTGRESQL.equals(dbResult.getDbType())) {
-            dbResult.getConfigProperties().forEach((k, v) -> data.put("tkit-db-import." + k, v));
+            for (Map.Entry<String, String> e : dbResult.getConfigProperties().entrySet()) {
+                if (e.getKey().lastIndexOf("jdbc.url") > 0) {
+                    jdbcUrlKey = e.getKey();
+                }
+                if (e.getKey().lastIndexOf("reactive.url") > 0) {
+                    reactiveUrlKey = e.getKey();
+                    reactiveUrlValue = e.getValue();
+                }
+                data.put("tkit-db-import." + e.getKey(), e.getValue());
+            }
+        }
+
+        // add support for only reactive vertx client dependency
+        if (jdbcUrlKey == null && reactiveUrlValue != null) {
+            String newValue = reactiveUrlValue.replace("vertx-reactive", "jdbc");
+            jdbcUrlKey = reactiveUrlKey.replace("reactive", "jdbc");
+            data.put("tkit-db-import." + jdbcUrlKey, newValue);
         }
     }
 
