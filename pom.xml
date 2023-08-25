@@ -47,12 +47,12 @@
     </modules>
 
     <properties>
-        <quarkus.version>2.16.7.Final</quarkus.version>
+        <quarkus.version>2.16.9.Final</quarkus.version>
         <hibernate-orm.version>5.6.15.Final</hibernate-orm.version>
         <!-- Code format -->
         <version.formatter.plugin>2.22.0</version.formatter.plugin>
         <version.impsort.plugin>1.8.0</version.impsort.plugin>
-        <version.quarkus.ide-config>2.16.5.Final</version.quarkus.ide-config>
+        <version.quarkus.ide-config>2.16.9.Final</version.quarkus.ide-config>
         <format.skip>false</format.skip>
 
         <maven.compiler.source>17</maven.compiler.source>
