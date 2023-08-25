@@ -28,3 +28,10 @@ Quarkus configuration value `quarkus.default-locale`.  Exception is in the packa
 In the package `org.tkit.quarkus.rs.mappers` is the `ExceptionMapper` for all `Exception` in the project with priority `DefaultExceptionMapper.PRIORITY`.
 You can `extend` and overwrite this `ExceptionMapper`. Use the `@Priority` to overwrite existing registration.
 
+### Interceptor
+
+Reactive version of RX-JS was equipped in Quarkus in a nice feature to clean up an up-stream response if it contained incorrect 
+combination of [Transfer-Encoding and Content-Length](https://github.com/quarkusio/quarkus/issues/29059) headers.
+To mimic that behavior for a non-reactive stack you, can apply a provided `TransferEncodingFilter`. It cannot detect
+improper combination, but instead it is always removing the problematic header. The behavior can be blocked by setting:
+`tkit.rs.filter.transfer-encoding` to `false`

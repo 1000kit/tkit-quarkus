@@ -1,17 +1,17 @@
 package org.tkit.quarkus.rs.interceptor;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import javax.ws.rs.client.ClientResponseContext;
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import javax.ws.rs.client.ClientResponseContext;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class TransferEncodingFilterTest {
@@ -32,7 +32,7 @@ class TransferEncodingFilterTest {
         Mockito.when(clientResponseContextMock.getHeaderString("Transfer-Encoding")).thenReturn("chunked");
 
         MultivaluedMap<String, String> headers = new MultivaluedHashMap<>();
-        headers.add("Transfer-Encoding","chunked");
+        headers.add("Transfer-Encoding", "chunked");
         Mockito.when(clientResponseContextMock.getHeaders()).thenReturn(headers);
 
         // when
@@ -48,7 +48,7 @@ class TransferEncodingFilterTest {
         Mockito.when(clientResponseContextMock.getHeaderString("Transfer-Encoding")).thenReturn("compress");
 
         MultivaluedMap<String, String> headers = new MultivaluedHashMap<>();
-        headers.add("Transfer-Encoding","compress");
+        headers.add("Transfer-Encoding", "compress");
         Mockito.when(clientResponseContextMock.getHeaders()).thenReturn(headers);
 
         // when
