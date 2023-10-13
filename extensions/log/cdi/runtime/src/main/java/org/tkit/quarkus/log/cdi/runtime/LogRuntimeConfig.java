@@ -55,6 +55,12 @@ public class LogRuntimeConfig {
     public Map<String, ServiceConfig> service = new HashMap<>();
 
     /**
+     * Mdc error key for FBN error code
+     */
+    @ConfigItem(name = "mdc.errorKey", defaultValue = "errorNumber")
+    public String errorNumberKey;
+
+    /**
      * Start message
      */
     @ConfigGroup
