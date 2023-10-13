@@ -12,6 +12,10 @@ public class ErrorDataService {
         throw new RuntimeException(error);
     }
 
+    public void error2() {
+        throw new DummyLogFriendlyException();
+    }
+
     @LogService(stacktrace = false)
     public void noStacktrace() {
         throw new RuntimeException("Error1");

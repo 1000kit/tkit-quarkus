@@ -5,17 +5,20 @@ import jakarta.inject.Inject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.tkit.quarkus.log.cdi.test.app.DummyLogFriendlyException;
 import org.tkit.quarkus.log.cdi.test.app.ErrorDataService;
 import org.tkit.quarkus.log.cdi.test.app.ErrorWrapperService;
 
 import io.quarkus.test.QuarkusUnitTest;
+
+import static org.tkit.quarkus.log.cdi.test.app.DummyLogFriendlyException.DUMMY_ERROR_NUMBER;
 
 public class ErrorDataServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
             .withApplicationRoot((jar) -> jar
-                    .addClasses(ErrorDataService.class, ErrorWrapperService.class)
+                    .addClasses(ErrorDataService.class, ErrorWrapperService.class, DummyLogFriendlyException.class)
                     .addAsResource("default.properties", "application.properties"));
 
     @Inject
@@ -31,6 +34,13 @@ public class ErrorDataServiceTest extends AbstractTest {
                 .assertLines(92)
                 .assertContains(0,
                         "ERROR [org.tki.qua.log.cdi.tes.app.ErrorDataService] (main) error1(Error) throw java.lang.RuntimeException: Error");
+    }
+
+    @Test
+    public void error2Test() {
+        Assertions.assertThrows(RuntimeException.class, () -> service.error2());
+        assertLogs().assertContains(0,
+                DUMMY_ERROR_NUMBER +" ERROR [org.tki.qua.log.cdi.tes.app.ErrorDataService] (main) error2() throw org.tkit.quarkus.log.cdi.test.app.DummyLogFriendlyException");
     }
 
     @Test
