@@ -43,6 +43,8 @@ tkit.log.cdi.failed.enabled=true
 tkit.log.cdi.failed.template=%1$s(%2$s) throw %3$s [%4$.3fs]
 # Return void method template
 tkit.log.cdi.return-void-template=void
+# Return void method template
+tkit.log.cdi.mdc.errorKey=errorNumber
 # Enable or disable service log. (optional)
 tkit.log.cdi.service.<fully-qualified-class-name|config-key>.log=
 # Enable or disable service stacktrace. (optional)

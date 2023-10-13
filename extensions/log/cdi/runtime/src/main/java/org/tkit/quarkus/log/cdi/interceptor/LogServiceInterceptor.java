@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.ApplicationContext;
 import org.tkit.quarkus.context.Context;
+import org.tkit.quarkus.log.cdi.LogFriendlyException;
 import org.tkit.quarkus.log.cdi.LogRecorder;
 import org.tkit.quarkus.log.cdi.LogService;
 import org.tkit.quarkus.log.cdi.ServiceValue;
@@ -122,6 +123,9 @@ public class LogServiceInterceptor {
             Context.ApplicationError aex = ApplicationContext.get().addError(ex);
 
             Throwable error = ex;
+            if (ex instanceof LogFriendlyException) {
+                ApplicationContext.addBusinessLogParam(config.errorNumberKey, ((LogFriendlyException) ex).getErrorNumber());
+            }
             if (ex instanceof InvocationTargetException) {
                 error = ex.getCause();
             }
