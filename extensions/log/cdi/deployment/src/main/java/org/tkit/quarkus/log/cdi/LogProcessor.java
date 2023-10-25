@@ -11,11 +11,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Singleton;
 
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.jboss.jandex.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,7 @@ import io.quarkus.arc.processor.BeanInfo;
 import io.quarkus.arc.processor.BuildExtension;
 import io.quarkus.deployment.annotations.*;
 import io.quarkus.deployment.annotations.Record;
+import io.quarkus.deployment.builditem.ConfigPropertiesBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.RuntimeConfigSetupCompleteBuildItem;
 
@@ -220,6 +223,19 @@ public class LogProcessor {
                 return matches;
             }
         });
+    }
+
+    @BuildStep
+    public ConfigPropertiesBuildItem validateDeprecatedConfiguration() {
+        Set<String> quarkusTkitConfigNames = StreamSupport
+                .stream(ConfigProvider.getConfig().getPropertyNames().spliterator(), false)
+                .filter(s -> s.startsWith("quarkus.tkit")).collect(Collectors.toSet());
+        if (!quarkusTkitConfigNames.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Configuration with prefix quarkus.tkit are deprecated : " + quarkusTkitConfigNames
+                            + " . You can find new configuration mapping on https://github.com/1000kit/tkit-quarkus/tree/main/extensions/log");
+        }
+        return null;
     }
 
     private static LogService createLogService(AnnotationInstance annotationInstance) {
