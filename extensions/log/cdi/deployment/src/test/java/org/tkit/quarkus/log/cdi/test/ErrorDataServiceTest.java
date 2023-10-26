@@ -1,5 +1,7 @@
 package org.tkit.quarkus.log.cdi.test;
 
+import static org.tkit.quarkus.log.cdi.test.app.DummyLogFriendlyException.DUMMY_ERROR_NUMBER;
+
 import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Assertions;
@@ -10,8 +12,6 @@ import org.tkit.quarkus.log.cdi.test.app.ErrorDataService;
 import org.tkit.quarkus.log.cdi.test.app.ErrorWrapperService;
 
 import io.quarkus.test.QuarkusUnitTest;
-
-import static org.tkit.quarkus.log.cdi.test.app.DummyLogFriendlyException.DUMMY_ERROR_NUMBER;
 
 public class ErrorDataServiceTest extends AbstractTest {
 
@@ -40,7 +40,8 @@ public class ErrorDataServiceTest extends AbstractTest {
     public void error2Test() {
         Assertions.assertThrows(RuntimeException.class, () -> service.error2());
         assertLogs().assertContains(0,
-                DUMMY_ERROR_NUMBER +" ERROR [org.tki.qua.log.cdi.tes.app.ErrorDataService] (main) error2() throw org.tkit.quarkus.log.cdi.test.app.DummyLogFriendlyException");
+                DUMMY_ERROR_NUMBER
+                        + " ERROR [org.tki.qua.log.cdi.tes.app.ErrorDataService] (main) error2() throw org.tkit.quarkus.log.cdi.test.app.DummyLogFriendlyException");
     }
 
     @Test
