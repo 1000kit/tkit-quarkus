@@ -233,7 +233,7 @@ public class LogProcessor {
         if (!quarkusTkitConfigNames.isEmpty()) {
             throw new IllegalArgumentException(
                     "Configuration with prefix quarkus.tkit are deprecated : " + quarkusTkitConfigNames
-                            + " . You can find new configuration mapping on https://github.com/1000kit/tkit-quarkus/tree/main/extensions/log");
+                            + " . You can find new configuration mapping on https://github.com/1000kit/tkit-quarkus/tree/0.x/extensions/log");
         }
         return null;
     }
