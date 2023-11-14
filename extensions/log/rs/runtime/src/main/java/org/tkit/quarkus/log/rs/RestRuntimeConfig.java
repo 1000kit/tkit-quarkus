@@ -71,6 +71,12 @@ public class RestRuntimeConfig {
     public PayloadLog payload;
 
     /**
+     * Rest-client interceptor configuration.
+     */
+    @ConfigItem(name = "client")
+    public RestClientRuntimeConfig client;
+
+    /**
      * Payload log configuration.
      */
     @ConfigGroup
@@ -209,6 +215,22 @@ public class RestRuntimeConfig {
     }
 
     @ConfigGroup
+    public static class RestClientMdcLogConfig {
+
+        /**
+         * Enable duration time as MDC parameter
+         */
+        @ConfigItem(name = "duration.enabled", defaultValue = "true")
+        public boolean durationEnabled;
+
+        /**
+         * Duration MDC key name
+         */
+        @ConfigItem(name = "duration.name", defaultValue = "rs-client-time")
+        public String durationName;
+    }
+
+    @ConfigGroup
     public static class RestMdcLogConfig {
 
         /**
@@ -220,15 +242,9 @@ public class RestRuntimeConfig {
         /**
          * Duration MDC key name
          */
-        @ConfigItem(name = "duration.name", defaultValue = "tkit_time")
+        @ConfigItem(name = "duration.name", defaultValue = "rs-time")
         public String durationName;
     }
-
-    /**
-     * Rest-client interceptor configuration.
-     */
-    @ConfigItem(name = "client")
-    public RestClientRuntimeConfig client;
 
     /**
      * Rest-client interceptor configuration.
@@ -367,6 +383,12 @@ public class RestRuntimeConfig {
          */
         @ConfigItem(name = "template", defaultValue = "%1$s %2$s [%4$s] [%3$ss]")
         public String template;
+
+        /**
+         * Default MDC parameters
+         */
+        @ConfigItem(name = "mdc")
+        public RestClientMdcLogConfig mdc;
     }
 
 }
