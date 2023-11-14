@@ -31,7 +31,9 @@ tkit.log.rs.end.template=%1$s %2$s [%4$s] [%3$ss]
 # Enable duration time as MDC parameter
 tkit.log.rs.end.mdc.duration.enabled=true
 # MDC duration name
-tkit.log.rs.end.mdc.duration.name=tkit_time
+tkit.log.rs.end.mdc.duration.name=rs-time
+# MDC duration name
+tkit.log.rs.client.end.mdc.duration.name=rs-client-time
 # Enable or disable error log message
 tkit.log.rs.error.enabled=true
 # Enable or disable error log message
