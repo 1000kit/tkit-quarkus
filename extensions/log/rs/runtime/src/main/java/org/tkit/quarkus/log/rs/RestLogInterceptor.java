@@ -135,11 +135,16 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
                 }
                 if (config.end.enabled && log) {
 
-                    if (config.end.mdc.durationEnabled) {
+                    Response.StatusType status = responseContext.getStatusInfo();
+
+                    if (config.end.mdc.enabled) {
                         MDC.put(config.end.mdc.durationName, restContext.time);
                         restContext.mdcKeys.add(config.end.mdc.durationName);
+
+                        MDC.put(config.end.mdc.responseStatusName, status.getStatusCode());
+                        restContext.mdcKeys.add(config.end.mdc.responseStatusName);
                     }
-                    Response.StatusType status = responseContext.getStatusInfo();
+
                     LoggerFactory.getLogger(resourceInfo.getResourceClass())
                             .info(String.format(config.end.template, restContext.method, restContext.path,
                                     restContext.time, status.getStatusCode(), status.getReasonPhrase(),

@@ -91,9 +91,12 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             Response.StatusType status = responseContext.getStatusInfo();
             context.close();
 
-            if (config.client.end.mdc.durationEnabled) {
+            if (config.client.end.mdc.enabled) {
                 MDC.put(config.client.end.mdc.durationName, context.time);
                 context.mdcKeys.add(config.client.end.mdc.durationName);
+
+                MDC.put(config.client.end.mdc.responseStatusName, status.getStatusCode());
+                context.mdcKeys.add(config.end.mdc.responseStatusName);
             }
 
             if (config.client.end.enabled) {

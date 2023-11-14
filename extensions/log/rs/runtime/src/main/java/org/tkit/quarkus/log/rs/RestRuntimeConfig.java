@@ -220,14 +220,20 @@ public class RestRuntimeConfig {
         /**
          * Enable duration time as MDC parameter
          */
-        @ConfigItem(name = "duration.enabled", defaultValue = "true")
-        public boolean durationEnabled;
+        @ConfigItem(name = "enabled", defaultValue = "true")
+        public boolean enabled;
 
         /**
          * Duration MDC key name
          */
         @ConfigItem(name = "duration.name", defaultValue = "rs-client-time")
         public String durationName;
+
+        /**
+         * Response client status MDC key name
+         */
+        @ConfigItem(name = "response-status.name", defaultValue = "rs-client-status")
+        public String responseStatusName;
     }
 
     @ConfigGroup
@@ -236,14 +242,20 @@ public class RestRuntimeConfig {
         /**
          * Enable duration time as MDC parameter
          */
-        @ConfigItem(name = "duration.enabled", defaultValue = "true")
-        public boolean durationEnabled;
+        @ConfigItem(name = "enabled", defaultValue = "true")
+        public boolean enabled;
 
         /**
          * Duration MDC key name
          */
         @ConfigItem(name = "duration.name", defaultValue = "rs-time")
         public String durationName;
+
+        /**
+         * Response status MDC key name
+         */
+        @ConfigItem(name = "response-status.name", defaultValue = "rs-status")
+        public String responseStatusName;
     }
 
     /**
