@@ -26,7 +26,6 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
-import jakarta.persistence.PersistenceException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaDelete;
@@ -34,6 +33,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.CriteriaUpdate;
 import jakarta.transaction.Transactional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.jpa.exceptions.ConstraintException;
@@ -540,29 +540,17 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      */
     @SuppressWarnings("squid:S1872")
     protected DAOException handleConstraint(Exception ex, Enum<?> key) {
-        if (ex instanceof ConstraintException) {
-            return (ConstraintException) ex;
+        if (ex instanceof ConstraintException ce) {
+            return ce;
         }
-        if (ex instanceof PersistenceException) {
-            PersistenceException e = (PersistenceException) ex;
-            if (e.getCause() != null) {
-
-                Throwable providerException = e.getCause();
-                // Hibernate constraint violation exception
-                if ("org.hibernate.exception.ConstraintViolationException".equals(providerException.getClass().getName())) {
-
-                    // for the org.postgresql.util.PSQLException get the constraints message.
-                    String msg = providerException.getMessage();
-                    if (providerException.getCause() != null) {
-                        msg = providerException.getCause().getMessage();
-                        if (msg != null) {
-                            msg = msg.replaceAll("\n", "");
-                        }
-                    }
-                    // throw own constraints exception.
-                    return new ConstraintException(msg, key, e, entityName);
-                }
+        if (ex instanceof ConstraintViolationException cve) {
+            var msg = cve.getErrorMessage();
+            if (msg != null) {
+                msg = msg.replaceAll("\n", "").replaceAll("\"", "'");
             }
+            var re = new ConstraintException(msg, key, ex, entityName);
+            re.addParameter("constraintName", cve.getConstraintName());
+            return re;
         }
         return new DAOException(key, ex, entityName);
     }
