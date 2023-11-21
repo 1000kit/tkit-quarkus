@@ -92,16 +92,16 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             context.close();
 
             if (config.client.end.mdc.enabled) {
-                MDC.put(config.client.end.mdc.durationName, context.time);
+                MDC.put(config.client.end.mdc.durationName, context.durationSec);
                 context.mdcKeys.add(config.client.end.mdc.durationName);
 
                 MDC.put(config.client.end.mdc.responseStatusName, status.getStatusCode());
-                context.mdcKeys.add(config.end.mdc.responseStatusName);
+                context.mdcKeys.add(config.client.end.mdc.responseStatusName);
             }
 
             if (config.client.end.enabled) {
                 log.info(String.format(config.client.end.template, context.method, context.uri,
-                        context.time, status.getStatusCode(), status.getReasonPhrase()));
+                        context.durationString, status.getStatusCode(), status.getReasonPhrase()));
             }
         } finally {
             // clean up MDC header keys
