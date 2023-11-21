@@ -41,7 +41,7 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
         }
         //propagate our log context if present
         if (!ApplicationContext.isEmpty() && config.correlationIdEnabled) {
-            requestContext.getHeaders().add(config.correlationIdHeader, ApplicationContext.get().correlationId);
+            requestContext.getHeaders().add(config.correlationIdHeader, ApplicationContext.get().getCorrelationId());
         }
 
         RestInterceptorContext context = new RestInterceptorContext();
@@ -91,9 +91,17 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             Response.StatusType status = responseContext.getStatusInfo();
             context.close();
 
+            if (config.client.end.mdc.enabled) {
+                MDC.put(config.client.end.mdc.durationName, context.durationSec);
+                context.mdcKeys.add(config.client.end.mdc.durationName);
+
+                MDC.put(config.client.end.mdc.responseStatusName, status.getStatusCode());
+                context.mdcKeys.add(config.end.mdc.responseStatusName);
+            }
+
             if (config.client.end.enabled) {
                 log.info(String.format(config.client.end.template, context.method, context.uri,
-                        context.time, status.getStatusCode(), status.getReasonPhrase()));
+                        context.durationString, status.getStatusCode(), status.getReasonPhrase()));
             }
         } finally {
             // clean up MDC header keys

@@ -17,9 +17,11 @@
         <module>log</module>
         <module>jpa-models</module>
         <module>jpa</module>
+        <module>jpa-tenant</module>
         <module>data-import</module>
         <module>rest</module>
         <module>rest-dto</module>
+        <module>rest-context</module>
         <module>test-db-import</module>
     </modules>
 
