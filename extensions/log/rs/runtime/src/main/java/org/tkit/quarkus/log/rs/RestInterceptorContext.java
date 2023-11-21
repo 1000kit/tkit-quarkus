@@ -1,5 +1,7 @@
 package org.tkit.quarkus.log.rs;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,19 +15,25 @@ public class RestInterceptorContext {
 
     String path;
 
-    String time;
-
     boolean exclude = false;
 
     Set<String> mdcKeys = new HashSet<>();
 
     private final long startTime;
 
+    long durationMillis;
+
+    double durationSec;
+
+    String durationString;
+
     RestInterceptorContext() {
         this.startTime = System.currentTimeMillis();
     }
 
     public void close() {
-        time = String.format("%.3f", (System.currentTimeMillis() - startTime) / 1000f);
+        durationMillis = (System.currentTimeMillis() - startTime);
+        durationSec = BigDecimal.valueOf(durationMillis / 1000f).setScale(3, RoundingMode.HALF_DOWN).doubleValue();
+        durationString = String.format("%.3f", durationSec);
     }
 }
