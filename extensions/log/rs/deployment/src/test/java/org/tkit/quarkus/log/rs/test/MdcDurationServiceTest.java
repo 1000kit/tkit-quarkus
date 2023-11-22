@@ -9,7 +9,7 @@ import org.tkit.quarkus.log.rs.test.app.NoAnnotationRestController;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class MdcDurationServiceTest extends AbstractTest {
+class MdcDurationServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
@@ -18,7 +18,7 @@ public class MdcDurationServiceTest extends AbstractTest {
                     .addAsResource("mdc-duration.properties", "application.properties"));
 
     @Test
-    public void mdcTest() {
+    void mdcTest() {
 
         given().header("H1", "Value1").when()
                 .get("/no-anno/test1")

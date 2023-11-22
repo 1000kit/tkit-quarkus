@@ -5,7 +5,10 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 
+import io.quarkus.arc.Unremovable;
+
 @RequestScoped
+@Unremovable
 public class RestContextHeaderContainer {
 
     private static final MultivaluedHashMap<String, String> EMPTY_MAP = new MultivaluedHashMap<>();
