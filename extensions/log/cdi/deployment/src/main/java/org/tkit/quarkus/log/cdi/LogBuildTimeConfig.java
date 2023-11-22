@@ -1,5 +1,6 @@
 package org.tkit.quarkus.log.cdi;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,9 @@ import io.quarkus.runtime.annotations.ConfigRoot;
  */
 @ConfigRoot(prefix = "tkit", name = "log.cdi", phase = ConfigPhase.BUILD_TIME)
 public class LogBuildTimeConfig {
+
+    private static final String AUTO_DISCOVER_ANNO = "jakarta.enterprise.context.ApplicationScoped," +
+            "jakarta.enterprise.context.Singleton,jakarta.enterprise.context.RequestScoped";
 
     /**
      * Auto-discovery configuration.
@@ -42,6 +46,13 @@ public class LogBuildTimeConfig {
          */
         @ConfigItem(name = "ignore.pattern", defaultValue = "")
         public Optional<String> ignorePattern;
+
+        /**
+         * The list of beans annotation
+         */
+        @ConfigItem(name = "bean.annotations", defaultValue = AUTO_DISCOVER_ANNO)
+        public List<String> annoBeans = new ArrayList<>();
+
     }
 
 }

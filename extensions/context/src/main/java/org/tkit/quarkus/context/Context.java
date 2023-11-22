@@ -7,37 +7,117 @@ public class Context {
     /**
      * User principal
      */
-    public final String principal;
+    private final String principal;
+
+    /**
+     * User tenant ID
+     */
+    private final String tenantId;
 
     /**
      * Correlation id that should be preserved throughout invocation chain
      */
-    public final String correlationId;
+    private final String correlationId;
 
     /**
      * Business context that should be preserved throughout invocation chain
      */
-    public final String businessContext;
+    private final String businessContext;
 
     /**
      * Additional metadata that should be preserved throughout invocation chain
      */
-    public final Map<String, String> meta;
+    private final Map<String, String> meta;
 
-    final Set<String> businessParams;
+    private final Set<String> businessParams;
 
     /**
      * Stack of errors, which happens in the execution context.
      */
-    final Stack<ApplicationError> errors;
+    private final Stack<ApplicationError> errors;
 
-    Context(String correlationId, String businessContext, String principal, Map<String, String> meta) {
+    Context(String correlationId, String businessContext, String principal, Map<String, String> meta, String tenantId) {
         this.correlationId = correlationId;
         this.businessContext = businessContext;
         this.meta = meta;
         this.principal = principal;
         this.businessParams = new HashSet<>();
         this.errors = new Stack<>();
+        this.tenantId = tenantId;
+    }
+
+    /**
+     * Gets the current principal.
+     *
+     * @return the current principal.
+     */
+    public String getPrincipal() {
+        return principal;
+    }
+
+    /**
+     * Gets business context.
+     *
+     * @return the business context.
+     */
+    public String getBusinessContext() {
+        return businessContext;
+    }
+
+    /**
+     * Gets user tenant ID.
+     *
+     * @return the user tenant ID.
+     */
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    /**
+     * Gets the correlation ID.
+     *
+     * @return the correlation ID.
+     */
+    public String getCorrelationId() {
+        return correlationId;
+    }
+
+    /**
+     * Gets the context meta-data
+     *
+     * @return the context meta-data.
+     */
+    public Map<String, String> getMeta() {
+        return meta;
+    }
+
+    public void addMeta(String key, String value) {
+        if (key == null) {
+            return;
+        }
+        meta.put(key, value);
+    }
+
+    public Set<String> getBusinessParams() {
+        return businessParams;
+    }
+
+    public void addBusinessParams(String businessParam) {
+        if (businessParam == null) {
+            return;
+        }
+        businessParams.add(businessParam);
+    }
+
+    public void removeBusinessParams(String businessParam) {
+        if (businessParam == null) {
+            return;
+        }
+        businessParams.remove(businessParam);
+    }
+
+    public void clearBusinessParams() {
+        businessParams.clear();
     }
 
     @Override
@@ -60,10 +140,16 @@ public class Context {
         return new ApplicationContextBuilder();
     }
 
+    /**
+     * Application error in the context
+     */
     public static class ApplicationError {
 
         public Throwable throwable;
 
+        /**
+         * Show stack-strace
+         */
         public boolean stacktrace;
 
         ApplicationError(Throwable throwable) {
@@ -80,7 +166,9 @@ public class Context {
 
         private String businessContext;
 
-        private Map<String, String> meta = new HashMap<>();
+        private String tenantId;
+
+        private final Map<String, String> meta = new HashMap<>();
 
         public ApplicationContextBuilder correlationId(String correlationId) {
             if (correlationId == null) {
@@ -100,8 +188,18 @@ public class Context {
             return this;
         }
 
+        public ApplicationContextBuilder tenantId(String tenantId) {
+            this.tenantId = tenantId;
+            return this;
+        }
+
+        public ApplicationContextBuilder addMeta(String key, String value) {
+            this.meta.put(key, value);
+            return this;
+        }
+
         public Context build() {
-            return new Context(correlationId, businessContext, principal, meta);
+            return new Context(correlationId, businessContext, principal, meta, tenantId);
         }
     }
 }

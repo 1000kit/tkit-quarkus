@@ -20,6 +20,13 @@ tkit.log.cdi.auto-discovery.enabled=false
 tkit.log.cdi.auto-discovery.packages=org.tkit
 # Specify ignore pattern. (optional)
 tkit.log.cdi.auto-discovery.ignore.pattern=
+# Bean annotations to discovery. (list)
+tkit.log.cdi.auto-discovery.bean.annotations=jakarta.enterprise.context.ApplicationScoped,jakarta.enterprise.context.Singleton,jakarta.enterprise.context.RequestScoped
+```
+To activate the auto discovery only for rest-controllers use this configuration
+
+```properties
+tkit.log.cdi.auto-discovery.bean.annotations=jakarta.ws.rs.Path
 ```
 
 Runtime configuration.

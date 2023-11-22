@@ -2,7 +2,6 @@ package org.tkit.quarkus.log.rs;
 
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.container.*;
-import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
@@ -10,14 +9,12 @@ import jakarta.ws.rs.ext.Provider;
 import org.jboss.logging.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.context.ApplicationContext;
-import org.tkit.quarkus.context.Context;
 
 /**
  * The rest log interceptor.
  */
 @Provider
-@Priority(1)
+@Priority(5)
 public class RestLogInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
 
     /**
@@ -30,23 +27,12 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
     @jakarta.ws.rs.core.Context
     ResourceInfo resourceInfo;
 
-    @jakarta.ws.rs.core.Context
-    HttpHeaders headers;
-
     /**
      * {@inheritDoc }
      */
     @Override
     public void filter(ContainerRequestContext requestContext) {
         RestRuntimeConfig config = RestRecorder.getConfig();
-
-        //start log scope/correlation id
-        String correlationId = null;
-        if (config.correlationIdEnabled) {
-            correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader);
-        }
-
-        ApplicationContext.start(Context.builder().correlationId(correlationId).build());
 
         if (!config.enabled) {
             return;
@@ -100,59 +86,61 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
      */
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
+
+        RestRuntimeConfig config = RestRecorder.getConfig();
+        if (!config.enabled) {
+            return;
+        }
+
+        RestInterceptorContext restContext = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
+
+        // if we do not have context we are in error mode
+        if (restContext == null) {
+            if (config.error.enabled) {
+                Response.StatusType status = responseContext.getStatusInfo();
+                log.info(String.format(config.end.template, requestContext.getMethod(),
+                        requestContext.getUriInfo().getPath(), 0.000,
+                        status.getStatusCode(), status.getReasonPhrase(), requestContext.getUriInfo().getRequestUri()));
+            }
+            return;
+        }
+
         try {
-            RestRuntimeConfig config = RestRecorder.getConfig();
-            if (!config.enabled) {
+            // stop if we need to exclude
+            if (restContext.exclude) {
                 return;
             }
 
-            RestInterceptorContext restContext = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
+            // close rest context
+            restContext.close();
 
-            // if we do not have context we are in error mode
-            if (restContext == null) {
-                if (config.error.enabled) {
-                    Response.StatusType status = responseContext.getStatusInfo();
-                    log.info(String.format(config.end.template, requestContext.getMethod(),
-                            requestContext.getUriInfo().getPath(), 0.000,
-                            status.getStatusCode(), status.getReasonPhrase(), requestContext.getUriInfo().getRequestUri()));
-                }
-                return;
+            // log end message
+            boolean logMsg = true;
+            if (restContext.ano != null) {
+                logMsg = restContext.ano.config.log;
             }
+            if (config.end.enabled && logMsg) {
 
-            try {
-                // stop if we need to exclude
-                if (restContext.exclude) {
-                    return;
+                Response.StatusType status = responseContext.getStatusInfo();
+
+                if (config.end.mdc.enabled) {
+                    MDC.put(config.end.mdc.durationName, restContext.durationSec);
+                    restContext.mdcKeys.add(config.end.mdc.durationName);
+
+                    MDC.put(config.end.mdc.responseStatusName, status.getStatusCode());
+                    restContext.mdcKeys.add(config.end.mdc.responseStatusName);
                 }
 
-                // close rest context
-                restContext.close();
-
-                // log end message
-                boolean log = true;
-                if (restContext.ano != null) {
-                    log = restContext.ano.config.log;
-                }
-                if (config.end.enabled && log) {
-
-                    if (config.end.mdc.durationEnabled) {
-                        MDC.put(config.end.mdc.durationName, restContext.duration);
-                        restContext.mdcKeys.add(config.end.mdc.durationName);
-                    }
-                    Response.StatusType status = responseContext.getStatusInfo();
-                    LoggerFactory.getLogger(resourceInfo.getResourceClass())
-                            .info(String.format(config.end.template, restContext.method, restContext.path,
-                                    restContext.time, status.getStatusCode(), status.getReasonPhrase(),
-                                    restContext.uri));
-                }
-            } finally {
-                // clean up MDC header keys
-                restContext.mdcKeys.forEach(MDC::remove);
+                LoggerFactory.getLogger(resourceInfo.getResourceClass())
+                        .info(String.format(config.end.template, restContext.method, restContext.path,
+                                restContext.durationString, status.getStatusCode(), status.getReasonPhrase(),
+                                restContext.uri));
             }
         } finally {
-            //we are exiting server context, close the application context
-            ApplicationContext.close();
+            // clean up MDC header keys
+            restContext.mdcKeys.forEach(MDC::remove);
         }
+
     }
 
 }

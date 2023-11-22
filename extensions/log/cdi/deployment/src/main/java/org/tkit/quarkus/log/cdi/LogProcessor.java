@@ -12,10 +12,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Singleton;
-
 import org.jboss.jandex.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,11 +42,6 @@ public class LogProcessor {
 
     private static final Set<String> EXCLUDE_METHODS = Arrays.stream(Object.class.getMethods()).map(Method::getName)
             .collect(Collectors.toSet());
-
-    private static final List<DotName> ANNOTATION_DOT_NAMES = List.of(
-            DotName.createSimple(ApplicationScoped.class.getName()),
-            DotName.createSimple(Singleton.class.getName()),
-            DotName.createSimple(RequestScoped.class.getName()));
 
     @BuildStep
     void build(BuildProducer<FeatureBuildItem> feature) {
@@ -172,6 +163,9 @@ public class LogProcessor {
 
         final Pattern ignorePattern = buildConfig.autoDiscover.ignorePattern.map(Pattern::compile).orElse(null);
 
+        Set<DotName> annotation = buildConfig.autoDiscover.annoBeans.stream()
+                .map(DotName::createSimple).collect(Collectors.toSet());
+
         return new AnnotationsTransformerBuildItem(new AnnotationsTransformer() {
 
             @Override
@@ -188,18 +182,32 @@ public class LogProcessor {
                     return;
                 }
 
+                String name = target.name().toString();
+
+                // skip log param value
+                if (LOG_BUILDER_SERVICE.equals(name)) {
+                    return;
+                }
+
+                // skip wrong package
+                Optional<String> add = buildConfig.autoDiscover.packages.stream().filter(name::startsWith).findFirst();
+                if (add.isEmpty()) {
+                    return;
+                }
+
                 // skip for none Bean class
                 Map<DotName, List<AnnotationInstance>> tmp = target.annotationsMap();
-                Optional<DotName> dot = ANNOTATION_DOT_NAMES.stream().filter(tmp::containsKey).findFirst();
+                Optional<DotName> dot = annotation.stream().filter(tmp::containsKey).findFirst();
                 if (dot.isEmpty()) {
                     return;
                 }
 
-                String name = target.name().toString();
-                Optional<String> add = buildConfig.autoDiscover.packages.stream().filter(name::startsWith).findFirst();
-                if (add.isPresent() && !LOG_BUILDER_SERVICE.equals(name) && !matchesIgnorePattern(name)) {
-                    context.transform().add(LogService.class).done();
+                // ignore match to pattern
+                if (matchesIgnorePattern(name)) {
+                    return;
                 }
+
+                context.transform().add(LogService.class).done();
             }
 
             private boolean matchesIgnorePattern(String name) {

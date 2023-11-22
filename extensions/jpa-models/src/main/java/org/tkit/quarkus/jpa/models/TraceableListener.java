@@ -58,7 +58,7 @@ public class TraceableListener implements Serializable {
     private String getPrincipal() {
         final Context context = ApplicationContext.get();
         if (context != null) {
-            return context.principal;
+            return context.getPrincipal();
         }
 
         Instance<Principal> principalInstance = CDI.current().select(Principal.class);

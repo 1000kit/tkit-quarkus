@@ -9,6 +9,9 @@ public class ApplicationContext {
 
     private static final ThreadLocal<Context> CONTEXT = new ThreadLocal<>();
 
+    private ApplicationContext() {
+    }
+
     /**
      * Get current value of application context. Can be null.
      *
@@ -26,7 +29,7 @@ public class ApplicationContext {
     static void set(Context ctx) {
         CONTEXT.set(ctx);
         if (ctx != null) {
-            MDC.put(MDC_X_CORRELATION_ID, ctx.correlationId);
+            MDC.put(MDC_X_CORRELATION_ID, ctx.getCorrelationId());
         } else {
             MDC.remove(MDC_X_CORRELATION_ID);
         }
@@ -48,6 +51,7 @@ public class ApplicationContext {
         if (!isEmpty()) {
             removeAllBusinessLogParams();
             set(null);
+            CONTEXT.remove();
         }
     }
 
@@ -56,18 +60,18 @@ public class ApplicationContext {
 
     public static void addBusinessLogParam(String key, String value) {
         String k = BUSINESS_DATA_PREFIX + key;
-        get().businessParams.add(k);
+        get().addBusinessParams(k);
         MDC.put(k, value);
     }
 
     public static void removeBusinessLogParam(String key) {
         String k = BUSINESS_DATA_PREFIX + key;
-        get().businessParams.remove(k);
+        get().removeBusinessParams(k);
         MDC.remove(k);
     }
 
     public static void removeAllBusinessLogParams() {
-        get().businessParams.forEach(MDC::remove);
-        get().businessParams.clear();
+        get().getBusinessParams().forEach(MDC::remove);
+        get().clearBusinessParams();
     }
 }

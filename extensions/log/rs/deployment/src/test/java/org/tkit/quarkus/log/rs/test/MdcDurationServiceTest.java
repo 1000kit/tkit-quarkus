@@ -9,7 +9,7 @@ import org.tkit.quarkus.log.rs.test.app.NoAnnotationRestController;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class MdcDurationServiceTest extends AbstractTest {
+class MdcDurationServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
@@ -18,7 +18,7 @@ public class MdcDurationServiceTest extends AbstractTest {
                     .addAsResource("mdc-duration.properties", "application.properties"));
 
     @Test
-    public void mdcTest() {
+    void mdcTest() {
 
         given().header("H1", "Value1").when()
                 .get("/no-anno/test1")
@@ -27,6 +27,6 @@ public class MdcDurationServiceTest extends AbstractTest {
 
         assertLogs().assertLines(1)
                 .assertMatches(0,
-                        ".+INFO  \\{X-Correlation-ID=.+, tkit_time=.+\\} \\[org\\.tki\\.qua\\.log\\.rs\\.tes\\.app\\.NoAnnotationRestController\\] \\(executor-thread-1\\) GET \\/no-anno\\/test1 \\[200\\] \\[.+s\\]");
+                        ".+INFO  \\{X-Correlation-ID=.+, rs-status=200, rs-time=.+\\} \\[org\\.tki\\.qua\\.log\\.rs\\.tes\\.app\\.NoAnnotationRestController\\] \\(executor-thread-1\\) GET \\/no-anno\\/test1 \\[200\\] \\[.+s\\]");
     }
 }

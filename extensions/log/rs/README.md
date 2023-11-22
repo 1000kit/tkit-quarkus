@@ -28,10 +28,12 @@ tkit.log.rs.start.template=%1$s %2$s started.
 tkit.log.rs.end.enabled=true
 # End log message template (%1 - HTTP method, %2 - Path, %3 - Duration, %4 - HTTP response code, %5 - HTTP response name, %6 - URI)
 tkit.log.rs.end.template=%1$s %2$s [%4$s] [%3$ss]
-# Enable duration time as MDC parameter
+# Enable duration time as MDC parameter in rest calls
 tkit.log.rs.end.mdc.duration.enabled=true
 # MDC duration name
-tkit.log.rs.end.mdc.duration.name=tkit_time
+tkit.log.rs.end.mdc.duration.name=rs-time
+# Response status MDC key name
+tkit.log.rs.end.mdc.response-status.name=rs-status
 # Enable or disable error log message
 tkit.log.rs.error.enabled=true
 # Enable or disable error log message
@@ -98,6 +100,12 @@ tkit.log.rs.client.start.template=%1$s %2$s started.
 tkit.log.rs.client.end.enabled=true
 # Client end message template (%1 - HTTP method, %2 - URI, %3 - Duration, %4 - HTTP response code, %5 - HTTP response name)
 tkit.log.rs.client.end.template=%1$s %2$s [%4$s] [%3$ss]
+# Enable duration in the MDC rest client
+tkit.log.rs.client.end.mdc.enabled=true
+# MDC duration name
+tkit.log.rs.client.end.mdc.duration.name=rs-client-time
+# Response client status MDC key name
+tkit.log.rs.client.end.mdc.response-status.name=rs-client-status
 # Enable or disable error log message
 tkit.log.rs.client.error.enabled=true
 ```

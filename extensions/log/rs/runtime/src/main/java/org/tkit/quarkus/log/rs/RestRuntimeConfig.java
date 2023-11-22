@@ -17,6 +17,12 @@ public class RestRuntimeConfig {
     public boolean enabled;
 
     /**
+     * Enabled or disable to add principal name to the application context.
+     */
+    @ConfigItem(name = "principal.enabled", defaultValue = "true")
+    public boolean enabledPrincipal;
+
+    /**
      * Enabled or disable the correlation ID
      */
     @ConfigItem(name = "correlation-id-enabled", defaultValue = "true")
@@ -214,14 +220,20 @@ public class RestRuntimeConfig {
         /**
          * Enable duration time as MDC parameter
          */
-        @ConfigItem(name = "duration.enabled", defaultValue = "true")
-        public boolean durationEnabled;
+        @ConfigItem(name = "enabled", defaultValue = "true")
+        public boolean enabled;
 
         /**
          * Duration MDC key name
          */
-        @ConfigItem(name = "duration.name", defaultValue = "tkit_time")
+        @ConfigItem(name = "duration.name", defaultValue = "rs-time")
         public String durationName;
+
+        /**
+         * Response status MDC key name
+         */
+        @ConfigItem(name = "response-status.name", defaultValue = "rs-status")
+        public String responseStatusName;
     }
 
     /**
@@ -277,6 +289,7 @@ public class RestRuntimeConfig {
          */
         @ConfigItem(name = "error")
         public ErrorLog error;
+
     }
 
     /**
@@ -367,6 +380,34 @@ public class RestRuntimeConfig {
          */
         @ConfigItem(name = "template", defaultValue = "%1$s %2$s [%4$s] [%3$ss]")
         public String template;
+
+        /**
+         * Default MDC parameters for rest client
+         */
+        @ConfigItem(name = "mdc")
+        public RestClientMdcLogConfig mdc;
+    }
+
+    @ConfigGroup
+    public static class RestClientMdcLogConfig {
+
+        /**
+         * Enable duration time as MDC parameter
+         */
+        @ConfigItem(name = "enabled", defaultValue = "true")
+        public boolean enabled;
+
+        /**
+         * Duration MDC key name
+         */
+        @ConfigItem(name = "duration.name", defaultValue = "rs-client-time")
+        public String durationName;
+
+        /**
+         * Response client status MDC key name
+         */
+        @ConfigItem(name = "response-status.name", defaultValue = "rs-client-status")
+        public String responseStatusName;
     }
 
 }
