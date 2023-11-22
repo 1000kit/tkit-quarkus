@@ -15,11 +15,15 @@
  */
 package org.tkit.quarkus.rs.mappers;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.rs.config.RestConfig;
+import org.tkit.quarkus.rs.exceptions.RestException;
+import org.tkit.quarkus.rs.models.RestExceptionDTO;
+import org.tkit.quarkus.rs.resources.ResourceManager;
 
 import javax.annotation.Priority;
+import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -28,13 +32,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-
-import org.eclipse.microprofile.config.ConfigProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.rs.exceptions.RestException;
-import org.tkit.quarkus.rs.models.RestExceptionDTO;
-import org.tkit.quarkus.rs.resources.ResourceManager;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * The default exception mapper with priority {@code PRIORITY}.
@@ -49,6 +48,9 @@ public class DefaultExceptionMapper implements ExceptionMapper<Exception> {
      * The exception mapper priority
      */
     public static final int PRIORITY = 10000;
+
+    @Inject
+    RestConfig restConfig;
 
     /**
      * The request headers.
@@ -67,10 +69,13 @@ public class DefaultExceptionMapper implements ExceptionMapper<Exception> {
      */
     @Override
     public Response toResponse(Exception e) {
-        Optional<Boolean> logException = ConfigProvider.getConfig().getOptionalValue("tkit.rs.mapper.log", Boolean.class);
-        if (logException.isEmpty() || logException.get()) {
-            log.error("REST exception URL:{},ERROR:{}", uriInfo.getRequestUri(), e.getMessage());
+
+        log.error("REST exception URL:{},ERROR:{}", uriInfo.getRequestUri(), e.getMessage());
+
+        if (restConfig.logStacktrace()) {
+            log.error("REST exception stacktrace", e);
         }
+
         if (e instanceof RestException) {
             return createResponse((RestException) e);
         }
