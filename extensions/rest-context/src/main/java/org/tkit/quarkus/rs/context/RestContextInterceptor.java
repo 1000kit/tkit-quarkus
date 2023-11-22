@@ -43,6 +43,10 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
+        if (!config.enabled()) {
+            return;
+        }
+
         if (headerContainer != null) {
             headerContainer.setContainerRequestContext(requestContext);
         }
@@ -55,10 +59,10 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
 
         // get business context
         String businessContext = null;
-        if (config.businessParam().enabled()) {
-            businessContext = requestContext.getHeaders().getFirst(config.businessParam().headerParamName());
+        if (config.businessContext().enabled()) {
+            businessContext = requestContext.getHeaders().getFirst(config.businessContext().headerParamName());
             if (businessContext == null || businessContext.isBlank()) {
-                businessContext = config.businessParam().defaultBusinessParam().orElse(null);
+                businessContext = config.businessContext().defaultBusinessParam().orElse(null);
             }
         }
 
@@ -83,6 +87,10 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+
+        if (!config.enabled()) {
+            return;
+        }
 
         // close application context
         ApplicationContext.close();

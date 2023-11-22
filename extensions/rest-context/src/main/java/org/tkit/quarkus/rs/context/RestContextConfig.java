@@ -11,11 +11,15 @@ import io.smallrye.config.WithName;
 @ConfigMapping(prefix = "tkit.rs.context")
 public interface RestContextConfig {
 
+    @WithName("enabled")
+    @WithDefault("true")
+    boolean enabled();
+
     @WithName("correlation-id")
     RestContextCorrelationIdConfig correlationId();
 
-    @WithName("business-param")
-    RestContextBusinessConfig businessParam();
+    @WithName("business-context")
+    RestContextBusinessConfig businessContext();
 
     interface RestContextCorrelationIdConfig {
 
