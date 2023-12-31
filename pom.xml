@@ -48,8 +48,8 @@
 
     <properties>
         <!-- Quarkus -->
-        <quarkus.version>3.6.3</quarkus.version>
-        <quarkus.hibernate-orm.version>6.4.0.Final</quarkus.hibernate-orm.version>
+        <quarkus.version>3.6.4</quarkus.version>
+        <quarkus.hibernate-orm.version>6.4.1.Final</quarkus.hibernate-orm.version>
         <quarkiverse.mockserver.version>1.2.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.1.6</quarkus.jandex-plugin.version>
 
@@ -66,7 +66,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.release>17</maven.compiler.release>
         <maven.compiler.parameters>true</maven.compiler.parameters>
-        <maven.compiler-plugin.version>3.11.0</maven.compiler-plugin.version>
+        <maven.compiler-plugin.version>3.12.1</maven.compiler-plugin.version>
         <maven.surefire-plugin.version>3.2.3</maven.surefire-plugin.version>
         <maven.formatter-maven-plugin.version>2.23.0</maven.formatter-maven-plugin.version>
         <maven.impsort-maven-plugin.version>1.9.0</maven.impsort-maven-plugin.version>
