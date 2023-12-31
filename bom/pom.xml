@@ -75,6 +75,11 @@
                 <artifactId>tkit-quarkus-test-db-import</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus.lib</groupId>
+                <artifactId>tkit-quarkus-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

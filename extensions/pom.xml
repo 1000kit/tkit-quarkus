@@ -23,6 +23,7 @@
         <module>rest-dto</module>
         <module>rest-context</module>
         <module>test-db-import</module>
+        <module>security</module>
     </modules>
 
 </project>
