@@ -23,6 +23,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 /**
  * The persistent entity interface.
  */
+@Deprecated
 @RegisterForReflection
 public abstract class AbstractTraceableDTO<T> implements Serializable {
 

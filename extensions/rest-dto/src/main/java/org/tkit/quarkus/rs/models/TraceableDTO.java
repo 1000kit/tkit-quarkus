@@ -23,6 +23,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 /**
  * The persistent entity with string GUID.
  */
+@Deprecated
 @RegisterForReflection
 public class TraceableDTO extends AbstractTraceableDTO<String> {
 

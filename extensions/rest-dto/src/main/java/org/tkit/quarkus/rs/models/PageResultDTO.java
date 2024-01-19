@@ -19,6 +19,7 @@ import java.util.List;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
+@Deprecated
 @RegisterForReflection
 public class PageResultDTO<T> {
 

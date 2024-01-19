@@ -27,6 +27,8 @@ public class ConstraintException extends DAOException {
      */
     private static final String PARAMETER = "constraint";
 
+    private static final String NAME = "constraintName";
+
     /**
      * The default constructor.
      *
@@ -38,6 +40,24 @@ public class ConstraintException extends DAOException {
     public ConstraintException(String constraints, Enum<?> messageKey, Throwable cause, Serializable... params) {
         super(messageKey, cause, params);
         addParameter(PARAMETER, constraints);
+    }
+
+    /**
+     * Sets the constraint name.
+     *
+     * @param name the name of the constraint.
+     */
+    public void addConstraintName(String name) {
+        addParameter(NAME, name);
+    }
+
+    /**
+     * Gets the constraints name.
+     *
+     * @return the constraints name.
+     */
+    public String getConstraintName() {
+        return (String) namedParameters.get(NAME);
     }
 
     /**

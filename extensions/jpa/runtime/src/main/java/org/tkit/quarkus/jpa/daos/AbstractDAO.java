@@ -23,11 +23,7 @@ import java.util.stream.Stream;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityGraph;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.LockModeType;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.CriteriaUpdate;
@@ -539,9 +535,12 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      * @return the corresponding service exception.
      */
     @SuppressWarnings("squid:S1872")
-    protected DAOException handleConstraint(Exception ex, Enum<?> key) {
+    protected RuntimeException handleConstraint(Exception ex, Enum<?> key) {
         if (ex instanceof ConstraintException ce) {
             return ce;
+        }
+        if (ex instanceof OptimisticLockException ole) {
+            return ole;
         }
         if (ex instanceof ConstraintViolationException cve) {
             var msg = cve.getErrorMessage();
@@ -549,7 +548,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
                 msg = msg.replaceAll("\n", "").replaceAll("\"", "'");
             }
             var re = new ConstraintException(msg, key, ex, entityName);
-            re.addParameter("constraintName", cve.getConstraintName());
+            re.addConstraintName(cve.getConstraintName());
             return re;
         }
         return new DAOException(key, ex, entityName);

@@ -24,6 +24,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 /**
  * The rest exception DTO model.
  */
+@Deprecated
 @RegisterForReflection
 public class RestExceptionDTO {
 
