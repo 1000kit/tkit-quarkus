@@ -57,7 +57,7 @@ Include the component in your project by including the corresponding dependency.
 | Log RS           | tkit-quarkus-log-rs         |                                                                    | Quarkus extension for HTTP request logging (client & server).                                                                                                                                                                                                       | [Link](extensions/log/rs)         |
 | Log JSON         | tkit-quarkus-log-json       |                                                                    | Custom JSON log formatter that provides additional features not included in [Official Quarkus json logger](https://quarkus.io/guides/logging#json-logging). Make sure you only include this if you need those extra features, otherwise use the official extension. | [Link](extensions/log/json)       |
 | Rest             | tkit-quarkus-rest           |                                                                    | Helper classes for JAX-RS and Jackson.                                                                                                                                                                                                                              | [Link](extensions/rest-dto)       |
-| Rest DTO         | tkit-quarkus-rest-dto       |                                                                    | Helper classes for REST - model mapping, exception handling, DTOs.                                                                                                                                                                                                  | [Link](extensions/rest)           |
+| Rest DTO         | tkit-quarkus-rest-dto       | > DEPRECATED                                                       | Helper classes for REST - model mapping, exception handling, DTOs.                                                                                                                                                                                                  | [Link](extensions/rest)           |
 | Test data import | tkit-quarkus-test-db-import |                                                                    | Test extension for data import from excel into database during unit tests.                                                                                                                                                                                          | [Link](extensions/test-db-import) |
 | Security         | tkit-quarkus-security       |                                                                    | Enhanced security configuration                                                                                                                                                                                                                                     | [Link](extensions/security)       |
 
@@ -65,10 +65,7 @@ Include the component in your project by including the corresponding dependency.
 
 If you have used previous versions of tkit quarkus libraries (mvn groupId `org.tkit.quarkus`) then there are a few breaking changes in this new version, however the migration is straightforward:
 
-1. Quarkus 2.x 
-Tkit Quarkus libs only support Quarkus version 2. Check the [official guide](https://github.com/quarkusio/quarkus/wiki/Migration-Guide-2.0) for migration instructions.
-
-2. Change maven imports
+#### Change maven imports
 Group id of the libraries has changed to `org.tkit.quarkus.lib`. Also, prefer the use of bom import, to ensure version compatibility. So if your current pom.xml looks sth like this:
 
 ```xml
@@ -97,7 +94,7 @@ Change it to:
 </dependencies>
 ```
 
-3. Update configuration
+#### Update configuration
 All extensions and libraries now have unified configuration properties structure, starting with `tkit.` prefix, some keys have been renamed or otherwise updated. Check the table bellow for config property migration:
 
 | Old                               | New                                          | Note                                                                                                                   |
@@ -105,7 +102,7 @@ All extensions and libraries now have unified configuration properties structure
 | `quarkus.tkit.log.ignore.pattern` | `tkit.log.cdi.auto-discovery.ignore.pattern` |                                                                                                                        |
 | `quarkus.tkit.log.packages`       | `tkit.log.cdi.auto-discovery.packages`       | In order to enable auto binding of logging extension, you must add property `tkit.log.cdi.auto-discovery.enabled=true` |
 
-4. Default behavior changes
+#### Default behavior changes
 
 Logging:  
 CDI logging now only logs end of business methods (success or error) to reduce logging verbosity. If you restore the behavior and still log start method invocations, set the property: `tkit.log.cdi.start.enabled=true`
@@ -122,7 +119,8 @@ New behavior:
 [com.acme.dom.dao.SomeBean] someMethod(param):SomeResultClass [0.035s]
 ```
 
-5. Use `modificationCount` instead of `version` when working with `TraceableEntity`. Therefore, annotations like `@Mapping(target = "version", ignore = true)` should be changed to `@Mapping(target = "modificationCount", ignore = true)`.
+#### JPA ModificationCount
+Use `modificationCount` instead of `version` when working with `TraceableEntity`. Therefore, annotations like `@Mapping(target = "version", ignore = true)` should be changed to `@Mapping(target = "modificationCount", ignore = true)`.
 
 ## Contributors ✨
 

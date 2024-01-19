@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import jakarta.inject.Inject;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.persistence.criteria.Order;
 import jakarta.transaction.Transactional;
 
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.jpa.daos.Page;
 import org.tkit.quarkus.jpa.daos.PageResult;
 import org.tkit.quarkus.jpa.daos.PagedQuery;
-import org.tkit.quarkus.jpa.exceptions.DAOException;
 import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -48,7 +48,7 @@ public class UserDAOTest extends AbstractTest {
         userDAO.update(loaded);
 
         user.setName("update-name");
-        Assertions.assertThrows(DAOException.class, () -> {
+        Assertions.assertThrows(OptimisticLockException.class, () -> {
             userDAO.update(user);
         });
     }

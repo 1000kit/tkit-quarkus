@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Expression;
@@ -31,6 +32,13 @@ import jakarta.persistence.criteria.Predicate;
 public class QueryCriteriaUtil {
 
     /**
+     * Custom query like characters.
+     */
+    private static final Map<String, String> DEFAULT_LIKE_MAPPING_CHARACTERS = Map.of(
+            "*", "%",
+            "?", "_");
+
+    /**
      * The default constructor.
      */
     private QueryCriteriaUtil() {
@@ -38,7 +46,7 @@ public class QueryCriteriaUtil {
     }
 
     /**
-     * Wildcard the search string with case insensitive {@code true}.
+     * Wildcard the search string with case-insensitive {@code true}.
      *
      * @param searchString the search string.
      * @return the corresponding search string.
@@ -89,7 +97,7 @@ public class QueryCriteriaUtil {
                 subList.clear();
             }
             predicates.add(path.in(valuesList));
-            result = cb.or(predicates.toArray(new Predicate[predicates.size()]));
+            result = cb.or(predicates.toArray(new Predicate[0]));
         }
         return result;
     }
@@ -114,7 +122,7 @@ public class QueryCriteriaUtil {
                 subList.clear();
             }
             predicates.add(cb.not(path.in(valuesList)));
-            result = cb.and(predicates.toArray(new Predicate[predicates.size()]));
+            result = cb.and(predicates.toArray(new Predicate[0]));
         }
         return result;
     }
@@ -129,6 +137,7 @@ public class QueryCriteriaUtil {
      * @param parameters the parameters to be added from the IN clause
      * @return the query string with the IN clause
      */
+    @Deprecated
     public static String inClause(String attribute, String attributeName, Collection<?> values,
             Map<String, Object> parameters) {
         StringBuilder sb = new StringBuilder();
@@ -159,6 +168,7 @@ public class QueryCriteriaUtil {
      * @param parameters the parameters to be added from the NOT IN clause
      * @return the query string with the NOT IN clause
      */
+    @Deprecated
     public static String notInClause(String attribute, String attributeName, Collection<?> values,
             Map<String, Object> parameters) {
         StringBuilder sb = new StringBuilder();
@@ -177,5 +187,142 @@ public class QueryCriteriaUtil {
         sb.append(")");
         parameters.put(attributeName, valuesList);
         return sb.toString();
+    }
+
+    /**
+     * Add a search predicate to the list of predicates.
+     *
+     * @param predicates - list of predicates
+     * @param criteriaBuilder - CriteriaBuilder
+     * @param column - column Path [root.get(Entity_.attribute)]
+     * @param searchString - string to search. if Contains [*,?] like will be used
+     * @param caseInsensitive - true in case of insensitive search (db column and search string are given to lower case)
+     * @return {@code true} add predicate to the list
+     */
+    public static boolean addSearchStringPredicate(List<Predicate> predicates, CriteriaBuilder criteriaBuilder,
+            Expression<String> column,
+            String searchString, final boolean caseInsensitive) {
+        if (predicates == null) {
+            return false;
+        }
+        var predicate = createSearchStringPredicate(criteriaBuilder, column, searchString, caseInsensitive);
+        if (predicate == null) {
+            return false;
+        }
+
+        return predicates.add(predicate);
+    }
+
+    /**
+     * Add a search predicate as a case of insensitive search to the list of predicates.
+     *
+     * @param predicates - list of predicates
+     * @param criteriaBuilder - CriteriaBuilder
+     * @param column - column Path [root.get(Entity_.attribute)]
+     * @param searchString - string to search. if Contains [*,?] like will be used
+     * @return {@code true} add predicate to the list
+     */
+    public static boolean addSearchStringPredicate(List<Predicate> predicates, CriteriaBuilder criteriaBuilder,
+            Expression<String> column,
+            String searchString) {
+        if (predicates == null) {
+            return false;
+        }
+        var predicate = createSearchStringPredicate(criteriaBuilder, column, searchString, true);
+        if (predicate == null) {
+            return false;
+        }
+
+        return predicates.add(predicate);
+    }
+
+    /**
+     * Create a search predicate as a case of insensitive search.
+     *
+     * @param criteriaBuilder - CriteriaBuilder
+     * @param column - column Path [root.get(Entity_.attribute)]
+     * @param searchString - string to search. if Contains [*,?] like will be used
+     * @return LIKE or EQUAL Predicate according to the search string
+     */
+    public static Predicate createSearchStringPredicate(CriteriaBuilder criteriaBuilder, Expression<String> column,
+            String searchString) {
+        return createSearchStringPredicate(criteriaBuilder, column, searchString, true);
+    }
+
+    /**
+     * Create a search predicate.
+     *
+     * @param criteriaBuilder - CriteriaBuilder
+     * @param column - column Path [root.get(Entity_.attribute)]
+     * @param searchString - string to search. if Contains [*,?] like will be used
+     * @param caseInsensitive - true in case of insensitive search (db column and search string are given to lower case)
+     * @return LIKE or EQUAL Predicate according to the search string
+     */
+    public static Predicate createSearchStringPredicate(CriteriaBuilder criteriaBuilder, Expression<String> column,
+            String searchString, final boolean caseInsensitive) {
+        return createSearchStringPredicate(criteriaBuilder, column, searchString, caseInsensitive,
+                QueryCriteriaUtil::defaultReplaceFunction, DEFAULT_LIKE_MAPPING_CHARACTERS);
+    }
+
+    /**
+     * Create a search predicate.
+     *
+     * @param criteriaBuilder - CriteriaBuilder
+     * @param column - column Path [root.get(Entity_.attribute)]
+     * @param searchString - string to search. if Contains [*,?] like will be used
+     * @param caseInsensitive - true in case of insensitive search (db column and search string are given to lower case)
+     * @param replaceFunction - replace special character function for characters in the searchString
+     * @param likeMapping - map of like query mapping characters ['*','%', ...]
+     * @return LIKE or EQUAL Predicate according to the search string
+     */
+    public static Predicate createSearchStringPredicate(CriteriaBuilder criteriaBuilder, Expression<String> column,
+            String searchString, final boolean caseInsensitive,
+            Function<String, String> replaceFunction,
+            Map<String, String> likeMapping) {
+
+        if (searchString == null || searchString.isBlank()) {
+            return null;
+        }
+
+        // replace function for special characters
+        if (replaceFunction != null) {
+            searchString = replaceFunction.apply(searchString);
+        }
+
+        // case insensitive
+        Expression<String> columnDefinition = column;
+        if (caseInsensitive) {
+            searchString = searchString.toLowerCase();
+            columnDefinition = criteriaBuilder.lower(column);
+        }
+
+        // check for like characters
+        boolean like = false;
+        if (likeMapping != null) {
+            for (Map.Entry<String, String> item : likeMapping.entrySet()) {
+                if (searchString.contains(item.getKey())) {
+                    searchString = searchString.replace(item.getKey(), item.getValue());
+                    like = true;
+                }
+            }
+        }
+
+        // like predicate
+        if (like) {
+            return criteriaBuilder.like(columnDefinition, searchString);
+        }
+
+        // equal predicate
+        return criteriaBuilder.equal(columnDefinition, searchString);
+    }
+
+    /**
+     * Escape the extra DB characters
+     */
+    public static String defaultReplaceFunction(String searchString) {
+        return searchString
+                .replace("\\", "\\\\")
+                .replace("%", "\\%")
+                .replace("_", "\\_");
     }
 }

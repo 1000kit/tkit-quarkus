@@ -24,6 +24,7 @@ import org.tkit.quarkus.rs.resources.ResourceManager;
 /**
  * The default exception mapper with priority {@code PRIORITY}.
  */
+@Deprecated
 @Provider
 @Priority(DefaultExceptionMapper.PRIORITY)
 public class DefaultExceptionMapper implements ExceptionMapper<Exception> {
