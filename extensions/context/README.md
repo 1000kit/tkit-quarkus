@@ -9,3 +9,10 @@ Maven dependency
     <artifactId>tkit-quarkus-context</artifactId>
 </dependency>
 ```
+
+Context object holds
+
+* request ID
+* principal name
+* principal token
+* business values

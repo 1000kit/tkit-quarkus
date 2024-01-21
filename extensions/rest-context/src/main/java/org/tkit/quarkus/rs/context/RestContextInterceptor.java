@@ -11,6 +11,7 @@ import jakarta.ws.rs.container.ContainerResponseFilter;
 import jakarta.ws.rs.core.SecurityContext;
 import jakarta.ws.rs.ext.Provider;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.tkit.quarkus.context.ApplicationContext;
 import org.tkit.quarkus.context.Context;
 import org.tkit.quarkus.rs.context.principal.RestContextPrincipalResolverService;
@@ -66,8 +67,11 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
             }
         }
 
+        // get principal token
+        JsonWebToken principalToken = principalResolverService.getPrincipalToken(requestContext);
+
         // get principal ID
-        String principal = principalResolverService.getPrincipalName(requestContext);
+        String principal = principalResolverService.getPrincipalName(principalToken, requestContext);
 
         // get tenant ID
         String tenantId = tenantResolverService.getTenantId(requestContext);
@@ -77,6 +81,7 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
                 .correlationId(correlationId)
                 .principal(principal)
                 .tenantId(tenantId)
+                .principalToken(principalToken)
                 .businessContext(businessContext)
                 .build();
 

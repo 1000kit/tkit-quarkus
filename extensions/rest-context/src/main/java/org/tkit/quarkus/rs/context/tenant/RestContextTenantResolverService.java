@@ -34,12 +34,10 @@ public class RestContextTenantResolverService {
 
         // get tenant-id from custom service
         try {
-
             String tenantId = customTenantResolver.getTenantId(containerRequestContext);
             if (tenantId != null && !tenantId.isBlank()) {
                 return tenantId;
             }
-
         } catch (Exception ex) {
             log.error("Failed to call custom tenant resolver service, error: " + ex.getMessage(), ex);
             throw new RestContextException(ErrorKeys.ERROR_CALL_CUSTOM_TENANT_SERVICE,

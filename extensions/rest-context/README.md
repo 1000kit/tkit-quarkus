@@ -28,15 +28,34 @@ tkit.rs.context.business-context.enabled=false
 tkit.rs.context.business-context.header-param-name=business-context
 ```
 
-Runtime principal configuration.
+Runtime principal name configuration.
 
 ```properties
 # Enable or disable principal name for the context
-tkit.rs.context.principal.enabled=true
+tkit.rs.context.principal.name.enabled=true
+# Enable or disable custom principal service
+tkit.rs.context.principal.name.custom-service-enabled=false
 # Enabled or disable `SecurityContext` principal name resolver
-tkit.rs.context.principal.security-context.enabled=false
+tkit.rs.context.principal.name.security-context.enabled=false
+# Optional default principal name, default null
+tkit.rs.context.principal.name.default=
+# Read name from token
+tkit.rs.context.principal.name.token-enabled=true
+# Token claim name for principal name
+tkit.rs.context.principal.name.token-claim-name=sub
+# Use header parameter as principal name
+tkit.rs.context.principal.name.header-param-enabled=false
+# Principal name header for header-param-enabled
+tkit.rs.context.principal.name.header-param-name=x-principal-id
+```
+
+Runtime principal token configuration.
+
+```properties
 # Enabled or disable token resolver for principal name
 tkit.rs.context.principal.token.enabled=true
+# Token type name for parsing token
+tkit.rs.context.principal.token.type=principal-token
 # Verify the token or skip token verification
 tkit.rs.context.principal.token.verify=false
 # Enable or disable the public key location for the verified token.
@@ -44,9 +63,8 @@ tkit.rs.context.principal.token.public-key-location.enabled=false
 # Token public key location suffix. This property is use only if public-key-location.enabled set to true.
 tkit.rs.context.principal.token.public-key-location.suffix=/protocol/openid-connect/certs
 # Token header parameter
-tkit.rs.context.principal.token.token-header-param=apm-principal-token
-# Token claim name for principal name
-tkit.rs.context.principal.token.claim-name=sub
+tkit.rs.context.principal.token.header-param=apm-principal-token
+
 ```
 
 Runtime tenant configuration.

@@ -18,5 +18,9 @@
             <artifactId>quarkus-arc</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.jwt</groupId>
+            <artifactId>microprofile-jwt-auth-api</artifactId>
+        </dependency>
     </dependencies>
 </project>
