@@ -11,6 +11,8 @@ import jakarta.json.JsonValue;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import io.smallrye.jwt.JsonUtils;
+
 /**
  * Token claim utility
  */
@@ -72,7 +74,7 @@ public class TokenClaimUtility {
         if (path == null || path.length == 0) {
             return null;
         }
-        return findClaimValue(token.getClaim(path[0]), path, 1);
+        return findClaimValue(JsonUtils.wrapValue(token.getClaim(path[0])), path, 1);
     }
 
     private static JsonValue findClaimValue(JsonValue json, String[] path, int step) {

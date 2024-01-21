@@ -3,6 +3,8 @@ package org.tkit.quarkus.rs.context.principal;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.container.ContainerRequestContext;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
 import io.quarkus.arc.DefaultBean;
 import io.quarkus.arc.Unremovable;
 
@@ -11,7 +13,7 @@ import io.quarkus.arc.Unremovable;
 @ApplicationScoped
 public class DefaultPrincipalNameCustomResolver implements PrincipalNameCustomResolver {
     @Override
-    public String getPrincipalName(ContainerRequestContext containerRequestContext) {
+    public String getPrincipalName(JsonWebToken principalToken, ContainerRequestContext containerRequestContext) {
         return null;
     }
 }

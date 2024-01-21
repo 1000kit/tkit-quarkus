@@ -11,9 +11,6 @@ import io.smallrye.config.WithName;
 @ConfigMapping(prefix = "tkit.rs.context.principal")
 public interface RestContextPrincipalConfig {
 
-    @WithName("token")
-    TokenConfig token();
-
     @WithName("name")
     PrincipalName name();
 
@@ -48,34 +45,6 @@ public interface RestContextPrincipalConfig {
         @WithName("header-param-name")
         @WithDefault("x-principal-id")
         String headerParamName();
-    }
-
-    interface TokenConfig {
-
-        @WithName("type")
-        @WithDefault("principal-token")
-        String type();
-
-        @WithName("enabled")
-        @WithDefault("true")
-        boolean enabled();
-
-        @WithName("verify")
-        @WithDefault("false")
-        boolean verify();
-
-        @WithName("public-key-location.enabled")
-        @WithDefault("false")
-        boolean issuerEnabled();
-
-        @WithName("public-key-location.suffix")
-        @WithDefault("/protocol/openid-connect/certs")
-        String issuerSuffix();
-
-        @WithName("header-param")
-        @WithDefault("apm-principal-token")
-        String tokenHeaderParam();
-
     }
 
     interface SecurityContextConfig {

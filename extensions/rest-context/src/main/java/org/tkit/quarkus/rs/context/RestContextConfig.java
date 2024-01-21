@@ -21,6 +21,21 @@ public interface RestContextConfig {
     @WithName("business-context")
     RestContextBusinessConfig businessContext();
 
+    @WithName("token")
+    TokenConfig token();
+
+    @WithName("token-context")
+    @WithDefault("true")
+    boolean tokenContext();
+
+    @WithName("token-mandatory")
+    @WithDefault("false")
+    boolean tokenMandatory();
+
+    @WithName("principal-mandatory")
+    @WithDefault("false")
+    boolean principalMandatory();
+
     interface RestContextCorrelationIdConfig {
 
         @WithName("enabled")
@@ -44,6 +59,34 @@ public interface RestContextConfig {
         @WithName("header-param-name")
         @WithDefault("business-context")
         String headerParamName();
+
+    }
+
+    interface TokenConfig {
+
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
+
+        @WithName("type")
+        @WithDefault("principal-token")
+        String type();
+
+        @WithName("verify")
+        @WithDefault("false")
+        boolean verify();
+
+        @WithName("public-key-location.enabled")
+        @WithDefault("false")
+        boolean issuerEnabled();
+
+        @WithName("public-key-location.suffix")
+        @WithDefault("/protocol/openid-connect/certs")
+        String issuerSuffix();
+
+        @WithName("header-param")
+        @WithDefault("apm-principal-token")
+        String tokenHeaderParam();
 
     }
 

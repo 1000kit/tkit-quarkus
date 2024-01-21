@@ -1,6 +1,5 @@
 package org.tkit.quarkus.rs.context.token;
 
-import io.quarkus.arc.Unremovable;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
@@ -26,14 +25,14 @@ public class TokenParserService {
     @Inject
     JWTParser parser;
 
-    public JsonWebToken parseToken(TokenParserRequest request) throws TokenParserException {
+    public JsonWebToken parseToken(TokenParserRequest request) throws TokenException {
+        if (request == null) {
+            return null;
+        }
         try {
-            if (request == null) {
-                return null;
-            }
             return parseTokenRequest(request);
         } catch (Exception ex) {
-            throw new TokenParserException(ErrorKeys.ERROR_PARSE_TOKEN, "Error parse raw token", ex);
+            throw new TokenException(ErrorKeys.ERROR_PARSE_TOKEN, "Error parse raw token", ex);
         }
     }
 
@@ -59,7 +58,7 @@ public class TokenParserService {
 
         var jws = (JsonWebSignature) JsonWebStructure.fromCompactSerialization(request.getRawToken());
         var jwtClaims = JwtClaims.parse(jws.getUnverifiedPayload());
-        return new DefaultJWTCallerPrincipal(request.getType(), jwtClaims);
+        return new DefaultJWTCallerPrincipal(request.getRawToken(), request.getType(), jwtClaims);
     }
 
     public enum ErrorKeys {
