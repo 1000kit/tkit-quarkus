@@ -2,6 +2,8 @@ package org.tkit.quarkus.context;
 
 import java.util.*;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
 public class Context {
 
     /**
@@ -36,7 +38,10 @@ public class Context {
      */
     private final Stack<ApplicationError> errors;
 
-    Context(String correlationId, String businessContext, String principal, Map<String, String> meta, String tenantId) {
+    private final JsonWebToken principalToken;
+
+    Context(String correlationId, String businessContext, String principal, Map<String, String> meta, String tenantId,
+            JsonWebToken principalToken) {
         this.correlationId = correlationId;
         this.businessContext = businessContext;
         this.meta = meta;
@@ -44,6 +49,25 @@ public class Context {
         this.businessParams = new HashSet<>();
         this.errors = new Stack<>();
         this.tenantId = tenantId;
+        this.principalToken = principalToken;
+    }
+
+    /**
+     * Gets the principal token
+     *
+     * @return the principal token
+     */
+    public JsonWebToken getPrincipalToken() {
+        return principalToken;
+    }
+
+    /**
+     * Returns {@code true} if principal token is set in context.
+     *
+     * @return {@code true} if principal token is set in context.
+     */
+    public boolean hasPrincipalToken() {
+        return principalToken != null;
     }
 
     /**
@@ -53,6 +77,15 @@ public class Context {
      */
     public String getPrincipal() {
         return principal;
+    }
+
+    /**
+     * Returns {@code true} if principal is set in context.
+     *
+     * @return {@code true} if principal is set in context.
+     */
+    public boolean hasPrincipal() {
+        return principal != null;
     }
 
     /**
@@ -71,6 +104,15 @@ public class Context {
      */
     public String getTenantId() {
         return tenantId;
+    }
+
+    /**
+     * Returns {@code true} if tenant ID is set in context.
+     *
+     * @return {@code true} if tenant ID is set in context.
+     */
+    public boolean hasTenantId() {
+        return tenantId != null;
     }
 
     /**
@@ -170,11 +212,18 @@ public class Context {
 
         private final Map<String, String> meta = new HashMap<>();
 
+        private JsonWebToken principalToken;
+
         public ApplicationContextBuilder correlationId(String correlationId) {
             if (correlationId == null) {
                 return this;
             }
             this.correlationId = correlationId;
+            return this;
+        }
+
+        public ApplicationContextBuilder principalToken(JsonWebToken principalToken) {
+            this.principalToken = principalToken;
             return this;
         }
 
@@ -199,7 +248,7 @@ public class Context {
         }
 
         public Context build() {
-            return new Context(correlationId, businessContext, principal, meta, tenantId);
+            return new Context(correlationId, businessContext, principal, meta, tenantId, principalToken);
         }
     }
 }

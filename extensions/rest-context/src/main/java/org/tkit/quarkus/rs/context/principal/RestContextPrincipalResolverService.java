@@ -5,24 +5,11 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.SecurityContext;
 
-import org.jose4j.jws.JsonWebSignature;
-import org.jose4j.jwt.JwtClaims;
-import org.jose4j.jwt.MalformedClaimException;
-import org.jose4j.jwt.consumer.InvalidJwtException;
-import org.jose4j.jwx.JsonWebStructure;
-import org.jose4j.lang.JoseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.tkit.quarkus.rs.context.RestContextException;
-
-import io.smallrye.jwt.auth.principal.JWTAuthContextInfo;
-import io.smallrye.jwt.auth.principal.JWTParser;
-import io.smallrye.jwt.auth.principal.ParseException;
 
 @RequestScoped
 public class RestContextPrincipalResolverService {
-
-    private static final Logger log = LoggerFactory.getLogger(RestContextPrincipalResolverService.class);
 
     @Inject
     RestContextPrincipalConfig config;
@@ -31,18 +18,31 @@ public class RestContextPrincipalResolverService {
     SecurityContext securityContext;
 
     @Inject
-    JWTAuthContextInfo authContextInfo;
+    PrincipalNameCustomResolver customResolver;
 
-    @Inject
-    JWTParser parser;
+    public String getPrincipalName(JsonWebToken principalToken, ContainerRequestContext containerRequestContext) {
 
-    public String getPrincipalName(ContainerRequestContext containerRequestContext) {
-        if (!config.enabled()) {
+        var principalNameConfig = config.name();
+        if (!principalNameConfig.enabled()) {
             return null;
         }
 
+        // get principal name from custom service
+        if (principalNameConfig.enabledCustomService()) {
+            try {
+                String principalName = customResolver.getPrincipalName(principalToken, containerRequestContext);
+                if (principalName != null && !principalName.isBlank()) {
+                    return principalName;
+                }
+            } catch (Exception ex) {
+                throw new RestContextException(ErrorKeys.ERROR_CALL_CUSTOM_PRINCIPAL_NAME_SERVICE,
+                        "Failed to call custom principal name resolver service, error: " + ex.getMessage(), ex);
+            }
+        }
+
         // get principal name from the security context
-        if (config.securityContext().enabled() && securityContext != null && securityContext.getUserPrincipal() != null) {
+        if (principalNameConfig.securityContext().enabled() && securityContext != null
+                && securityContext.getUserPrincipal() != null) {
             String principal = securityContext.getUserPrincipal().getName();
             if (principal != null && !principal.isBlank()) {
                 return principal;
@@ -50,56 +50,29 @@ public class RestContextPrincipalResolverService {
         }
 
         // get the principal name from the token
-        if (config.token().enabled()) {
-            try {
-                String principal = getPrincipalNameFromToken(
-                        containerRequestContext.getHeaders().getFirst(config.token().tokenHeaderParam()));
+        if (principalNameConfig.tokenEnabled()) {
+            // check principal name from token
+            if (principalToken != null) {
+                String principal = principalToken.getClaim(principalNameConfig.tokenClaimName());
                 if (principal != null && !principal.isBlank()) {
                     return principal;
                 }
-            } catch (Exception ex) {
-                log.error("Failed to verify/parse a token: {}", config.token().tokenHeaderParam());
-                log.error(ex.getMessage(), ex);
-                throw new RestContextException(ErrorKeys.ERROR_PARSE_PRINCIPAL_TOKEN,
-                        "Failed to verify/parse a token '" + config.token().tokenHeaderParam() + "', error: " + ex.getMessage(),
-                        ex);
             }
         }
 
-        return config.defaultPrincipal().orElse(null);
-    }
-
-    private String getPrincipalNameFromToken(String token)
-            throws InvalidJwtException, JoseException, MalformedClaimException, ParseException {
-        if (token == null) {
-            return null;
-        }
-
-        String principal;
-
-        var jws = (JsonWebSignature) JsonWebStructure.fromCompactSerialization(token);
-        var jwtClaims = JwtClaims.parse(jws.getUnverifiedPayload());
-
-        if (config.token().verify()) {
-            var info = authContextInfo;
-
-            if (config.token().issuerEnabled()) {
-                var publicKeyLocation = jwtClaims.getIssuer() + config.token().issuerSuffix();
-                info = new JWTAuthContextInfo(authContextInfo);
-                info.setPublicKeyLocation(publicKeyLocation);
+        // check principal name from header parameter
+        if (principalNameConfig.headerParamEnabled()) {
+            String tenantId = containerRequestContext.getHeaders().getFirst(principalNameConfig.headerParamName());
+            if (tenantId != null && !tenantId.isBlank()) {
+                return tenantId;
             }
-
-            var jwtWebToken = parser.parse(token, info);
-            principal = jwtWebToken.getClaim(config.token().claimName());
-        } else {
-            principal = jwtClaims.getStringClaimValue(config.token().claimName());
         }
 
-        return principal;
+        return principalNameConfig.defaultPrincipal().orElse(null);
     }
 
     public enum ErrorKeys {
 
-        ERROR_PARSE_PRINCIPAL_TOKEN;
+        ERROR_CALL_CUSTOM_PRINCIPAL_NAME_SERVICE;
     }
 }

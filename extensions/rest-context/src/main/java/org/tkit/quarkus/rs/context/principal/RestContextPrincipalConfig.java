@@ -10,43 +10,41 @@ import io.smallrye.config.WithName;
 @StaticInitSafe
 @ConfigMapping(prefix = "tkit.rs.context.principal")
 public interface RestContextPrincipalConfig {
-    @WithName("enabled")
-    @WithDefault("true")
-    boolean enabled();
 
-    @WithName("security-context")
-    SecurityContextConfig securityContext();
+    @WithName("name")
+    PrincipalName name();
 
-    @WithName("token")
-    TokenConfig token();
+    interface PrincipalName {
 
-    @WithName("default")
-    Optional<String> defaultPrincipal();
-
-    interface TokenConfig {
         @WithName("enabled")
         @WithDefault("true")
         boolean enabled();
 
-        @WithName("verify")
+        @WithName("custom-service-enabled")
         @WithDefault("false")
-        boolean verify();
+        boolean enabledCustomService();
 
-        @WithName("public-key-location.enabled")
-        @WithDefault("false")
-        boolean issuerEnabled();
+        @WithName("security-context")
+        SecurityContextConfig securityContext();
 
-        @WithName("public-key-location.suffix")
-        @WithDefault("/protocol/openid-connect/certs")
-        boolean issuerSuffix();
+        @WithName("default")
+        Optional<String> defaultPrincipal();
 
-        @WithName("token-header-param")
-        @WithDefault("apm-principal-token")
-        String tokenHeaderParam();
+        @WithName("token-enabled")
+        @WithDefault("true")
+        boolean tokenEnabled();
 
-        @WithName("claim-name")
+        @WithName("token-claim-name")
         @WithDefault("sub")
-        String claimName();
+        String tokenClaimName();
+
+        @WithName("header-param-enabled")
+        @WithDefault("false")
+        boolean headerParamEnabled();
+
+        @WithName("header-param-name")
+        @WithDefault("x-principal-id")
+        String headerParamName();
     }
 
     interface SecurityContextConfig {

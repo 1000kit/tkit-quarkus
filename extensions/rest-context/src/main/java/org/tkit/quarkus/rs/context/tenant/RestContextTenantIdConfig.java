@@ -30,6 +30,26 @@ public interface RestContextTenantIdConfig {
     @WithName("mock")
     MockConfig mock();
 
+    @WithName("token")
+    TokenConfig token();
+
+    interface TokenConfig {
+        /**
+         * Enable or disable tenant token claim.
+         */
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
+
+        /**
+         * Default mock tenant
+         */
+        @WithName("claim-tenant-param")
+        @WithDefault("tenantId")
+        String claimTenantParam();
+
+    }
+
     interface MockConfig {
 
         /**
@@ -59,11 +79,5 @@ public interface RestContextTenantIdConfig {
         @WithDefault("orgId")
         String claimOrgId();
 
-        /**
-         * Token header parameter for mock service
-         */
-        @WithName("token-header-param")
-        @WithDefault("apm-principal-token")
-        String tokenHeaderParam();
     }
 }
