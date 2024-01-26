@@ -27,6 +27,6 @@ class MdcDurationServiceTest extends AbstractTest {
 
         assertLogs().assertLines(1)
                 .assertMatches(0,
-                        ".+INFO  \\{X-Correlation-ID=.+, rs-status=200, rs-time=.+\\} \\[org\\.tki\\.qua\\.log\\.rs\\.tes\\.app\\.NoAnnotationRestController\\] \\(executor-thread-1\\) GET \\/no-anno\\/test1 \\[200\\] \\[.+s\\]");
+                        ".+INFO  \\{rs-status=200, rs-time=.+\\} \\[org\\.tki\\.qua\\.log\\.rs\\.tes\\.app\\.NoAnnotationRestController\\] \\(executor-thread-1\\) GET \\/no-anno\\/test1 \\[200\\] \\[.+s\\]");
     }
 }
