@@ -1,4 +1,6 @@
-package org.tkit.quarkus.log.cdi;
+package org.tkit.quarkus.log.cdi.deployment;
+
+import org.tkit.quarkus.log.cdi.ServiceValue;
 
 import io.quarkus.builder.item.SimpleBuildItem;
 

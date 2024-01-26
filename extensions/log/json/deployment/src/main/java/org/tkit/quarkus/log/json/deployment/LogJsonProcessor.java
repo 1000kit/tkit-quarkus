@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tkit.quarkus.log.json;
+package org.tkit.quarkus.log.json.deployment;
+
+import org.tkit.quarkus.log.json.LogJsonConfig;
+import org.tkit.quarkus.log.json.LogJsonRecorder;
 
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;

@@ -1,4 +1,4 @@
-package org.tkit.quarkus.log.cdi;
+package org.tkit.quarkus.log.cdi.deployment;
 
 import java.util.ArrayList;
 import java.util.List;
