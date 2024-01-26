@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.tkit.quarkus.lib</groupId>
-        <artifactId>tkit-quarkus-log-rs-parent</artifactId>
+        <artifactId>tkit-quarkus-rest-context-parent</artifactId>
         <version>999-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tkit-quarkus-log-rs-deployment</artifactId>
-    <name>tkit-quarkus-log-rs-deployment</name>
+    <artifactId>tkit-quarkus-rest-context-deployment</artifactId>
+    <name>tkit-quarkus-rest-context-deployment</name>
 
     <dependencies>
         <dependency>
@@ -19,36 +19,23 @@
             <artifactId>quarkus-arc-deployment</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-core-deployment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-jwt-deployment</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.tkit.quarkus.lib</groupId>
-            <artifactId>tkit-quarkus-log-rs</artifactId>
+            <artifactId>tkit-quarkus-rest-context</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <!-- TEST -->
         <dependency>
-            <groupId>org.tkit.quarkus.lib</groupId>
-            <artifactId>tkit-quarkus-rest-context</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-jwt-deployment</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-deployment</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5-internal</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

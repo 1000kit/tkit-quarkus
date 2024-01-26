@@ -24,6 +24,7 @@
         <module>panache-reactive</module>
         <module>rs-client</module>
         <module>rs-client-reactive</module>
+        <module>rest-context</module>
     </modules>
 
     <profiles>
