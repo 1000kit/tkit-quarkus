@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>tkit-quarkus-it-rc-client</artifactId>
+    <artifactId>tkit-quarkus-it-rs-client</artifactId>
     <name>tkit-quarkus-it-rs-client</name>
     <packaging>jar</packaging>
 

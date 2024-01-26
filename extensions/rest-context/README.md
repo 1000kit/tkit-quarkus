@@ -26,8 +26,8 @@ tkit.rs.context.correlation-id.header-param-name=X-Correlation-ID
 tkit.rs.context.business-context.enabled=false
 # Business context header parameter
 tkit.rs.context.business-context.header-param-name=business-context
-# Add token to the context
-tkit.rs.context.token-context=true
+# Add token to the application context
+tkit.rs.context.add-token-to-context=true
 # Principal token is mandatory
 tkit.rs.context.token-mandatory=false
 # Principal is mandatory

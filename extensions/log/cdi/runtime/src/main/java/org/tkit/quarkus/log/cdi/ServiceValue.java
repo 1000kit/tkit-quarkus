@@ -35,11 +35,11 @@ public class ServiceValue {
         return classes.get(clazz);
     }
 
-    ClassItem getOrCreate(String clazz) {
+    public ClassItem getOrCreate(String clazz) {
         return classes.computeIfAbsent(clazz, c -> createClass(clazz));
     }
 
-    void updateMapping() {
+    public void updateMapping() {
         classes.forEach((k, v) -> {
             if (v.config != null && v.config.configKey != null) {
                 mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
@@ -63,7 +63,7 @@ public class ServiceValue {
 
         public Map<String, Set<String>> mapping = new HashMap<>();
 
-        MethodItem getOrCreate(String method) {
+        public MethodItem getOrCreate(String method) {
             return methods.computeIfAbsent(method, c -> createMethod(method));
         }
 
@@ -124,7 +124,7 @@ public class ServiceValue {
         return c;
     }
 
-    static LogServiceAnnotation createConfig() {
+    public static LogServiceAnnotation createConfig() {
         LogServiceAnnotation item = new LogServiceAnnotation();
         item.log = false;
         item.stacktrace = false;
