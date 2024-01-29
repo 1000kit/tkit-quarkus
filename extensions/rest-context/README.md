@@ -115,3 +115,23 @@ Priority of the tenant ID resolver:
 The application can implement its own tenant resolver by implementing the `RestCustomTenantResolver` interface. The header parameter can be accessed using the input parameter `ContainerRequestContext` or by including the request scope bean `RestContextHeaderContainer`.
 
 For `ApplicationContext`. See [context](../context)
+
+### Tenant
+
+To skip the tenant resolver for the rest method, annotate the method with the `@TenantExclude` annotation.
+
+```java
+import org.tkit.quarkus.rs.context.tenant.TenantExclude;
+
+@Path("test")
+@ApplicationScoped
+public class OperatorRestController {
+
+    @GET
+    @TenantExclude
+    public Response test() {
+        // ...
+    }
+
+}
+```
