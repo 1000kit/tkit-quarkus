@@ -15,8 +15,8 @@ import org.tkit.quarkus.log.cdi.test.app.ErrorWrapperService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-@EnabledForJreRange(min = JRE.JAVA_21)
-public class ErrorDataServiceTest extends AbstractTest {
+@EnabledForJreRange(max = JRE.JAVA_17)
+public class ErrorDataServiceJdk17Test extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
@@ -34,7 +34,7 @@ public class ErrorDataServiceTest extends AbstractTest {
     public void error1Test() {
         Assertions.assertThrows(RuntimeException.class, () -> service.error1("Error"));
         assertLogs()
-                .assertLines(90)
+                .assertLines(92)
                 .assertContains(0,
                         "ERROR [org.tki.qua.log.cdi.tes.app.ErrorDataService] (main) error1(Error) throw java.lang.RuntimeException: Error");
     }
@@ -58,7 +58,7 @@ public class ErrorDataServiceTest extends AbstractTest {
     @Test
     public void wrapperTest() {
         Assertions.assertThrows(RuntimeException.class, () -> wrapper.wrapperMethod("WrapperError"));
-        assertLogs().assertLines(104)
+        assertLogs().assertLines(106)
                 .assertContains(0,
                         "ERROR [org.tki.qua.log.cdi.tes.app.ErrorDataService] (main) error1(WrapperError) throw java.lang.RuntimeException: WrapperError");
     }
