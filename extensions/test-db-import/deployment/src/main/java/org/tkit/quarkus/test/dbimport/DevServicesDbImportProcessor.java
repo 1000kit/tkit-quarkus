@@ -46,6 +46,12 @@ public class DevServicesDbImportProcessor {
             return null;
         }
 
+        // keep the previous behaviour of producing DevServicesDatasourceResultBuildItem only when the devservices first starts.
+        if (devServiceDatasource == null) {
+            log.debug("Dev service datasource is null, keep the previous configuration.");
+            return null;
+        }
+
         HashMap<String, String> data = new HashMap<>();
 
         setupDbResultSystemProperties(data, devServiceDatasource.getDefaultDatasource());
