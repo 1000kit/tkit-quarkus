@@ -49,13 +49,13 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     private static final Logger log = LoggerFactory.getLogger(AbstractDAO.class);
 
     /**
-     * The property hint is javax.persistence.loadgraph.
+     * The property hint is jakarta.persistence.loadgraph.
      * <p>
      * This hint will treat all the specified attributes in the Entity Graph as
      * FetchType.EAGER. Attributes that are not specified are treated as
      * FetchType.LAZY.
      */
-    protected static final String HINT_LOAD_GRAPH = "javax.persistence.loadgraph";
+    protected static final String HINT_LOAD_GRAPH = "jakarta.persistence.loadgraph";
 
     /**
      * The entity manager.
@@ -168,6 +168,25 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
         } catch (Exception e) {
             throw new DAOException(Errors.FIND_ALL_ENTITIES_FAILED, e, entityName,
                     entityGraph == null ? null : entityGraph.getName());
+        }
+    }
+
+    /**
+     * Get an instance, whose state may be lazily fetched. If the requested instance does not exist in the database,
+     * the {@code null} is return. The application should not expect that the instance state will be available
+     * upon detachment, unless it was accessed by the application while the entity manager was open.
+     *
+     * @param id the entity ID.
+     * @return the entity corresponding to the ID.
+     * @throws DAOException if the method fails.
+     */
+    public T getReference(final Object id) throws DAOException {
+        try {
+            return getEntityManager().getReference(entityClass, id);
+        } catch (EntityNotFoundException n) {
+            return null;
+        } catch (Exception ex) {
+            throw new DAOException(Errors.REFERENCE_ENTITY_BY_ID_FAILED, ex, entityName, id);
         }
     }
 
@@ -596,6 +615,8 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
         DELETE_ENTITY_FAILED,
         FIND_ENTITY_BY_ID_FAILED,
         FIND_ALL_ENTITIES_FAILED,
+
+        REFERENCE_ENTITY_BY_ID_FAILED,
         ;
     }
 }
