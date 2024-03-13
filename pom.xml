@@ -71,7 +71,7 @@
         <maven.formatter-maven-plugin.version>2.23.0</maven.formatter-maven-plugin.version>
         <maven.impsort-maven-plugin.version>1.9.0</maven.impsort-maven-plugin.version>
         <maven.enforcer-plugin.version>3.2.1</maven.enforcer-plugin.version>
-        <maven.gpg-plugin.version>3.1.0</maven.gpg-plugin.version>
+        <maven.gpg-plugin.version>3.2.0</maven.gpg-plugin.version>
         <maven.source-plugin.version>3.3.0</maven.source-plugin.version>
         <maven.javadoc-plugin.version>3.6.3</maven.javadoc-plugin.version>
         <maven.nexus-staging-maven-plugin.version>1.6.13</maven.nexus-staging-maven-plugin.version>
