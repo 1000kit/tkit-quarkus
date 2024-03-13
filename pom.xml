@@ -50,7 +50,7 @@
         <!-- Quarkus -->
         <quarkus.version>3.8.1</quarkus.version>
         <quarkus.hibernate-orm.version>6.4.4.Final</quarkus.hibernate-orm.version>
-        <quarkiverse.mockserver.version>1.4.0</quarkiverse.mockserver.version>
+        <quarkiverse.mockserver.version>1.5.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.1.6</quarkus.jandex-plugin.version>
 
         <!-- build -->
