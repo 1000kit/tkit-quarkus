@@ -1,0 +1,20 @@
+== tkit-quarkus-rest
+
+include::./includes/attributes.adoc[]
+
+This extension contains `OffsetDateTimeMapper` Jackson DateTimeOffset convertor for path and body parameters. The `RegisterCustomModuleCustomizer` update Jackson configuration to write `date-time` as string.
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-rest` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-rest</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----

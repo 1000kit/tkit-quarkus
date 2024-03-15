@@ -1,0 +1,72 @@
+== tkit-quarkus-db-import
+
+include::./includes/attributes.adoc[]
+
+Test extension for data import from excel into database during unit tests.
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-db-import` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-db-import</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== Usage
+
+The `@WithDBData` annotation to import database data before testing can be used at the class level or method level.
+
+
+Example of using the annotation on the class level
+[source,java]
+----
+@QuarkusTest
+@TestHTTPEndpoint(ThemesRestController.class)
+@WithDBData(value = "data/testdata.xml", deleteBeforeInsert = true, deleteAfterTest = true, rinseAndRepeat = true)
+class ThemesRestControllerTest {
+
+    // test methods
+
+}
+----
+
+Example of using the annotation on the method level
+[source,java]
+----
+@QuarkusTest
+@TestHTTPEndpoint(UserRestController.class)
+class UserRestControllerTest {
+
+     @Test
+    @WithDBData(value = { "data/test.xml" })
+    public void createUserTest() {
+        // test
+    }
+
+}
+----
+
+IMPORTANT: Only `FlatXmlDataSet` format of the `DBUnit` is currently supported.
+
+The `XML` file must be in the classpath. The best practice is to place this file in this directory `src/test/resources`.
+
+Example:
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <T_USER guid="U_GUID_3" optlock="3" username="TestUser" email="test@test"/>
+    <T_USER guid="U_GUID_4" optlock="3" username="TestUser" email="test@test"/>
+</dataset>
+----
+
+=== Configuration
+
+include::includes/tkit-db-import.adoc[leveloffset=+1, opts=optional]

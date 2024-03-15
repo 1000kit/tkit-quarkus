@@ -1,0 +1,845 @@
+
+:summaryTableId: tkit-log-rs
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[tkit-log-rs_configuration]]link:#tkit-log-rs_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a| [[tkit-log-rs_tkit-log-rs-enabled]]`link:#tkit-log-rs_tkit-log-rs-enabled[tkit.log.rs.enabled]`
+
+
+[.description]
+--
+Enabled or disable the rest log interceptor
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-principal-enabled]]`link:#tkit-log-rs_tkit-log-rs-principal-enabled[tkit.log.rs.principal.enabled]`
+
+
+[.description]
+--
+Enabled or disable to add principal name to the application context.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PRINCIPAL_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PRINCIPAL_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-correlation-id-enabled]]`link:#tkit-log-rs_tkit-log-rs-correlation-id-enabled[tkit.log.rs.correlation-id-enabled]`
+
+
+[.description]
+--
+Enabled or disable the correlation ID
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CORRELATION_ID_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CORRELATION_ID_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-correlation-id-header]]`link:#tkit-log-rs_tkit-log-rs-correlation-id-header[tkit.log.rs.correlation-id-header]`
+
+
+[.description]
+--
+The correlation ID header
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CORRELATION_ID_HEADER+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CORRELATION_ID_HEADER+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`X-Correlation-ID`
+
+
+a| [[tkit-log-rs_tkit-log-rs-start-enabled]]`link:#tkit-log-rs_tkit-log-rs-start-enabled[tkit.log.rs.start.enabled]`
+
+
+[.description]
+--
+Enable or disable start message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_START_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_START_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-start-template]]`link:#tkit-log-rs_tkit-log-rs-start-template[tkit.log.rs.start.template]`
+
+
+[.description]
+--
+Message template 1 - HTTP method 2 - URI
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_START_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_START_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s %2$s started.`
+
+
+a| [[tkit-log-rs_tkit-log-rs-end-enabled]]`link:#tkit-log-rs_tkit-log-rs-end-enabled[tkit.log.rs.end.enabled]`
+
+
+[.description]
+--
+Enable or disable end message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_END_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_END_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-end-template]]`link:#tkit-log-rs_tkit-log-rs-end-template[tkit.log.rs.end.template]`
+
+
+[.description]
+--
+Message template 1 - HTTP method 2 - path 3 - duration 4 - HTTP response code 5 - HTTP response name 6 - URI
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_END_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_END_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s %2$s [%4$s] [%3$ss]`
+
+
+a| [[tkit-log-rs_tkit-log-rs-end-mdc-enabled]]`link:#tkit-log-rs_tkit-log-rs-end-mdc-enabled[tkit.log.rs.end.mdc.enabled]`
+
+
+[.description]
+--
+Enable duration time as MDC parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_END_MDC_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_END_MDC_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-end-mdc-duration-name]]`link:#tkit-log-rs_tkit-log-rs-end-mdc-duration-name[tkit.log.rs.end.mdc.duration.name]`
+
+
+[.description]
+--
+Duration MDC key name
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_END_MDC_DURATION_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_END_MDC_DURATION_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`rs-time`
+
+
+a| [[tkit-log-rs_tkit-log-rs-end-mdc-response-status-name]]`link:#tkit-log-rs_tkit-log-rs-end-mdc-response-status-name[tkit.log.rs.end.mdc.response-status.name]`
+
+
+[.description]
+--
+Response status MDC key name
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_END_MDC_RESPONSE_STATUS_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_END_MDC_RESPONSE_STATUS_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`rs-status`
+
+
+a| [[tkit-log-rs_tkit-log-rs-error-enabled]]`link:#tkit-log-rs_tkit-log-rs-error-enabled[tkit.log.rs.error.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_ERROR_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_ERROR_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-regex-enabled[tkit.log.rs.regex.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_REGEX_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_REGEX_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-regex-exclude[tkit.log.rs.regex.exclude]`
+
+
+[.description]
+--
+Exclude request path patterns
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_REGEX_EXCLUDE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_REGEX_EXCLUDE+++`
+endif::add-copy-button-to-env-var[]
+--|list of string 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-enabled]]`link:#tkit-log-rs_tkit-log-rs-payload-enabled[tkit.log.rs.payload.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-template]]`link:#tkit-log-rs_tkit-log-rs-payload-template[tkit.log.rs.payload.template]`
+
+
+[.description]
+--
+Payload message 1 - HTTP method 2 - URL 3 - payload
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s %2$s payload: %3$s`
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-empty-body-enabled]]`link:#tkit-log-rs_tkit-log-rs-payload-empty-body-enabled[tkit.log.rs.payload.empty-body-enabled]`
+
+
+[.description]
+--
+Empty body enabled or disabled
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_EMPTY_BODY_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_EMPTY_BODY_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-empty-body-message]]`link:#tkit-log-rs_tkit-log-rs-payload-empty-body-message[tkit.log.rs.payload.empty-body-message]`
+
+
+[.description]
+--
+Empty body message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_EMPTY_BODY_MESSAGE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_EMPTY_BODY_MESSAGE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`<EMPTY BODY>`
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-page-message]]`link:#tkit-log-rs_tkit-log-rs-payload-page-message[tkit.log.rs.payload.page-message]`
+
+
+[.description]
+--
+Page message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_PAGE_MESSAGE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_PAGE_MESSAGE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`...more...`
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-max-entity-size]]`link:#tkit-log-rs_tkit-log-rs-payload-max-entity-size[tkit.log.rs.payload.max-entity-size]`
+
+
+[.description]
+--
+Maximum entity size
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_MAX_ENTITY_SIZE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_MAX_ENTITY_SIZE+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`1048576`
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-payload-regex-enabled[tkit.log.rs.payload.regex.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_REGEX_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_REGEX_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-payload-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-payload-regex-exclude[tkit.log.rs.payload.regex.exclude]`
+
+
+[.description]
+--
+Exclude request path patterns
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_PAYLOAD_REGEX_EXCLUDE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_PAYLOAD_REGEX_EXCLUDE+++`
+endif::add-copy-button-to-env-var[]
+--|list of string 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-enabled[tkit.log.rs.client.enabled]`
+
+
+[.description]
+--
+Enable or disable rest-client log interceptor.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-regex-enabled[tkit.log.rs.client.regex.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_REGEX_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_REGEX_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-client-regex-exclude[tkit.log.rs.client.regex.exclude]`
+
+
+[.description]
+--
+Exclude request path patterns
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_REGEX_EXCLUDE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_REGEX_EXCLUDE+++`
+endif::add-copy-button-to-env-var[]
+--|list of string 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-payload-enabled[tkit.log.rs.client.payload.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-template]]`link:#tkit-log-rs_tkit-log-rs-client-payload-template[tkit.log.rs.client.payload.template]`
+
+
+[.description]
+--
+Payload message 1 - HTTP method 2 - URL 3 - payload
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s %2$s payload: %3$s`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-empty-body-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-payload-empty-body-enabled[tkit.log.rs.client.payload.empty-body-enabled]`
+
+
+[.description]
+--
+Empty body enabled or disabled
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_EMPTY_BODY_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_EMPTY_BODY_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-empty-body-message]]`link:#tkit-log-rs_tkit-log-rs-client-payload-empty-body-message[tkit.log.rs.client.payload.empty-body-message]`
+
+
+[.description]
+--
+Empty body message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_EMPTY_BODY_MESSAGE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_EMPTY_BODY_MESSAGE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`<EMPTY BODY>`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-page-message]]`link:#tkit-log-rs_tkit-log-rs-client-payload-page-message[tkit.log.rs.client.payload.page-message]`
+
+
+[.description]
+--
+Page message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_PAGE_MESSAGE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_PAGE_MESSAGE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`...more...`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-max-entity-size]]`link:#tkit-log-rs_tkit-log-rs-client-payload-max-entity-size[tkit.log.rs.client.payload.max-entity-size]`
+
+
+[.description]
+--
+Maximum entity size
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_MAX_ENTITY_SIZE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_MAX_ENTITY_SIZE+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`1048576`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-payload-regex-enabled[tkit.log.rs.client.payload.regex.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_REGEX_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_REGEX_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-payload-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-client-payload-regex-exclude[tkit.log.rs.client.payload.regex.exclude]`
+
+
+[.description]
+--
+Exclude request path patterns
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_PAYLOAD_REGEX_EXCLUDE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_REGEX_EXCLUDE+++`
+endif::add-copy-button-to-env-var[]
+--|list of string 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-start-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-start-enabled[tkit.log.rs.client.start.enabled]`
+
+
+[.description]
+--
+Enable or disable start message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_START_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_START_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-start-template]]`link:#tkit-log-rs_tkit-log-rs-client-start-template[tkit.log.rs.client.start.template]`
+
+
+[.description]
+--
+Message template 0 - HTTP method 1 - URI
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_START_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_START_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s %2$s started.`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-end-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-end-enabled[tkit.log.rs.client.end.enabled]`
+
+
+[.description]
+--
+Enable or disable end message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_END_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_END_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-end-template]]`link:#tkit-log-rs_tkit-log-rs-client-end-template[tkit.log.rs.client.end.template]`
+
+
+[.description]
+--
+Message template 1 - HTTP method 2 - URI 3 - duration 4 - HTTP response code 5 - HTTP response name
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_END_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_END_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s %2$s [%4$s] [%3$ss]`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-end-mdc-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-end-mdc-enabled[tkit.log.rs.client.end.mdc.enabled]`
+
+
+[.description]
+--
+Enable duration time as MDC parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_END_MDC_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-end-mdc-duration-name]]`link:#tkit-log-rs_tkit-log-rs-client-end-mdc-duration-name[tkit.log.rs.client.end.mdc.duration.name]`
+
+
+[.description]
+--
+Duration MDC key name
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_END_MDC_DURATION_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_DURATION_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`rs-client-time`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-end-mdc-response-status-name]]`link:#tkit-log-rs_tkit-log-rs-client-end-mdc-response-status-name[tkit.log.rs.client.end.mdc.response-status.name]`
+
+
+[.description]
+--
+Response client status MDC key name
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_END_MDC_RESPONSE_STATUS_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_RESPONSE_STATUS_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`rs-client-status`
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-error-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-error-enabled[tkit.log.rs.client.error.enabled]`
+
+
+[.description]
+--
+Enable or disable error log message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_ERROR_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_ERROR_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-rs_tkit-log-rs-mdc-headers-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-mdc-headers-mdc-headers[tkit.log.rs.mdc-headers]`
+
+
+[.description]
+--
+Map of MDC headers
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_MDC_HEADERS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_MDC_HEADERS+++`
+endif::add-copy-button-to-env-var[]
+--|`Map<String,String>` 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-controller-controller-log]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-log[tkit.log.rs.controller."controller".log]`
+
+
+[.description]
+--
+Enable or disable rest controller log
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__LOG+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-controller-controller-payload]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-payload[tkit.log.rs.controller."controller".payload]`
+
+
+[.description]
+--
+Enable or disable rest controller payload
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__PAYLOAD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__PAYLOAD+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-controller-controller-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-mdc-headers[tkit.log.rs.controller."controller".mdc-headers]`
+
+
+[.description]
+--
+Map of MDC headers
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__MDC_HEADERS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__MDC_HEADERS+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-controller-controller-method-method-log]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-method-method-log[tkit.log.rs.controller."controller".method."method".log]`
+
+
+[.description]
+--
+Enable or disable rest controller log
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__METHOD__METHOD__LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__METHOD__METHOD__LOG+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-controller-controller-method-method-payload]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-method-method-payload[tkit.log.rs.controller."controller".method."method".payload]`
+
+
+[.description]
+--
+Enable or disable rest controller payload
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__METHOD__METHOD__PAYLOAD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__METHOD__METHOD__PAYLOAD+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-controller-controller-method-method-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-method-method-mdc-headers[tkit.log.rs.controller."controller".method."method".mdc-headers]`
+
+
+[.description]
+--
+Map of MDC headers
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__METHOD__METHOD__MDC_HEADERS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CONTROLLER__CONTROLLER__METHOD__METHOD__MDC_HEADERS+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers[tkit.log.rs.client.mdc-headers]`
+
+
+[.description]
+--
+Map of MDC headers
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_MDC_HEADERS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_MDC_HEADERS+++`
+endif::add-copy-button-to-env-var[]
+--|`Map<String,String>` 
+|
+
+|===

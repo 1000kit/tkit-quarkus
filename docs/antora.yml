@@ -1,0 +1,6 @@
+name: tkit-quarkus
+title: 1000kit Quarkus
+version: latest
+start_page: tkit-quarkus:index.adoc
+nav:
+  - modules/tkit-quarkus/nav.adoc

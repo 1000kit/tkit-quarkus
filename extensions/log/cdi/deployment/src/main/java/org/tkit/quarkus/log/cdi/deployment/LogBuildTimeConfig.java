@@ -20,6 +20,8 @@ public class LogBuildTimeConfig {
 
     /**
      * Auto-discovery configuration.
+     *
+     * @deprecated
      */
     @ConfigItem(name = "auto-discovery")
     public AutoDiscoverBuildTimeConfig autoDiscover;
@@ -31,26 +33,32 @@ public class LogBuildTimeConfig {
     public static class AutoDiscoverBuildTimeConfig {
         /**
          * Enable autodiscovery
+         *
+         * @deprecated
          */
         @ConfigItem(name = "enabled", defaultValue = "false")
+        @Deprecated
         public boolean enabled;
 
         /**
          * Binding includes packages.
          */
         @ConfigItem(name = "packages", defaultValue = "org.tkit")
+        @Deprecated
         public List<String> packages;
 
         /**
          * Specify ignore pattern.
          */
         @ConfigItem(name = "ignore.pattern", defaultValue = "")
+        @Deprecated
         public Optional<String> ignorePattern;
 
         /**
          * The list of beans annotation
          */
         @ConfigItem(name = "bean.annotations", defaultValue = AUTO_DISCOVER_ANNO)
+        @Deprecated
         public List<String> annoBeans = new ArrayList<>();
 
     }

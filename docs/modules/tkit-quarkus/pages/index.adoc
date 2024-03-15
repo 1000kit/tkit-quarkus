@@ -1,0 +1,41 @@
+= 1000kit Quarkus Extensions
+
+include::./includes/attributes.adoc[]
+
+== Installation
+
+Include the following bom artifact into your pom or parent pom and then pick the components you need.
+
+[source,xml,subs=attributes+]
+----
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.tkit.quarkus.lib</groupId>
+            <artifactId>tkit-quarkus-bom</artifactId>
+            <version>{project-version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+----
+
+TIP: Some component come with additional documentation and configuration - check the 'Documentation' link for particular section.
+
+== Components
+
+Include the component in your project by including the corresponding dependency.
+
+* xref:tkit-context.adoc[Context]
+* xref:tkit-dataimport.adoc[Master Data Import]
+* xref:tkit-db-import.adoc[Test Database Import]
+* xref:tkit-jpa.adoc[JPA Persistence]
+* xref:tkit-jpa-models.adoc[JPA Persistence Models]
+* xref:tkit-jpa-tenant.adoc[JPA Persistence Tenant Resolver]
+* xref:tkit-log-cdi.adoc[CDI Log Interceptor]
+* xref:tkit-log-json.adoc[Json Log Format]
+* xref:tkit-log-rs.adoc[Rest Log Interceptor]
+* xref:tkit-log-rs.adoc[Rest Extension]
+* xref:tkit-log-rs.adoc[Rest Context Extension]
+* xref:tkit-log-rs.adoc[Rest Security]

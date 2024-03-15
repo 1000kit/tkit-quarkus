@@ -44,11 +44,12 @@
         <module>bom</module>
         <module>extensions</module>
         <module>it</module>
+        <module>docs</module>
     </modules>
 
     <properties>
         <!-- Quarkus -->
-        <quarkus.version>3.8.1</quarkus.version>
+        <quarkus.version>3.8.2</quarkus.version>
         <quarkus.hibernate-orm.version>6.4.4.Final</quarkus.hibernate-orm.version>
         <quarkiverse.mockserver.version>1.5.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.1.6</quarkus.jandex-plugin.version>
@@ -75,6 +76,11 @@
         <maven.source-plugin.version>3.3.0</maven.source-plugin.version>
         <maven.javadoc-plugin.version>3.6.3</maven.javadoc-plugin.version>
         <maven.nexus-staging-maven-plugin.version>1.6.13</maven.nexus-staging-maven-plugin.version>
+
+        <!-- Documentation -->
+        <asciidoctorj.version>2.5.12</asciidoctorj.version>
+        <asciidoctor-maven-plugin.version>3.0.0</asciidoctor-maven-plugin.version>
+        <git-commit-id-maven-plugin.version>8.0.1</git-commit-id-maven-plugin.version>
 
         <!-- Other -->
         <dbunit.version>2.7.3</dbunit.version>
@@ -151,10 +157,72 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>${asciidoctor-maven-plugin.version}</version>
+                    <configuration>
+                        <enableVerbose>true</enableVerbose>
+                        <logHandler>
+                            <failIf>
+                                <severity>WARN</severity>
+                            </failIf>
+                        </logHandler>
+                        <sourceDirectory>${project.basedir}/modules/tkit-quarkus/pages/</sourceDirectory>
+                        <preserveDirectories>true</preserveDirectories>
+                        <attributes>
+                            <icons>font</icons>
+                            <imagesdir>./_images/</imagesdir>
+                            <sectanchors>true</sectanchors>
+                            <idprefix />
+                            <idseparator>-</idseparator>
+                            <docinfo1>true</docinfo1>
+                            <skip-front-matter>true</skip-front-matter>
+                        </attributes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>output-html</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>process-asciidoc</goal>
+                            </goals>
+                            <configuration>
+                                <backend>html5</backend>
+                                <attributes>
+                                    <source-highlighter>coderay</source-highlighter>
+                                    <linkcss>true</linkcss>
+                                    <copycss>true</copycss>
+                                </attributes>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj</artifactId>
+                            <version>${asciidoctorj.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>${git-commit-id-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>git-describe</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
                 <artifactId>formatter-maven-plugin</artifactId>

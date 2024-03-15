@@ -1,0 +1,26 @@
+== tkit-quarkus-tenant
+
+include::./includes/attributes.adoc[]
+
+1000kit Quarkus hibernate tenant resolver.
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-jpa-tenant` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-jpa-tenant</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+TIP: This will be not use if tenant is set in the `ApplicationContext`. See  xref:tkit-rest-context.adoc[Rest Context]
+
+=== Configuration
+
+include::includes/tkit-jpa-tenant.adoc[leveloffset=+1, opts=optional]

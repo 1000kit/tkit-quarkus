@@ -1,0 +1,4 @@
+:project-version: ${git.closest.tag.name}
+:quarkus-version: ${quarkus.version}
+
+:examples-dir: ./../examples/

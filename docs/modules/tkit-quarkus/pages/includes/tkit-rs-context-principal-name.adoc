@@ -1,0 +1,165 @@
+
+:summaryTableId: tkit-rs-context-principal-name
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[tkit-rs-context-principal-name_configuration]]link:#tkit-rs-context-principal-name_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-enabled]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-enabled[tkit.rs.context.principal.name.enabled]`
+
+
+[.description]
+--
+Enable or disable principal name resolver.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-mandatory]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-mandatory[tkit.rs.context.principal.name.mandatory]`
+
+
+[.description]
+--
+Make the principal name mandatory (not null).
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_MANDATORY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_MANDATORY+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-custom-service-enabled]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-custom-service-enabled[tkit.rs.context.principal.name.custom-service-enabled]`
+
+
+[.description]
+--
+Enabled custom service.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_CUSTOM_SERVICE_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_CUSTOM_SERVICE_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-security-context-enabled]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-security-context-enabled[tkit.rs.context.principal.name.security-context.enabled]`
+
+
+[.description]
+--
+Enable or disable principal from security context.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_SECURITY_CONTEXT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_SECURITY_CONTEXT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-default]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-default[tkit.rs.context.principal.name.default]`
+
+
+[.description]
+--
+Default principal.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_DEFAULT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_DEFAULT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-token-enabled]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-token-enabled[tkit.rs.context.principal.name.token-enabled]`
+
+
+[.description]
+--
+Enable principal from token.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-token-claim-name]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-token-claim-name[tkit.rs.context.principal.name.token-claim-name]`
+
+
+[.description]
+--
+Principal from token claim.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_CLAIM_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_CLAIM_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`sub`
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-header-param-enabled]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-header-param-enabled[tkit.rs.context.principal.name.header-param-enabled]`
+
+
+[.description]
+--
+Enable principal from header parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-rs-context-principal-name_tkit-rs-context-principal-name-header-param-name]]`link:#tkit-rs-context-principal-name_tkit-rs-context-principal-name-header-param-name[tkit.rs.context.principal.name.header-param-name]`
+
+
+[.description]
+--
+Principal from header parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`x-principal-id`
+
+|===
