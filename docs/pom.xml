@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.tkit.quarkus.lib</groupId>
+        <artifactId>tkit-quarkus-parent</artifactId>
+        <version>999-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>tkit-quarkus-docs</artifactId>
+
+    <dependencies>
+        <!-- Make sure the doc is build after the other artifacts -->
+        <dependency>
+            <groupId>org.tkit.quarkus.lib</groupId>
+            <artifactId>tkit-quarkus-context</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>modules/tkit-quarkus/examples</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>modules/tkit-quarkus/pages/includes/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/../target/asciidoc/generated/config/</directory>
+                                    <includes>
+                                        <include>tkit-dataimport.adoc</include>
+                                        <include>tkit-db-import.adoc</include>
+                                        <include>tkit-log-cdi.adoc</include>
+                                        <include>tkit-log-json.adoc</include>
+                                        <include>tkit-log-rs.adoc</include>
+                                        <include>tkit-jpa-tenant.adoc</include>
+                                        <include>tkit-rs-context.adoc</include>
+                                        <include>tkit-rs-context-build.adoc</include>
+                                        <include>tkit-rs-context-principal-name.adoc</include>
+                                        <include>tkit-rs-context-tenant-id.adoc</include>
+                                        <include>tkit-rs-context-token.adoc</include>
+                                        <include>tkit-security.adoc</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>${project.basedir}/templates/includes</directory>
+                                    <include>attributes.adoc</include>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

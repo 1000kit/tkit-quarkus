@@ -1,0 +1,77 @@
+== tkit-quarkus-context
+
+include::./includes/attributes.adoc[]
+
+1000kit Quarkus rest application context. This library contains rest interceptor with priority `1` that
+start xref:tkit-context.adoc[Context] with `PrincipalName`, `Tenant-Id`, `Request-Id` and `Business-Context`
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-context` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-context</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== Usage
+
+Priority of the tenant ID resolver:
+* mock service
+* custom implementation of th `RestCustomTenantResolver` interface
+* header parameter
+
+The application can implement its own tenant resolver by implementing the `RestCustomTenantResolver` interface. The header parameter can be accessed using the input parameter `ContainerRequestContext` or by including the request scope bean `RestContextHeaderContainer`.
+
+For `ApplicationContext`. See xref:tkit-context.adoc[Context]
+
+==== Build configuration
+
+include::includes/tkit-rs-context-build.adoc[leveloffset=+1, opts=optional]
+
+==== Runtime configuration
+
+include::includes/tkit-rs-context.adoc[leveloffset=+1, opts=optional]
+
+=== Principal
+
+==== Configuration
+
+include::includes/tkit-rs-context-principal-name.adoc[leveloffset=+1, opts=optional]
+
+=== Token
+
+==== Configuration
+
+include::includes/tkit-rs-context-token.adoc[leveloffset=+1, opts=optional]
+
+=== Tenant
+
+To skip the tenant resolver for the rest method, annotate the method with the `@TenantExclude` annotation.
+
+[source,java]
+----
+import org.tkit.quarkus.rs.context.tenant.TenantExclude;
+
+@Path("test")
+@ApplicationScoped
+public class OperatorRestController {
+
+    @GET
+    @TenantExclude
+    public Response test() {
+        // ...
+    }
+
+}
+----
+
+==== Configuration
+
+include::includes/tkit-rs-context-tenant-id.adoc[leveloffset=+1, opts=optional]

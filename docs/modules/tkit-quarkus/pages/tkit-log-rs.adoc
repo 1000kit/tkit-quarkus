@@ -1,0 +1,24 @@
+== tkit-quarkus-log-rs
+
+include::./includes/attributes.adoc[]
+
+Quarkus extension for HTTP request logging (client & server).
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-log-rs` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-log-rs</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== Configuration
+
+include::includes/tkit-log-rs.adoc[leveloffset=+1, opts=optional]

@@ -1,0 +1,46 @@
+
+:summaryTableId: tkit-db-import
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[tkit-db-import_configuration]]link:#tkit-db-import_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[tkit-db-import_tkit-db-import-devservices-enabled]]`link:#tkit-db-import_tkit-db-import-devservices-enabled[tkit.db-import.devservices.enabled]`
+
+
+[.description]
+--
+If Dev Services for db-import has been explicitly enabled or disabled. Dev Services are generally enabled by default, unless there is an existing configuration present.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DB_IMPORT_DEVSERVICES_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DB_IMPORT_DEVSERVICES_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[tkit-db-import_tkit-db-import-devservices-db-image-name]]`link:#tkit-db-import_tkit-db-import-devservices-db-image-name[tkit.db-import.devservices.db-image-name]`
+
+
+[.description]
+--
+The db image to use.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DB_IMPORT_DEVSERVICES_DB_IMAGE_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DB_IMPORT_DEVSERVICES_DB_IMAGE_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`docker.io/postgres`
+
+|===

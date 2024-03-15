@@ -1,0 +1,284 @@
+
+:summaryTableId: tkit-log-cdi
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[tkit-log-cdi_configuration]]link:#tkit-log-cdi_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a| [[tkit-log-cdi_tkit-log-cdi-enabled]]`link:#tkit-log-cdi_tkit-log-cdi-enabled[tkit.log.cdi.enabled]`
+
+
+[.description]
+--
+Enable or disable interceptor
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-custom-data-prefix]]`link:#tkit-log-cdi_tkit-log-cdi-custom-data-prefix[tkit.log.cdi.custom-data.prefix]`
+
+
+[.description]
+--
+Prefix for custom data mdc entries
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_CUSTOM_DATA_PREFIX+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_CUSTOM_DATA_PREFIX+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-start-enabled]]`link:#tkit-log-cdi_tkit-log-cdi-start-enabled[tkit.log.cdi.start.enabled]`
+
+
+[.description]
+--
+Enable or disable start message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_START_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_START_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-start-template]]`link:#tkit-log-cdi_tkit-log-cdi-start-template[tkit.log.cdi.start.template]`
+
+
+[.description]
+--
+Message template 0 - method 1 - parameters
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_START_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_START_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s(%2$s) started.`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-succeed-enabled]]`link:#tkit-log-cdi_tkit-log-cdi-succeed-enabled[tkit.log.cdi.succeed.enabled]`
+
+
+[.description]
+--
+Enable or disable end message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SUCCEED_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SUCCEED_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-succeed-template]]`link:#tkit-log-cdi_tkit-log-cdi-succeed-template[tkit.log.cdi.succeed.template]`
+
+
+[.description]
+--
+Message template 1 - method 2 - parameters 3 - return value 4 - time
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SUCCEED_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SUCCEED_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s(%2$s):%3$s [%4$.3fs]`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-failed-enabled]]`link:#tkit-log-cdi_tkit-log-cdi-failed-enabled[tkit.log.cdi.failed.enabled]`
+
+
+[.description]
+--
+Enable or disable end message
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_FAILED_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_FAILED_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-failed-template]]`link:#tkit-log-cdi_tkit-log-cdi-failed-template[tkit.log.cdi.failed.template]`
+
+
+[.description]
+--
+Message template 1 - method 2 - parameters 3 - return value 4 - time
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_FAILED_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_FAILED_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`%1$s(%2$s) throw %3$s [%4$.3fs]`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-return-void-template]]`link:#tkit-log-cdi_tkit-log-cdi-return-void-template[tkit.log.cdi.return-void-template]`
+
+
+[.description]
+--
+Return void method template
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_RETURN_VOID_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_RETURN_VOID_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`void`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-mdc-errorkey]]`link:#tkit-log-cdi_tkit-log-cdi-mdc-errorkey[tkit.log.cdi.mdc.errorKey]`
+
+
+[.description]
+--
+Mdc error key for FBN error code
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_MDC_ERRORKEY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_MDC_ERRORKEY+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`errorNumber`
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-service-service-log]]`link:#tkit-log-cdi_tkit-log-cdi-service-service-log[tkit.log.cdi.service."service".log]`
+
+
+[.description]
+--
+Enable or disable service log
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SERVICE__SERVICE__LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SERVICE__SERVICE__LOG+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-service-service-stacktrace]]`link:#tkit-log-cdi_tkit-log-cdi-service-service-stacktrace[tkit.log.cdi.service."service".stacktrace]`
+
+
+[.description]
+--
+Enable or disable service stacktrace
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SERVICE__SERVICE__STACKTRACE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SERVICE__SERVICE__STACKTRACE+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-service-service-method-method-log]]`link:#tkit-log-cdi_tkit-log-cdi-service-service-method-method-log[tkit.log.cdi.service."service".method."method".log]`
+
+
+[.description]
+--
+Enable or disable service log
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__LOG+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-service-service-method-method-stacktrace]]`link:#tkit-log-cdi_tkit-log-cdi-service-service-method-method-stacktrace[tkit.log.cdi.service."service".method."method".stacktrace]`
+
+
+[.description]
+--
+Enable or disable service stacktrace
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__STACKTRACE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__STACKTRACE+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-service-service-method-method-return-mask]]`link:#tkit-log-cdi_tkit-log-cdi-service-service-method-method-return-mask[tkit.log.cdi.service."service".method."method".return-mask]`
+
+
+[.description]
+--
+Return mask
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__RETURN_MASK+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__RETURN_MASK+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-log-cdi_tkit-log-cdi-service-service-method-method-param]]`link:#tkit-log-cdi_tkit-log-cdi-service-service-method-method-param[tkit.log.cdi.service."service".method."method".param]`
+
+
+[.description]
+--
+Exclude parameters
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__PARAM+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_CDI_SERVICE__SERVICE__METHOD__METHOD__PARAM+++`
+endif::add-copy-button-to-env-var[]
+--|short 
+|
+
+|===

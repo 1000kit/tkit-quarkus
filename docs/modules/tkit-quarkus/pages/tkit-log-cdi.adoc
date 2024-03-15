@@ -1,0 +1,51 @@
+== tkit-quarkus-log-cdi
+
+include::./includes/attributes.adoc[]
+
+1000kit Quarkus logger extension, core log library for Quarkus ARC `cdi` implementation.
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-log-cdi` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-log-cdi</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== Usage
+
+==== Annotations
+
+To enable the log interceptor, you need to add the `@LogService` annotation to your service.
+You can add this annotation at the class or method level.
+
+[source,java]
+----
+import org.tkit.quarkus.log.cdi.LogService;
+import org.tkit.quarkus.log.cdi.LogExclude;
+
+@LogService
+@ApplicationScoped
+public class RolesRestController {
+
+    @LogSevice(log = false)
+    public void method(String name, @LogExclude String password) {
+
+    }
+}
+----
+
+The `@LogExclude` parameter annotation excludes the parameter from the logs. For more information, see the class's Javadoc documentation.
+
+CAUTION: The autodiscovery feature is deprecated and not recommend to use. Configuration `tkit.log.cdi.auto-discovery.*`
+
+=== Configuration
+
+include::includes/tkit-log-cdi.adoc[leveloffset=+1, opts=optional]

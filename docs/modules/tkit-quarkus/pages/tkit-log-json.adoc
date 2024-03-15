@@ -1,0 +1,25 @@
+== tkit-quarkus-log-json
+
+include::./includes/attributes.adoc[]
+
+Custom JSON log formatter that provides additional features not included in https://quarkus.io/guides/logging#json-logging[Official Quarkus json logger].
+Make sure you only include this if you need those extra features, otherwise use the official extension.
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-log-json` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-log-json</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== Configuration
+
+include::includes/tkit-log-json.adoc[leveloffset=+1, opts=optional]

@@ -1,0 +1,10 @@
+name: Update documentation
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+jobs:
+  release:
+    uses: 1000kit/tkit-ci-java/.github/workflows/documentation.yml@main
+    secrets: inherit

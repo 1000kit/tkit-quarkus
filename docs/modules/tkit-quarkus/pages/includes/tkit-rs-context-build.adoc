@@ -1,0 +1,29 @@
+
+:summaryTableId: tkit-rs-context-build
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[tkit-rs-context-build_configuration]]link:#tkit-rs-context-build_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[tkit-rs-context-build_tkit-rs-context-build-tenant-enabled]]`link:#tkit-rs-context-build_tkit-rs-context-build-tenant-enabled[tkit.rs.context.build.tenant.enabled]`
+
+
+[.description]
+--
+Enable tenant annotation discovery
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_BUILD_TENANT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_BUILD_TENANT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+|===
