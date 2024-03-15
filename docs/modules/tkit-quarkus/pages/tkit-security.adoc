@@ -1,4 +1,4 @@
-== tkit-quarkus-context
+== tkit-quarkus-security
 
 include::./includes/attributes.adoc[]
 
