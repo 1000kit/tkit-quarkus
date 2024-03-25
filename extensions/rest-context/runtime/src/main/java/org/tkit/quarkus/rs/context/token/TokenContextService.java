@@ -16,12 +16,12 @@ public class TokenContextService {
     TokenContextConfig config;
 
     public JsonWebToken getRestContextPrincipalToken(ContainerRequestContext containerRequestContext) {
-        if (!config.enabled()) {
+        if (!config.token().enabled()) {
             return null;
         }
 
         var token = getToken(containerRequestContext);
-        if (token == null && config.mandatory()) {
+        if (token == null && config.token().mandatory()) {
             throw new PrincipalTokenRequiredException();
         }
         return token;
@@ -29,12 +29,12 @@ public class TokenContextService {
 
     private JsonWebToken getToken(ContainerRequestContext containerRequestContext) {
 
-        String rawToken = containerRequestContext.getHeaders().getFirst(config.tokenHeaderParam());
+        String rawToken = containerRequestContext.getHeaders().getFirst(config.token().tokenHeaderParam());
         TokenParserRequest request = new TokenParserRequest(rawToken)
-                .issuerEnabled(config.issuerEnabled())
-                .type(config.type())
-                .verify(config.verify())
-                .issuerSuffix(config.issuerSuffix());
+                .issuerEnabled(config.token().issuerEnabled())
+                .type(config.token().type())
+                .verify(config.token().verify())
+                .issuerSuffix(config.token().issuerSuffix());
         return tokenParserService.parseToken(request);
     }
 }

@@ -1,16 +1,16 @@
 
-:summaryTableId: tkit-dataimport
+:summaryTableId: tkit-quarkus-data-import
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[tkit-dataimport_configuration]]link:#tkit-dataimport_configuration[Configuration property]
+h|[[tkit-quarkus-data-import_configuration]]link:#tkit-quarkus-data-import_configuration[Configuration property]
 
 h|Type
 h|Default
 
-a| [[tkit-dataimport_tkit-dataimport-enabled]]`link:#tkit-dataimport_tkit-dataimport-enabled[tkit.dataimport.enabled]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-enabled]]`link:#tkit-quarkus-data-import_tkit-dataimport-enabled[tkit.dataimport.enabled]`
 
 
 [.description]
@@ -27,7 +27,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-dataimport_tkit-dataimport-error-msg-length]]`link:#tkit-dataimport_tkit-dataimport-error-msg-length[tkit.dataimport.error-msg-length]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-error-msg-length]]`link:#tkit-quarkus-data-import_tkit-dataimport-error-msg-length[tkit.dataimport.error-msg-length]`
 
 
 [.description]
@@ -44,7 +44,7 @@ endif::add-copy-button-to-env-var[]
 |`255`
 
 
-a| [[tkit-dataimport_tkit-dataimport-configurations-configurations-bean]]`link:#tkit-dataimport_tkit-dataimport-configurations-configurations-bean[tkit.dataimport.configurations."configurations".bean]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-bean]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-bean[tkit.dataimport.configurations."configurations".bean]`
 
 
 [.description]
@@ -61,7 +61,7 @@ endif::add-copy-button-to-env-var[]
 |` `
 
 
-a| [[tkit-dataimport_tkit-dataimport-configurations-configurations-file]]`link:#tkit-dataimport_tkit-dataimport-configurations-configurations-file[tkit.dataimport.configurations."configurations".file]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-file]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-file[tkit.dataimport.configurations."configurations".file]`
 
 
 [.description]
@@ -78,7 +78,7 @@ endif::add-copy-button-to-env-var[]
 |required icon:exclamation-circle[title=Configuration property is required]
 
 
-a| [[tkit-dataimport_tkit-dataimport-configurations-configurations-metadata-metadata]]`link:#tkit-dataimport_tkit-dataimport-configurations-configurations-metadata-metadata[tkit.dataimport.configurations."configurations".metadata]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata[tkit.dataimport.configurations."configurations".metadata]`
 
 
 [.description]
@@ -95,7 +95,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-dataimport_tkit-dataimport-configurations-configurations-enabled]]`link:#tkit-dataimport_tkit-dataimport-configurations-configurations-enabled[tkit.dataimport.configurations."configurations".enabled]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-enabled]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-enabled[tkit.dataimport.configurations."configurations".enabled]`
 
 
 [.description]
@@ -112,7 +112,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-dataimport_tkit-dataimport-configurations-configurations-stop-at-error]]`link:#tkit-dataimport_tkit-dataimport-configurations-configurations-stop-at-error[tkit.dataimport.configurations."configurations".stop-at-error]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-stop-at-error]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-stop-at-error[tkit.dataimport.configurations."configurations".stop-at-error]`
 
 
 [.description]
@@ -129,7 +129,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-dataimport_tkit-dataimport-configurations-configurations-retry-error-import]]`link:#tkit-dataimport_tkit-dataimport-configurations-configurations-retry-error-import[tkit.dataimport.configurations."configurations".retry-error-import]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-retry-error-import]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-retry-error-import[tkit.dataimport.configurations."configurations".retry-error-import]`
 
 
 [.description]

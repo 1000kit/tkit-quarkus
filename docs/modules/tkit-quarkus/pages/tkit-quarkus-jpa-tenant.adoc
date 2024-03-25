@@ -19,8 +19,8 @@ For instance, with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
-TIP: This will be not use if tenant is set in the `ApplicationContext`. See  xref:tkit-rest-context.adoc[Rest Context]
+TIP: This will be not use if tenant is set in the `ApplicationContext`. See  xref:tkit-quarkus-rest-context.adoc[Rest Context]
 
 === Configuration
 
-include::includes/tkit-jpa-tenant.adoc[leveloffset=+1, opts=optional]
+include::includes/tkit-quarkus-jpa-tenant.adoc[leveloffset=+1, opts=optional]

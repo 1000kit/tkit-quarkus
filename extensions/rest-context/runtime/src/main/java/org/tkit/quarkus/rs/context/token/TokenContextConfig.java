@@ -1,5 +1,6 @@
 package org.tkit.quarkus.rs.context.token;
 
+import io.quarkus.runtime.annotations.ConfigDocFilename;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 import io.quarkus.runtime.annotations.StaticInitSafe;
@@ -8,57 +9,65 @@ import io.smallrye.config.WithDefault;
 import io.smallrye.config.WithName;
 
 @StaticInitSafe
-@ConfigMapping(prefix = "tkit.rs.context.token")
+@ConfigDocFilename("tkit-quarkus-rs-context.adoc")
+@ConfigMapping(prefix = "tkit.rs.context")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
 public interface TokenContextConfig {
 
     /**
-     * Enable or disable token parsing.
+     * Rest context token configuration.
      */
-    @WithName("enabled")
-    @WithDefault("true")
-    boolean enabled();
+    @WithName("token")
+    TokenConfig token();
 
-    /**
-     * Make the token mandatory (not null)
-     */
-    @WithName("mandatory")
-    @WithDefault("false")
-    boolean mandatory();
+    interface TokenConfig {
+        /**
+         * Enable or disable token parsing.
+         */
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
-    /**
-     * Type of the token for new created token
-     */
-    @WithName("type")
-    @WithDefault("principal-token")
-    String type();
+        /**
+         * Make the token mandatory (not null)
+         */
+        @WithName("mandatory")
+        @WithDefault("false")
+        boolean mandatory();
 
-    /**
-     * Verify token
-     */
-    @WithName("verify")
-    @WithDefault("false")
-    boolean verify();
+        /**
+         * Type of the token for new created token
+         */
+        @WithName("type")
+        @WithDefault("principal-token")
+        String type();
 
-    /**
-     * Use token realm for the public key.
-     */
-    @WithName("public-key-location.enabled")
-    @WithDefault("false")
-    boolean issuerEnabled();
+        /**
+         * Verify token
+         */
+        @WithName("verify")
+        @WithDefault("false")
+        boolean verify();
 
-    /**
-     * Public key server suffix
-     */
-    @WithName("public-key-location.suffix")
-    @WithDefault("/protocol/openid-connect/certs")
-    String issuerSuffix();
+        /**
+         * Use token realm for the public key.
+         */
+        @WithName("public-key-location.enabled")
+        @WithDefault("false")
+        boolean issuerEnabled();
 
-    /**
-     * Principal token header parameter.
-     */
-    @WithName("header-param")
-    @WithDefault("apm-principal-token")
-    String tokenHeaderParam();
+        /**
+         * Public key server suffix
+         */
+        @WithName("public-key-location.suffix")
+        @WithDefault("/protocol/openid-connect/certs")
+        String issuerSuffix();
 
+        /**
+         * Principal token header parameter.
+         */
+        @WithName("header-param")
+        @WithDefault("apm-principal-token")
+        String tokenHeaderParam();
+    }
 }

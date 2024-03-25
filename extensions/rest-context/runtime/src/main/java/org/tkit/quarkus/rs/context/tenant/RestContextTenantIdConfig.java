@@ -9,62 +9,72 @@ import io.smallrye.config.WithDefault;
 import io.smallrye.config.WithName;
 
 @StaticInitSafe
-@ConfigMapping(prefix = "tkit.rs.context.tenant-id")
+@ConfigDocFilename("tkit-quarkus-rs-context.adoc")
+@ConfigMapping(prefix = "tkit.rs.context")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
 public interface RestContextTenantIdConfig {
 
     /**
-     * Enable or disable rest context tenant.
+     * Rest context tenant-id configuration
      */
-    @WithName("enabled")
-    @WithDefault("false")
-    boolean enabled();
+    @WithName("tenant-id")
+    TenantIdConfig tenantId();
 
-    /**
-     * Make the tenant mandatory (not null)
-     */
-    @WithName("mandatory")
-    @WithDefault("false")
-    boolean mandatory();
+    interface TenantIdConfig {
+        /**
+         * Enable or disable rest context tenant.
+         */
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
 
-    /**
-     * Default tenant.
-     */
-    @WithName("default")
-    Optional<String> defaultTenantId();
+        /**
+         * Make the tenant mandatory (not null)
+         */
+        @WithName("mandatory")
+        @WithDefault("false")
+        boolean mandatory();
 
-    /**
-     * Take tenant ID from header parameter
-     */
-    @WithName("header-param-enabled")
-    @WithDefault("false")
-    boolean headerParamEnabled();
+        /**
+         * Default tenant.
+         */
+        @WithName("default")
+        Optional<String> defaultTenantId();
 
-    /**
-     * Tenant ID header parameter
-     */
-    @WithName("header-param-name")
-    @WithDefault("x-tenant-id")
-    String headerParamName();
+        /**
+         * Take tenant ID from header parameter
+         */
+        @WithName("header-param-enabled")
+        @WithDefault("false")
+        boolean headerParamEnabled();
 
-    /**
-     * Enable or disable custom tenant resolver service.
-     */
-    @WithName("custom-service-enabled")
-    @WithDefault("true")
-    boolean enabledCustomService();
+        /**
+         * Tenant ID header parameter
+         */
+        @WithName("header-param-name")
+        @WithDefault("x-tenant-id")
+        String headerParamName();
 
-    /**
-     * Mock service config.
-     */
-    @WithName("mock")
-    MockConfig mock();
+        /**
+         * Enable or disable custom tenant resolver service.
+         */
+        @WithName("custom-service-enabled")
+        @WithDefault("true")
+        boolean enabledCustomService();
 
-    /**
-     * Token config.
-     */
-    @WithName("token")
-    TokenConfig token();
+        /**
+         * Mock service config.
+         */
+        @WithName("mock")
+        MockConfig mock();
+
+        /**
+         * Token config.
+         */
+        @WithName("token")
+        TokenConfig token();
+
+    }
 
     /**
      * Token config.

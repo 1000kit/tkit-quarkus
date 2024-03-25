@@ -8,6 +8,7 @@ import io.smallrye.config.WithDefault;
 import io.smallrye.config.WithName;
 
 @StaticInitSafe
+@ConfigDocFilename("tkit-quarkus-rs-context.adoc")
 @ConfigMapping(prefix = "tkit.rs.context")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
 public interface RestContextConfig {

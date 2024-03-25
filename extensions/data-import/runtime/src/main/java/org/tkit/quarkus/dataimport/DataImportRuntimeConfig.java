@@ -2,11 +2,9 @@ package org.tkit.quarkus.dataimport;
 
 import java.util.Map;
 
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
-import io.quarkus.runtime.annotations.ConfigPhase;
-import io.quarkus.runtime.annotations.ConfigRoot;
+import io.quarkus.runtime.annotations.*;
 
+@ConfigDocFilename("tkit-quarkus-data-import.adoc")
 @ConfigRoot(prefix = "tkit", name = "dataimport", phase = ConfigPhase.RUN_TIME)
 public class DataImportRuntimeConfig {
 

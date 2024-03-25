@@ -1,16 +1,16 @@
 
-:summaryTableId: tkit-security
+:summaryTableId: tkit-quarkus-security
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[tkit-security_configuration]]link:#tkit-security_configuration[Configuration property]
+h|[[tkit-quarkus-security_configuration]]link:#tkit-quarkus-security_configuration[Configuration property]
 
 h|Type
 h|Default
 
-a| [[tkit-security_tkit-security-auth-enabled]]`link:#tkit-security_tkit-security-auth-enabled[tkit.security.auth.enabled]`
+a| [[tkit-quarkus-security_tkit-security-auth-enabled]]`link:#tkit-quarkus-security_tkit-security-auth-enabled[tkit.security.auth.enabled]`
 
 
 [.description]

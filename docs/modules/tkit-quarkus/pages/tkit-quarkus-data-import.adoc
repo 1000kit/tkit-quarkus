@@ -102,4 +102,4 @@ tkit.dataimport.configurations.key1.stop-at-error=false
 
 === Configuration
 
-include::includes/tkit-dataimport.adoc[leveloffset=+1, opts=optional]
+include::includes/tkit-quarkus-data-import.adoc[leveloffset=+1, opts=optional]

@@ -1,16 +1,16 @@
 
-:summaryTableId: tkit-jpa-tenant
+:summaryTableId: tkit-quarkus-jpa-tenant
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[tkit-jpa-tenant_configuration]]link:#tkit-jpa-tenant_configuration[Configuration property]
+h|[[tkit-quarkus-jpa-tenant_configuration]]link:#tkit-quarkus-jpa-tenant_configuration[Configuration property]
 
 h|Type
 h|Default
 
-a| [[tkit-jpa-tenant_tkit-jpa-tenant-default]]`link:#tkit-jpa-tenant_tkit-jpa-tenant-default[tkit.jpa.tenant.default]`
+a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default]]`link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default[tkit.jpa.tenant.default]`
 
 
 [.description]
