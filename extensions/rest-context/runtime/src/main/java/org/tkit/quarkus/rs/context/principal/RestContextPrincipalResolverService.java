@@ -21,12 +21,12 @@ public class RestContextPrincipalResolverService {
     PrincipalNameCustomResolver customResolver;
 
     public String getPrincipalName(JsonWebToken principalToken, ContainerRequestContext containerRequestContext) {
-        if (!config.enabled()) {
+        if (!config.principalName().enabled()) {
             return null;
         }
 
         var principal = getPrincipal(principalToken, containerRequestContext);
-        if (principal == null && config.mandatory()) {
+        if (principal == null && config.principalName().mandatory()) {
             throw new PrincipalRequiredException();
         }
         return principal;
@@ -35,7 +35,7 @@ public class RestContextPrincipalResolverService {
     public String getPrincipal(JsonWebToken principalToken, ContainerRequestContext containerRequestContext) {
 
         // get principal name from custom service
-        if (config.enabledCustomService()) {
+        if (config.principalName().enabledCustomService()) {
             try {
                 String principalName = customResolver.getPrincipalName(principalToken, containerRequestContext);
                 if (principalName != null && !principalName.isBlank()) {
@@ -48,7 +48,7 @@ public class RestContextPrincipalResolverService {
         }
 
         // get principal name from the security context
-        if (config.securityContext().enabled() && securityContext != null
+        if (config.principalName().securityContext().enabled() && securityContext != null
                 && securityContext.getUserPrincipal() != null) {
             String principal = securityContext.getUserPrincipal().getName();
             if (principal != null && !principal.isBlank()) {
@@ -57,10 +57,10 @@ public class RestContextPrincipalResolverService {
         }
 
         // get the principal name from the token
-        if (config.tokenEnabled()) {
+        if (config.principalName().tokenEnabled()) {
             // check principal name from token
             if (principalToken != null) {
-                String principal = principalToken.getClaim(config.tokenClaimName());
+                String principal = principalToken.getClaim(config.principalName().tokenClaimName());
                 if (principal != null && !principal.isBlank()) {
                     return principal;
                 }
@@ -68,14 +68,14 @@ public class RestContextPrincipalResolverService {
         }
 
         // check principal name from header parameter
-        if (config.headerParamEnabled()) {
-            String tenantId = containerRequestContext.getHeaders().getFirst(config.headerParamName());
+        if (config.principalName().headerParamEnabled()) {
+            String tenantId = containerRequestContext.getHeaders().getFirst(config.principalName().headerParamName());
             if (tenantId != null && !tenantId.isBlank()) {
                 return tenantId;
             }
         }
 
-        return config.defaultPrincipal().orElse(null);
+        return config.principalName().defaultPrincipal().orElse(null);
     }
 
     public enum ErrorKeys {

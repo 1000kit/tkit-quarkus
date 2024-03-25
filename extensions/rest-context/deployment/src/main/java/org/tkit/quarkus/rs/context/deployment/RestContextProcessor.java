@@ -40,7 +40,7 @@ public class RestContextProcessor {
             RestContextBuildConfig buildConfig,
             BuildProducer<AnnotationDataBuildItem> producer) {
 
-        if (!buildConfig.tenant.enabled) {
+        if (!buildConfig.build.tenant.enabled) {
             return;
         }
 

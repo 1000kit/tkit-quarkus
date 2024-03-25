@@ -8,14 +8,24 @@ import io.quarkus.runtime.annotations.ConfigRoot;
 /**
  * Rest context build configuration.
  */
-@ConfigRoot(prefix = "tkit", name = "rs.context.build", phase = ConfigPhase.BUILD_TIME)
+@ConfigRoot(prefix = "tkit", name = "rs.context", phase = ConfigPhase.BUILD_TIME)
 public class RestContextBuildConfig {
 
     /**
-     * Auto-discovery configuration.
+     * Rest context build configuration
      */
-    @ConfigItem(name = "tenant")
-    public TenantBuildTimeConfig tenant;
+    @ConfigItem(name = "build")
+    public BuildConfig build;
+
+    @ConfigGroup
+    public static class BuildConfig {
+        /**
+         * Auto-discovery configuration.
+         */
+        @ConfigItem(name = "tenant")
+        public TenantBuildTimeConfig tenant;
+
+    }
 
     /**
      * Build tenant annotation config.

@@ -22,4 +22,4 @@ For instance, with Maven, add the following dependency to your POM file:
 
 === Configuration
 
-include::includes/tkit-log-json.adoc[leveloffset=+1, opts=optional]
+include::includes/tkit-quarkus-log-json.adoc[leveloffset=+1, opts=optional]

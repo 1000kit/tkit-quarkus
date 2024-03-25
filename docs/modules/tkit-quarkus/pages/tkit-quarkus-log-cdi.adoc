@@ -48,4 +48,4 @@ CAUTION: The autodiscovery feature is deprecated and not recommend to use. Confi
 
 === Configuration
 
-include::includes/tkit-log-cdi.adoc[leveloffset=+1, opts=optional]
+include::includes/tkit-quarkus-log-cdi.adoc[leveloffset=+1, opts=optional]

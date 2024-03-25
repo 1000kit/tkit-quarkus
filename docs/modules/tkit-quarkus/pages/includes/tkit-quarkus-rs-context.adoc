@@ -1,0 +1,607 @@
+
+:summaryTableId: tkit-quarkus-rs-context
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[tkit-quarkus-rs-context_configuration]]link:#tkit-quarkus-rs-context_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-token-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-token-enabled[tkit.rs.context.token.enabled]`
+
+
+[.description]
+--
+Enable or disable token parsing.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-token-mandatory]]`link:#tkit-quarkus-rs-context_tkit-rs-context-token-mandatory[tkit.rs.context.token.mandatory]`
+
+
+[.description]
+--
+Make the token mandatory (not null)
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_MANDATORY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_MANDATORY+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-token-type]]`link:#tkit-quarkus-rs-context_tkit-rs-context-token-type[tkit.rs.context.token.type]`
+
+
+[.description]
+--
+Type of the token for new created token
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_TYPE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_TYPE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`principal-token`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-token-verify]]`link:#tkit-quarkus-rs-context_tkit-rs-context-token-verify[tkit.rs.context.token.verify]`
+
+
+[.description]
+--
+Verify token
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_VERIFY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_VERIFY+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-token-public-key-location-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-token-public-key-location-enabled[tkit.rs.context.token.public-key-location.enabled]`
+
+
+[.description]
+--
+Use token realm for the public key.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_PUBLIC_KEY_LOCATION_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_PUBLIC_KEY_LOCATION_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-token-public-key-location-suffix]]`link:#tkit-quarkus-rs-context_tkit-rs-context-token-public-key-location-suffix[tkit.rs.context.token.public-key-location.suffix]`
+
+
+[.description]
+--
+Public key server suffix
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_PUBLIC_KEY_LOCATION_SUFFIX+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_PUBLIC_KEY_LOCATION_SUFFIX+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`/protocol/openid-connect/certs`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-token-header-param]]`link:#tkit-quarkus-rs-context_tkit-rs-context-token-header-param[tkit.rs.context.token.header-param]`
+
+
+[.description]
+--
+Principal token header parameter.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_HEADER_PARAM+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_HEADER_PARAM+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`apm-principal-token`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-enabled[tkit.rs.context.tenant-id.enabled]`
+
+
+[.description]
+--
+Enable or disable rest context tenant.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mandatory]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mandatory[tkit.rs.context.tenant-id.mandatory]`
+
+
+[.description]
+--
+Make the tenant mandatory (not null)
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_MANDATORY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_MANDATORY+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-default]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-default[tkit.rs.context.tenant-id.default]`
+
+
+[.description]
+--
+Default tenant.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_DEFAULT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_DEFAULT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-header-param-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-header-param-enabled[tkit.rs.context.tenant-id.header-param-enabled]`
+
+
+[.description]
+--
+Take tenant ID from header parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_HEADER_PARAM_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_HEADER_PARAM_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-header-param-name]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-header-param-name[tkit.rs.context.tenant-id.header-param-name]`
+
+
+[.description]
+--
+Tenant ID header parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_HEADER_PARAM_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_HEADER_PARAM_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`x-tenant-id`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-custom-service-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-custom-service-enabled[tkit.rs.context.tenant-id.custom-service-enabled]`
+
+
+[.description]
+--
+Enable or disable custom tenant resolver service.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_CUSTOM_SERVICE_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_CUSTOM_SERVICE_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-enabled[tkit.rs.context.tenant-id.mock.enabled]`
+
+
+[.description]
+--
+Enable or disable tenant mock service.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-default-tenant]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-default-tenant[tkit.rs.context.tenant-id.mock.default-tenant]`
+
+
+[.description]
+--
+Default mock tenant
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DEFAULT_TENANT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DEFAULT_TENANT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`default`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-claim-org-id]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-claim-org-id[tkit.rs.context.tenant-id.mock.claim-org-id]`
+
+
+[.description]
+--
+Token organization claim id
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_CLAIM_ORG_ID+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_CLAIM_ORG_ID+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`orgId`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-token-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-token-enabled[tkit.rs.context.tenant-id.token.enabled]`
+
+
+[.description]
+--
+Enable or disable tenant token claim.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_TOKEN_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_TOKEN_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-token-claim-tenant-param]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-token-claim-tenant-param[tkit.rs.context.tenant-id.token.claim-tenant-param]`
+
+
+[.description]
+--
+Default mock tenant
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_TOKEN_CLAIM_TENANT_PARAM+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_TOKEN_CLAIM_TENANT_PARAM+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`tenantId`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-enabled[tkit.rs.context.principal.name.enabled]`
+
+
+[.description]
+--
+Enable or disable principal name resolver.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-mandatory]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-mandatory[tkit.rs.context.principal.name.mandatory]`
+
+
+[.description]
+--
+Make the principal name mandatory (not null).
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_MANDATORY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_MANDATORY+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-custom-service-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-custom-service-enabled[tkit.rs.context.principal.name.custom-service-enabled]`
+
+
+[.description]
+--
+Enabled custom service.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_CUSTOM_SERVICE_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_CUSTOM_SERVICE_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-security-context-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-security-context-enabled[tkit.rs.context.principal.name.security-context.enabled]`
+
+
+[.description]
+--
+Enable or disable principal from security context.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_SECURITY_CONTEXT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_SECURITY_CONTEXT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-default]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-default[tkit.rs.context.principal.name.default]`
+
+
+[.description]
+--
+Default principal.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_DEFAULT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_DEFAULT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-token-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-token-enabled[tkit.rs.context.principal.name.token-enabled]`
+
+
+[.description]
+--
+Enable principal from token.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-token-claim-name]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-token-claim-name[tkit.rs.context.principal.name.token-claim-name]`
+
+
+[.description]
+--
+Principal from token claim.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_CLAIM_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_TOKEN_CLAIM_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`sub`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-header-param-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-header-param-enabled[tkit.rs.context.principal.name.header-param-enabled]`
+
+
+[.description]
+--
+Enable principal from header parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-principal-name-header-param-name]]`link:#tkit-quarkus-rs-context_tkit-rs-context-principal-name-header-param-name[tkit.rs.context.principal.name.header-param-name]`
+
+
+[.description]
+--
+Principal from header parameter
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_PRINCIPAL_NAME_HEADER_PARAM_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`x-principal-id`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-enabled[tkit.rs.context.enabled]`
+
+
+[.description]
+--
+Enable or disable rest context.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-correlation-id-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-correlation-id-enabled[tkit.rs.context.correlation-id.enabled]`
+
+
+[.description]
+--
+Enable or disable correlation ID.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_CORRELATION_ID_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_CORRELATION_ID_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-correlation-id-header-param-name]]`link:#tkit-quarkus-rs-context_tkit-rs-context-correlation-id-header-param-name[tkit.rs.context.correlation-id.header-param-name]`
+
+
+[.description]
+--
+Header parameter for correlation ID.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_CORRELATION_ID_HEADER_PARAM_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_CORRELATION_ID_HEADER_PARAM_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`x-correlation-id`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-business-context-enabled]]`link:#tkit-quarkus-rs-context_tkit-rs-context-business-context-enabled[tkit.rs.context.business-context.enabled]`
+
+
+[.description]
+--
+Enable or disable business context.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_BUSINESS_CONTEXT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_BUSINESS_CONTEXT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-business-context-default]]`link:#tkit-quarkus-rs-context_tkit-rs-context-business-context-default[tkit.rs.context.business-context.default]`
+
+
+[.description]
+--
+The default business parameter.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_BUSINESS_CONTEXT_DEFAULT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_BUSINESS_CONTEXT_DEFAULT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-business-context-header-param-name]]`link:#tkit-quarkus-rs-context_tkit-rs-context-business-context-header-param-name[tkit.rs.context.business-context.header-param-name]`
+
+
+[.description]
+--
+Header parameter for business context.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_BUSINESS_CONTEXT_HEADER_PARAM_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_BUSINESS_CONTEXT_HEADER_PARAM_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`business-context`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-add-token-to-context]]`link:#tkit-quarkus-rs-context_tkit-rs-context-add-token-to-context[tkit.rs.context.add-token-to-context]`
+
+
+[.description]
+--
+Add token to application context.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_ADD_TOKEN_TO_CONTEXT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_ADD_TOKEN_TO_CONTEXT+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-data-data]]`link:#tkit-quarkus-rs-context_tkit-rs-context-tenant-id-mock-data-data[tkit.rs.context.tenant-id.mock.data]`
+
+
+[.description]
+--
+Mock data
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DATA+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DATA+++`
+endif::add-copy-button-to-env-var[]
+--|`Map<String,String>` 
+|
+
+|===

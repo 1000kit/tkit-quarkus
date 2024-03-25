@@ -69,4 +69,4 @@ Example:
 
 === Configuration
 
-include::includes/tkit-db-import.adoc[leveloffset=+1, opts=optional]
+include::includes/tkit-quarkus-test-db-import.adoc[leveloffset=+1, opts=optional]

@@ -27,7 +27,7 @@ public class RestContextTenantResolverService {
 
     public String getTenantId(JsonWebToken principalToken, ContainerRequestContext containerRequestContext) {
 
-        if (!config.enabled()) {
+        if (!config.tenantId().enabled()) {
             return null;
         }
 
@@ -38,7 +38,7 @@ public class RestContextTenantResolverService {
         }
 
         var tenantId = get(principalToken, containerRequestContext);
-        if (tenantId == null && config.mandatory()) {
+        if (tenantId == null && config.tenantId().mandatory()) {
             throw new TenantRequiredException();
         }
 
@@ -48,14 +48,14 @@ public class RestContextTenantResolverService {
     public String get(JsonWebToken principalToken, ContainerRequestContext containerRequestContext) {
 
         // check mock service
-        if (config.mock().enabled()) {
+        if (config.tenantId().mock().enabled()) {
             return getMockTenantId(principalToken);
         }
 
-        if (config.token().enabled()) {
+        if (config.tenantId().token().enabled()) {
             // check principal name from token
             if (principalToken != null) {
-                String tenantId = principalToken.getClaim(config.token().claimTenantParam());
+                String tenantId = principalToken.getClaim(config.tenantId().token().claimTenantParam());
                 if (tenantId != null && !tenantId.isBlank()) {
                     return tenantId;
                 }
@@ -63,7 +63,7 @@ public class RestContextTenantResolverService {
         }
 
         // get tenant-id from custom service
-        if (config.enabledCustomService()) {
+        if (config.tenantId().enabledCustomService()) {
             try {
                 String tenantId = customTenantResolver.getTenantId(principalToken, containerRequestContext);
                 if (tenantId != null && !tenantId.isBlank()) {
@@ -77,19 +77,19 @@ public class RestContextTenantResolverService {
         }
 
         // check tenant-id from header
-        if (config.headerParamEnabled()) {
-            String tenantId = containerRequestContext.getHeaders().getFirst(config.headerParamName());
+        if (config.tenantId().headerParamEnabled()) {
+            String tenantId = containerRequestContext.getHeaders().getFirst(config.tenantId().headerParamName());
             if (tenantId != null && !tenantId.isBlank()) {
                 return tenantId;
             }
         }
 
-        return config.defaultTenantId().orElse(null);
+        return config.tenantId().defaultTenantId().orElse(null);
     }
 
     private String getMockTenantId(JsonWebToken principalToken) {
 
-        var mockConfig = config.mock();
+        var mockConfig = config.tenantId().mock();
         String organization = null;
         if (principalToken != null) {
             organization = principalToken.getClaim(mockConfig.claimOrgId());

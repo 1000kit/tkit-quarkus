@@ -8,70 +8,80 @@ import io.smallrye.config.WithDefault;
 import io.smallrye.config.WithName;
 
 @StaticInitSafe
-@ConfigMapping(prefix = "tkit.rs.context.principal.name")
+@ConfigDocFilename("tkit-quarkus-rs-context.adoc")
+@ConfigMapping(prefix = "tkit.rs.context")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
 public interface RestContextPrincipalNameConfig {
 
     /**
-     * Enable or disable principal name resolver.
+     * Rest context principal name configuration.
      */
-    @WithName("enabled")
-    @WithDefault("true")
-    boolean enabled();
+    @WithName("principal.name")
+    PrincipalNameConfig principalName();
 
-    /**
-     * Make the principal name mandatory (not null).
-     */
-    @WithName("mandatory")
-    @WithDefault("false")
-    boolean mandatory();
+    interface PrincipalNameConfig {
+        /**
+         * Enable or disable principal name resolver.
+         */
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
-    /**
-     * Enabled custom service.
-     */
-    @WithName("custom-service-enabled")
-    @WithDefault("false")
-    boolean enabledCustomService();
+        /**
+         * Make the principal name mandatory (not null).
+         */
+        @WithName("mandatory")
+        @WithDefault("false")
+        boolean mandatory();
 
-    /**
-     * Enable security context for principal name resolver.
-     */
-    @WithName("security-context")
-    SecurityContextConfig securityContext();
+        /**
+         * Enabled custom service.
+         */
+        @WithName("custom-service-enabled")
+        @WithDefault("false")
+        boolean enabledCustomService();
 
-    /**
-     * Default principal.
-     */
-    @WithName("default")
-    Optional<String> defaultPrincipal();
+        /**
+         * Enable security context for principal name resolver.
+         */
+        @WithName("security-context")
+        SecurityContextConfig securityContext();
 
-    /**
-     * Enable principal from token.
-     */
-    @WithName("token-enabled")
-    @WithDefault("true")
-    boolean tokenEnabled();
+        /**
+         * Default principal.
+         */
+        @WithName("default")
+        Optional<String> defaultPrincipal();
 
-    /**
-     * Principal from token claim.
-     */
-    @WithName("token-claim-name")
-    @WithDefault("sub")
-    String tokenClaimName();
+        /**
+         * Enable principal from token.
+         */
+        @WithName("token-enabled")
+        @WithDefault("true")
+        boolean tokenEnabled();
 
-    /**
-     * Enable principal from header parameter
-     */
-    @WithName("header-param-enabled")
-    @WithDefault("false")
-    boolean headerParamEnabled();
+        /**
+         * Principal from token claim.
+         */
+        @WithName("token-claim-name")
+        @WithDefault("sub")
+        String tokenClaimName();
 
-    /**
-     * Principal from header parameter
-     */
-    @WithName("header-param-name")
-    @WithDefault("x-principal-id")
-    String headerParamName();
+        /**
+         * Enable principal from header parameter
+         */
+        @WithName("header-param-enabled")
+        @WithDefault("false")
+        boolean headerParamEnabled();
+
+        /**
+         * Principal from header parameter
+         */
+        @WithName("header-param-name")
+        @WithDefault("x-principal-id")
+        String headerParamName();
+
+    }
 
     interface SecurityContextConfig {
 

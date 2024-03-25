@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import io.quarkus.runtime.annotations.*;
 
+@ConfigDocFilename("tkit-quarkus-log-rs.adoc")
 @ConfigRoot(prefix = "tkit", name = "log.rs", phase = ConfigPhase.RUN_TIME)
 public class RestRuntimeConfig {
 

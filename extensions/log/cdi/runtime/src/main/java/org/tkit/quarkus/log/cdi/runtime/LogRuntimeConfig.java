@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
-import io.quarkus.runtime.annotations.ConfigPhase;
-import io.quarkus.runtime.annotations.ConfigRoot;
+import io.quarkus.runtime.annotations.*;
 
+@ConfigDocFilename("tkit-quarkus-log-cdi.adoc")
 @ConfigRoot(prefix = "tkit", name = "log.cdi", phase = ConfigPhase.RUN_TIME)
 public class LogRuntimeConfig {
 

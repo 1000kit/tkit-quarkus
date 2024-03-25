@@ -1,16 +1,16 @@
 
-:summaryTableId: tkit-db-import
+:summaryTableId: tkit-quarkus-test-db-import
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[tkit-db-import_configuration]]link:#tkit-db-import_configuration[Configuration property]
+h|[[tkit-quarkus-test-db-import_configuration]]link:#tkit-quarkus-test-db-import_configuration[Configuration property]
 
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[tkit-db-import_tkit-db-import-devservices-enabled]]`link:#tkit-db-import_tkit-db-import-devservices-enabled[tkit.db-import.devservices.enabled]`
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-test-db-import_tkit-db-import-devservices-enabled]]`link:#tkit-quarkus-test-db-import_tkit-db-import-devservices-enabled[tkit.db-import.devservices.enabled]`
 
 
 [.description]
@@ -27,7 +27,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a|icon:lock[title=Fixed at build time] [[tkit-db-import_tkit-db-import-devservices-db-image-name]]`link:#tkit-db-import_tkit-db-import-devservices-db-image-name[tkit.db-import.devservices.db-image-name]`
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-test-db-import_tkit-db-import-devservices-db-image-name]]`link:#tkit-quarkus-test-db-import_tkit-db-import-devservices-db-image-name[tkit.db-import.devservices.db-image-name]`
 
 
 [.description]

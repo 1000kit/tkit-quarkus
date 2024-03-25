@@ -1,16 +1,16 @@
 
-:summaryTableId: tkit-log-rs
+:summaryTableId: tkit-quarkus-log-rs
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[tkit-log-rs_configuration]]link:#tkit-log-rs_configuration[Configuration property]
+h|[[tkit-quarkus-log-rs_configuration]]link:#tkit-quarkus-log-rs_configuration[Configuration property]
 
 h|Type
 h|Default
 
-a| [[tkit-log-rs_tkit-log-rs-enabled]]`link:#tkit-log-rs_tkit-log-rs-enabled[tkit.log.rs.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-enabled[tkit.log.rs.enabled]`
 
 
 [.description]
@@ -27,7 +27,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-principal-enabled]]`link:#tkit-log-rs_tkit-log-rs-principal-enabled[tkit.log.rs.principal.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-principal-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-principal-enabled[tkit.log.rs.principal.enabled]`
 
 
 [.description]
@@ -44,7 +44,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-correlation-id-enabled]]`link:#tkit-log-rs_tkit-log-rs-correlation-id-enabled[tkit.log.rs.correlation-id-enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-correlation-id-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-correlation-id-enabled[tkit.log.rs.correlation-id-enabled]`
 
 
 [.description]
@@ -61,7 +61,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-correlation-id-header]]`link:#tkit-log-rs_tkit-log-rs-correlation-id-header[tkit.log.rs.correlation-id-header]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-correlation-id-header]]`link:#tkit-quarkus-log-rs_tkit-log-rs-correlation-id-header[tkit.log.rs.correlation-id-header]`
 
 
 [.description]
@@ -78,7 +78,7 @@ endif::add-copy-button-to-env-var[]
 |`X-Correlation-ID`
 
 
-a| [[tkit-log-rs_tkit-log-rs-start-enabled]]`link:#tkit-log-rs_tkit-log-rs-start-enabled[tkit.log.rs.start.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-start-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-start-enabled[tkit.log.rs.start.enabled]`
 
 
 [.description]
@@ -95,7 +95,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-start-template]]`link:#tkit-log-rs_tkit-log-rs-start-template[tkit.log.rs.start.template]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-start-template]]`link:#tkit-quarkus-log-rs_tkit-log-rs-start-template[tkit.log.rs.start.template]`
 
 
 [.description]
@@ -112,7 +112,7 @@ endif::add-copy-button-to-env-var[]
 |`%1$s %2$s started.`
 
 
-a| [[tkit-log-rs_tkit-log-rs-end-enabled]]`link:#tkit-log-rs_tkit-log-rs-end-enabled[tkit.log.rs.end.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-end-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-end-enabled[tkit.log.rs.end.enabled]`
 
 
 [.description]
@@ -129,7 +129,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-end-template]]`link:#tkit-log-rs_tkit-log-rs-end-template[tkit.log.rs.end.template]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-end-template]]`link:#tkit-quarkus-log-rs_tkit-log-rs-end-template[tkit.log.rs.end.template]`
 
 
 [.description]
@@ -146,7 +146,7 @@ endif::add-copy-button-to-env-var[]
 |`%1$s %2$s [%4$s] [%3$ss]`
 
 
-a| [[tkit-log-rs_tkit-log-rs-end-mdc-enabled]]`link:#tkit-log-rs_tkit-log-rs-end-mdc-enabled[tkit.log.rs.end.mdc.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-end-mdc-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-end-mdc-enabled[tkit.log.rs.end.mdc.enabled]`
 
 
 [.description]
@@ -163,7 +163,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-end-mdc-duration-name]]`link:#tkit-log-rs_tkit-log-rs-end-mdc-duration-name[tkit.log.rs.end.mdc.duration.name]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-end-mdc-duration-name]]`link:#tkit-quarkus-log-rs_tkit-log-rs-end-mdc-duration-name[tkit.log.rs.end.mdc.duration.name]`
 
 
 [.description]
@@ -180,7 +180,7 @@ endif::add-copy-button-to-env-var[]
 |`rs-time`
 
 
-a| [[tkit-log-rs_tkit-log-rs-end-mdc-response-status-name]]`link:#tkit-log-rs_tkit-log-rs-end-mdc-response-status-name[tkit.log.rs.end.mdc.response-status.name]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-end-mdc-response-status-name]]`link:#tkit-quarkus-log-rs_tkit-log-rs-end-mdc-response-status-name[tkit.log.rs.end.mdc.response-status.name]`
 
 
 [.description]
@@ -197,7 +197,7 @@ endif::add-copy-button-to-env-var[]
 |`rs-status`
 
 
-a| [[tkit-log-rs_tkit-log-rs-error-enabled]]`link:#tkit-log-rs_tkit-log-rs-error-enabled[tkit.log.rs.error.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-error-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-error-enabled[tkit.log.rs.error.enabled]`
 
 
 [.description]
@@ -214,7 +214,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-regex-enabled[tkit.log.rs.regex.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-regex-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-regex-enabled[tkit.log.rs.regex.enabled]`
 
 
 [.description]
@@ -231,7 +231,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-regex-exclude[tkit.log.rs.regex.exclude]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-regex-exclude]]`link:#tkit-quarkus-log-rs_tkit-log-rs-regex-exclude[tkit.log.rs.regex.exclude]`
 
 
 [.description]
@@ -248,7 +248,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-enabled]]`link:#tkit-log-rs_tkit-log-rs-payload-enabled[tkit.log.rs.payload.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-enabled[tkit.log.rs.payload.enabled]`
 
 
 [.description]
@@ -265,7 +265,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-template]]`link:#tkit-log-rs_tkit-log-rs-payload-template[tkit.log.rs.payload.template]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-template]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-template[tkit.log.rs.payload.template]`
 
 
 [.description]
@@ -282,7 +282,7 @@ endif::add-copy-button-to-env-var[]
 |`%1$s %2$s payload: %3$s`
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-empty-body-enabled]]`link:#tkit-log-rs_tkit-log-rs-payload-empty-body-enabled[tkit.log.rs.payload.empty-body-enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-enabled[tkit.log.rs.payload.empty-body-enabled]`
 
 
 [.description]
@@ -299,7 +299,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-empty-body-message]]`link:#tkit-log-rs_tkit-log-rs-payload-empty-body-message[tkit.log.rs.payload.empty-body-message]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-message]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-message[tkit.log.rs.payload.empty-body-message]`
 
 
 [.description]
@@ -316,7 +316,7 @@ endif::add-copy-button-to-env-var[]
 |`<EMPTY BODY>`
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-page-message]]`link:#tkit-log-rs_tkit-log-rs-payload-page-message[tkit.log.rs.payload.page-message]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-page-message]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-page-message[tkit.log.rs.payload.page-message]`
 
 
 [.description]
@@ -333,7 +333,7 @@ endif::add-copy-button-to-env-var[]
 |`...more...`
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-max-entity-size]]`link:#tkit-log-rs_tkit-log-rs-payload-max-entity-size[tkit.log.rs.payload.max-entity-size]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-max-entity-size]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-max-entity-size[tkit.log.rs.payload.max-entity-size]`
 
 
 [.description]
@@ -350,7 +350,7 @@ endif::add-copy-button-to-env-var[]
 |`1048576`
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-payload-regex-enabled[tkit.log.rs.payload.regex.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-regex-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-regex-enabled[tkit.log.rs.payload.regex.enabled]`
 
 
 [.description]
@@ -367,7 +367,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-payload-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-payload-regex-exclude[tkit.log.rs.payload.regex.exclude]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-regex-exclude]]`link:#tkit-quarkus-log-rs_tkit-log-rs-payload-regex-exclude[tkit.log.rs.payload.regex.exclude]`
 
 
 [.description]
@@ -384,7 +384,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-enabled[tkit.log.rs.client.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-enabled[tkit.log.rs.client.enabled]`
 
 
 [.description]
@@ -401,7 +401,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-regex-enabled[tkit.log.rs.client.regex.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-regex-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-regex-enabled[tkit.log.rs.client.regex.enabled]`
 
 
 [.description]
@@ -418,7 +418,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-client-regex-exclude[tkit.log.rs.client.regex.exclude]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-regex-exclude]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-regex-exclude[tkit.log.rs.client.regex.exclude]`
 
 
 [.description]
@@ -435,7 +435,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-payload-enabled[tkit.log.rs.client.payload.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-enabled[tkit.log.rs.client.payload.enabled]`
 
 
 [.description]
@@ -452,7 +452,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-template]]`link:#tkit-log-rs_tkit-log-rs-client-payload-template[tkit.log.rs.client.payload.template]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-template]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-template[tkit.log.rs.client.payload.template]`
 
 
 [.description]
@@ -469,7 +469,7 @@ endif::add-copy-button-to-env-var[]
 |`%1$s %2$s payload: %3$s`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-empty-body-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-payload-empty-body-enabled[tkit.log.rs.client.payload.empty-body-enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-enabled[tkit.log.rs.client.payload.empty-body-enabled]`
 
 
 [.description]
@@ -486,7 +486,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-empty-body-message]]`link:#tkit-log-rs_tkit-log-rs-client-payload-empty-body-message[tkit.log.rs.client.payload.empty-body-message]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-message]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-message[tkit.log.rs.client.payload.empty-body-message]`
 
 
 [.description]
@@ -503,7 +503,7 @@ endif::add-copy-button-to-env-var[]
 |`<EMPTY BODY>`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-page-message]]`link:#tkit-log-rs_tkit-log-rs-client-payload-page-message[tkit.log.rs.client.payload.page-message]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-page-message]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-page-message[tkit.log.rs.client.payload.page-message]`
 
 
 [.description]
@@ -520,7 +520,7 @@ endif::add-copy-button-to-env-var[]
 |`...more...`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-max-entity-size]]`link:#tkit-log-rs_tkit-log-rs-client-payload-max-entity-size[tkit.log.rs.client.payload.max-entity-size]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-max-entity-size]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-max-entity-size[tkit.log.rs.client.payload.max-entity-size]`
 
 
 [.description]
@@ -537,7 +537,7 @@ endif::add-copy-button-to-env-var[]
 |`1048576`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-regex-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-payload-regex-enabled[tkit.log.rs.client.payload.regex.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-enabled[tkit.log.rs.client.payload.regex.enabled]`
 
 
 [.description]
@@ -554,7 +554,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-payload-regex-exclude]]`link:#tkit-log-rs_tkit-log-rs-client-payload-regex-exclude[tkit.log.rs.client.payload.regex.exclude]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-exclude]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-exclude[tkit.log.rs.client.payload.regex.exclude]`
 
 
 [.description]
@@ -571,7 +571,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-start-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-start-enabled[tkit.log.rs.client.start.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-start-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-start-enabled[tkit.log.rs.client.start.enabled]`
 
 
 [.description]
@@ -588,7 +588,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-start-template]]`link:#tkit-log-rs_tkit-log-rs-client-start-template[tkit.log.rs.client.start.template]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-start-template]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-start-template[tkit.log.rs.client.start.template]`
 
 
 [.description]
@@ -605,7 +605,7 @@ endif::add-copy-button-to-env-var[]
 |`%1$s %2$s started.`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-end-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-end-enabled[tkit.log.rs.client.end.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-enabled[tkit.log.rs.client.end.enabled]`
 
 
 [.description]
@@ -622,7 +622,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-end-template]]`link:#tkit-log-rs_tkit-log-rs-client-end-template[tkit.log.rs.client.end.template]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-template]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-template[tkit.log.rs.client.end.template]`
 
 
 [.description]
@@ -639,7 +639,7 @@ endif::add-copy-button-to-env-var[]
 |`%1$s %2$s [%4$s] [%3$ss]`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-end-mdc-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-end-mdc-enabled[tkit.log.rs.client.end.mdc.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-enabled[tkit.log.rs.client.end.mdc.enabled]`
 
 
 [.description]
@@ -656,7 +656,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-end-mdc-duration-name]]`link:#tkit-log-rs_tkit-log-rs-client-end-mdc-duration-name[tkit.log.rs.client.end.mdc.duration.name]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-duration-name]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-duration-name[tkit.log.rs.client.end.mdc.duration.name]`
 
 
 [.description]
@@ -673,7 +673,7 @@ endif::add-copy-button-to-env-var[]
 |`rs-client-time`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-end-mdc-response-status-name]]`link:#tkit-log-rs_tkit-log-rs-client-end-mdc-response-status-name[tkit.log.rs.client.end.mdc.response-status.name]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-response-status-name]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-response-status-name[tkit.log.rs.client.end.mdc.response-status.name]`
 
 
 [.description]
@@ -690,7 +690,7 @@ endif::add-copy-button-to-env-var[]
 |`rs-client-status`
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-error-enabled]]`link:#tkit-log-rs_tkit-log-rs-client-error-enabled[tkit.log.rs.client.error.enabled]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-error-enabled]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-error-enabled[tkit.log.rs.client.error.enabled]`
 
 
 [.description]
@@ -707,7 +707,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-log-rs_tkit-log-rs-mdc-headers-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-mdc-headers-mdc-headers[tkit.log.rs.mdc-headers]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers[tkit.log.rs.mdc-headers]`
 
 
 [.description]
@@ -724,7 +724,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-controller-controller-log]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-log[tkit.log.rs.controller."controller".log]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-controller-controller-log]]`link:#tkit-quarkus-log-rs_tkit-log-rs-controller-controller-log[tkit.log.rs.controller."controller".log]`
 
 
 [.description]
@@ -741,7 +741,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-controller-controller-payload]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-payload[tkit.log.rs.controller."controller".payload]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-controller-controller-payload]]`link:#tkit-quarkus-log-rs_tkit-log-rs-controller-controller-payload[tkit.log.rs.controller."controller".payload]`
 
 
 [.description]
@@ -758,7 +758,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-controller-controller-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-mdc-headers[tkit.log.rs.controller."controller".mdc-headers]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-controller-controller-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-controller-controller-mdc-headers[tkit.log.rs.controller."controller".mdc-headers]`
 
 
 [.description]
@@ -775,7 +775,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-controller-controller-method-method-log]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-method-method-log[tkit.log.rs.controller."controller".method."method".log]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-controller-controller-method-method-log]]`link:#tkit-quarkus-log-rs_tkit-log-rs-controller-controller-method-method-log[tkit.log.rs.controller."controller".method."method".log]`
 
 
 [.description]
@@ -792,7 +792,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-controller-controller-method-method-payload]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-method-method-payload[tkit.log.rs.controller."controller".method."method".payload]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-controller-controller-method-method-payload]]`link:#tkit-quarkus-log-rs_tkit-log-rs-controller-controller-method-method-payload[tkit.log.rs.controller."controller".method."method".payload]`
 
 
 [.description]
@@ -809,7 +809,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-controller-controller-method-method-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-controller-controller-method-method-mdc-headers[tkit.log.rs.controller."controller".method."method".mdc-headers]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-controller-controller-method-method-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-controller-controller-method-method-mdc-headers[tkit.log.rs.controller."controller".method."method".mdc-headers]`
 
 
 [.description]
@@ -826,7 +826,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers]]`link:#tkit-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers[tkit.log.rs.client.mdc-headers]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers[tkit.log.rs.client.mdc-headers]`
 
 
 [.description]
