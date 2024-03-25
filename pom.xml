@@ -80,7 +80,7 @@
         <!-- Documentation -->
         <asciidoctorj.version>2.5.12</asciidoctorj.version>
         <asciidoctor-maven-plugin.version>3.0.0</asciidoctor-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>8.0.1</git-commit-id-maven-plugin.version>
+        <git-commit-id-maven-plugin.version>8.0.2</git-commit-id-maven-plugin.version>
 
         <!-- Other -->
         <dbunit.version>2.7.3</dbunit.version>
