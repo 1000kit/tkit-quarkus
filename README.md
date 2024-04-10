@@ -15,114 +15,17 @@ Set of Quarkus extensions and libraries to speed up development of backend micro
 
 Tkit-Quarkus provides two different version streams, one compatible with Quarkus 2.x and the other compatible with Quarkus 3.x.
 
-| Quarkus | Tkit-Quarkus |
-|---------|--------------|
-| 2.x     | 0.x          |
-| 3.2.x   | 1.x          |
-| > 3.3.x | 2.x (main)   |
-
+| Quarkus | Tkit-Quarkus     |
+|---------|------------------|
+| 2.x     | = 0.x            |
+| 3.2.x   | = 1.x            |
+| > 3.3.x | >= 2.x           |
+| > 3.9.x | >= 2.18.0 (main) |
 Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://search.maven.org/artifact/org.tkit.quarkus.lib/tkit-quarkus-bom).
 
-## Getting started
+## Documentation
 
-Include the following bom artifact into your pom or parent pom and then pick the components you need. 
-
-```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.tkit.quarkus.lib</groupId>
-            <artifactId>tkit-quarkus-bom</artifactId>
-            <version>${tkit.quarkus.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-```
-
-## Components
-
-Include the component in your project by including the corresponding dependency. 
-
-:information_source: Some component come with additional documentation and configuration - check the 'Documentation' link for particular section.
-
-| Name             | ArtifactId                  | Info                                                               | Description                                                                                                                                                                                                                                                           | Documentation                     |
-|------------------|-----------------------------|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| Context          | tkit-quarkus-context        |                                                                    | Context propagation helpers used by other extensions like logging or jpa.                                                                                                                                                                                             | [Link](extensions/context)        |
-| Data Import      | tkit-quarkus-data-import    |                                                                    | Extension for business data import - initial data, mounted import files etc.                                                                                                                                                                                          | [Link](extensions/data-import)    |
-| JPA models       | tkit-quarkus-jpa-models     |                                                                    | Base classes for JPA entities, traceable superclass and related classes.                                                                                                                                                                                              | [Link](extensions/jpa-models)     |
-| JPA DAO          | tkit-quarkus-jpa            | > Note: Consider using official Quarkus Panache extension instead. | Abstract DAO/Repository superclass and related utilities.                                                                                                                                                                                                             | [Link](extensions/jpa)            |
-| JPA tenant       | tkit-quarkus-tenant-jpa     |                                                                    | Tenant extension for JPA layer.                                                                                                                                                                                                                                       | [Link](extensions/jpa-tenant)     |
-| Log CDI          | tkit-quarkus-log-cdi        |                                                                    | Quarkus extension for CDI method logging(business method start/stop logging).                                                                                                                                                                                         | [Link](extensions/log/cdi)        |
-| Log RS           | tkit-quarkus-log-rs         |                                                                    | Quarkus extension for HTTP request logging (client & server).                                                                                                                                                                                                         | [Link](extensions/log/rs)         |
-| Log JSON         | tkit-quarkus-log-json       |                                                                    | Custom JSON log formatter that provides additional features not included in [Official Quarkus json logger](https://quarkus.io/guides/logging#json-logging). Make sure you only include this if you need those extra features, otherwise use the official extension.   | [Link](extensions/log/json)       |
-| Rest             | tkit-quarkus-rest           |                                                                    | Helper classes for JAX-RS and Jackson.                                                                                                                                                                                                                                | [Link](extensions/rest)           |
-| Rest context     | tkit-quarkus-rest-context   |                                                                    | Create application context from rest context.                                                                                                                                                                                                                         | [Link](extensions/rest-context)   |
-| Rest DTO         | tkit-quarkus-rest-dto       | > DEPRECATED                                                       | Helper classes for REST - model mapping, exception handling, DTOs.                                                                                                                                                                                                    | [Link](extensions/rest-dto)       |
-| Test data import | tkit-quarkus-test-db-import |                                                                    | Test extension for data import from excel into database during unit tests.                                                                                                                                                                                            | [Link](extensions/test-db-import) |
-| Security         | tkit-quarkus-security       |                                                                    | Enhanced security configuration                                                                                                                                                                                                                                       | [Link](extensions/security)       |
-
-### Migration from older version
-
-If you have used previous versions of tkit quarkus libraries (mvn groupId `org.tkit.quarkus`) then there are a few breaking changes in this new version, however the migration is straightforward:
-
-#### Change maven imports
-Group id of the libraries has changed to `org.tkit.quarkus.lib`. Also, prefer the use of bom import, to ensure version compatibility. So if your current pom.xml looks sth like this:
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>org.tkit.quarkus</groupId>
-        <artifactId>tkit-quarkus-....</artifactId>
-    </dependency>
-</dependencies>
-```
-Change it to:
-```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.tkit.quarkus.lib</groupId>
-            <artifactId>tkit-quarkus-bom</artifactId>
-            <version>${tkit.quarkus.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-<dependencies>
-    <!-- Other dependencies -->
-</dependencies>
-```
-
-#### Update configuration
-All extensions and libraries now have unified configuration properties structure, starting with `tkit.` prefix, some keys have been renamed or otherwise updated. Check the table bellow for config property migration:
-
-| Old                               | New                                          | Note                                                                                                                   |
-|-----------------------------------|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| `quarkus.tkit.log.ignore.pattern` | `tkit.log.cdi.auto-discovery.ignore.pattern` |                                                                                                                        |
-| `quarkus.tkit.log.packages`       | `tkit.log.cdi.auto-discovery.packages`       | In order to enable auto binding of logging extension, you must add property `tkit.log.cdi.auto-discovery.enabled=true` |
-
-#### Default behavior changes
-
-Logging:  
-CDI logging now only logs end of business methods (success or error) to reduce logging verbosity. If you restore the behavior and still log start method invocations, set the property: `tkit.log.cdi.start.enabled=true`
-
-Old behavior: 
-```
-[com.acme.dom.dao.SomeBean] someMethod(param) started
-[com.acme.dom.dao.SomeBean] someMethod(param):SomeResultClass finished [0.035s]
-```
-[com.acme.dom.dao.SomeBean] (executor-thread-0) someMethod(param) started [0.035s]
-
-New behavior:
-```
-[com.acme.dom.dao.SomeBean] someMethod(param):SomeResultClass [0.035s]
-```
-
-#### JPA ModificationCount
-Use `modificationCount` instead of `version` when working with `TraceableEntity`. Therefore, annotations like `@Mapping(target = "version", ignore = true)` should be changed to `@Mapping(target = "modificationCount", ignore = true)`.
+Please, see the latest released [documentation page](https://1000kit.github.io/tkit-quarkus/current/tkit-quarkus/index.html).
 
 ## Contributors ✨
 

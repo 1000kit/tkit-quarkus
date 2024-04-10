@@ -1,13 +1,11 @@
 package org.tkit.quarkus.rs.context.deployment;
 
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
-import io.quarkus.runtime.annotations.ConfigPhase;
-import io.quarkus.runtime.annotations.ConfigRoot;
+import io.quarkus.runtime.annotations.*;
 
 /**
  * Rest context build configuration.
  */
+@ConfigDocFilename("tkit-quarkus-rs-context.adoc")
 @ConfigRoot(prefix = "tkit", name = "rs.context", phase = ConfigPhase.BUILD_TIME)
 public class RestContextBuildConfig {
 

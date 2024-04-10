@@ -24,12 +24,18 @@ public class UserRestController {
     @GET
     @Path("{id}")
     public Response getUser(@PathParam("id") String id) {
-        return Response.fromResponse(client.getUserById(id)).build();
+        try (Response response = client.getUserById(id)) {
+            var tmp = response.readEntity(String.class);
+            return Response.ok(tmp).build();
+        }
     }
 
     @POST
     @Path("{id}")
     public Response createUser(@PathParam("id") String id, String data) {
-        return Response.fromResponse(client.createUser(id, data)).build();
+        try (Response response = client.createUser(id, data)) {
+            var tmp = response.readEntity(String.class);
+            return Response.ok(tmp).build();
+        }
     }
 }
