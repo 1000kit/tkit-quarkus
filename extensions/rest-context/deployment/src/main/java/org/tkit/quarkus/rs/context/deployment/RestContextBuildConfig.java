@@ -5,7 +5,7 @@ import io.quarkus.runtime.annotations.*;
 /**
  * Rest context build configuration.
  */
-@ConfigDocFilename("tkit-quarkus-rs-context.adoc")
+@ConfigDocFilename("tkit-quarkus-rest-context.adoc")
 @ConfigRoot(prefix = "tkit", name = "rs.context", phase = ConfigPhase.BUILD_TIME)
 public class RestContextBuildConfig {
 
