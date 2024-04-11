@@ -54,4 +54,4 @@ public class OperatorRestController {
 
 === Configuration
 
-include::includes/tkit-quarkus-rs-context.adoc[leveloffset=+1, opts=optional]
+include::includes/tkit-quarkus-rest-context.adoc[leveloffset=+1, opts=optional]

@@ -85,7 +85,7 @@
                                         <include>tkit-quarkus-log-json.adoc</include>
                                         <include>tkit-quarkus-log-rs.adoc</include>
                                         <include>tkit-quarkus-jpa-tenant.adoc</include>
-                                        <include>tkit-quarkus-rs-context.adoc</include>
+                                        <include>tkit-quarkus-rest-context.adoc</include>
                                         <include>tkit-quarkus-security.adoc</include>
                                     </includes>
                                     <filtering>false</filtering>
