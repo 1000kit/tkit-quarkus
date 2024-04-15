@@ -38,6 +38,8 @@ public class QueryCriteriaUtil {
             "*", "%",
             "?", "_");
 
+    private static final char DEFAULT_ESCAPE_CHAR = '\\';
+
     /**
      * The default constructor.
      */
@@ -261,7 +263,7 @@ public class QueryCriteriaUtil {
     public static Predicate createSearchStringPredicate(CriteriaBuilder criteriaBuilder, Expression<String> column,
             String searchString, final boolean caseInsensitive) {
         return createSearchStringPredicate(criteriaBuilder, column, searchString, caseInsensitive,
-                QueryCriteriaUtil::defaultReplaceFunction, DEFAULT_LIKE_MAPPING_CHARACTERS);
+                QueryCriteriaUtil::defaultReplaceFunction, DEFAULT_LIKE_MAPPING_CHARACTERS, DEFAULT_ESCAPE_CHAR);
     }
 
     /**
@@ -273,20 +275,16 @@ public class QueryCriteriaUtil {
      * @param caseInsensitive - true in case of insensitive search (db column and search string are given to lower case)
      * @param replaceFunction - replace special character function for characters in the searchString
      * @param likeMapping - map of like query mapping characters ['*','%', ...]
+     * @param escapeChar - escape character for like statement
      * @return LIKE or EQUAL Predicate according to the search string
      */
     public static Predicate createSearchStringPredicate(CriteriaBuilder criteriaBuilder, Expression<String> column,
             String searchString, final boolean caseInsensitive,
             Function<String, String> replaceFunction,
-            Map<String, String> likeMapping) {
+            Map<String, String> likeMapping, char escapeChar) {
 
         if (searchString == null || searchString.isBlank()) {
             return null;
-        }
-
-        // replace function for special characters
-        if (replaceFunction != null) {
-            searchString = replaceFunction.apply(searchString);
         }
 
         // case insensitive
@@ -299,17 +297,29 @@ public class QueryCriteriaUtil {
         // check for like characters
         boolean like = false;
         if (likeMapping != null) {
-            for (Map.Entry<String, String> item : likeMapping.entrySet()) {
-                if (searchString.contains(item.getKey())) {
-                    searchString = searchString.replace(item.getKey(), item.getValue());
+            for (String item : likeMapping.keySet()) {
+                if (searchString.contains(item)) {
                     like = true;
+                    break;
                 }
             }
         }
 
         // like predicate
         if (like) {
-            return criteriaBuilder.like(columnDefinition, searchString);
+
+            // replace function for special characters
+            if (replaceFunction != null) {
+                searchString = replaceFunction.apply(searchString);
+            }
+
+            // replace for like characters
+            for (Map.Entry<String, String> item : likeMapping.entrySet()) {
+                if (searchString.contains(item.getKey())) {
+                    searchString = searchString.replace(item.getKey(), item.getValue());
+                }
+            }
+            return criteriaBuilder.like(columnDefinition, searchString, escapeChar);
         }
 
         // equal predicate

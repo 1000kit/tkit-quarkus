@@ -1,5 +1,7 @@
 package org.tkit.quarkus.jpa.test;
 
+import static org.tkit.quarkus.jpa.utils.QueryCriteriaUtil.addSearchStringPredicate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,19 @@ public class UserDAO extends AbstractDAO<User> {
             }
 
         }
+        return createPageQuery(cq, page);
+    }
+
+    public PagedQuery<User> pageUsers2(UserSearchCriteria criteria, Page page) {
+        CriteriaQuery<User> cq = criteriaQuery();
+        Root<User> root = cq.from(User.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        addSearchStringPredicate(predicates, cb, root.get(User_.NAME), criteria.getName());
+        addSearchStringPredicate(predicates, cb, root.get(User_.EMAIL), criteria.getEmail());
+        cq.where(predicates.toArray(new Predicate[0]));
+
         return createPageQuery(cq, page);
     }
 }
