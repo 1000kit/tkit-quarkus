@@ -1,6 +1,7 @@
 package org.tkit.quarkus.jpa.utils;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyChar;
 
 import jakarta.persistence.criteria.*;
 
@@ -19,7 +20,7 @@ class QueryCriteriaUtilTest {
         Predicate predicate = Mockito.mock(Predicate.class);
         CriteriaBuilder cb = Mockito.mock(CriteriaBuilder.class);
         Mockito.when(cb.lower(any())).thenReturn(null);
-        Mockito.when(cb.like(any(), (String) any())).thenAnswer(invocation -> {
+        Mockito.when(cb.like(any(), (String) any(), anyChar())).thenAnswer(invocation -> {
             result.like = true;
             result.searchString = invocation.getArgument(1);
             return predicate;
