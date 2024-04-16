@@ -44,6 +44,11 @@ public class PagedQuery<T> {
     private Page page;
 
     /**
+     * Query hint
+     */
+    private String hint;
+
+    /**
      * Default constructor.
      *
      * @param em the entity manager.
@@ -57,10 +62,30 @@ public class PagedQuery<T> {
         this.countCriteria = createCountCriteria(em, criteria);
     }
 
+    /**
+     * Constructor including query hint.
+     *
+     * @param em the entity manager.
+     * @param criteria the search criteria
+     * @param page the start page.
+     * @param hint custom query hint
+     */
+    public PagedQuery(EntityManager em, CriteriaQuery<T> criteria, Page page, String idAttributeName, String hint) {
+        this.em = em;
+        this.criteria = setDefaultSorting(em, criteria, idAttributeName);
+        this.page = page;
+        this.countCriteria = createCountCriteria(em, criteria);
+        this.hint = hint;
+    }
+
     public PageResult<T> getPageResult() {
         try {
+            var q = em.createQuery(countCriteria);
+            if (hint != null) {
+                q.setHint("hint", hint);
+            }
             // get count
-            Long count = em.createQuery(countCriteria).getSingleResult();
+            Long count = q.getSingleResult();
             // return empty page for count zero
             if (count == 0) {
                 return PageResult.empty();
