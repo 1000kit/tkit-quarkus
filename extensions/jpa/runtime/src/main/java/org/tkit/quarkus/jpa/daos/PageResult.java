@@ -27,12 +27,12 @@ public class PageResult<T> {
     /**
      * The page number.
      */
-    private int number;
+    private long number;
 
     /**
      * The page size.
      */
-    private int size;
+    private long size;
 
     /**
      * The number of pages.
@@ -52,10 +52,22 @@ public class PageResult<T> {
      * @param page the page.
      */
     public PageResult(long totalElements, Stream<T> stream, Page page) {
+        this(totalElements, stream, page.number(), page.size());
+    }
+
+    /**
+     * The default constructor.
+     *
+     * @param totalElements the count of all items.
+     * @param stream the data stream.
+     * @param number number of the page.
+     * @param size size of the page.
+     */
+    public PageResult(long totalElements, Stream<T> stream, long number, long size) {
         this.totalElements = totalElements;
         this.stream = stream;
-        this.number = page.number();
-        this.size = page.size();
+        this.number = number;
+        this.size = size;
         this.totalPages = (totalElements + size - 1) / size;
     }
 

@@ -56,10 +56,7 @@ public class PagedQuery<T> {
      * @param page the start page.
      */
     public PagedQuery(EntityManager em, CriteriaQuery<T> criteria, Page page, String idAttributeName) {
-        this.em = em;
-        this.criteria = setDefaultSorting(em, criteria, idAttributeName);
-        this.page = page;
-        this.countCriteria = createCountCriteria(em, criteria);
+        this(em, criteria, page, idAttributeName, null);
     }
 
     /**
@@ -82,7 +79,7 @@ public class PagedQuery<T> {
         try {
             var q = em.createQuery(countCriteria);
             if (hint != null) {
-                q.setHint("hint", hint);
+                q.setHint(AbstractDAO.HINT_LOAD_GRAPH, em.getEntityGraph(hint));
             }
             // get count
             Long count = q.getSingleResult();
@@ -92,7 +89,11 @@ public class PagedQuery<T> {
             }
 
             // get stream
-            Stream<T> stream = em.createQuery(criteria)
+            var sq = em.createQuery(criteria);
+            if (hint != null) {
+                sq.setHint(AbstractDAO.HINT_LOAD_GRAPH, em.getEntityGraph(hint));
+            }
+            Stream<T> stream = sq
                     .setFirstResult(page.number() * page.size())
                     .setMaxResults(page.size())
                     .getResultStream();
