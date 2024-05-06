@@ -117,18 +117,6 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     /**
      * Creates the page query of the DAO {@code <T>} type.
      *
-     * @param query the criteria query
-     * @param page the page for the query
-     * @param hint query hint
-     * @return the new page query instance
-     */
-    public PagedQuery<T> createPageQuery(CriteriaQuery<T> query, Page page, String hint) {
-        return new PagedQuery<>(getEntityManager(), query, page, idAttributeName, hint);
-    }
-
-    /**
-     * Creates the page query of the DAO {@code <T>} type.
-     *
      * @param page the page for the query
      * @return the new page query instance
      */
@@ -148,19 +136,6 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      */
     public <E> PagedQuery<E> createPageQueryCustom(CriteriaQuery<E> query, Page page) {
         return new PagedQuery<>(em, query, page, idAttributeName);
-    }
-
-    /**
-     * Creates the page query of the custom {@code <E>} type
-     *
-     * @param query the criteria query
-     * @param page the page for the query
-     * @param hint query hint
-     * @param <E> the entity type of the paged query.
-     * @return the new page query instance
-     */
-    public <E> PagedQuery<E> createPageQueryCustom(CriteriaQuery<E> query, Page page, String hint) {
-        return new PagedQuery<>(em, query, page, idAttributeName, hint);
     }
 
     /**

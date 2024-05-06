@@ -44,11 +44,6 @@ public class PagedQuery<T> {
     private Page page;
 
     /**
-     * Query hint
-     */
-    private String hint;
-
-    /**
      * Default constructor.
      *
      * @param em the entity manager.
@@ -56,32 +51,17 @@ public class PagedQuery<T> {
      * @param page the start page.
      */
     public PagedQuery(EntityManager em, CriteriaQuery<T> criteria, Page page, String idAttributeName) {
-        this(em, criteria, page, idAttributeName, null);
-    }
-
-    /**
-     * Constructor including query hint.
-     *
-     * @param em the entity manager.
-     * @param criteria the search criteria
-     * @param page the start page.
-     * @param hint custom query hint
-     */
-    public PagedQuery(EntityManager em, CriteriaQuery<T> criteria, Page page, String idAttributeName, String hint) {
         this.em = em;
         this.criteria = setDefaultSorting(em, criteria, idAttributeName);
         this.page = page;
         this.countCriteria = createCountCriteria(em, criteria);
-        this.hint = hint;
     }
 
     public PageResult<T> getPageResult() {
         try {
-            var q = em.createQuery(countCriteria);
-            if (hint != null) {
-                q.setHint(AbstractDAO.HINT_LOAD_GRAPH, em.getEntityGraph(hint));
-            }
+
             // get count
+            var q = em.createQuery(countCriteria);
             Long count = q.getSingleResult();
             // return empty page for count zero
             if (count == 0) {
@@ -90,9 +70,6 @@ public class PagedQuery<T> {
 
             // get stream
             var sq = em.createQuery(criteria);
-            if (hint != null) {
-                sq.setHint(AbstractDAO.HINT_LOAD_GRAPH, em.getEntityGraph(hint));
-            }
             Stream<T> stream = sq
                     .setFirstResult(page.number() * page.size())
                     .setMaxResults(page.size())
