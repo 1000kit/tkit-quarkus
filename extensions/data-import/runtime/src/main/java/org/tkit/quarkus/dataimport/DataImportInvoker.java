@@ -3,6 +3,7 @@ package org.tkit.quarkus.dataimport;
 import static jakarta.persistence.LockModeType.PESSIMISTIC_WRITE;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +25,7 @@ import io.quarkus.arc.Arc;
 import io.quarkus.arc.InjectableBean;
 import io.quarkus.arc.InstanceHandle;
 import io.quarkus.arc.Unremovable;
+import io.quarkus.runtime.util.ClassPathUtils;
 
 @Unremovable
 @ApplicationScoped
@@ -49,10 +51,16 @@ public class DataImportInvoker {
             return;
         }
 
-        // check if the file exists
-        Path file = Paths.get(config.file);
-        if (!Files.exists(file)) {
-            LOGGER.info("Data import file does not exists. Key: " + key + " file: " + config.file);
+        // check and load data from file
+        byte[] data;
+        if (config.classpath) {
+            data = loadClassPathData(config.file);
+        } else {
+            data = loadData(Paths.get(config.file));
+        }
+        if (data == null) {
+            LOGGER.info("Data import file does not exists. Key: " + key + " class-path: " + config.classpath + " file: "
+                    + config.file);
             return;
         }
 
@@ -60,8 +68,8 @@ public class DataImportInvoker {
         DataImportConfig param = new DataImportConfig();
         param.key = key;
         param.metadata = config.metadata;
-        param.file = file;
-        param.data = loadData(param.file);
+        param.file = Path.of(config.file);
+        param.data = data;
         param.md5 = createChecksum(param.data);
 
         // find import entry and lock it
@@ -118,7 +126,29 @@ public class DataImportInvoker {
         }
     }
 
+    private static byte[] loadClassPathData(String file) throws RuntimeException {
+        try {
+            var url = Thread.currentThread().getContextClassLoader().getResource(file);
+            if (url == null) {
+                return null;
+            }
+
+            return ClassPathUtils.readStream(url, inputStream -> {
+                try {
+                    return inputStream.readAllBytes();
+                } catch (IOException e) {
+                    throw new UncheckedIOException(e);
+                }
+            });
+        } catch (Exception ex) {
+            throw new RuntimeException("Error loading class-path data from " + file, ex);
+        }
+    }
+
     private static byte[] loadData(Path path) throws RuntimeException {
+        if (!Files.exists(path)) {
+            return null;
+        }
         try {
             return Files.readAllBytes(path);
         } catch (IOException e) {

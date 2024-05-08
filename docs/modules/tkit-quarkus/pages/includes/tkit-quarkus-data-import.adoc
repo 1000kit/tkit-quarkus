@@ -78,6 +78,23 @@ endif::add-copy-button-to-env-var[]
 |required icon:exclamation-circle[title=Configuration property is required]
 
 
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-class-path]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-class-path[tkit.dataimport.configurations."configurations".class-path]`
+
+
+[.description]
+--
+Set to true if the file is a classpath file.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__CLASS_PATH+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__CLASS_PATH+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata[tkit.dataimport.configurations."configurations".metadata]`
 
 
