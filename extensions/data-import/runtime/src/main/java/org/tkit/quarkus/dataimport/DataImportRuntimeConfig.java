@@ -45,6 +45,12 @@ public class DataImportRuntimeConfig {
         String file;
 
         /**
+         * Set to true if the file is a classpath file.
+         */
+        @ConfigItem(name = "class-path", defaultValue = "false")
+        boolean classpath;
+
+        /**
          * The metadata for the execution
          */
         @ConfigItem(name = "metadata")
