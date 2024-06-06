@@ -8,7 +8,10 @@ import jakarta.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 @Provider
+@RegisterForReflection
 public class RestClientPayloadInterceptor implements ClientRequestFilter {
 
     /**

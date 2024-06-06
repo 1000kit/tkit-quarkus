@@ -12,11 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.ApplicationContext;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * The rest client log interceptor
  *
  */
 @Provider
+@RegisterForReflection
 public class RestClientLogInterceptor implements ClientRequestFilter, ClientResponseFilter {
 
     /**
