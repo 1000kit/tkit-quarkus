@@ -707,7 +707,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers[tkit.log.rs.mdc-headers]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers[tkit.log.rs.mdc-headers."mdc-headers"]`
 
 
 [.description]
@@ -715,12 +715,13 @@ a| [[tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers]]`link:#tkit-quarku
 Map of MDC headers
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_MDC_HEADERS+++[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_MDC_HEADERS__MDC_HEADERS_+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++TKIT_LOG_RS_MDC_HEADERS+++`
+Environment variable: `+++TKIT_LOG_RS_MDC_HEADERS__MDC_HEADERS_+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,String>` 
+--|link:https://docs.oracle.com/javase/8/docs/api/java/lang/String.html[String]
+ 
 |
 
 
@@ -826,7 +827,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[tkit-quarkus-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers[tkit.log.rs.client.mdc-headers]`
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers]]`link:#tkit-quarkus-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers[tkit.log.rs.client.mdc-headers."mdc-headers"]`
 
 
 [.description]
@@ -834,12 +835,13 @@ a| [[tkit-quarkus-log-rs_tkit-log-rs-client-mdc-headers-mdc-headers]]`link:#tkit
 Map of MDC headers
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_MDC_HEADERS+++[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_MDC_HEADERS__MDC_HEADERS_+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++TKIT_LOG_RS_CLIENT_MDC_HEADERS+++`
+Environment variable: `+++TKIT_LOG_RS_CLIENT_MDC_HEADERS__MDC_HEADERS_+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,String>` 
+--|link:https://docs.oracle.com/javase/8/docs/api/java/lang/String.html[String]
+ 
 |
 
 |===
