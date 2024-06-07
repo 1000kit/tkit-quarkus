@@ -95,7 +95,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata[tkit.dataimport.configurations."configurations".metadata]`
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata]]`link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata[tkit.dataimport.configurations."configurations".metadata."metadata"]`
 
 
 [.description]
@@ -103,12 +103,13 @@ a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-meta
 The metadata for the execution
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__METADATA+++[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__METADATA__METADATA_+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__METADATA+++`
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__METADATA__METADATA_+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,String>` 
+--|link:https://docs.oracle.com/javase/8/docs/api/java/lang/String.html[String]
+ 
 |
 
 

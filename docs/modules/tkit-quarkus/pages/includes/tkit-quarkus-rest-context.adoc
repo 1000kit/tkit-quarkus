@@ -605,7 +605,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-data-data]]`link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-data-data[tkit.rs.context.tenant-id.mock.data]`
+a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-data-data]]`link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-data-data[tkit.rs.context.tenant-id.mock.data."data"]`
 
 
 [.description]
@@ -613,12 +613,13 @@ a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-data-data]]`link:#
 Mock data
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DATA+++[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DATA__DATA_+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DATA+++`
+Environment variable: `+++TKIT_RS_CONTEXT_TENANT_ID_MOCK_DATA__DATA_+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,String>` 
+--|link:https://docs.oracle.com/javase/8/docs/api/java/lang/String.html[String]
+ 
 |
 
 |===
