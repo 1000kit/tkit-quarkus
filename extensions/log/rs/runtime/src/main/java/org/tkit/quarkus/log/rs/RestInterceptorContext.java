@@ -23,7 +23,7 @@ public class RestInterceptorContext {
 
     boolean exclude = false;
 
-    String logger;
+    String logger = RestInterceptorContext.class.getName();
 
     Set<String> mdcKeys = new HashSet<>();
 
