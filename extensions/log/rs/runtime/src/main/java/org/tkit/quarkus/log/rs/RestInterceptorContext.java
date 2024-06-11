@@ -23,6 +23,8 @@ public class RestInterceptorContext {
 
     boolean exclude = false;
 
+    String logger = RestInterceptorContext.class.getName();
+
     Set<String> mdcKeys = new HashSet<>();
 
     private final long startTime;

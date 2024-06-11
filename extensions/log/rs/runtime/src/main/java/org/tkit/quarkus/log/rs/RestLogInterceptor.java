@@ -61,7 +61,8 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             });
         }
 
-        restContext.ano = RestRecorder.getRestService(resourceInfo.getResourceClass().getName(),
+        restContext.logger = resourceInfo.getResourceClass().getName();
+        restContext.ano = RestRecorder.getRestService(restContext.logger,
                 resourceInfo.getResourceMethod().getName());
 
         UriInfo uriInfo = requestContext.getUriInfo();
@@ -75,7 +76,7 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             log = restContext.ano.config.log;
         }
         if (config.start.enabled && log) {
-            LoggerFactory.getLogger(resourceInfo.getResourceClass())
+            LoggerFactory.getLogger(restContext.logger)
                     .info(String.format(config.start.template, restContext.method, restContext.path, restContext.uri));
         }
         requestContext.setProperty(CONTEXT, restContext);
@@ -131,7 +132,7 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
                     restContext.mdcKeys.add(config.end.mdc.responseStatusName);
                 }
 
-                LoggerFactory.getLogger(resourceInfo.getResourceClass())
+                LoggerFactory.getLogger(restContext.logger)
                         .info(String.format(config.end.template, restContext.method, restContext.path,
                                 restContext.durationString, status.getStatusCode(), status.getReasonPhrase(),
                                 restContext.uri));
