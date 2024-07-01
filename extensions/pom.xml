@@ -24,6 +24,13 @@
         <module>rest-context</module>
         <module>test-db-import</module>
         <module>security</module>
+        <module>security-test</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

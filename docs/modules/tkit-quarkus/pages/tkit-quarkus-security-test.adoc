@@ -1,0 +1,24 @@
+== tkit-quarkus-security-test
+
+include::./includes/attributes.adoc[]
+
+Enhanced security configuration
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-security-test` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-security-test</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== Configuration
+
+include::includes/tkit-quarkus-security-test.adoc[leveloffset=+1, opts=optional]

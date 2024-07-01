@@ -11,3 +11,4 @@
 * xref:tkit-quarkus-rest.adoc[Rest Extension]
 * xref:tkit-quarkus-rest-context.adoc[Rest Context Extension]
 * xref:tkit-quarkus-security.adoc[Rest Security]
+* xref:tkit-quarkus-security-test.adoc[Rest Security Tests]
