@@ -59,8 +59,7 @@ public class SecurityTestUtils {
                     ((ValidatableResponse) ((Response) createRequestSpec().auth()
                             .oauth2(keycloakTestClient.getAdminAccessToken())
                             .contentType("application/json").body(JsonSerialization.writeValueAsBytes(scope)).when()
-                            .post(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes")).then()
-                            .log().all())
+                            .post(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes")).then())
                             .statusCode(201);
                 } catch (IOException var2) {
                     throw new RuntimeException(var2);
@@ -82,8 +81,7 @@ public class SecurityTestUtils {
 
     public static void removeClient(String clientName) {
         ((ValidatableResponse) ((Response) createRequestSpec().auth().oauth2(keycloakTestClient.getAdminAccessToken()).when()
-                .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/clients/" + clientName)).then().log()
-                .all())
+                .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/clients/" + clientName)).then())
                 .statusCode(204);
     }
 
@@ -91,9 +89,7 @@ public class SecurityTestUtils {
         scopes.forEach(id -> {
             ((ValidatableResponse) ((Response) createRequestSpec().auth().oauth2(keycloakTestClient.getAdminAccessToken())
                     .when()
-                    .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes/" + id)).then()
-                    .log()
-                    .all())
+                    .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes/" + id)).then())
                     .statusCode(204);
         });
     }
