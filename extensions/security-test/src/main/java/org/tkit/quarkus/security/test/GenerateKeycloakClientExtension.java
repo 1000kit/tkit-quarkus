@@ -2,7 +2,6 @@ package org.tkit.quarkus.security.test;
 
 import static org.tkit.quarkus.security.test.SecurityTestUtils.*;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,8 +51,8 @@ public class GenerateKeycloakClientExtension
         if (an == null) {
             return;
         }
-
-        log.info("[GENERATE KEYCLOAK TEST-CLIENT] Init class level data for {}", clazz.getName());
+        log.info("[GENERATE KEYCLOAK TEST-CLIENT] Init class level data for {} , client: {}", clazz.getSimpleName(),
+                an.clientName());
         addClient(an.clientName(), Arrays.stream(an.scopes()).toList());
     }
 }

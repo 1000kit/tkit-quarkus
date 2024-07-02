@@ -16,6 +16,7 @@ For instance, with Maven, add the following dependency to your POM file:
     <groupId>org.tkit.quarkus.lib</groupId>
     <artifactId>tkit-quarkus-security-test</artifactId>
     <version>{project-version}</version>
+    <scope>test</scope>
 </dependency>
 ----
 
