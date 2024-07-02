@@ -25,6 +25,7 @@
         <module>rs-client</module>
         <module>rs-client-reactive</module>
         <module>rest-context</module>
+        <module>security-test</module>
     </modules>
 
     <profiles>
