@@ -88,9 +88,6 @@ public abstract class AbstractSecurityTest {
 
     @Test
     public void test_initializer() {
-        System.out.println();
-        log.info("OPTIONS: {}", getConfig().toString());
-
         getConfig().options.keySet().forEach(key -> {
             log.info("Start security test for key: {}", key);
             default_security_test(key + "Client",
