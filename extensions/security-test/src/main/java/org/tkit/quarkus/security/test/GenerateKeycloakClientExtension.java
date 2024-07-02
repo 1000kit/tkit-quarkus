@@ -31,8 +31,10 @@ public class GenerateKeycloakClientExtension
             return;
         }
         log.debug("[GENERATE KEYCLOAK TEST-CLIENT] After class level remove data for {}", clazz.getName());
-        removeClient(an.clientName());
-        removeClientScopes(List.of(an.scopes()));
+        if (an.deleteAfterAll()) {
+            removeClient(an.clientName());
+            removeClientScopes(List.of(an.scopes()));
+        }
     }
 
     @Override

@@ -10,13 +10,13 @@ import java.util.Map;
 import org.keycloak.representations.idm.ClientRepresentation;
 import org.keycloak.representations.idm.ClientScopeRepresentation;
 import org.keycloak.util.JsonSerialization;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.quarkus.test.keycloak.client.KeycloakTestClient;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class SecurityTestUtils {
     private static final Logger log = LoggerFactory.getLogger(SecurityTestUtils.class);

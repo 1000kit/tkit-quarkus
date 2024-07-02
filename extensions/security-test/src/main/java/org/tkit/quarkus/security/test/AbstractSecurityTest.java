@@ -5,17 +5,14 @@ import static org.tkit.quarkus.security.test.SecurityTestUtils.*;
 
 import java.util.List;
 
-import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.Test;
-
-import io.quarkus.test.junit.QuarkusTest;
-import io.smallrye.config.SmallRyeConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@QuarkusTest
-public class AbstractSecurityTest {
+public abstract class AbstractSecurityTest {
     private static final Logger log = LoggerFactory.getLogger(AbstractSecurityTest.class);
+
+    public abstract SecurityTestConfig getConfig();
 
     void default_security_test(String client, List<String> scopes, Integer expectation, String url, String method) {
 
@@ -38,7 +35,7 @@ public class AbstractSecurityTest {
                     .then().statusCode(403);
 
         } else if (method.equalsIgnoreCase("post")) {
-                given()
+            given()
                     .contentType("application/json")
                     .auth().oauth2(getKeycloakClientToken(client))
                     .when()
@@ -91,20 +88,17 @@ public class AbstractSecurityTest {
 
     @Test
     public void test_initializer() {
-        SecurityTestConfig testConfig = ConfigProvider.getConfig().unwrap(SmallRyeConfig.class)
-                .getConfigMapping(SecurityTestConfig.class);
-        if (!testConfig.options().isEmpty() && testConfig.enabled()) {
-            testConfig.options().keySet().forEach(key -> {
-                if (testConfig.options().get(key).enabled()) {
-                    log.info("Start security test for key: {}", key );
-                    default_security_test(key + "Client",
-                            testConfig.options().get(key).scopes(),
-                            testConfig.options().get(key).expectation(),
-                            testConfig.options().get(key).url(),
-                            testConfig.options().get(key).method());
-                }
-            });
-        }
+        System.out.println();
+        log.info("OPTIONS: {}", getConfig().toString());
+
+        getConfig().options.keySet().forEach(key -> {
+            log.info("Start security test for key: {}", key);
+            default_security_test(key + "Client",
+                    getConfig().options.get(key).scopes,
+                    getConfig().options.get(key).expectation,
+                    getConfig().options.get(key).url,
+                    getConfig().options.get(key).method);
+        });
     }
 
 }
