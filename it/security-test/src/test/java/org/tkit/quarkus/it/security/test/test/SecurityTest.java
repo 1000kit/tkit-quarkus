@@ -12,8 +12,8 @@ public class SecurityTest extends AbstractSecurityTest {
     @Override
     public SecurityTestConfig getConfig() {
         SecurityTestConfig config = new SecurityTestConfig();
-        config.options.put("write", new SecurityTestConfig.Options("/users/1", 200, List.of("ocx-user:write"), "post"));
-        config.options.put("read", new SecurityTestConfig.Options("/users/1", 200, List.of("ocx-user:read"), "get"));
+        config.addConfig("write", "/users/1", 200, List.of("ocx-user:write"), "post");
+        config.addConfig("read", "/users/1", 200, List.of("ocx-user:read"), "get");
         return config;
     }
 }

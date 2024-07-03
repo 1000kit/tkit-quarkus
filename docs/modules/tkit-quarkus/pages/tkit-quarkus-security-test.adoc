@@ -20,6 +20,79 @@ For instance, with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
+=== Usage
+
+To work in @QuarkusIntegrationTest tests set the property
+
+**quarkus.test.enable-callbacks-for-integration-tests = true**
+
+in your application.properties.
+
+
+To deactivate the automated security tests of AbstractSecurityTests use
+
+*-Dtkit.security-test.disabled=true* as system property
+
+e.g.
+*mvn clean verify -Dtkit.security-test.disabled=true*
+
+
+=== Security Tests
+
+[source,java]
+----
+@QuarkusTest
+public class SecurityTest extends AbstractSecurityTest {
+    @Override
+    public SecurityTestConfig getConfig() {
+        SecurityTestConfig config = new SecurityTestConfig();
+        config.addConfig("write", "/users/1", 200, List.of("ocx-user:write"), "post");
+        config.addConfig("read", "/users/1", 200, List.of("ocx-user:read"), "get");
+        return config;
+    }
+}
+
+----
+
+=== Generate Keycloak clients via annotation
+
+==== Class Level
+Generated for all test methods in this class
+
+[source,java]
+----
+@GenerateKeycloakClient(clientName = "testClient", scopes = { "ocx-user:read", "ocx-user:write" })
+public class UserRestControllerTest {
+    @Test
+    public void testUserRestClient() {
+        given().header("Content-Type", "application/json")
+                .auth().oauth2(getKeycloakClientToken("testClient"))
+                .get("/1")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+}
+
+----
+
+==== Method Level
+Generated for the annotated method
+
+[source,java]
+----
+    @Test
+    @GenerateKeycloakClient(clientName = "methodLevelClient", scopes = { "ocx-user:read", "ocx-user:write" })
+    public void testCreateUserRestClient() {
+        given().header("Content-Type", "application/json")
+                .body("{\"id\":\"2\"}")
+                .auth().oauth2(getKeycloakClientToken("methodLevelClient"))
+                .post("/2")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+----
+
 === Configuration
 
 include::includes/tkit-quarkus-security-test.adoc[leveloffset=+1, opts=optional]

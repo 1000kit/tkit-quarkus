@@ -15,6 +15,19 @@ public class SecurityTestConfig {
     public Map<String, Options> options = new HashMap<>();
 
     /**
+     * Helper method to create a configuration
+     *
+     * @param key key of the configuration
+     * @param url url used to test
+     * @param expectation expected http status code
+     * @param scopes needed scopes to access the given url
+     * @param method used method to access the given url (supported: post, get, delete, put)
+     */
+    public void addConfig(String key, String url, int expectation, List<String> scopes, String method) {
+        this.options.put(key, new Options(url, expectation, scopes, method));
+    }
+
+    /**
      * Options for each operation
      */
     public static class Options {

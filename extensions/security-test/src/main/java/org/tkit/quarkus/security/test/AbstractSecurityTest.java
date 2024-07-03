@@ -73,6 +73,10 @@ public abstract class AbstractSecurityTest {
 
     @Test
     public void test_initializer() {
+        if (Boolean.getBoolean(System.getProperty("tkit.security-test.disabled"))) {
+            log.info("Security tests disabled");
+            return;
+        }
         getConfig().options.keySet().forEach(key -> {
             log.info("Start security test for key: {}", key);
             default_security_test(key + "Client",
@@ -82,5 +86,4 @@ public abstract class AbstractSecurityTest {
                     getConfig().options.get(key).method);
         });
     }
-
 }

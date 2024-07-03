@@ -23,14 +23,28 @@ public class SecurityTestUtils {
 
     protected final static KeycloakTestClient keycloakTestClient = new KeycloakTestClient();
 
+    /**
+     * Method to fetch the access-token needed for oauth2 for a client by name
+     * used realm is "quarkus" by default
+     * used client-secret is "secret" by default
+     *
+     * @param clientName name of client to get the access token from.
+     * @return access-token for given client
+     */
     public static String getKeycloakClientToken(String clientName) {
         return keycloakTestClient.getRealmClientAccessToken("quarkus", clientName, "secret");
     }
 
-    public static RequestSpecification createRequestSpec() {
+    private static RequestSpecification createRequestSpec() {
         return given();
     }
 
+    /**
+     * Method to manually add a new client with scopes to the default quarkus realm
+     *
+     * @param clientName name of client which should be added to the realm
+     * @param scopeNames list of scopes which should be added to the realm and the given client
+     */
     public static void addClient(String clientName, List<String> scopeNames) {
         ClientRepresentation client = new ClientRepresentation();
         client.setClientId(clientName);
@@ -85,6 +99,11 @@ public class SecurityTestUtils {
         }
     }
 
+    /**
+     * Method to manually remove a client by its name
+     *
+     * @param clientName name of client which should be removed from realm
+     */
     public static void removeClient(String clientName) {
         ((ValidatableResponse) ((Response) createRequestSpec().auth().oauth2(keycloakTestClient.getAdminAccessToken()).when()
                 .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/clients/" + clientName)).then())
@@ -92,6 +111,11 @@ public class SecurityTestUtils {
         log.info("Removed client with name: {}", clientName);
     }
 
+    /**
+     * Method to manually remove client scopes
+     *
+     * @param scopes list of scopes which should be removed from realm
+     */
     public static void removeClientScopes(List<String> scopes) {
         scopes.forEach(id -> {
             ((ValidatableResponse) ((Response) createRequestSpec().auth().oauth2(keycloakTestClient.getAdminAccessToken())
