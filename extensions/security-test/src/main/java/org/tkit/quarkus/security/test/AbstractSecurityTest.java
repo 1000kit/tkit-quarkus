@@ -14,71 +14,56 @@ public abstract class AbstractSecurityTest {
 
     public abstract SecurityTestConfig getConfig();
 
-    void default_security_test(String client, List<String> scopes, Integer expectation, String url, String method) {
+    public void default_security_test(String client, List<String> scopes, Integer expectation, String url, String method) {
 
         addClient(client, scopes);
+        var givenClient = given()
+                .contentType("application/json")
+                .auth().oauth2(getKeycloakClientToken(client))
+                .when();
+
+        var defaultClient = given()
+                .contentType("application/json")
+                .auth().oauth2(getKeycloakClientToken("quarkus-app"))
+                .when();
 
         if (method.equalsIgnoreCase("get")) {
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken(client))
-                    .when()
+            givenClient
                     .get(url)
                     .then().statusCode(expectation);
 
             //client with missing scope => forbidden
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken("quarkus-app"))
-                    .when()
+            defaultClient
                     .get(url)
                     .then().statusCode(403);
 
         } else if (method.equalsIgnoreCase("post")) {
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken(client))
-                    .when()
+            givenClient
                     .post(url)
                     .then().statusCode(expectation);
 
             //client with missing scope => forbidden
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken("quarkus-app"))
-                    .when()
+            defaultClient
                     .post(url)
                     .then().statusCode(403);
 
         } else if (method.equalsIgnoreCase("delete")) {
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken(client))
-                    .when()
+            givenClient
                     .delete(url)
                     .then().statusCode(expectation);
 
             //client with missing scope => forbidden
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken("quarkus-app"))
-                    .when()
+            defaultClient
                     .delete(url)
                     .then().statusCode(403);
 
         } else if (method.equalsIgnoreCase("put")) {
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken(client))
-                    .when()
+            givenClient
                     .put(url)
                     .then().statusCode(expectation);
 
             //client with missing scope => forbidden
-            given()
-                    .contentType("application/json")
-                    .auth().oauth2(getKeycloakClientToken("quarkus-app"))
-                    .when()
+            defaultClient
                     .put(url)
                     .then().statusCode(403);
         }

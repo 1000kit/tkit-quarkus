@@ -27,10 +27,11 @@ public class UserRestControllerTest {
     }
 
     @Test
+    @GenerateKeycloakClient(clientName = "methodLevelClient", scopes = { "ocx-user:read", "ocx-user:write" })
     public void testCreateUserRestClient() {
         given().header("Content-Type", "application/json")
                 .body("{\"id\":\"2\"}")
-                .auth().oauth2(getKeycloakClientToken("testClient"))
+                .auth().oauth2(getKeycloakClientToken("methodLevelClient"))
                 .post("/2")
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode());

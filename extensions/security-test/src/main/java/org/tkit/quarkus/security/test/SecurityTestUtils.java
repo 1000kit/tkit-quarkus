@@ -27,12 +27,11 @@ public class SecurityTestUtils {
         return keycloakTestClient.getRealmClientAccessToken("quarkus", clientName, "secret");
     }
 
-    private static RequestSpecification createRequestSpec() {
+    public static RequestSpecification createRequestSpec() {
         return given();
     }
 
     public static void addClient(String clientName, List<String> scopeNames) {
-
         ClientRepresentation client = new ClientRepresentation();
         client.setClientId(clientName);
         client.setId(clientName);
