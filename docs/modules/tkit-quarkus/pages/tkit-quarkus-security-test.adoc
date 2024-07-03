@@ -92,7 +92,3 @@ Generated for the annotated method
     }
 
 ----
-
-=== Configuration
-
-include::includes/tkit-quarkus-security-test.adoc[leveloffset=+1, opts=optional]
