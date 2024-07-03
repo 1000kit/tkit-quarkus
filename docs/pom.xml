@@ -87,6 +87,7 @@
                                         <include>tkit-quarkus-jpa-tenant.adoc</include>
                                         <include>tkit-quarkus-rest-context.adoc</include>
                                         <include>tkit-quarkus-security.adoc</include>
+                                        <include>tkit-quarkus-security-test.adoc</include>
                                     </includes>
                                     <filtering>false</filtering>
                                 </resource>
