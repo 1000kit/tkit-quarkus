@@ -13,7 +13,7 @@ import org.tkit.quarkus.test.dbunit.LocalDatabase;
 /**
  * This junit5 extension is using the db-import service to import data in the database.
  * The data to for the import needs to be in the class-path.
- * Only the excel and xml data formats are supported.
+ * Only the xml data formats are supported.
  *
  * @see WithDBData
  */
