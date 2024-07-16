@@ -36,4 +36,13 @@ public class UserRestControllerTest {
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
+
+    @Test
+    public void testUserRestClient2() {
+        given().header("Content-Type", "application/json")
+                .auth().oauth2(getKeycloakClientToken("testClient"))
+                .get("/1")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
 }
