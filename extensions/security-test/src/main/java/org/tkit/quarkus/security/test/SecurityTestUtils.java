@@ -77,9 +77,9 @@ public class SecurityTestUtils {
                             .contentType("application/json").body(JsonSerialization.writeValueAsBytes(scope)).when()
                             .post(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes")).then())
                             .statusCode(201);
-                    log.info("Created scope with id: {}", scope.getId());
+                    log.debug("Created scope with id: {}", scope.getId());
                 } catch (IOException var2) {
-                    log.info("Error while creating scope with id: {}", scope.getId());
+                    log.error("Error while creating scope with id: {}", scope.getId());
                     throw new RuntimeException(var2);
                 }
 
@@ -92,9 +92,9 @@ public class SecurityTestUtils {
             ((ValidatableResponse) ((Response) createRequestSpec().auth().oauth2(keycloakTestClient.getAdminAccessToken())
                     .contentType("application/json").body(JsonSerialization.writeValueAsBytes(client)).when()
                     .post(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/clients")).then()).statusCode(201);
-            log.info("Created client with id: {}", client.getId());
+            log.debug("Created client with id: {}", client.getId());
         } catch (IOException var2) {
-            log.info("Error while creating client with id: {}", client.getClientId());
+            log.error("Error while creating client with id: {}", client.getClientId());
             throw new RuntimeException(var2);
         }
     }
@@ -108,7 +108,7 @@ public class SecurityTestUtils {
         ((ValidatableResponse) ((Response) createRequestSpec().auth().oauth2(keycloakTestClient.getAdminAccessToken()).when()
                 .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/clients/" + clientName)).then())
                 .statusCode(204);
-        log.info("Removed client with name: {}", clientName);
+        log.debug("Removed client with name: {}", clientName);
     }
 
     /**
@@ -122,7 +122,7 @@ public class SecurityTestUtils {
                     .when()
                     .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes/" + id)).then())
                     .statusCode(204);
-            log.info("Removed scope with id: {}", id);
+            log.debug("Removed scope with id: {}", id);
         });
     }
 }
