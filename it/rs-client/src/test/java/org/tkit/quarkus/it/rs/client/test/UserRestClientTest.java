@@ -47,4 +47,18 @@ public class UserRestClientTest extends AbstractTest {
                 .log().all()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
+
+    @Test
+    public void testGetAllUserRestClient() {
+
+        mockServerClient.when(request().withPath("/users/").withMethod("GET"))
+                .respond(response().withBody("{\"id\":\"1\"}")
+                        .withHeader("Content-Type", "application/json"));
+
+        given().header("Content-Type", "application/json")
+                .get("users/")
+                .then()
+                .log().all()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
 }

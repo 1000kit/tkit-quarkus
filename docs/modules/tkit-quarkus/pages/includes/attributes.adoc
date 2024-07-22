@@ -1,4 +1,4 @@
-:project-version: 2.27.0
+:project-version: 2.28.0
 :quarkus-version: 3.12.2
 
 :examples-dir: ./../examples/

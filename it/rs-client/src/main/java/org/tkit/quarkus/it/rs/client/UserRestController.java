@@ -12,6 +12,8 @@ import jakarta.ws.rs.core.Response;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.util.Arrays;
+
 @Path("users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -37,5 +39,11 @@ public class UserRestController {
             var tmp = response.readEntity(String.class);
             return Response.ok(tmp).build();
         }
+    }
+
+    @GET
+    @Path("/")
+    public Response getAllUser() {
+        return client.getUserByIds(Arrays.asList(1L, 2L, 3L));
     }
 }

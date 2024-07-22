@@ -15,7 +15,7 @@ public class OffsetDateTimeParamConverterProvider implements ParamConverterProvi
 
     @Override
     public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations) {
-        if (rawType.isAssignableFrom(OffsetDateTime.class)) {
+        if (rawType.getName().equals(OffsetDateTime.class.getName())) {
             return (ParamConverter<T>) new OffsetDateTimeParamConverter();
         }
         return null;
