@@ -1,5 +1,7 @@
 package org.tkit.quarkus.it.rs.client;
 
+import java.util.List;
+
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -11,8 +13,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-
-import java.util.List;
 
 @Path("/users")
 @RegisterRestClient(configKey = "user")

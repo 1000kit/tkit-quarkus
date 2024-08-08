@@ -1,5 +1,7 @@
 package org.tkit.quarkus.it.rs.client;
 
+import java.util.Arrays;
+
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -11,8 +13,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-
-import java.util.Arrays;
 
 @Path("users")
 @Consumes(MediaType.APPLICATION_JSON)
