@@ -1,0 +1,52 @@
+== tkit-quarkus-security-test
+
+include::./includes/attributes.adoc[]
+
+Enhanced test configuration
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-test` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-test</artifactId>
+    <version>{project-version}</version>
+    <scope>test</scope>
+</dependency>
+----
+
+=== Usage
+
+==== Rest-Assured URI overwrite
+
+To enabled URI overwrite for integration test add `tkit.test.integration-test-enabled` system property to the `maven-failsafe-plugin` plugin.
+
+[source,xml,subs=attributes+]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-failsafe-plugin</artifactId>
+    <executions>
+        <execution>
+            <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+            </goals>
+            <configuration>
+                <systemPropertyVariables>
+                    <tkit.test.integration-test-enabled>true</tkit.test.integration-test-enabled>
+                </systemPropertyVariables>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+----
+
+=== Configuration
+
+include::includes/tkit-quarkus-test.adoc[leveloffset=+1, opts=optional]
