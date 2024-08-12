@@ -48,6 +48,11 @@
             <artifactId>tkit-quarkus-test-db-import-deployment</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tkit.quarkus.lib</groupId>
+            <artifactId>tkit-quarkus-test</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -88,6 +93,7 @@
                                         <include>tkit-quarkus-rest-context.adoc</include>
                                         <include>tkit-quarkus-security.adoc</include>
                                         <include>tkit-quarkus-security-test.adoc</include>
+                                        <include>tkit-quarkus-test.adoc</include>
                                     </includes>
                                     <filtering>false</filtering>
                                 </resource>
