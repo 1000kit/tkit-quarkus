@@ -1,4 +1,4 @@
-== tkit-quarkus-security-test
+== tkit-quarkus-test
 
 include::./includes/attributes.adoc[]
 
