@@ -3,86 +3,86 @@ package org.tkit.quarkus.dataimport;
 import java.util.Map;
 
 import io.quarkus.runtime.annotations.*;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
 
 @ConfigDocFilename("tkit-quarkus-data-import.adoc")
-@ConfigRoot(prefix = "tkit", name = "dataimport", phase = ConfigPhase.RUN_TIME)
-public class DataImportRuntimeConfig {
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+@ConfigMapping(prefix = "tkit.dataimport")
+public interface DataImportRuntimeConfig {
 
     /**
      * If set to true, the application will import data
      */
-    @ConfigItem(name = "enabled", defaultValue = "true")
-    boolean enabled = true;
+    @WithName("enabled")
+    @WithDefault("true")
+    boolean enabled();
 
     /**
      * Error message length in the database
      */
-    @ConfigItem(name = "error-msg-length", defaultValue = "255")
-    int errorMsgLength = 255;
+    @WithName("error-msg-length")
+    @WithDefault("255")
+    int errorMsgLength();
 
     /**
      * All configured Data Import Configurations
      */
-    @ConfigItem(name = "configurations")
-    Map<String, DataImportConfiguration> configurations;
+    @WithName("configurations")
+    Map<String, DataImportConfiguration> configurations();
 
     /**
      * A DataImportConfiguration
      */
-    @ConfigGroup
-    public static class DataImportConfiguration {
+    interface DataImportConfiguration {
 
         /**
          * The bean key
          */
-        @ConfigItem(name = "bean", defaultValue = " ")
-        String bean;
+        @WithName("bean")
+        @WithDefault(" ")
+        String bean();
 
         /**
          * The path to the data source file
          */
-        @ConfigItem(name = "file")
-        String file;
+        @WithName("file")
+        String file();
 
         /**
          * Set to true if the file is a classpath file.
          */
-        @ConfigItem(name = "class-path", defaultValue = "false")
-        boolean classpath;
+        @WithName("class-path")
+        @WithDefault("false")
+        boolean classpath();
 
         /**
          * The metadata for the execution
          */
-        @ConfigItem(name = "metadata")
-        Map<String, String> metadata;
+        @WithName("metadata")
+        Map<String, String> metadata();
 
         /**
          * If set to true, the application will run this import data
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        boolean enabled = true;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * If set to true, the application will stop if data import failed
          */
-        @ConfigItem(name = "stop-at-error", defaultValue = "false")
-        boolean stopAtError = false;
+        @WithName("stop-at-error")
+        @WithDefault("false")
+        boolean stopAtError();
 
         /**
          * If set to false, the application will not retry error import.
          */
-        @ConfigItem(name = "retry-error-import", defaultValue = "true")
-        boolean retryErrorImport = true;
+        @WithName("retry-error-import")
+        @WithDefault("true")
+        boolean retryErrorImport();
 
-        @Override
-        public String toString() {
-            return "Configuration{" +
-                    "bean='" + bean + '\'' +
-                    ",file='" + file + '\'' +
-                    ",metadata=" + metadata +
-                    ",enabled=" + enabled +
-                    ",stopAtError=" + stopAtError +
-                    '}';
-        }
     }
 }

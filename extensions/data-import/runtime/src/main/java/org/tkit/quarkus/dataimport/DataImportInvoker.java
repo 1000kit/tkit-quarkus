@@ -40,35 +40,35 @@ public class DataImportInvoker {
     public void processItem(String key, String bean, DataImportRuntimeConfig.DataImportConfiguration config,
             DataImportRuntimeConfig rootConfig) throws Exception {
         // check if the data import fo the key is enabled
-        if (!config.enabled) {
+        if (!config.enabled()) {
             LOGGER.info("Data import for key: " + key + " is disabled.");
             return;
         }
 
         // check if file is defined
-        if (config.file == null || config.file.isBlank()) {
+        if (config.file() == null || config.file().isBlank()) {
             LOGGER.warn("Data import file is not defined. Key: " + key);
             return;
         }
 
         // check and load data from file
         byte[] data;
-        if (config.classpath) {
-            data = loadClassPathData(config.file);
+        if (config.classpath()) {
+            data = loadClassPathData(config.file());
         } else {
-            data = loadData(Paths.get(config.file));
+            data = loadData(Paths.get(config.file()));
         }
         if (data == null) {
-            LOGGER.info("Data import file does not exists. Key: " + key + " class-path: " + config.classpath + " file: "
-                    + config.file);
+            LOGGER.info("Data import file does not exists. Key: " + key + " class-path: " + config.classpath() + " file: "
+                    + config.file());
             return;
         }
 
         // create parameter
         DataImportConfig param = new DataImportConfig();
         param.key = key;
-        param.metadata = config.metadata;
-        param.file = Path.of(config.file);
+        param.metadata = config.metadata();
+        param.file = Path.of(config.file());
         param.data = data;
         param.md5 = createChecksum(param.data);
 
@@ -89,8 +89,8 @@ public class DataImportInvoker {
 
         // check the MD5
         if (log.getMd5() != null && Objects.equals(param.md5, log.getMd5())) {
-            if ((log.getError() == null || log.getError().isBlank()) || !config.retryErrorImport) {
-                LOGGER.info("No changes found in the data import file. Key: " + key + " file: " + config.file);
+            if ((log.getError() == null || log.getError().isBlank()) || !config.retryErrorImport()) {
+                LOGGER.info("No changes found in the data import file. Key: " + key + " file: " + config.file());
                 return;
             }
         }
@@ -106,7 +106,7 @@ public class DataImportInvoker {
         } catch (Exception ex) {
             String msg = ex.getMessage();
             if (msg != null) {
-                msg = msg.substring(0, Math.min(msg.length(), rootConfig.errorMsgLength));
+                msg = msg.substring(0, Math.min(msg.length(), rootConfig.errorMsgLength()));
             }
             log.setError(msg);
             throw new DontRollbackException(msg, ex);

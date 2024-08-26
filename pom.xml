@@ -49,10 +49,10 @@
 
     <properties>
         <!-- Quarkus -->
-        <quarkus.version>3.13.2</quarkus.version>
-        <quarkus.hibernate-orm.version>6.5.2.Final</quarkus.hibernate-orm.version>
+        <quarkus.version>3.14.0</quarkus.version>
+        <quarkus.hibernate-orm.version>6.6.0.Final</quarkus.hibernate-orm.version>
         <quarkiverse.mockserver.version>1.11.0</quarkiverse.mockserver.version>
-        <quarkus.jandex-plugin.version>3.2.1</quarkus.jandex-plugin.version>
+        <quarkus.jandex-plugin.version>3.2.2</quarkus.jandex-plugin.version>
 
         <!-- build -->
         <format.skip>false</format.skip>
@@ -69,6 +69,7 @@
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <maven.compiler-plugin.version>3.13.0</maven.compiler-plugin.version>
         <maven.surefire-plugin.version>3.4.0</maven.surefire-plugin.version>
+        <maven.resources-plugin.version>3.3.1</maven.resources-plugin.version>
         <maven.formatter-maven-plugin.version>2.24.1</maven.formatter-maven-plugin.version>
         <maven.impsort-maven-plugin.version>1.11.0</maven.impsort-maven-plugin.version>
         <maven.enforcer-plugin.version>3.2.1</maven.enforcer-plugin.version>
@@ -123,6 +124,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>io.quarkus</groupId>

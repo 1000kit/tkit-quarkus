@@ -20,6 +20,7 @@ import org.tkit.quarkus.log.cdi.LogRecorder;
 import org.tkit.quarkus.log.cdi.LogService;
 import org.tkit.quarkus.log.cdi.ServiceValue;
 import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
+import org.tkit.quarkus.log.cdi.runtime.LogBuildTimeConfig;
 import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 import io.quarkus.arc.deployment.*;
@@ -62,7 +63,6 @@ public class LogProcessor {
     @BuildStep
     void services(BeanDiscoveryFinishedBuildItem beanDiscoveryFinishedBuildItem,
             BeanRegistrationPhaseBuildItem beanRegistrationPhase,
-            LogBuildTimeConfig buildConfig,
             BuildProducer<ServiceBuildItem> producer) {
 
         ServiceValue values = new ServiceValue();
@@ -72,7 +72,7 @@ public class LogProcessor {
         for (BeanInfo bean : beanRegistrationPhase.getContext().beans().classBeans()) {
             ClassInfo ci = bean.getImplClazz();
 
-            AnnotationInstance ano = ci.classAnnotation(LOG_SERVICE);
+            AnnotationInstance ano = ci.declaredAnnotation(LOG_SERVICE);
             if (ano == null) {
                 ano = annotationStore.getAnnotation(ci, LOG_SERVICE);
             }
@@ -119,7 +119,7 @@ public class LogProcessor {
                     Annotation[][] annotations = method.getParameterAnnotations();
                     for (int i = 0; i < annotations.length; i++) {
                         Annotation[] annotationList = annotations[i];
-                        if (annotationList != null && annotationList.length > 0) {
+                        if (annotationList != null) {
                             for (Annotation annotation : annotationList) {
                                 if (annotation instanceof LogExclude) {
                                     LogExclude ea = (LogExclude) annotation;
@@ -161,13 +161,13 @@ public class LogProcessor {
      */
     @BuildStep
     public AnnotationsTransformerBuildItem interceptorBinding(LogBuildTimeConfig buildConfig) {
-        if (!buildConfig.autoDiscover.enabled) {
+        if (!buildConfig.autoDiscover().enabled()) {
             return null;
         }
 
-        final Pattern ignorePattern = buildConfig.autoDiscover.ignorePattern.map(Pattern::compile).orElse(null);
+        final Pattern ignorePattern = buildConfig.autoDiscover().ignorePattern().map(Pattern::compile).orElse(null);
 
-        Set<DotName> annotation = buildConfig.autoDiscover.annoBeans.stream()
+        Set<DotName> annotation = buildConfig.autoDiscover().annoBeans().stream()
                 .map(DotName::createSimple).collect(Collectors.toSet());
 
         return new AnnotationsTransformerBuildItem(new AnnotationsTransformer() {
@@ -194,7 +194,7 @@ public class LogProcessor {
                 }
 
                 // skip wrong package
-                Optional<String> add = buildConfig.autoDiscover.packages.stream().filter(name::startsWith).findFirst();
+                Optional<String> add = buildConfig.autoDiscover().packages().stream().filter(name::startsWith).findFirst();
                 if (add.isEmpty()) {
                     return;
                 }
@@ -215,8 +215,8 @@ public class LogProcessor {
             }
 
             private boolean matchesIgnorePattern(String name) {
-                if (buildConfig.autoDiscover.ignorePattern.isEmpty()
-                        || buildConfig.autoDiscover.ignorePattern.get().isBlank()) {
+                if (buildConfig.autoDiscover().ignorePattern().isEmpty()
+                        || buildConfig.autoDiscover().ignorePattern().get().isBlank()) {
                     return false;
                 }
                 if (ignorePattern == null) {
@@ -227,7 +227,7 @@ public class LogProcessor {
                     log.info(
                             "Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.cdi.auto-discovery.ignore.pattern')",
                             name,
-                            buildConfig.autoDiscover.ignorePattern);
+                            buildConfig.autoDiscover().ignorePattern());
                 }
                 return matches;
             }

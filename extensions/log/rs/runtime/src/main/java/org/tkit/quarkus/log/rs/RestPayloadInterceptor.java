@@ -27,7 +27,7 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         RestRuntimeConfig config = RestRecorder.getConfig();
-        if (!config.payload.enabled) {
+        if (!config.payload().enabled()) {
             return;
         }
         if (!(requestContext.getMethod().equals(HttpMethod.POST) || requestContext.getMethod().equals(HttpMethod.PUT))) {
@@ -35,7 +35,7 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
         }
 
         // check regex exclude
-        if (config.payload.regex.enabled) {
+        if (RestRecorder.isRegexPayloadEnabled()) {
             if (RestRecorder.excludePayloadUrl(requestContext.getUriInfo().getPath())) {
                 return;
             }
@@ -55,24 +55,25 @@ public class RestPayloadInterceptor implements ContainerRequestFilter {
         if (!stream.markSupported()) {
             stream = new BufferedInputStream(stream);
         }
-        stream.mark(config.payload.maxEntitySize + 1);
+        stream.mark(config.payload().maxEntitySize() + 1);
         StringBuilder sb = new StringBuilder();
-        stream.mark(config.payload.maxEntitySize + 1);
-        final byte[] entity = new byte[config.payload.maxEntitySize + 1];
+        stream.mark(config.payload().maxEntitySize() + 1);
+        final byte[] entity = new byte[config.payload().maxEntitySize() + 1];
         final int entitySize = stream.read(entity);
         if (entitySize <= 0) {
-            if (config.payload.emptyBodyEnabled) {
-                sb.append(config.payload.emptyBodyMessage);
+            if (config.payload().emptyBodyEnabled()) {
+                sb.append(config.payload().emptyBodyMessage());
             }
         } else {
-            sb.append(new String(entity, 0, Math.min(entitySize, config.payload.maxEntitySize), StandardCharsets.UTF_8));
-            if (entitySize > config.payload.maxEntitySize) {
-                sb.append(config.payload.pageMessage);
+            sb.append(new String(entity, 0, Math.min(entitySize, config.payload().maxEntitySize()), StandardCharsets.UTF_8));
+            if (entitySize > config.payload().maxEntitySize()) {
+                sb.append(config.payload().pageMessage());
             }
         }
-        if (sb.length() > 0) {
+        if (!sb.isEmpty()) {
             logger.info(
-                    String.format(config.payload.template, requestContext.getMethod(), requestContext.getUriInfo().getPath(),
+                    String.format(config.payload().template(), requestContext.getMethod(),
+                            requestContext.getUriInfo().getPath(),
                             sb));
         }
         stream.reset();

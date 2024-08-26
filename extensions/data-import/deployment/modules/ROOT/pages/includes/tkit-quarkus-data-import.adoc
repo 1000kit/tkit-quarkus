@@ -1,0 +1,167 @@
+:summaryTableId: tkit-quarkus-data-import
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[.header-title]##Configuration property##
+h|Type
+h|Default
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-enabled]] [.property-path]##`tkit.dataimport.enabled`##
+
+[.description]
+--
+If set to true, the application will import data
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-error-msg-length]] [.property-path]##`tkit.dataimport.error-msg-length`##
+
+[.description]
+--
+Error message length in the database
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_ERROR_MSG_LENGTH+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_ERROR_MSG_LENGTH+++`
+endif::add-copy-button-to-env-var[]
+--
+|int
+|`255`
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-bean]] [.property-path]##`tkit.dataimport.configurations."configurations".bean`##
+
+[.description]
+--
+The bean key
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__BEAN+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__BEAN+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|` `
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-file]] [.property-path]##`tkit.dataimport.configurations."configurations".file`##
+
+[.description]
+--
+The path to the data source file
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__FILE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__FILE+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|required icon:exclamation-circle[title=Configuration property is required]
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-class-path]] [.property-path]##`tkit.dataimport.configurations."configurations".class-path`##
+
+[.description]
+--
+Set to true if the file is a classpath file.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__CLASS_PATH+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__CLASS_PATH+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`false`
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata]] [.property-path]##`tkit.dataimport.configurations."configurations".metadata."metadata"`##
+
+[.description]
+--
+The metadata for the execution
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__METADATA__METADATA_+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__METADATA__METADATA_+++`
+endif::add-copy-button-to-env-var[]
+--
+|Map<String,String>
+|
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-enabled]] [.property-path]##`tkit.dataimport.configurations."configurations".enabled`##
+
+[.description]
+--
+If set to true, the application will run this import data
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-stop-at-error]] [.property-path]##`tkit.dataimport.configurations."configurations".stop-at-error`##
+
+[.description]
+--
+If set to true, the application will stop if data import failed
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__STOP_AT_ERROR+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__STOP_AT_ERROR+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`false`
+
+a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-retry-error-import]] [.property-path]##`tkit.dataimport.configurations."configurations".retry-error-import`##
+
+[.description]
+--
+If set to false, the application will not retry error import.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__RETRY_ERROR_IMPORT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_DATAIMPORT_CONFIGURATIONS__CONFIGURATIONS__RETRY_ERROR_IMPORT+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+|===
+
+
+:!summaryTableId:

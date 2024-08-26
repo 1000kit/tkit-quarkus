@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.jboss.jandex.ClassInfo;
 import org.jboss.jandex.DotName;
 import org.jboss.jandex.MethodInfo;
+import org.tkit.quarkus.rs.context.runtime.RestContextBuildConfig;
 import org.tkit.quarkus.rs.context.runtime.RestContextTenantRecorder;
 import org.tkit.quarkus.rs.context.runtime.TenantAnnotationData;
 import org.tkit.quarkus.rs.context.tenant.TenantExclude;
@@ -40,7 +41,7 @@ public class RestContextProcessor {
             RestContextBuildConfig buildConfig,
             BuildProducer<AnnotationDataBuildItem> producer) {
 
-        if (!buildConfig.build.tenant.enabled) {
+        if (!buildConfig.build().tenant().enabled()) {
             return;
         }
 

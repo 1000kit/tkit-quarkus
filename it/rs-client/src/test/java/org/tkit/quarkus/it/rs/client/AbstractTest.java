@@ -1,9 +1,9 @@
 package org.tkit.quarkus.it.rs.client;
 
 import io.quarkiverse.mockserver.test.MockServerTestResource;
-import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.WithTestResource;
 
-@QuarkusTestResource(MockServerTestResource.class)
+@WithTestResource(MockServerTestResource.class)
 public class AbstractTest {
 
 }

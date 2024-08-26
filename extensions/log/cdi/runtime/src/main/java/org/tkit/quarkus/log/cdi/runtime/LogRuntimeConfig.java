@@ -1,95 +1,103 @@
 package org.tkit.quarkus.log.cdi.runtime;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import io.quarkus.runtime.annotations.*;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
+import io.smallrye.config.WithParentName;
 
 @ConfigDocFilename("tkit-quarkus-log-cdi.adoc")
-@ConfigRoot(prefix = "tkit", name = "log.cdi", phase = ConfigPhase.RUN_TIME)
-public class LogRuntimeConfig {
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+@ConfigMapping(prefix = "tkit.log.cdi")
+public interface LogRuntimeConfig {
 
     /**
      * Enable or disable interceptor
      */
-    @ConfigItem(name = "enabled", defaultValue = "true")
-    public boolean enabled;
+    @WithName("enabled")
+    @WithDefault("true")
+    boolean enabled();
 
     /**
      * Prefix for custom data mdc entries
      */
-    @ConfigItem(name = "custom-data.prefix")
-    public Optional<String> customDataPrefix;
+    @WithName("custom-data.prefix")
+    Optional<String> customDataPrefix();
 
     /**
      * Start message
      */
-    @ConfigItem(name = "start")
-    public StartLogMessage start;
+    @WithName("start")
+    StartLogMessage start();
 
     /**
      * Succeed message
      */
-    @ConfigItem(name = "succeed")
-    public SucceedLogMessage succeed;
+    @WithName("succeed")
+    SucceedLogMessage succeed();
 
     /**
      * Failed message
      */
-    @ConfigItem(name = "failed")
-    public FailedLogMessage failed;
+    @WithName("failed")
+    FailedLogMessage failed();
 
     /**
      * Return void method template
      */
-    @ConfigItem(name = "return-void-template", defaultValue = "void")
-    public String returnVoidTemplate;
+    @WithName("return-void-template")
+    @WithDefault("void")
+    String returnVoidTemplate();
 
     /**
      * Service configuration
      */
-    @ConfigItem(name = "service")
-    public Map<String, ServiceConfig> service = new HashMap<>();
+    @WithName("service")
+    Map<String, ServiceConfig> service();
 
     /**
      * Mdc error key for FBN error code
      */
-    @ConfigItem(name = "mdc.errorKey", defaultValue = "errorNumber")
-    public String errorNumberKey;
+    @WithName("mdc.errorKey")
+    @WithDefault("errorNumber")
+    String errorNumberKey();
 
     /**
      * Start message
      */
-    @ConfigGroup
-    public static class StartLogMessage {
+    interface StartLogMessage {
 
         /**
          * Enable or disable start message
          */
-        @ConfigItem(name = "enabled", defaultValue = "false")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
 
         /**
          * Message template
          * 0 - method
          * 1 - parameters
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s(%2$s) started.")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s(%2$s) started.")
+        String template();
     }
 
     /**
      * Succeed message
      */
-    @ConfigGroup
-    public static class SucceedLogMessage {
+    interface SucceedLogMessage {
 
         /**
          * Enable or disable end message
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * Message template
@@ -98,21 +106,22 @@ public class LogRuntimeConfig {
          * 3 - return value
          * 4 - time
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s(%2$s):%3$s [%4$.3fs]")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s(%2$s):%3$s [%4$.3fs]")
+        String template();
     }
 
     /**
      * Failed message
      */
-    @ConfigGroup
-    public static class FailedLogMessage {
+    interface FailedLogMessage {
 
         /**
          * Enable or disable end message
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * Message template
@@ -121,73 +130,71 @@ public class LogRuntimeConfig {
          * 3 - return value
          * 4 - time
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s(%2$s) throw %3$s [%4$.3fs]")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s(%2$s) throw %3$s [%4$.3fs]")
+        String template();
     }
 
     /**
      * Service configuration.
      */
-    @ConfigGroup
-    public static class ServiceConfig {
+    interface ServiceConfig {
 
         /**
          * Service controller config
          */
-        @ConfigItem(name = ConfigItem.PARENT)
-        public LogServiceConfig config;
+        @WithParentName
+        LogServiceConfig config();
 
         /**
          * Service methods
          */
-        @ConfigItem(name = "method")
-        public Map<String, MethodConfig> method = new HashMap<>();
+        @WithName("method")
+        Map<String, MethodConfig> method();
 
     }
 
     /**
      * Method configuration.
      */
-    @ConfigGroup
-    public static class MethodConfig {
+    interface MethodConfig {
 
         /**
          * Service controller config
          */
-        @ConfigItem(name = ConfigItem.PARENT)
-        public LogServiceConfig config;
+        @WithParentName
+        LogServiceConfig config();
 
         /**
          * Return mask
          */
-        @ConfigItem(name = "return-mask")
-        public Optional<String> returnMask;
+        @WithName("return-mask")
+        Optional<String> returnMask();
 
         /**
          * Exclude parameters
          */
-        @ConfigItem(name = "param")
-        public Optional<Map<Short, String>> params;
+        @WithName("param")
+        Map<Short, String> params();
 
     }
 
     /**
      * Rest-controller configuration.
      */
-    @ConfigGroup
-    public static class LogServiceConfig {
+    interface LogServiceConfig {
 
         /**
          * Enable or disable service log
          */
-        @ConfigItem(name = "log")
-        public Optional<Boolean> log;
+        @WithName("log")
+        Optional<Boolean> log();
 
         /**
          * Enable or disable service stacktrace
          */
-        @ConfigItem(name = "stacktrace")
-        public Optional<Boolean> stacktrace;
+        @WithName("stacktrace")
+        Optional<Boolean> stacktrace();
 
     }
 }

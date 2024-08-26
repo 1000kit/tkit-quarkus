@@ -1,93 +1,101 @@
 package org.tkit.quarkus.log.rs;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import io.quarkus.runtime.annotations.*;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
+import io.smallrye.config.WithParentName;
 
 @ConfigDocFilename("tkit-quarkus-log-rs.adoc")
-@ConfigRoot(prefix = "tkit", name = "log.rs", phase = ConfigPhase.RUN_TIME)
-public class RestRuntimeConfig {
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+@ConfigMapping(prefix = "tkit.log.rs")
+public interface RestRuntimeConfig {
 
     /**
      * Enabled or disable the rest log interceptor
      */
-    @ConfigItem(name = "enabled", defaultValue = "true")
-    public boolean enabled;
+    @WithName("enabled")
+    @WithDefault("true")
+    boolean enabled();
 
     /**
      * Enabled or disable to add principal name to the application context.
      */
-    @ConfigItem(name = "principal.enabled", defaultValue = "true")
-    public boolean enabledPrincipal;
+    @WithName("principal.enabled")
+    @WithDefault("true")
+    boolean enabledPrincipal();
 
     /**
      * Enabled or disable the correlation ID
      */
-    @ConfigItem(name = "correlation-id-enabled", defaultValue = "true")
-    public boolean correlationIdEnabled;
+    @WithName("correlation-id-enabled")
+    @WithDefault("true")
+    boolean correlationIdEnabled();
 
     /**
      * The correlation ID header
      */
-    @ConfigItem(name = "correlation-id-header", defaultValue = "X-Correlation-ID")
-    public String correlationIdHeader;
+    @WithName("correlation-id-header")
+    @WithDefault("X-Correlation-ID")
+    String correlationIdHeader();
 
     /**
      * Map of MDC headers
      */
-    @ConfigItem(name = "mdc-headers")
-    public Map<String, String> mdcHeaders;
+    @WithName("mdc-headers")
+    Map<String, String> mdcHeaders();
 
     /**
      * Start message
      */
-    @ConfigItem(name = "start")
-    public RestStartLogMessage start;
+    @WithName("start")
+    RestStartLogMessage start();
 
     /**
      * End message
      */
-    @ConfigItem(name = "end")
-    public RestEndLogMessage end;
+    @WithName("end")
+    RestEndLogMessage end();
 
     /**
      * Rest controller methods
      */
-    @ConfigItem(name = "controller")
-    public Map<String, RestControllerConfig> controller = new HashMap<>();
+    @WithName("controller")
+    Map<String, RestControllerConfig> controller();
 
     /**
      * Error log configuration.
      */
-    @ConfigItem(name = "error")
-    public ErrorLog error;
+    @WithName("error")
+    ErrorLog error();
 
     /**
      * Regex log configuration.
      */
-    @ConfigItem(name = "regex")
-    public RegexLog regex;
+    @WithName("regex")
+    RegexLog regex();
 
     /**
      * Payload log configuration.
      */
-    @ConfigItem(name = "payload")
-    public PayloadLog payload;
+    @WithName("payload")
+    PayloadLog payload();
 
     /**
      * Payload log configuration.
      */
-    @ConfigGroup
-    public static class PayloadLog {
+    interface PayloadLog {
 
         /**
          * Enable or disable error log message
          */
-        @ConfigItem(name = "enabled", defaultValue = "false")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
 
         /**
          * Payload message
@@ -95,106 +103,112 @@ public class RestRuntimeConfig {
          * 2 - URL
          * 3 - payload
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s %2$s payload: %3$s")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s %2$s payload: %3$s")
+        String template();
 
         /**
          * Empty body enabled or disabled
          */
-        @ConfigItem(name = "empty-body-enabled", defaultValue = "true")
-        public boolean emptyBodyEnabled;
+        @WithName("empty-body-enabled")
+        @WithDefault("true")
+        boolean emptyBodyEnabled();
 
         /**
          * Empty body message
          */
-        @ConfigItem(name = "empty-body-message", defaultValue = "<EMPTY BODY>")
-        public String emptyBodyMessage;
+        @WithName("empty-body-message")
+        @WithDefault("<EMPTY BODY>")
+        String emptyBodyMessage();
 
         /**
          * Page message
          */
-        @ConfigItem(name = "page-message", defaultValue = "...more...")
-        public String pageMessage;
+        @WithName("page-message")
+        @WithDefault("...more...")
+        String pageMessage();
 
         /**
          * Maximum entity size
          */
-        @ConfigItem(name = "max-entity-size", defaultValue = "1048576")
-        public int maxEntitySize = 1048576;
+        @WithName("max-entity-size")
+        @WithDefault("1048576")
+        int maxEntitySize();
 
         /**
          * Regex log configuration.
          */
-        @ConfigItem(name = "regex")
-        public RegexLog regex;
+        @WithName("regex")
+        RegexLog regex();
     }
 
     /**
      * Regex log configuration.
      */
-    @ConfigGroup
-    public static class RegexLog {
+    interface RegexLog {
 
         /**
          * Enable or disable error log message
          */
-        @ConfigItem(name = "enabled", defaultValue = "false")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
 
         /**
          * Exclude request path patterns
          */
-        @ConfigItem(name = "exclude")
-        public Optional<List<String>> exclude;
+        @WithName("exclude")
+        Optional<List<String>> exclude();
 
     }
 
     /**
      * Error log configuration.
      */
-    @ConfigGroup
-    public static class ErrorLog {
+    interface ErrorLog {
 
         /**
          * Enable or disable error log message
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
     }
 
     /**
      * Start message
      */
-    @ConfigGroup
-    public static class RestStartLogMessage {
+    interface RestStartLogMessage {
 
         /**
          * Enable or disable start message
          */
-        @ConfigItem(name = "enabled", defaultValue = "false")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
 
         /**
          * Message template
          * 1 - HTTP method
          * 2 - URI
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s %2$s started.")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s %2$s started.")
+        String template();
     }
 
     /**
      * End message
      */
-    @ConfigGroup
-    public static class RestEndLogMessage {
+    interface RestEndLogMessage {
 
         /**
          * Enable or disable end message
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * Message template
@@ -205,171 +219,169 @@ public class RestRuntimeConfig {
          * 5 - HTTP response name
          * 6 - URI
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s %2$s [%4$s] [%3$ss]")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s %2$s [%4$s] [%3$ss]")
+        String template();
 
         /**
          * Default MDC parameters
          */
-        @ConfigItem(name = "mdc")
-        public RestMdcLogConfig mdc;
+        @WithName("mdc")
+        RestMdcLogConfig mdc();
     }
 
-    @ConfigGroup
-    public static class RestMdcLogConfig {
+    interface RestMdcLogConfig {
 
         /**
          * Enable duration time as MDC parameter
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * Duration MDC key name
          */
-        @ConfigItem(name = "duration.name", defaultValue = "rs-time")
-        public String durationName;
+        @WithName("duration.name")
+        @WithDefault("rs-time")
+        String durationName();
 
         /**
          * Response status MDC key name
          */
-        @ConfigItem(name = "response-status.name", defaultValue = "rs-status")
-        public String responseStatusName;
+        @WithName("response-status.name")
+        @WithDefault("rs-status")
+        String responseStatusName();
     }
 
     /**
      * Rest-client interceptor configuration.
      */
-    @ConfigItem(name = "client")
-    public RestClientRuntimeConfig client;
+    @WithName("client")
+    RestClientRuntimeConfig client();
 
     /**
      * Rest-client interceptor configuration.
      */
-    @ConfigGroup
-    public static class RestClientRuntimeConfig {
+    interface RestClientRuntimeConfig {
 
         /**
          * Enable or disable rest-client log interceptor.
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * Regex log configuration.
          */
-        @ConfigItem(name = "regex")
-        public RegexLog regex;
+        @WithName("regex")
+        RegexLog regex();
 
         /**
          * Payload log configuration.
          */
-        @ConfigItem(name = "payload")
-        public PayloadLog payload;
+        @WithName("payload")
+        PayloadLog payload();
 
         /**
          * Map of MDC headers
          */
-        @ConfigItem(name = "mdc-headers")
-        public Map<String, String> mdcHeaders;
+        @WithName("mdc-headers")
+        Map<String, String> mdcHeaders();
 
         /**
          * Start message
          */
-        @ConfigItem(name = "start")
-        public RestClientStartLogMessage start;
+        @WithName("start")
+        RestClientStartLogMessage start();
 
         /**
          * End message
          */
-        @ConfigItem(name = "end")
-        public RestClientEndLogMessage end;
+        @WithName("end")
+        RestClientEndLogMessage end();
 
         /**
          * Error log configuration.
          */
-        @ConfigItem(name = "error")
-        public ErrorLog error;
+        @WithName("error")
+        ErrorLog error();
 
     }
 
     /**
      * Rest-controller configuration.
      */
-    @ConfigGroup
-    public static class RestControllerConfig {
+    interface RestControllerConfig {
 
         /**
          * Rest controller config
          */
-        @ConfigItem(name = ConfigItem.PARENT)
-        public RestServiceControllerConfig config;
+        @WithParentName
+        RestServiceControllerConfig config();
 
         /**
          * Rest controller methods
          */
-        @ConfigItem(name = "method")
-        public Map<String, RestServiceControllerConfig> method = new HashMap<>();
+        @WithName("method")
+        Map<String, RestServiceControllerConfig> method();
 
     }
 
     /**
      * Rest-controller configuration.
      */
-    @ConfigGroup
-    public static class RestServiceControllerConfig {
+    interface RestServiceControllerConfig {
 
         /**
          * Enable or disable rest controller log
          */
-        @ConfigItem(name = "log")
-        public Optional<Boolean> log;
+        @WithName("log")
+        Optional<Boolean> log();
 
         /**
          * Enable or disable rest controller payload
          */
-        @ConfigItem(name = "payload")
-        public Optional<Boolean> payload;
+        @WithName("payload")
+        Optional<Boolean> payload();
 
-        /**
-         * Map of MDC headers
-         */
-        @ConfigItem(name = "mdc-headers")
-        public Optional<Map<String, String>> mdcHeaders;
     }
 
     /**
      * Start message
      */
     @ConfigGroup
-    public static class RestClientStartLogMessage {
+    interface RestClientStartLogMessage {
 
         /**
          * Enable or disable start message
          */
-        @ConfigItem(name = "enabled", defaultValue = "false")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
 
         /**
          * Message template
          * 0 - HTTP method
          * 1 - URI
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s %2$s started.")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s %2$s started.")
+        String template();
     }
 
     /**
      * End message
      */
-    @ConfigGroup
-    public static class RestClientEndLogMessage {
+    interface RestClientEndLogMessage {
 
         /**
          * Enable or disable end message
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * Message template
@@ -379,36 +391,39 @@ public class RestRuntimeConfig {
          * 4 - HTTP response code
          * 5 - HTTP response name
          */
-        @ConfigItem(name = "template", defaultValue = "%1$s %2$s [%4$s] [%3$ss]")
-        public String template;
+        @WithName("template")
+        @WithDefault("%1$s %2$s [%4$s] [%3$ss]")
+        String template();
 
         /**
          * Default MDC parameters for rest client
          */
-        @ConfigItem(name = "mdc")
-        public RestClientMdcLogConfig mdc;
+        @WithName("mdc")
+        RestClientMdcLogConfig mdc();
     }
 
-    @ConfigGroup
-    public static class RestClientMdcLogConfig {
+    interface RestClientMdcLogConfig {
 
         /**
          * Enable duration time as MDC parameter
          */
-        @ConfigItem(name = "enabled", defaultValue = "true")
-        public boolean enabled;
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
 
         /**
          * Duration MDC key name
          */
-        @ConfigItem(name = "duration.name", defaultValue = "rs-client-time")
-        public String durationName;
+        @WithName("duration.name")
+        @WithDefault("rs-client-time")
+        String durationName();
 
         /**
          * Response client status MDC key name
          */
-        @ConfigItem(name = "response-status.name", defaultValue = "rs-client-status")
-        public String responseStatusName;
+        @WithName("response-status.name")
+        @WithDefault("rs-client-status")
+        String responseStatusName();
     }
 
 }

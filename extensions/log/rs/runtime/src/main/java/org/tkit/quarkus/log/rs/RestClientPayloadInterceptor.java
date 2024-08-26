@@ -22,17 +22,17 @@ public class RestClientPayloadInterceptor implements ClientRequestFilter {
     @Override
     public void filter(ClientRequestContext requestContext) {
         RestRuntimeConfig config = RestRecorder.getConfig();
-        if (config.client.payload.enabled) {
+        if (config.client().payload().enabled()) {
             if (requestContext.getMethod().equals(HttpMethod.POST) || requestContext.getMethod().equals(HttpMethod.PUT)) {
 
                 // check regex exclude
-                if (config.client.payload.regex.enabled) {
+                if (RestRecorder.isRegexPayloadEnabled() && config.client().payload().regex().enabled()) {
                     if (RestRecorder.excludePayloadUrl(requestContext.getUri().getPath())) {
                         return;
                     }
                 }
                 log.info(
-                        String.format(config.client.payload.template,
+                        String.format(config.client().payload().template(),
                                 requestContext.getMethod(),
                                 requestContext.getUri().getPath(),
                                 requestContext.getEntity()));

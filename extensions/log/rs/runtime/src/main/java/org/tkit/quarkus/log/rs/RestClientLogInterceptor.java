@@ -39,12 +39,12 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
     public void filter(ClientRequestContext requestContext) {
         RestRuntimeConfig config = RestRecorder.getConfig();
 
-        if (!config.client.enabled) {
+        if (!config.client().enabled()) {
             return;
         }
         //propagate our log context if present
-        if (!ApplicationContext.isEmpty() && config.correlationIdEnabled) {
-            requestContext.getHeaders().add(config.correlationIdHeader, ApplicationContext.get().getCorrelationId());
+        if (!ApplicationContext.isEmpty() && config.correlationIdEnabled()) {
+            requestContext.getHeaders().add(config.correlationIdHeader(), ApplicationContext.get().getCorrelationId());
         }
 
         RestInterceptorContext context = new RestInterceptorContext();
@@ -52,8 +52,8 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
         context.uri = requestContext.getUri().toString();
 
         // add header parameters to MDC
-        if (config.client.mdcHeaders != null && !config.client.mdcHeaders.isEmpty()) {
-            config.client.mdcHeaders.forEach((k, v) -> {
+        if (config.client().mdcHeaders() != null && !config.client().mdcHeaders().isEmpty()) {
+            config.client().mdcHeaders().forEach((k, v) -> {
                 String tmp = requestContext.getHeaderString(k);
                 if (tmp != null && !tmp.isBlank()) {
                     MDC.put(v, tmp);
@@ -62,8 +62,8 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             });
         }
 
-        if (config.client.start.enabled) {
-            log.info(String.format(config.client.start.template, context.method, context.uri));
+        if (config.client().start().enabled()) {
+            log.info(String.format(config.client().start().template(), context.method, context.uri));
         }
         requestContext.setProperty(CONTEXT, context);
     }
@@ -75,15 +75,15 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
     public void filter(ClientRequestContext requestContext, ClientResponseContext responseContext) {
         RestRuntimeConfig config = RestRecorder.getConfig();
 
-        if (!config.client.enabled) {
+        if (!config.client().enabled()) {
             return;
         }
 
         RestInterceptorContext context = (RestInterceptorContext) requestContext.getProperty(CONTEXT);
         if (context == null) {
-            if (config.client.error.enabled) {
+            if (config.client().error().enabled()) {
                 Response.StatusType status = responseContext.getStatusInfo();
-                log.info(String.format(config.client.end.template, requestContext.getMethod(),
+                log.info(String.format(config.client().end().template(), requestContext.getMethod(),
                         requestContext.getUri().getPath(), 0.000,
                         status.getStatusCode(), status.getReasonPhrase()));
             }
@@ -94,16 +94,16 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             Response.StatusType status = responseContext.getStatusInfo();
             context.close();
 
-            if (config.client.end.mdc.enabled) {
-                MDC.put(config.client.end.mdc.durationName, context.durationSec);
-                context.mdcKeys.add(config.client.end.mdc.durationName);
+            if (config.client().end().mdc().enabled()) {
+                MDC.put(config.client().end().mdc().durationName(), context.durationSec);
+                context.mdcKeys.add(config.client().end().mdc().durationName());
 
-                MDC.put(config.client.end.mdc.responseStatusName, status.getStatusCode());
-                context.mdcKeys.add(config.end.mdc.responseStatusName);
+                MDC.put(config.client().end().mdc().responseStatusName(), status.getStatusCode());
+                context.mdcKeys.add(config.end().mdc().responseStatusName());
             }
 
-            if (config.client.end.enabled) {
-                log.info(String.format(config.client.end.template, context.method, context.uri,
+            if (config.client().end().enabled()) {
+                log.info(String.format(config.client().end().template(), context.method, context.uri,
                         context.durationString, status.getStatusCode(), status.getReasonPhrase()));
             }
         } finally {

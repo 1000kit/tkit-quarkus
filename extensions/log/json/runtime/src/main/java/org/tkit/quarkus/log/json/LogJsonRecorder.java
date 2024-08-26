@@ -32,44 +32,44 @@ import io.quarkus.runtime.annotations.Recorder;
 public class LogJsonRecorder {
 
     public RuntimeValue<Optional<Formatter>> initializeJsonLogging(final LogJsonConfig config) {
-        if (!config.enabled) {
+        if (!config.enabled()) {
             return new RuntimeValue<>(Optional.empty());
         }
         final JsonAdvancedFormatter formatter = new JsonAdvancedFormatter();
-        formatter.setPrettyPrint(config.prettyPrint);
-        final String dateFormat = config.dateFormat;
+        formatter.setPrettyPrint(config.prettyPrint());
+        final String dateFormat = config.dateFormat();
         if (!dateFormat.equals("default")) {
             formatter.setDateFormat(dateFormat);
         }
-        formatter.setExceptionOutputType(config.exceptionOutputType);
-        formatter.setPrintDetails(config.printDetails);
-        config.recordDelimiter.ifPresent(formatter::setRecordDelimiter);
-        final String zoneId = config.zoneId;
+        formatter.setExceptionOutputType(config.exceptionOutputType());
+        formatter.setPrintDetails(config.printDetails());
+        config.recordDelimiter().ifPresent(formatter::setRecordDelimiter);
+        final String zoneId = config.zoneId();
         if (!zoneId.equals("default")) {
             formatter.setZoneId(zoneId);
         }
 
-        Map<String, String> mdcKeys = convertToMap(config.mdcKeys);
+        Map<String, String> mdcKeys = convertToMap(config.mdcKeys());
         formatter.addMdcKeys(mdcKeys);
 
-        Map<String, String> mdcPrefix = convertToMap(config.mdcPrefixKeys);
+        Map<String, String> mdcPrefix = convertToMap(config.mdcPrefixKeys());
         formatter.addMdcPrefix(mdcPrefix);
 
-        Map<String, String> overrideKeys = convertToMap(config.overrideKeys);
+        Map<String, String> overrideKeys = convertToMap(config.overrideKeys());
         formatter.addOverrideKeys(overrideKeys);
 
-        Map<String, String> typeKeys = convertToMap(config.typeKeys);
+        Map<String, String> typeKeys = convertToMap(config.typeKeys());
         formatter.addTypeKeys(typeKeys);
 
-        Map<String, String> envKeys = convertToMap(config.envKeys);
+        Map<String, String> envKeys = convertToMap(config.envKeys());
         formatter.addEnvKeys(envKeys);
 
-        if (!empty(config.ignoreKeys)) {
-            formatter.addIgnoreKeys(new HashSet<>(config.ignoreKeys));
+        if (!empty(config.ignoreKeys())) {
+            formatter.addIgnoreKeys(new HashSet<>(config.ignoreKeys()));
         }
 
-        if (config.splitStacktraceAfter.isPresent()) {
-            formatter.setSplitStacktracesAfter(config.splitStacktraceAfter.get());
+        if (config.splitStacktraceAfter().isPresent()) {
+            formatter.setSplitStacktracesAfter(config.splitStacktraceAfter().get());
         }
         return new RuntimeValue<>(Optional.of(formatter));
     }

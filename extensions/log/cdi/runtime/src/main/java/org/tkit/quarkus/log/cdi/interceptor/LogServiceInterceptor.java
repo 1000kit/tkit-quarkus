@@ -68,7 +68,7 @@ public class LogServiceInterceptor {
     public Object methodExecution(final InvocationContext ic) throws Exception {
 
         LogRuntimeConfig config = LogRecorder.getConfig();
-        if (!config.enabled) {
+        if (!config.enabled()) {
             return ic.proceed();
         }
 
@@ -94,37 +94,37 @@ public class LogServiceInterceptor {
         long startTime = System.currentTimeMillis();
 
         try {
-            if (config.start.enabled) {
+            if (config.start().enabled()) {
                 parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
-                logger.info(String.format(config.start.template, methodName, parameters));
+                logger.info(String.format(config.start().template(), methodName, parameters));
             }
             Object result = ic.proceed();
 
-            String returnValue = config.returnVoidTemplate;
+            String returnValue = config.returnVoidTemplate();
             if (method.getReturnType() != Void.TYPE) {
                 returnValue = getReturnValue(methodItem, result);
             }
 
             // log the success message
-            if (config.succeed.enabled) {
+            if (config.succeed().enabled()) {
                 if (parameters == null) {
                     parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
                 }
-                logger.info(String.format(config.succeed.template, methodName, parameters, returnValue,
+                logger.info(String.format(config.succeed().template(), methodName, parameters, returnValue,
                         (System.currentTimeMillis() - startTime) / 1000f));
             }
 
             return result;
 
         } catch (Exception ex) {
-            if (!config.failed.enabled) {
+            if (!config.failed().enabled()) {
                 throw ex;
             }
             Context.ApplicationError aex = ApplicationContext.get().addError(ex);
 
             Throwable error = ex;
             if (ex instanceof LogFriendlyException) {
-                ApplicationContext.addBusinessLogParam(config.errorNumberKey, ((LogFriendlyException) ex).getErrorNumber());
+                ApplicationContext.addBusinessLogParam(config.errorNumberKey(), ((LogFriendlyException) ex).getErrorNumber());
             }
             if (ex instanceof InvocationTargetException) {
                 error = ex.getCause();
@@ -133,7 +133,7 @@ public class LogServiceInterceptor {
                 parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
             }
             String er = getReturnValue(methodItem, error);
-            logger.error(String.format(config.failed.template, methodName, parameters, er,
+            logger.error(String.format(config.failed().template(), methodName, parameters, er,
                     (System.currentTimeMillis() - startTime) / 1000f));
 
             if (methodItem.config.stacktrace && !aex.stacktrace) {
