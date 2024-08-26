@@ -22,8 +22,15 @@ public class TestTenantCustomResolver implements TenantCustomResolver {
         var tmp = containerRequestContext.getHeaders().getFirst("test-tenant");
         log.info("----> TENANT RESOLVER <------ Test tenant-id: {}", tmp);
         if (tmp == null) {
-            throw new RuntimeException("Missing token for tenant");
+            throw new TestRuntimeException("Missing token for tenant");
         }
         return null;
+    }
+
+    public static class TestRuntimeException extends RuntimeException {
+
+        public TestRuntimeException(String message) {
+            super(message);
+        }
     }
 }
