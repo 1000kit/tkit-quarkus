@@ -33,9 +33,9 @@ public class LogServiceInterceptor {
      */
     private static String getObjectClassName(Object object) {
         if (object instanceof Proxy) {
-            Class<?>[] interf = object.getClass().getInterfaces();
-            if (interf.length > 0) {
-                return getClassName(interf[0]);
+            Class<?>[] clazz = object.getClass().getInterfaces();
+            if (clazz.length > 0) {
+                return getClassName(clazz[0]);
             }
         }
         return getClassName(object.getClass());
@@ -136,9 +136,9 @@ public class LogServiceInterceptor {
             logger.error(String.format(config.failed().template(), methodName, parameters, er,
                     (System.currentTimeMillis() - startTime) / 1000f));
 
-            if (methodItem.config.stacktrace && !aex.stacktrace) {
+            if (methodItem.config.stacktrace && !aex.isStacktrace()) {
                 logger.error("", ex);
-                aex.stacktrace = true;
+                aex.setStacktrace(true);
             }
 
             throw ex;

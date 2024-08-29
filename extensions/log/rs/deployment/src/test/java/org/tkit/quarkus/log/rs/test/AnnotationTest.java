@@ -9,16 +9,16 @@ import org.tkit.quarkus.log.rs.test.app.AnnotationRestController;
 import io.quarkus.test.QuarkusUnitTest;
 import io.restassured.RestAssured;
 
-public class AnnotationTest extends AbstractTest {
+class AnnotationTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(AnnotationRestController.class)
                     .addAsResource("default.properties", "application.properties"));
 
     @Test
-    public void test1Test() {
+    void test1Test() {
         RestAssured.get("/anno/test1").then()
                 .body(is("OK"));
         assertLogs()
@@ -28,7 +28,7 @@ public class AnnotationTest extends AbstractTest {
     }
 
     @Test
-    public void test2Test() {
+    void test2Test() {
         RestAssured.get("/anno/test2").then()
                 .body(is("OK"));
         assertLogs().assertNoLogs();

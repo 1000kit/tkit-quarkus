@@ -8,11 +8,13 @@ import org.tkit.quarkus.log.cdi.test.app.AppLifecycleService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class AppLifecycleServiceTest {
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+class AppLifecycleServiceTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(AppLifecycleService.class)
                     .addAsResource("default.properties", "application.properties"));
 
@@ -20,8 +22,10 @@ public class AppLifecycleServiceTest {
     AppLifecycleService service;
 
     @Test
-    public void startup() {
-        service.info();
+    void startupTest() {
+        assertDoesNotThrow(() -> {
+            service.info();
+        });
     }
 
 }

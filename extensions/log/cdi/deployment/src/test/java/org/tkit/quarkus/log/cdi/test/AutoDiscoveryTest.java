@@ -8,11 +8,11 @@ import org.tkit.quarkus.log.cdi.test.app.NoAnnotationService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class AutoDiscoveryTest extends AbstractTest {
+class AutoDiscoveryTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(NoAnnotationService.class)
                     .addAsResource("autodiscovery.properties", "application.properties"));
 
@@ -20,7 +20,7 @@ public class AutoDiscoveryTest extends AbstractTest {
     NoAnnotationService service;
 
     @Test
-    public void noAnnotationMethodTest() {
+    void noAnnotationMethodTest() {
         service.noAnnotationMethod("input1");
         assertLogs().assertLines(1)
                 .assertContains(0,
@@ -28,7 +28,7 @@ public class AutoDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    public void disableLogMethodTest() {
+    void disableLogMethodTest() {
         service.disableLog("input1");
         assertLogs().assertNoLogs();
     }

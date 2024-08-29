@@ -9,6 +9,7 @@ public class TokenException extends RuntimeException {
         this.key = key;
     }
 
+    @SuppressWarnings("java:S1452")
     public Enum<?> getKey() {
         return key;
     }

@@ -126,6 +126,7 @@ public class WithDBDataExtension
         importAllData(an);
     }
 
+    @SuppressWarnings("java:S1172")
     private Database createDatabase(WithDBData an) {
         return new LocalDatabase();
     }
@@ -172,7 +173,7 @@ public class WithDBDataExtension
 
             URL fileUrl = this.getClass().getClassLoader().getResource(path);
             if (fileUrl == null) {
-                log.warn("[DB-IMPORT] Missing database data resource {} in the class-path.", path);
+                log.warn("[DB-IMPORT] Delete all data. Missing database data resource {} in the class-path.", path);
                 continue;
             }
 
@@ -216,6 +217,6 @@ public class WithDBDataExtension
                             """,
                     file);
         }
-        throw new RuntimeException("Not supported file type!");
+        throw new UnsupportedOperationException("Not supported file type!");
     }
 }

@@ -187,17 +187,28 @@ public class Context {
      */
     public static class ApplicationError {
 
-        public Throwable throwable;
+        private final Throwable throwable;
 
         /**
          * Show stack-strace
          */
-        public boolean stacktrace;
+        private boolean stacktrace;
 
         ApplicationError(Throwable throwable) {
             this.throwable = throwable;
         }
 
+        public Throwable getThrowable() {
+            return throwable;
+        }
+
+        public boolean isStacktrace() {
+            return stacktrace;
+        }
+
+        public void setStacktrace(boolean stacktrace) {
+            this.stacktrace = stacktrace;
+        }
     }
 
     public static class ApplicationContextBuilder {

@@ -9,16 +9,16 @@ import org.tkit.quarkus.log.rs.test.app.NoAnnotationRestController;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class MdcServiceTest extends AbstractTest {
+class MdcServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(NoAnnotationRestController.class)
                     .addAsResource("mdc.properties", "application.properties"));
 
     @Test
-    public void mdcTest() {
+    void mdcTest() {
 
         given().header("H1", "Value1").when()
                 .get("/no-anno/test1")

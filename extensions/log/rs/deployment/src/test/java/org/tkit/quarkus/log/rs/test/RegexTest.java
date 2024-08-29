@@ -9,16 +9,16 @@ import org.tkit.quarkus.log.rs.test.app.RegexRestController;
 import io.quarkus.test.QuarkusUnitTest;
 import io.restassured.RestAssured;
 
-public class RegexTest extends AbstractTest {
+class RegexTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(RegexRestController.class)
                     .addAsResource("regex.properties", "application.properties"));
 
     @Test
-    public void loadTest() {
+    void loadTest() {
         RestAssured.get("/regex/load").then()
                 .body(is("OK"));
         assertLogs().assertLines(1)
@@ -27,7 +27,7 @@ public class RegexTest extends AbstractTest {
     }
 
     @Test
-    public void createTest() {
+    void createTest() {
         RestAssured.given().body("OK")
                 .header("Content-Type", "application/json")
                 .post("/regex/create").then()

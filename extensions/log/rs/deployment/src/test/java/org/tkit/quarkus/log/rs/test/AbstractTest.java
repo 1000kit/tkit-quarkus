@@ -12,7 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 import io.quarkus.bootstrap.logging.InitialConfigurator;
 
-public class AbstractTest {
+@SuppressWarnings("java:S2187")
+public abstract class AbstractTest {
 
     private static StringWriter writer = new StringWriter();
     private static WriterHandler handler;

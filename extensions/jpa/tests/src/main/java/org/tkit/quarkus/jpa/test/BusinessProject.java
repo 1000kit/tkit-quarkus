@@ -1,18 +1,20 @@
 package org.tkit.quarkus.jpa.test;
 
+import static org.hibernate.generator.EventType.INSERT;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "BUSINESS_PROJECT")
+@SuppressWarnings("java:S2160")
 public class BusinessProject extends TraceableEntity {
 
-    @Generated(GenerationTime.INSERT)
+    @Generated(event = INSERT)
     @Column(name = "bid", columnDefinition = "SERIAL")
     private Long bid;
 

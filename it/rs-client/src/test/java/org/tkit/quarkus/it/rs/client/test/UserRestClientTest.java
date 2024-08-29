@@ -14,13 +14,13 @@ import io.quarkiverse.mockserver.test.InjectMockServerClient;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-public class UserRestClientTest extends AbstractTest {
+class UserRestClientTest extends AbstractTest {
 
     @InjectMockServerClient
     MockServerClient mockServerClient;
 
     @Test
-    public void testUserRestClient() {
+    void testUserRestClient() {
 
         mockServerClient.when(request().withPath("/users/1").withMethod("GET"))
                 .respond(response().withBody("{\"id\":\"1\"}")
@@ -34,7 +34,7 @@ public class UserRestClientTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateUserRestClient() {
+    void testCreateUserRestClient() {
 
         mockServerClient.when(request().withPath("/users/1").withMethod("POST"))
                 .respond(response().withBody("{\"id\":\"1\"}")
@@ -49,7 +49,7 @@ public class UserRestClientTest extends AbstractTest {
     }
 
     @Test
-    public void testGetAllUserRestClient() {
+    void testGetAllUserRestClient() {
 
         mockServerClient.when(request().withPath("/users/").withMethod("GET"))
                 .respond(response().withBody("{\"id\":\"1\"}")

@@ -7,7 +7,7 @@ public class AbstractService {
 
     @LogService(configKey = "test")
     public void superTestAnnotation() {
-
+        // test implementation
     }
 
 }

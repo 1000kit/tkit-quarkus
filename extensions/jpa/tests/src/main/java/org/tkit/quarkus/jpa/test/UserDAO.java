@@ -11,6 +11,7 @@ import jakarta.persistence.criteria.*;
 import org.tkit.quarkus.jpa.daos.AbstractDAO;
 import org.tkit.quarkus.jpa.daos.Page;
 import org.tkit.quarkus.jpa.daos.PagedQuery;
+import org.tkit.quarkus.jpa.models.AbstractTraceableEntity_;
 
 @ApplicationScoped
 public class UserDAO extends AbstractDAO<User> {
@@ -43,7 +44,7 @@ public class UserDAO extends AbstractDAO<User> {
             }
             if (!predicates.isEmpty()) {
                 cq.where(predicates.toArray(new Predicate[0]));
-                cq.orderBy(cb.asc(root.get(User_.CREATION_DATE)));
+                cq.orderBy(cb.asc(root.get(AbstractTraceableEntity_.CREATION_DATE)));
             }
 
         }

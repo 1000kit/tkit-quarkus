@@ -9,23 +9,23 @@ import org.tkit.quarkus.log.rs.test.app.PropertiesRestController;
 import io.quarkus.test.QuarkusUnitTest;
 import io.restassured.RestAssured;
 
-public class PropertiesTest extends AbstractTest {
+class PropertiesTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(PropertiesRestController.class)
                     .addAsResource("properties.properties", "application.properties"));
 
     @Test
-    public void test1Test() {
+    void test1Test() {
         RestAssured.get("/properties/test1").then()
                 .body(is("OK"));
         assertLogs().assertNoLogs();
     }
 
     @Test
-    public void test2Test() {
+    void test2Test() {
         RestAssured.get("/properties/test2").then()
                 .body(is("OK"));
         assertLogs().assertLines(1)

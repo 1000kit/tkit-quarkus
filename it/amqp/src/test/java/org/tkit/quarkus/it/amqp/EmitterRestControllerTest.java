@@ -7,14 +7,13 @@ import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.response.ValidatableResponse;
 
 @QuarkusTest
-public class EmitterRestControllerTest extends AbstractTest {
+class EmitterRestControllerTest extends AbstractTest {
 
     @Test
-    public void emitter() {
-        ValidatableResponse response = given()
+    void emitter() {
+        given()
                 .get("emitter")
                 .then()
                 .log().all()

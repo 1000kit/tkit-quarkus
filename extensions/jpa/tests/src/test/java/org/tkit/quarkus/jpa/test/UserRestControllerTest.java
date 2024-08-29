@@ -11,10 +11,10 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-public class UserRestControllerTest extends AbstractTest {
+class UserRestControllerTest extends AbstractTest {
 
     @Test
-    public void createUserTest() {
+    void createUserTest() {
         given()
                 .pathParam("id", "1234")
                 .get("users/{id}")
@@ -46,7 +46,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void pageTest() {
+    void pageTest() {
         User user = new User();
         user.setEmail("email");
         user.setName("PageRestName");
@@ -69,12 +69,12 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void pageHeaderTest() {
+    void pageHeaderTest() {
         User user = new User();
         user.setEmail("email");
         user.setName("PageRestName");
 
-        User tmp = given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(user)
                 .post("users")
@@ -92,12 +92,12 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void pageSearchTest() {
+    void pageSearchTest() {
         User user = new User();
         user.setEmail("email100");
         user.setName("PageRestName100");
 
-        User tmp = given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(user)
                 .post("users")

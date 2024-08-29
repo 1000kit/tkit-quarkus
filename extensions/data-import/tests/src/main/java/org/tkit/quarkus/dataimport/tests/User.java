@@ -9,6 +9,7 @@ import org.tkit.quarkus.jpa.models.TraceableEntity;
 @Entity
 @ApplicationScoped
 @Table(name = "USER_TABLE")
+@SuppressWarnings("java:S2160")
 public class User extends TraceableEntity {
 
     String name;

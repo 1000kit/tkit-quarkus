@@ -10,9 +10,11 @@ import jakarta.ws.rs.core.Response;
 
 /**
  * The REST exception. The DTO for this class {@link org.tkit.quarkus.rs.models.RestExceptionDTO}
- * THe exception mapper {@link org.tkit.quarkus.rs.mappers.DefaultExceptionMapper}
+ * The exception mapper {@link org.tkit.quarkus.rs.mappers.DefaultExceptionMapper}
+ *
+ * @deprecated will be removed in next major release.
  */
-@Deprecated
+@Deprecated(since = "1.0.0")
 public class RestException extends RuntimeException {
 
     /**

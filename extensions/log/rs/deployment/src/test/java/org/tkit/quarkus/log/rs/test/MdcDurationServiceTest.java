@@ -13,7 +13,7 @@ class MdcDurationServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(NoAnnotationRestController.class)
                     .addAsResource("mdc-duration.properties", "application.properties"));
 

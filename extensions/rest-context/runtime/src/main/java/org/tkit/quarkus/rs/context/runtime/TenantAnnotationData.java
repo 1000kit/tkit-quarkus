@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@SuppressWarnings("java:S1104")
 public class TenantAnnotationData {
 
     public Set<String> classes = new HashSet<>();

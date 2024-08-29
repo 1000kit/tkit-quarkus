@@ -8,11 +8,11 @@ import org.tkit.quarkus.log.cdi.test.app.DataConfigKeyService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class DataConfigKeyServiceTest extends AbstractTest {
+class DataConfigKeyServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(DataConfigKeyService.class)
                     .addAsResource("config-key.properties", "application.properties"));
 
@@ -20,7 +20,7 @@ public class DataConfigKeyServiceTest extends AbstractTest {
     DataConfigKeyService service;
 
     @Test
-    public void noAnnotationTest() {
+    void noAnnotationTest() {
         service.noAnnotationMethod("no-annotation");
         assertLogs()
                 .assertNoEmpty()
@@ -29,7 +29,7 @@ public class DataConfigKeyServiceTest extends AbstractTest {
     }
 
     @Test
-    public void annotationTest() {
+    void annotationTest() {
         service.annotationMethod("annotation");
         assertLogs().assertNoLogs();
     }

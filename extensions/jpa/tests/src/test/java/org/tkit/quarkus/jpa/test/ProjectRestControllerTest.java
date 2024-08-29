@@ -11,10 +11,10 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-public class ProjectRestControllerTest extends AbstractTest {
+class ProjectRestControllerTest extends AbstractTest {
 
     @Test
-    public void createProjectTest() {
+    void createProjectTest() {
         given()
                 .pathParam("id", "1234")
                 .get("project/{id}")
@@ -45,7 +45,7 @@ public class ProjectRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void pageProjectTest() {
+    void pageProjectTest() {
         Project p = new Project();
         p.setName("RestName");
 

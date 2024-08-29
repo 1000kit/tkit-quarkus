@@ -6,6 +6,8 @@ import java.util.List;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.dataimport.DataImport;
 import org.tkit.quarkus.dataimport.DataImportConfig;
 import org.tkit.quarkus.dataimport.DataImportService;
@@ -16,11 +18,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @DataImport("key1")
 public class ParameterTestImport implements DataImportService {
 
-    @Inject
-    ParameterTestEntityDAO dao;
+    private static final Logger log = LoggerFactory.getLogger(ParameterTestImport.class);
 
     @Inject
-    UserDAO userDAO;
+    ParameterTestEntityDAO dao;
 
     @Inject
     ObjectMapper mapper;
@@ -28,10 +29,10 @@ public class ParameterTestImport implements DataImportService {
     @Override
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void importData(DataImportConfig config) {
-        System.out.println("File: " + config.getFile());
-        System.out.println("MD5: " + config.getMD5());
-        System.out.println("Metadata: " + config.getMetadata());
-        System.out.println("Data: \n" + new String(config.getData(), StandardCharsets.UTF_8));
+        log.info("File: {}", config.getFile());
+        log.info("MD5: {}", config.getMD5());
+        log.info("Metadata: {}", config.getMetadata());
+        log.info("Data: \n {}", new String(config.getData(), StandardCharsets.UTF_8));
 
         try {
             dao.deleteAll();

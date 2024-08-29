@@ -8,6 +8,7 @@ import io.restassured.RestAssured;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
 
+@SuppressWarnings("java:S2187")
 public abstract class AbstractTest {
 
     static {

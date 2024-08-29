@@ -12,11 +12,11 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-public class UserRestControllerTest extends AbstractTest {
+class UserRestControllerTest extends AbstractTest {
 
     @Test
     @WithDBData(value = { "data/test.xml" })
-    public void importDataTest() throws InterruptedException {
+    void importDataTest() {
 
         given()
                 .pathParam("id", "GUID_3")
@@ -27,7 +27,7 @@ public class UserRestControllerTest extends AbstractTest {
 
     @Test
     @WithDBData(value = { "data/remote.xml" })
-    public void importRemoteXmlDataTest() throws InterruptedException {
+    void importRemoteXmlDataTest() {
         given()
                 .pathParam("id", "GUID_1")
                 .get("users/{id}")
@@ -36,7 +36,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void createUserTest() {
+    void createUserTest() {
         given()
                 .pathParam("id", "1234")
                 .get("users/{id}")

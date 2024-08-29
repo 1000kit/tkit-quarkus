@@ -8,11 +8,11 @@ import org.tkit.quarkus.log.cdi.test.app.DataPropertiesService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class DataPropertiesServiceTest extends AbstractTest {
+class DataPropertiesServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(DataPropertiesService.class)
                     .addAsResource("data-properties.properties", "application.properties"));
 
@@ -20,13 +20,13 @@ public class DataPropertiesServiceTest extends AbstractTest {
     DataPropertiesService service;
 
     @Test
-    public void noAnnotationTest() {
+    void noAnnotationTest() {
         service.noAnnotationMethod("no-annotation");
         assertLogs().assertNoLogs();
     }
 
     @Test
-    public void annotationTest() {
+    void annotationTest() {
         service.annotationMethod("annotation");
         assertLogs().assertNoLogs();
     }

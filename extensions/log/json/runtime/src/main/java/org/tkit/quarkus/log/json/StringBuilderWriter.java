@@ -68,10 +68,12 @@ final class StringBuilderWriter extends Writer {
 
     @Override
     public void flush() {
+        // empty implementation
     }
 
     @Override
     public void close() {
+        // empty implementation
     }
 
     @Override

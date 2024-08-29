@@ -25,9 +25,9 @@ public class UserRestController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         UserDTO dto = new UserDTO();
-        dto.id = user.getId();
-        dto.username = user.username;
-        dto.email = user.email;
+        dto.setId(user.getId());
+        dto.setUsername(user.username);
+        dto.setEmail(user.email);
         return Response.ok(dto).build();
     }
 
@@ -35,8 +35,8 @@ public class UserRestController {
     @Transactional
     public Response create(UserDTO dto) {
         User user = new User();
-        user.username = dto.username;
-        user.email = dto.email;
+        user.username = dto.getUsername();
+        user.email = dto.getEmail();
         dao.persist(user);
 
         return Response.ok(user).build();

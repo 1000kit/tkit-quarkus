@@ -138,8 +138,11 @@ public class QueryCriteriaUtil {
      * @param values the values for the IN clause
      * @param parameters the parameters to be added from the IN clause
      * @return the query string with the IN clause
+     *
+     * @deprecated will be removed in next major version
      */
-    @Deprecated
+    @Deprecated(since = "1.0.0")
+    @SuppressWarnings("java:S1133")
     public static String inClause(String attribute, String attributeName, Collection<?> values,
             Map<String, Object> parameters) {
         StringBuilder sb = new StringBuilder();
@@ -169,8 +172,11 @@ public class QueryCriteriaUtil {
      * @param values the values for the NOT IN clause
      * @param parameters the parameters to be added from the NOT IN clause
      * @return the query string with the NOT IN clause
+     *
+     * @deprecated will be removed in next major version
      */
-    @Deprecated
+    @Deprecated(since = "1.0.0")
+    @SuppressWarnings("java:S1133")
     public static String notInClause(String attribute, String attributeName, Collection<?> values,
             Map<String, Object> parameters) {
         StringBuilder sb = new StringBuilder();

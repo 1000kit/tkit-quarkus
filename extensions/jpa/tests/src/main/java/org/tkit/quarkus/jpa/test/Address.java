@@ -7,6 +7,7 @@ import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "ADDRESS")
+@SuppressWarnings("java:S2160")
 public class Address extends TraceableEntity {
 
     private String city;

@@ -2,6 +2,10 @@ package org.tkit.quarkus.log.json.util;
 
 public class ClassNameAbbreviationUtil {
 
+    private ClassNameAbbreviationUtil() {
+        // empty constructor
+    }
+
     /**
      * Creates abbreviation from class name in the for of <code>p.p.p.p.ClassName</code> where <code>p</code> stands for first
      * letter of the corresponding package.
@@ -13,13 +17,10 @@ public class ClassNameAbbreviationUtil {
         StringBuilder sb = new StringBuilder();
         int fromIndex = 0;
         int dollarIndex = className.indexOf("$", fromIndex);
-        String suffix = null;
         if (dollarIndex != -1) {
             className = className.substring(0, dollarIndex);
-            suffix = className.substring(dollarIndex);
         }
 
-        //TODO make this more efficient
         while (true) {
             int index = className.indexOf(".", fromIndex);
             if (index == -1) {

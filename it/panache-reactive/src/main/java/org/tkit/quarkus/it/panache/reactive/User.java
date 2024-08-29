@@ -11,6 +11,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 @Entity
 @RegisterForReflection
 @Table(name = "T_USER")
+@SuppressWarnings("java:S2160")
 public class User extends TraceableEntity {
 
     @Column(name = "username")

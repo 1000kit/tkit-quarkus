@@ -15,10 +15,10 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 @GenerateKeycloakClient(clientName = "testClient", scopes = { "ocx-user:read", "ocx-user:write" })
 @TestHTTPEndpoint(UserRestController.class)
-public class UserRestControllerTest {
+class UserRestControllerTest {
 
     @Test
-    public void testUserRestClient() {
+    void testUserRestClient() {
         given().header("Content-Type", "application/json")
                 .auth().oauth2(getKeycloakClientToken("testClient"))
                 .get("/1")
@@ -28,7 +28,7 @@ public class UserRestControllerTest {
 
     @Test
     @GenerateKeycloakClient(clientName = "methodLevelClient", scopes = { "ocx-user:read", "ocx-user:write" })
-    public void testCreateUserRestClient() {
+    void testCreateUserRestClient() {
         given().header("Content-Type", "application/json")
                 .body("{\"id\":\"2\"}")
                 .auth().oauth2(getKeycloakClientToken("methodLevelClient"))
@@ -38,7 +38,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void testUserRestClient2() {
+    void testUserRestClient2() {
         given().header("Content-Type", "application/json")
                 .auth().oauth2(getKeycloakClientToken("testClient"))
                 .get("/1")

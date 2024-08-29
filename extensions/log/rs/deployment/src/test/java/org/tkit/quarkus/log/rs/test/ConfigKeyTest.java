@@ -9,23 +9,23 @@ import org.tkit.quarkus.log.rs.test.app.ConfigKeyRestController;
 import io.quarkus.test.QuarkusUnitTest;
 import io.restassured.RestAssured;
 
-public class ConfigKeyTest extends AbstractTest {
+class ConfigKeyTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(ConfigKeyRestController.class)
                     .addAsResource("configkey.properties", "application.properties"));
 
     @Test
-    public void test1Test() {
+    void test1Test() {
         RestAssured.get("/configkey/test1").then()
                 .body(is("OK"));
         assertLogs().assertNoLogs();
     }
 
     @Test
-    public void test2Test() {
+    void test2Test() {
         RestAssured.get("/configkey/test2").then()
                 .body(is("OK"));
         assertLogs().assertLines(1)
@@ -34,7 +34,7 @@ public class ConfigKeyTest extends AbstractTest {
     }
 
     @Test
-    public void test3Test() {
+    void test3Test() {
         RestAssured.get("/configkey/test3").then()
                 .body(is("OK"));
         assertLogs().assertLines(1)

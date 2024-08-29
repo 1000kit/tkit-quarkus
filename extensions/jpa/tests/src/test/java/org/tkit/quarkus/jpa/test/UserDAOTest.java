@@ -1,9 +1,10 @@
 package org.tkit.quarkus.jpa.test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import jakarta.inject.Inject;
@@ -26,7 +27,7 @@ import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 @DisplayName("User DAO tests")
-public class UserDAOTest extends AbstractTest {
+class UserDAOTest extends AbstractTest {
 
     private static final Logger log = LoggerFactory.getLogger(UserDAOTest.class);
 
@@ -37,7 +38,7 @@ public class UserDAOTest extends AbstractTest {
     AddressDAO addressDAO;
 
     @Test
-    public void updateUserTest() {
+    void updateUserTest() {
         User c = new User();
         c.setEmail("Rest@Rest.Rest");
         c.setName("RestName");
@@ -54,7 +55,7 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void user5000PagingTest() {
+    void user5000PagingTest() {
         // create 5000 users
         userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(5000));
         List<String> userIds = new ArrayList<>(5000);
@@ -68,7 +69,7 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void userDefaultSortingPagingTest() {
+    void userDefaultSortingPagingTest() {
         // create 150 users
         userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(150));
         PagedQuery<User> query = userDAO.createPageQuery(Page.of(0, 10));
@@ -81,7 +82,7 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void userSortByNamePagingTest() {
+    void userSortByNamePagingTest() {
         // create 150 users
         userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(150));
         PagedQuery<User> query = userDAO.pageUsersAndSortByName(Page.of(0, 10));
@@ -94,65 +95,72 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void userPagingTest() {
-        // create 150 users
-        userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(150));
+    void userPagingTest() {
+        assertDoesNotThrow(() -> {
+            // create 150 users
+            userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(150));
 
-        PagedQuery<User> query = userDAO.createPageQuery(Page.of(0, 10));
+            PagedQuery<User> query = userDAO.createPageQuery(Page.of(0, 10));
 
-        PageResult<User> page = query.getPageResult();
-        log.info("{}", page);
-        log.info("{}", page.getStream().map(TraceableEntity::getId).collect(Collectors.toList()));
+            PageResult<User> page = query.getPageResult();
+            log.info("{}", page);
+            log.info("{}", page.getStream().map(TraceableEntity::getId).toList());
 
-        query.next().getPageResult();
-        page = query.getPageResult();
-        log.info("{}", page);
-        log.info("{}", page.getStream().map(TraceableEntity::getId).collect(Collectors.toList()));
+            query.next().getPageResult();
+            page = query.getPageResult();
+            log.info("{}", page);
+            log.info("{}", page.getStream().map(TraceableEntity::getId).toList());
+        });
     }
 
     @Test
-    public void userPagingCriteriaTest() {
-        // create 100 users
-        Address address = new Address();
-        address.setCity("Bratislava");
-        address = addressDAO.create(address);
+    void userPagingCriteriaTest() {
 
-        userDAO.create(UserTestBuilder.createIndexUsers(100, address));
+        assertDoesNotThrow(() -> {
+            // create 100 users
+            Address address = new Address();
+            address.setCity("Bratislava");
+            address = addressDAO.create(address);
 
-        UserSearchCriteria criteria = new UserSearchCriteria();
-        criteria.setName("Name_1");
-        criteria.setEmail("Email_");
-        criteria.setCity("Bratislava");
-        PagedQuery<User> pages = userDAO.pageUsers(criteria, Page.of(0, 10));
+            userDAO.create(UserTestBuilder.createIndexUsers(100, address));
 
-        PageResult<User> page = pages.getPageResult();
-        log.info("{}", page);
-        log.info("{}", page.getStream().map(User::getName).collect(Collectors.toList()));
+            UserSearchCriteria criteria = new UserSearchCriteria();
+            criteria.setName("Name_1");
+            criteria.setEmail("Email_");
+            criteria.setCity("Bratislava");
+            PagedQuery<User> pages = userDAO.pageUsers(criteria, Page.of(0, 10));
 
-        page = pages.next().getPageResult();
-        log.info("{}", page);
-        log.info("{}", page.getStream().map(User::getName).collect(Collectors.toList()));
+            PageResult<User> page = pages.getPageResult();
+            log.info("{}", page);
+            log.info("{}", page.getStream().map(User::getName).toList());
 
-        page = pages.next().getPageResult();
-        log.info("{}", page);
-        log.info("{}", page.getStream().map(User::getName).collect(Collectors.toList()));
+            page = pages.next().getPageResult();
+            log.info("{}", page);
+            log.info("{}", page.getStream().map(User::getName).toList());
+
+            page = pages.next().getPageResult();
+            log.info("{}", page);
+            log.info("{}", page.getStream().map(User::getName).toList());
+        });
     }
 
     @Test
-    public void pageCountSizeTest() {
-        // create 150 users
-        userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(10));
+    void pageCountSizeTest() {
+        assertDoesNotThrow(() -> {
+            // create 150 users
+            userDAO.create(Stream.generate(UserTestBuilder::createUser).limit(10));
 
-        PagedQuery<User> query = userDAO.createPageQuery(Page.of(100, 100));
+            PagedQuery<User> query = userDAO.createPageQuery(Page.of(100, 100));
 
-        PageResult<User> page = query.getPageResult();
-        log.info("{}", page);
-        log.info("{}", page.getStream().map(TraceableEntity::getId).collect(Collectors.toList()));
+            PageResult<User> page = query.getPageResult();
+            log.info("{}", page);
+            log.info("{}", page.getStream().map(TraceableEntity::getId).toList());
+        });
     }
 
     @Test
     @Transactional
-    public void deleteAllUsersTest() {
+    void deleteAllUsersTest() {
         User user = UserTestBuilder.createUser();
         userDAO.create(user);
         User foundUser1 = userDAO.findById(user.getId());
@@ -163,7 +171,7 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void deleteByIdTest() {
+    void deleteByIdTest() {
         User user = UserTestBuilder.createUser();
         String userIdForDeleting = "123456789";
         user.setId(userIdForDeleting);
@@ -176,7 +184,7 @@ public class UserDAOTest extends AbstractTest {
 
     @Test
     @Transactional
-    public void deleteEntityTest() {
+    void deleteEntityTest() {
         User user = UserTestBuilder.createUser();
         userDAO.create(user);
         User foundUser1 = userDAO.findById(user.getId());
@@ -187,7 +195,7 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
-    public void updateEntitiesTest() {
+    void updateEntitiesTest() {
         User user1 = UserTestBuilder.createUser();
         User user2 = UserTestBuilder.createUser();
         userDAO.create(user1);

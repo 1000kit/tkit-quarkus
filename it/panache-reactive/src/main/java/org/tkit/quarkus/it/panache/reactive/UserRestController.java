@@ -40,16 +40,16 @@ public class UserRestController {
 
     private static UserDTO dto(User e) {
         UserDTO dto = new UserDTO();
-        dto.id = e.getId();
-        dto.username = e.username;
-        dto.email = e.email;
+        dto.setId(e.getId());
+        dto.setUsername(e.username);
+        dto.setEmail(e.email);
         return dto;
     }
 
     private static User map(UserDTO dto) {
         User user = new User();
-        user.username = dto.username;
-        user.email = dto.email;
+        user.username = dto.getUsername();
+        user.email = dto.getEmail();
         return user;
     }
 }

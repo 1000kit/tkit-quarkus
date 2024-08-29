@@ -13,8 +13,11 @@ import org.tkit.quarkus.rs.exceptions.RestException;
 
 /**
  * The resource manager for messages.
+ *
+ * @deprecated will be removed in next major release.
  */
-@Deprecated
+@Deprecated(since = "1.0.0")
+@SuppressWarnings("java:S1133")
 public class ResourceManager {
 
     private static final Logger log = LoggerFactory.getLogger(ResourceManager.class);

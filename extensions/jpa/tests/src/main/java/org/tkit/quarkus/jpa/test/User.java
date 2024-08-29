@@ -6,6 +6,7 @@ import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "TEST_USER")
+@SuppressWarnings("java:S2160")
 public class User extends TraceableEntity {
 
     private String name;

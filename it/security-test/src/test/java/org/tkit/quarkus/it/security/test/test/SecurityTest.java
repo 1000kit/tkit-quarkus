@@ -8,7 +8,8 @@ import org.tkit.quarkus.security.test.SecurityTestConfig;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-public class SecurityTest extends AbstractSecurityTest {
+class SecurityTest extends AbstractSecurityTest {
+    
     @Override
     public SecurityTestConfig getConfig() {
         SecurityTestConfig config = new SecurityTestConfig();

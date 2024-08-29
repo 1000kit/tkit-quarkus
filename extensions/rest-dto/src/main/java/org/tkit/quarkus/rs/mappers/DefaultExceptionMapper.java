@@ -23,10 +23,13 @@ import org.tkit.quarkus.rs.resources.ResourceManager;
 
 /**
  * The default exception mapper with priority {@code PRIORITY}.
+ *
+ * @deprecated will be removed in next major release
  */
-@Deprecated
+@Deprecated(since = "1.0.0")
 @Provider
 @Priority(DefaultExceptionMapper.PRIORITY)
+@SuppressWarnings("java:S1133")
 public class DefaultExceptionMapper implements ExceptionMapper<Exception> {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultExceptionMapper.class);

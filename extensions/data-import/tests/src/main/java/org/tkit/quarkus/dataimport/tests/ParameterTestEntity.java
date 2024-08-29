@@ -7,6 +7,7 @@ import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "param_table")
+@SuppressWarnings("java:S2160")
 public class ParameterTestEntity extends TraceableEntity {
 
     String name;

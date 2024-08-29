@@ -22,9 +22,12 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
  * The persistent entity with string GUID.
+ *
+ * @deprecated will be remove in nex release
  */
-@Deprecated
+@Deprecated(since = "1.0.0")
 @RegisterForReflection
+@SuppressWarnings("java:S1133")
 public class TraceableDTO extends AbstractTraceableDTO<String> {
 
     /**

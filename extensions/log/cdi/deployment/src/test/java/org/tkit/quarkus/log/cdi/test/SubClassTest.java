@@ -9,11 +9,11 @@ import org.tkit.quarkus.log.cdi.test.app.SubClassService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class SubClassTest extends AbstractTest {
+class SubClassTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(AbstractService.class, SubClassService.class)
                     .addAsResource("default.properties", "application.properties"));
 
@@ -21,20 +21,20 @@ public class SubClassTest extends AbstractTest {
     SubClassService service;
 
     @Test
-    public void superTestAnnotationTest() {
+    void superTestAnnotationTest() {
         service.superTestAnnotation();
         assertLogs().assertLines(1)
                 .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.SubClassService] (main) superTestAnnotation():void");
     }
 
     @Test
-    public void noAnnotationTest() {
+    void noAnnotationTest() {
         service.testNoAnnotation();
         assertLogs().assertNoLogs();
     }
 
     @Test
-    public void annotationTest() {
+    void annotationTest() {
         service.testAnnotation();
         assertLogs().assertNoLogs();
     }

@@ -5,9 +5,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -25,7 +22,6 @@ import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 import io.quarkus.arc.deployment.*;
 import io.quarkus.arc.processor.AnnotationStore;
-import io.quarkus.arc.processor.AnnotationsTransformer;
 import io.quarkus.arc.processor.BeanInfo;
 import io.quarkus.arc.processor.BuildExtension;
 import io.quarkus.deployment.annotations.*;
@@ -160,78 +156,42 @@ public class LogProcessor {
      * Autodiscovery
      */
     @BuildStep
-    public AnnotationsTransformerBuildItem interceptorBinding(LogBuildTimeConfig buildConfig) {
+    public void interceptorBinding(LogBuildTimeConfig buildConfig, BuildProducer<AnnotationsTransformerBuildItem> transformer) {
         if (!buildConfig.autoDiscover().enabled()) {
-            return null;
+            return;
         }
 
-        final Pattern ignorePattern = buildConfig.autoDiscover().ignorePattern().map(Pattern::compile).orElse(null);
+        var input = buildConfig.autoDiscover().ignorePattern();
+        Pattern tmp = null;
+        if (input.isPresent() && !input.get().isBlank()) {
+            tmp = input.map(Pattern::compile).orElse(null);
+        }
+        final Pattern ignorePattern = tmp;
 
         Set<DotName> annotation = buildConfig.autoDiscover().annoBeans().stream()
                 .map(DotName::createSimple).collect(Collectors.toSet());
 
-        return new AnnotationsTransformerBuildItem(new AnnotationsTransformer() {
+        transformer.produce(new AnnotationsTransformerBuildItem(AnnotationTransformation.forClasses()
+                .whenClass(ci -> ci.hasAnnotation(LOG_SERVICE)
+                        && !LOG_BUILDER_SERVICE.equals(ci.name().toString())
+                        && buildConfig.autoDiscover().packages().stream().anyMatch(x -> ci.name().toString().startsWith(x))
+                        && annotation.stream().anyMatch(ci::hasAnnotation)
+                        && !matchesIgnorePattern(buildConfig, ignorePattern, ci.name().toString()))
+                .transform(context -> context.add(LogService.class))));
+    }
 
-            @Override
-            public boolean appliesTo(AnnotationTarget.Kind kind) {
-                return kind == AnnotationTarget.Kind.CLASS;
-            }
-
-            public void transform(TransformationContext context) {
-                ClassInfo target = context.getTarget().asClass();
-
-                // skip if annotation @LogService exists
-                AnnotationInstance classLogService = target.declaredAnnotation(LOG_SERVICE);
-                if (classLogService != null) {
-                    return;
-                }
-
-                String name = target.name().toString();
-
-                // skip log param value
-                if (LOG_BUILDER_SERVICE.equals(name)) {
-                    return;
-                }
-
-                // skip wrong package
-                Optional<String> add = buildConfig.autoDiscover().packages().stream().filter(name::startsWith).findFirst();
-                if (add.isEmpty()) {
-                    return;
-                }
-
-                // skip for none Bean class
-                Map<DotName, List<AnnotationInstance>> tmp = target.annotationsMap();
-                Optional<DotName> dot = annotation.stream().filter(tmp::containsKey).findFirst();
-                if (dot.isEmpty()) {
-                    return;
-                }
-
-                // ignore match to pattern
-                if (matchesIgnorePattern(name)) {
-                    return;
-                }
-
-                context.transform().add(LogService.class).done();
-            }
-
-            private boolean matchesIgnorePattern(String name) {
-                if (buildConfig.autoDiscover().ignorePattern().isEmpty()
-                        || buildConfig.autoDiscover().ignorePattern().get().isBlank()) {
-                    return false;
-                }
-                if (ignorePattern == null) {
-                    return false;
-                }
-                boolean matches = ignorePattern.matcher(name).matches();
-                if (matches) {
-                    log.info(
-                            "Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.cdi.auto-discovery.ignore.pattern')",
-                            name,
-                            buildConfig.autoDiscover().ignorePattern());
-                }
-                return matches;
-            }
-        });
+    private static boolean matchesIgnorePattern(LogBuildTimeConfig buildConfig, Pattern ignorePattern, String name) {
+        if (ignorePattern == null) {
+            return false;
+        }
+        boolean matches = ignorePattern.matcher(name).matches();
+        if (matches) {
+            log.info(
+                    "Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.cdi.auto-discovery.ignore.pattern')",
+                    name,
+                    buildConfig.autoDiscover().ignorePattern());
+        }
+        return matches;
     }
 
     private static LogService createLogService(AnnotationInstance annotationInstance) {

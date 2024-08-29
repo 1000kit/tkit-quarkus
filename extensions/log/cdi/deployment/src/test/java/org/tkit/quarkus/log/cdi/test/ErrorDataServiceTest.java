@@ -16,11 +16,11 @@ import org.tkit.quarkus.log.cdi.test.app.ErrorWrapperService;
 import io.quarkus.test.QuarkusUnitTest;
 
 @EnabledForJreRange(min = JRE.JAVA_21)
-public class ErrorDataServiceTest extends AbstractTest {
+class ErrorDataServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(ErrorDataService.class, ErrorWrapperService.class, DummyLogFriendlyException.class)
                     .addAsResource("default.properties", "application.properties"));
 
@@ -31,7 +31,7 @@ public class ErrorDataServiceTest extends AbstractTest {
     ErrorWrapperService wrapper;
 
     @Test
-    public void error1Test() {
+    void error1Test() {
         Assertions.assertThrows(RuntimeException.class, () -> service.error1("Error"));
         assertLogs()
                 .assertLines(90)
@@ -40,7 +40,7 @@ public class ErrorDataServiceTest extends AbstractTest {
     }
 
     @Test
-    public void error2Test() {
+    void error2Test() {
         Assertions.assertThrows(RuntimeException.class, () -> service.error2());
         assertLogs().assertContains(0,
                 DUMMY_ERROR_NUMBER
@@ -48,7 +48,7 @@ public class ErrorDataServiceTest extends AbstractTest {
     }
 
     @Test
-    public void noStacktraceTest() {
+    void noStacktraceTest() {
         Assertions.assertThrows(RuntimeException.class, () -> service.noStacktrace());
         assertLogs().assertLines(1)
                 .assertContains(0,
@@ -56,7 +56,7 @@ public class ErrorDataServiceTest extends AbstractTest {
     }
 
     @Test
-    public void wrapperTest() {
+    void wrapperTest() {
         Assertions.assertThrows(RuntimeException.class, () -> wrapper.wrapperMethod("WrapperError"));
         assertLogs().assertLines(104)
                 .assertContains(0,

@@ -16,7 +16,7 @@ import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 @DisplayName("User DAO tests")
-public class UserDAOLikeTest extends AbstractTest {
+class UserDAOLikeTest extends AbstractTest {
 
     private static final Logger log = LoggerFactory.getLogger(UserDAOLikeTest.class);
 
@@ -38,7 +38,7 @@ public class UserDAOLikeTest extends AbstractTest {
     }
 
     @Test
-    public void searchUserTest() {
+    void searchUserTest() {
         User c = new User();
         c.setEmail("test@test.test");
         c.setName("rest1");

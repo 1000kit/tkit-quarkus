@@ -25,10 +25,10 @@ public class UserRestController extends TestAbstract implements TestInterface {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         UserDTO dto = new UserDTO();
-        dto.modificationCount = user.getModificationCount();
-        dto.id = user.getId();
-        dto.username = user.username;
-        dto.email = user.email;
+        dto.setModificationCount(user.getModificationCount());
+        dto.setId(user.getId());
+        dto.setUsername(user.username);
+        dto.setEmail(user.email);
         return Response.ok(dto).build();
     }
 
@@ -36,8 +36,8 @@ public class UserRestController extends TestAbstract implements TestInterface {
     @LogRestService(configKey = "create")
     public Response create(UserDTO dto) {
         User user = new User();
-        user.username = dto.username;
-        user.email = dto.email;
+        user.username = dto.getUsername();
+        user.email = dto.getEmail();
         dao.create(user);
 
         return Response.ok(user).build();
@@ -51,19 +51,19 @@ public class UserRestController extends TestAbstract implements TestInterface {
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        user.setModificationCount(dto.modificationCount);
-        user.username = dto.username;
-        user.email = dto.email;
+        user.setModificationCount(dto.getModificationCount());
+        user.username = dto.getUsername();
+        user.email = dto.getEmail();
         try {
             user = dao.update(user);
         } catch (OptimisticLockException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         UserDTO r = new UserDTO();
-        r.modificationCount = user.getModificationCount();
-        r.id = user.getId();
-        r.username = user.username;
-        r.email = user.email;
+        r.setModificationCount(user.getModificationCount());
+        r.setId(user.getId());
+        r.setUsername(user.username);
+        r.setEmail(user.email);
 
         return Response.ok(r).build();
     }

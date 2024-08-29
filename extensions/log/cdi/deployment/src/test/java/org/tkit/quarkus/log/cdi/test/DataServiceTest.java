@@ -8,11 +8,11 @@ import org.tkit.quarkus.log.cdi.test.app.DataService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class DataServiceTest extends AbstractTest {
+class DataServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
-            .withApplicationRoot((jar) -> jar
+            .withApplicationRoot(jar -> jar
                     .addClasses(DataService.class)
                     .addAsResource("default.properties", "application.properties"));
 
@@ -20,35 +20,35 @@ public class DataServiceTest extends AbstractTest {
     DataService service;
 
     @Test
-    public void data1Test() {
+    void data1Test() {
         service.getData1("input1");
         assertLogs().assertLines(1)
                 .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) getData1(input1):data1 input1");
     }
 
     @Test
-    public void excludeParamTest() {
+    void excludeParamTest() {
         service.excludeParam("input1");
         assertLogs().assertLines(1)
                 .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) excludeParam(input):data1 input1");
     }
 
     @Test
-    public void maskParamTest() {
+    void maskParamTest() {
         service.maskParam("input1");
         assertLogs().assertLines(1)
                 .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) maskParam(*****):data1 input1");
     }
 
     @Test
-    public void excludeReturnTest() {
+    void excludeReturnTest() {
         service.excludeReturn("input1");
         assertLogs().assertLines(1)
                 .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) excludeReturn(input1): [");
     }
 
     @Test
-    public void maskReturnTest() {
+    void maskReturnTest() {
         service.maskReturn("input1");
         assertLogs().assertLines(1)
                 .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) maskReturn(input1):###");

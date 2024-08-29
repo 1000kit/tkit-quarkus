@@ -14,10 +14,10 @@ import io.restassured.http.ContentType;
 
 @QuarkusTest
 @TestHTTPEndpoint(UserRestController.class)
-public class UserRestControllerTest extends AbstractTest {
+class UserRestControllerTest extends AbstractTest {
 
     @Test
-    public void ping() {
+    void ping() {
         given()
                 .get("ping")
                 .then()
@@ -25,7 +25,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void test() {
+    void test() {
         given()
                 .get("test")
                 .then()
@@ -33,7 +33,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void notfound() {
+    void notFound() {
         given()
                 .get("not-found")
                 .then()
@@ -42,7 +42,7 @@ public class UserRestControllerTest extends AbstractTest {
 
     @Test
     @WithDBData(value = { "data/test.xml" })
-    public void importDataTest() throws InterruptedException {
+    void importDataTest() {
         given()
                 .pathParam("id", "GUID_3")
                 .get("{id}")
@@ -52,7 +52,7 @@ public class UserRestControllerTest extends AbstractTest {
 
     @Test
     @WithDBData(value = { "data/remote.xml" })
-    public void importRemoteXmlDataTest() throws InterruptedException {
+    void importRemoteXmlDataTest() {
         given()
                 .pathParam("id", "GUID_1")
                 .get("{id}")
@@ -62,7 +62,7 @@ public class UserRestControllerTest extends AbstractTest {
 
     @Test
     @WithDBData(value = { "data/update.xml" })
-    public void updateUserTest() {
+    void updateUserTest() {
         var dto = given()
                 .get("U_GUID_3")
                 .then()
@@ -70,32 +70,32 @@ public class UserRestControllerTest extends AbstractTest {
                 .extract().as(UserDTO.class);
 
         var update = new UserDTO();
-        update.username = dto.username;
-        update.email = dto.email + "+update";
-        update.modificationCount = dto.modificationCount;
+        update.setUsername(dto.getUsername());
+        update.setEmail(dto.getEmail() + "+update");
+        update.setModificationCount(dto.getModificationCount());
 
         given()
                 .body(update)
                 .contentType(ContentType.JSON)
-                .put(dto.id)
+                .put(dto.getId())
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .extract().as(UserDTO.class);
 
         dto = given()
-                .get(dto.id)
+                .get(dto.getId())
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .extract().as(UserDTO.class);
 
-        update.username = dto.username;
-        update.email = dto.email + "+update";
-        update.modificationCount = 1;
+        update.setUsername(dto.getUsername());
+        update.setEmail(dto.getEmail() + "+update");
+        update.setModificationCount(1);
 
         var msg = given()
                 .body(update)
                 .contentType(ContentType.JSON)
-                .put(dto.id)
+                .put(dto.getId())
                 .then()
                 .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
                 .extract().asString();
@@ -107,7 +107,7 @@ public class UserRestControllerTest extends AbstractTest {
     }
 
     @Test
-    public void createUserTest() {
+    void createUserTest() {
         given()
                 .pathParam("id", "1234")
                 .get("{id}")

@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-public class DataImportRestTest extends AbstractTest {
+class DataImportRestTest extends AbstractTest {
 
     @Test
-    public void testHealthCheck() {
+    void testHealthCheck() {
         ParameterTestEntity param = given()
                 .when()
                 .contentType(MediaType.APPLICATION_JSON)

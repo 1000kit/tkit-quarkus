@@ -17,4 +17,8 @@ public final class TestConfigUtil {
     static public TestConfig config() {
         return TEST_CONFIG;
     }
+
+    private TestConfigUtil() {
+        // empty constructor
+    }
 }

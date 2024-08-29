@@ -9,10 +9,10 @@ public class SubClassService extends AbstractService {
 
     @LogService(log = false)
     public void testAnnotation() {
-
+        // empty implementation
     }
 
     public void testNoAnnotation() {
-
+        // empty implementation
     }
 }
