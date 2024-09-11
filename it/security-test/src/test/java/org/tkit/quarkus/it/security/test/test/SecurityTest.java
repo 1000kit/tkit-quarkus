@@ -9,7 +9,7 @@ import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 class SecurityTest extends AbstractSecurityTest {
-    
+
     @Override
     public SecurityTestConfig getConfig() {
         SecurityTestConfig config = new SecurityTestConfig();

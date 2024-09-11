@@ -1,5 +1,7 @@
 package org.tkit.quarkus.log.cdi.test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
@@ -7,8 +9,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.tkit.quarkus.log.cdi.test.app.AppLifecycleService;
 
 import io.quarkus.test.QuarkusUnitTest;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class AppLifecycleServiceTest {
 
