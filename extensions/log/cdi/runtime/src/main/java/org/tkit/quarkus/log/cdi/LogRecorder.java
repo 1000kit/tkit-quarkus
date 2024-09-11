@@ -21,7 +21,7 @@ public class LogRecorder {
 
     private static final Logger log = LoggerFactory.getLogger(LogRecorder.class);
 
-    static LogRuntimeConfig CONFIG = new LogRuntimeConfig();
+    static LogRuntimeConfig CONFIG;
 
     static ServiceValue SERVICE = new ServiceValue();
 
@@ -33,11 +33,11 @@ public class LogRecorder {
         CONFIG = config;
         SERVICE = values;
 
-        if (config.service == null) {
+        if (config.service() == null) {
             return;
         }
 
-        config.service.forEach((key, value) -> {
+        config.service().forEach((key, value) -> {
             List<ServiceValue.ClassItem> items = values.getByConfig(key);
             if (items == null) {
                 log.warn("No @LogService annotation found for key `tkit.log.cdi.service.\"{}\"`. Key will be ignored",
@@ -46,12 +46,12 @@ public class LogRecorder {
             }
 
             // update class values from properties
-            if (value.config.log.isPresent() || value.config.stacktrace.isPresent()) {
+            if (value.config().log().isPresent() || value.config().stacktrace().isPresent()) {
                 items.forEach(item -> {
                     // update class config from properties
                     if (item.config != null) {
-                        value.config.log.ifPresent(x -> item.config.log = x);
-                        value.config.stacktrace.ifPresent(x -> item.config.stacktrace = x);
+                        value.config().log().ifPresent(x -> item.config.log = x);
+                        value.config().stacktrace().ifPresent(x -> item.config.stacktrace = x);
                     } else {
                         log.warn(
                                 "No @LogService annotation found for class {}. Key `tkit.log.cdi.service.\"{}\"` will be ignored",
@@ -61,7 +61,7 @@ public class LogRecorder {
             }
 
             // update method values from properties
-            value.method.forEach((mk, mv) -> {
+            value.method().forEach((mk, mv) -> {
                 items.forEach(item -> {
                     List<ServiceValue.MethodItem> methods = item.getByConfig(mk);
                     if (methods != null) {
@@ -72,10 +72,12 @@ public class LogRecorder {
                             }
                             // update method config from properties
                             if (method.config != null) {
-                                mv.config.log.ifPresent(x -> method.config.log = x);
-                                mv.config.stacktrace.ifPresent(x -> method.config.stacktrace = x);
-                                mv.params.ifPresent(map -> method.params.putAll(map));
-                                mv.returnMask.ifPresent(x -> method.returnMask = x);
+                                mv.config().log().ifPresent(x -> method.config.log = x);
+                                mv.config().stacktrace().ifPresent(x -> method.config.stacktrace = x);
+                                if (mv.params() != null && !mv.params().isEmpty()) {
+                                    method.params.putAll(mv.params());
+                                }
+                                mv.returnMask().ifPresent(x -> method.returnMask = x);
                             } else {
                                 log.warn(
                                         "No @LogService annotation found for method `{}.{}`. Key `tkit.log.cdi.service.\"{}\".method.{}` will be ignored",

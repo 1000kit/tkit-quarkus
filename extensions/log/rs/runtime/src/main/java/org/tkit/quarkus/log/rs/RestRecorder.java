@@ -23,28 +23,35 @@ public class RestRecorder {
 
     static List<Pattern> PAYLOAD_PATTERNS;
 
+    static boolean REGEX_ENABLED = false;
+    static boolean REGEX_PAYLOAD_ENABLED = false;
+
     public void init(RestRuntimeConfig config, RestServiceValue values) {
         CONFIG = config;
-        if (config.regex.enabled) {
-            List<String> items = config.regex.exclude.orElse(null);
+        if (config.regex().enabled()) {
+            List<String> items = config.regex().exclude().orElse(null);
             PATTERNS = createPatterns(items);
             if (PATTERNS == null) {
-                config.regex.enabled = false;
+                REGEX_ENABLED = false;
                 log.info("No exclude regex patterns found. Disable exclude regex patterns for rest log interceptor.");
+            } else {
+                REGEX_ENABLED = true;
             }
         }
-        if (config.payload.regex.enabled) {
-            List<String> items = config.payload.regex.exclude.orElse(null);
+        if (config.payload().regex().enabled()) {
+            List<String> items = config.payload().regex().exclude().orElse(null);
             PAYLOAD_PATTERNS = createPatterns(items);
             if (PAYLOAD_PATTERNS == null) {
-                config.payload.regex.enabled = false;
+                REGEX_PAYLOAD_ENABLED = false;
                 log.info(
                         "No exclude regex payload patterns found. Disable exclude regex patterns for rest payload interceptor.");
+            } else {
+                REGEX_PAYLOAD_ENABLED = true;
             }
         }
         REST_SERVICE = values;
 
-        config.controller.forEach((key, value) -> {
+        config.controller().forEach((key, value) -> {
             List<RestServiceValue.ClassItem> items = values.getByConfig(key);
             if (items == null) {
                 log.warn(
@@ -54,12 +61,12 @@ public class RestRecorder {
             }
 
             // update class values from properties
-            if (value.config.log.isPresent() || value.config.payload.isPresent()) {
+            if (value.config().log().isPresent() || value.config().payload().isPresent()) {
                 items.forEach(item -> {
                     // update class config from properties
                     if (item.config != null) {
-                        value.config.log.ifPresent(x -> item.config.log = x);
-                        value.config.payload.ifPresent(x -> item.config.payload = x);
+                        value.config().log().ifPresent(x -> item.config.log = x);
+                        value.config().payload().ifPresent(x -> item.config.payload = x);
                     } else {
                         log.warn(
                                 "No @RestService annotation found for class {}. Key `tkit.log.rs.controller.\"{}\"` will be ignored",
@@ -69,7 +76,7 @@ public class RestRecorder {
             }
 
             // update method values from properties
-            value.method.forEach((mk, mv) -> {
+            value.method().forEach((mk, mv) -> {
                 items.forEach(item -> {
                     List<RestServiceValue.MethodItem> methods = item.getByConfig(mk);
                     if (methods != null) {
@@ -80,8 +87,8 @@ public class RestRecorder {
                             }
                             // update method config from properties
                             if (method.config != null) {
-                                mv.log.ifPresent(x -> method.config.log = x);
-                                mv.payload.ifPresent(x -> method.config.payload = x);
+                                mv.log().ifPresent(x -> method.config.log = x);
+                                mv.payload().ifPresent(x -> method.config.payload = x);
                             } else {
                                 log.warn(
                                         "No @RestService annotation found for method `{}.{}`. Key `tkit.log.rs.controller.\"{}\".method.{}` will be ignored",
@@ -134,6 +141,14 @@ public class RestRecorder {
 
     public static RestRuntimeConfig getConfig() {
         return CONFIG;
+    }
+
+    public static boolean isRegexEnabled() {
+        return REGEX_ENABLED;
+    }
+
+    public static boolean isRegexPayloadEnabled() {
+        return REGEX_PAYLOAD_ENABLED;
     }
 
     public static RestServiceValue.MethodItem getRestService(String clazz, String method) {
