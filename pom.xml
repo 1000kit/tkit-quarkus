@@ -135,6 +135,11 @@
                     <version>${quarkus.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-config-doc-maven-plugin</artifactId>
+                    <version>${quarkus.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${maven.surefire-plugin.version}</version>

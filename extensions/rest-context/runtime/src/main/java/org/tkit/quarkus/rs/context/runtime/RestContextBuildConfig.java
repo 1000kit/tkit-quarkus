@@ -9,7 +9,7 @@ import io.smallrye.config.WithParentName;
 /**
  * Rest context build configuration.
  */
-@ConfigDocFilename("tkit-quarkus-rest-context.adoc")
+@ConfigDocFilename("tkit-quarkus-rest-context-build.adoc")
 @ConfigRoot(phase = ConfigPhase.BUILD_AND_RUN_TIME_FIXED)
 @ConfigMapping(prefix = "tkit.rs.context.build")
 public interface RestContextBuildConfig {
@@ -34,7 +34,7 @@ public interface RestContextBuildConfig {
      */
     interface TenantBuildTimeConfig {
         /**
-         * Enable tenant annotation discovery
+         * Enable @TenantExclude annotation discovery
          */
         @WithName("enabled")
         @WithDefault("true")

@@ -12,7 +12,7 @@ import io.smallrye.config.WithParentName;
 /**
  * Build configuration.
  */
-@ConfigDocFilename("tkit-quarkus-log-cdi.adoc")
+@ConfigDocFilename("tkit-quarkus-log-cdi-build.adoc")
 @ConfigRoot(phase = ConfigPhase.BUILD_AND_RUN_TIME_FIXED)
 @ConfigMapping(prefix = "tkit.log.cdi.auto-discovery")
 public interface LogBuildTimeConfig {

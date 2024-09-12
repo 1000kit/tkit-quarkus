@@ -1,21 +1,19 @@
-
 :summaryTableId: tkit-quarkus-test
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[tkit-quarkus-test_configuration]]link:#tkit-quarkus-test_configuration[Configuration property]
-
+h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-test_tkit-test-integration-test-enabled]]`link:#tkit-quarkus-test_tkit-test-integration-test-enabled[tkit.test.integration-test-enabled]`
-
+a| [[tkit-quarkus-test_tkit-test-integration-test-enabled]] [.property-path]##`tkit.test.integration-test-enabled`##
 
 [.description]
 --
 Disable or enabled integration test flag
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_TEST_INTEGRATION_TEST_ENABLED+++[]
@@ -23,16 +21,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_TEST_INTEGRATION_TEST_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--
+|boolean
 |`false`
 
-
-a| [[tkit-quarkus-test_tkit-test-ci-enabled]]`link:#tkit-quarkus-test_tkit-test-ci-enabled[tkit.test.ci.enabled]`
-
+a| [[tkit-quarkus-test_tkit-test-ci-enabled]] [.property-path]##`tkit.test.ci.enabled`##
 
 [.description]
 --
 Disable or enabled for ci pipeline
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_TEST_CI_ENABLED+++[]
@@ -40,16 +38,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_TEST_CI_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--
+|boolean
 |`true`
 
-
-a| [[tkit-quarkus-test_tkit-test-ci-env-name]]`link:#tkit-quarkus-test_tkit-test-ci-env-name[tkit.test.ci.env-name]`
-
+a| [[tkit-quarkus-test_tkit-test-ci-env-name]] [.property-path]##`tkit.test.ci.env-name`##
 
 [.description]
 --
 The name of environment variable to check if we are running in the pipe.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_TEST_CI_ENV_NAME+++[]
@@ -57,16 +55,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_TEST_CI_ENV_NAME+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--
+|string
 |`GITLAB_CI`
 
-
-a| [[tkit-quarkus-test_tkit-test-rest-assured-enabled]]`link:#tkit-quarkus-test_tkit-test-rest-assured-enabled[tkit.test.rest-assured.enabled]`
-
+a| [[tkit-quarkus-test_tkit-test-rest-assured-enabled]] [.property-path]##`tkit.test.rest-assured.enabled`##
 
 [.description]
 --
 Disable or enabled rest-assured config.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_TEST_REST_ASSURED_ENABLED+++[]
@@ -74,16 +72,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_TEST_REST_ASSURED_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--
+|boolean
 |`true`
 
-
-a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled]]`link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled[tkit.test.rest-assured.overwrite-uri.enabled]`
-
+a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled]] [.property-path]##`tkit.test.rest-assured.overwrite-uri.enabled`##
 
 [.description]
 --
 Disable or enabled URI overwrite
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_TEST_REST_ASSURED_OVERWRITE_URI_ENABLED+++[]
@@ -91,16 +89,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_TEST_REST_ASSURED_OVERWRITE_URI_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--
+|boolean
 |`true`
 
-
-a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri]]`link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri[tkit.test.rest-assured.overwrite-uri.uri]`
-
+a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri]] [.property-path]##`tkit.test.rest-assured.overwrite-uri.uri`##
 
 [.description]
 --
 Overwrite the RestAssured URI with a new value.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_TEST_REST_ASSURED_OVERWRITE_URI_URI+++[]
@@ -108,7 +106,11 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_TEST_REST_ASSURED_OVERWRITE_URI_URI+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--
+|string
 |`http://docker`
 
 |===
+
+
+:!summaryTableId:
