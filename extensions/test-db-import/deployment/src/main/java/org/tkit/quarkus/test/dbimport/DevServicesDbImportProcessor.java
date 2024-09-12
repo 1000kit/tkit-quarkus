@@ -39,8 +39,8 @@ public class DevServicesDbImportProcessor {
             List<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem) {
 
         // create dev service config
-        DbImportDevServicesBuildTimeConfig configuration = dbImportClientBuildTimeConfig.devservices;
-        if (!configuration.enabled.orElse(true)) {
+        DbImportDevServicesBuildTimeConfig configuration = dbImportClientBuildTimeConfig.devservices();
+        if (!configuration.enabled().orElse(true)) {
             // explicitly disabled
             log.debug("Not starting dev services for db-import, as it has been disabled in the config.");
             return null;
@@ -67,7 +67,7 @@ public class DevServicesDbImportProcessor {
                 DockerClient dockerClient = DockerClientFactory.lazyClient();
                 Map<String, Container> containers = dockerClient.listContainersCmd().exec().stream()
                         .filter(c -> (SESSION_ID.equals(c.getLabels().get(TESTCONTAINERS_SESSION_ID_LABEL))
-                                && c.getImage().startsWith(configuration.dbImageName)))
+                                && c.getImage().startsWith(configuration.dbImageName())))
                         .collect(Collectors.toMap(c -> c.getLabels().get("datasource"), c -> c));
 
                 if (containers.isEmpty()) {

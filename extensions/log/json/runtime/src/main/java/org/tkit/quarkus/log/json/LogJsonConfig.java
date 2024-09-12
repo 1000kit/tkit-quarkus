@@ -15,102 +15,123 @@
  */
 package org.tkit.quarkus.log.json;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import io.quarkus.runtime.annotations.ConfigDocFilename;
-import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
 
 @ConfigDocFilename("tkit-quarkus-log-json.adoc")
-@ConfigRoot(prefix = "tkit", phase = ConfigPhase.RUN_TIME, name = "log.json")
-public class LogJsonConfig {
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+@ConfigMapping(prefix = "tkit.log.json")
+public interface LogJsonConfig {
 
     /**
      * Empty list constant.
      */
-    public static final String EMPTY_LIST = "<EMPTY-LIST>";
+    String EMPTY_LIST = "<EMPTY-LIST>";
 
     /**
      * Determine whether to enable the JSON console formatting extension, which disables "normal" console formatting.
      */
-    @ConfigItem(name = "enabled", defaultValue = "true")
-    boolean enabled;
+    @WithName("enabled")
+    @WithDefault("true")
+    boolean enabled();
+
     /**
      * Enable "pretty printing" of the JSON record. Note that some JSON parsers will fail to read pretty printed output.
      */
-    @ConfigItem(name = "pretty-print", defaultValue = "false")
-    boolean prettyPrint;
+    @WithName("pretty-print")
+    @WithDefault("false")
+    boolean prettyPrint();
+
     /**
      * The date format to use. The special string "default" indicates that the default format should be used.
      */
-    @ConfigItem(name = "date-format", defaultValue = "default")
-    String dateFormat;
+    @WithName("date-format")
+    @WithDefault("default")
+    String dateFormat();
+
     /**
      * The special end-of-record delimiter to be used. By default, no delimiter is used.
      */
-    @ConfigItem(name = "record-delimiter")
-    Optional<String> recordDelimiter;
+    @WithName("record-delimiter")
+    Optional<String> recordDelimiter();
+
     /**
      * The zone ID to use. The special string "default" indicates that the default zone should be used.
      */
-    @ConfigItem(name = "zone-id", defaultValue = "default")
-    String zoneId;
+    @WithName("zone-id")
+    @WithDefault("default")
+    String zoneId();
+
     /**
      * The exception output type to specify.
      */
-    @ConfigItem(name = "exception-output-type", defaultValue = "formatted")
-    ExtendedStructureFormatter.ExceptionOutputType exceptionOutputType;
+    @WithName("exception-output-type")
+    @WithDefault("formatted")
+    ExtendedStructureFormatter.ExceptionOutputType exceptionOutputType();
+
     /**
      * Enable printing of more details in the log.
      * <p>
      * Printing the details can be expensive as the values are retrieved from the caller. The details include the
      * source class name, source file name, source method name and source line number.
      */
-    @ConfigItem(name = "print-details", defaultValue = "false")
-    boolean printDetails;
+    @WithName("print-details")
+    @WithDefault("false")
+    boolean printDetails();
 
     /**
      * Add MDC keys mapping.
      */
-    @ConfigItem(name = "keys.mdc", defaultValue = EMPTY_LIST)
-    List<String> mdcKeys;
+    @WithName("keys.mdc")
+    @WithDefault(EMPTY_LIST)
+    List<String> mdcKeys();
 
     /**
      * Add MDC prefix mapping.
      */
-    @ConfigItem(name = "keys.group", defaultValue = EMPTY_LIST)
-    List<String> mdcPrefixKeys;
+    @WithName("keys.group")
+    @WithDefault(EMPTY_LIST)
+    List<String> mdcPrefixKeys();
 
     /**
      * Ignore keys.
      */
-    @ConfigItem(name = "keys.ignore", defaultValue = EMPTY_LIST)
-    List<String> ignoreKeys = new ArrayList<>();
+    @WithName("keys.ignore")
+    @WithDefault(EMPTY_LIST)
+    List<String> ignoreKeys();
 
     /**
      * Override keys.
      */
-    @ConfigItem(name = "keys.override", defaultValue = EMPTY_LIST)
-    List<String> overrideKeys = new ArrayList<>();
+    @WithName("keys.override")
+    @WithDefault(EMPTY_LIST)
+    List<String> overrideKeys();
 
     /**
      * Override keys.
      */
-    @ConfigItem(name = "keys.type", defaultValue = EMPTY_LIST)
-    List<String> typeKeys = new ArrayList<>();
+    @WithName("keys.type")
+    @WithDefault(EMPTY_LIST)
+    List<String> typeKeys();
 
     /**
      * Environment keys.
      */
-    @ConfigItem(name = "keys.env", defaultValue = EMPTY_LIST)
-    List<String> envKeys = new ArrayList<>();
+    @WithName("keys.env")
+    @WithDefault(EMPTY_LIST)
+    List<String> envKeys();
 
     /**
      * Number of characters after which the stacktrace is split. We produce linked messages.
      */
-    @ConfigItem(name = "split-stacktrace-after", defaultValue = "12000")
-    Optional<Integer> splitStacktraceAfter;
+    @WithName("split-stacktrace-after")
+    @WithDefault("12000")
+    Optional<Integer> splitStacktraceAfter();
 }

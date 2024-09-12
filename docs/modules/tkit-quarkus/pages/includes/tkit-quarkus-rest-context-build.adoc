@@ -1,4 +1,4 @@
-:summaryTableId: tkit-quarkus-security
+:summaryTableId: tkit-quarkus-rest-context-build
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
@@ -8,18 +8,18 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-security_tkit-security-auth-enabled]] [.property-path]##`tkit.security.auth.enabled`##
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-rest-context_tkit-rs-context-build-tenant-enabled]] [.property-path]##`tkit.rs.context.build.tenant.enabled`##
 
 [.description]
 --
-Disable or enabled authentication
+Enable @TenantExclude annotation discovery
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_AUTH_ENABLED+++[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_BUILD_TENANT_ENABLED+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++TKIT_SECURITY_AUTH_ENABLED+++`
+Environment variable: `+++TKIT_RS_CONTEXT_BUILD_TENANT_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean

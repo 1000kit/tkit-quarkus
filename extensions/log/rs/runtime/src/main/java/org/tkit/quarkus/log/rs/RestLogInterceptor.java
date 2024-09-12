@@ -34,14 +34,14 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
     public void filter(ContainerRequestContext requestContext) {
         RestRuntimeConfig config = RestRecorder.getConfig();
 
-        if (!config.enabled) {
+        if (!config.enabled()) {
             return;
         }
 
         RestInterceptorContext restContext = new RestInterceptorContext();
 
         // check regex exclude
-        if (config.regex.enabled) {
+        if (config.regex().enabled()) {
             String url = requestContext.getUriInfo().getPath();
             restContext.exclude = RestRecorder.excludeUrl(url);
             if (restContext.exclude) {
@@ -51,8 +51,8 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
         }
 
         // add header parameters to MDC
-        if (config.mdcHeaders != null && !config.mdcHeaders.isEmpty()) {
-            config.mdcHeaders.forEach((k, v) -> {
+        if (config.mdcHeaders() != null && !config.mdcHeaders().isEmpty()) {
+            config.mdcHeaders().forEach((k, v) -> {
                 String tmp = requestContext.getHeaderString(k);
                 if (tmp != null && !tmp.isBlank()) {
                     MDC.put(v, tmp);
@@ -75,9 +75,9 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
         if (restContext.ano != null) {
             log = restContext.ano.config.log;
         }
-        if (config.start.enabled && log) {
+        if (config.start().enabled() && log) {
             LoggerFactory.getLogger(restContext.logger)
-                    .info(String.format(config.start.template, restContext.method, restContext.path, restContext.uri));
+                    .info(String.format(config.start().template(), restContext.method, restContext.path, restContext.uri));
         }
         requestContext.setProperty(CONTEXT, restContext);
     }
@@ -89,7 +89,7 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
 
         RestRuntimeConfig config = RestRecorder.getConfig();
-        if (!config.enabled) {
+        if (!config.enabled()) {
             return;
         }
 
@@ -97,9 +97,9 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
 
         // if we do not have context we are in error mode
         if (restContext == null) {
-            if (config.error.enabled) {
+            if (config.error().enabled()) {
                 Response.StatusType status = responseContext.getStatusInfo();
-                log.info(String.format(config.end.template, requestContext.getMethod(),
+                log.info(String.format(config.end().template(), requestContext.getMethod(),
                         requestContext.getUriInfo().getPath(), 0.000,
                         status.getStatusCode(), status.getReasonPhrase(), requestContext.getUriInfo().getRequestUri()));
             }
@@ -120,20 +120,20 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             if (restContext.ano != null) {
                 logMsg = restContext.ano.config.log;
             }
-            if (config.end.enabled && logMsg) {
+            if (config.end().enabled() && logMsg) {
 
                 Response.StatusType status = responseContext.getStatusInfo();
 
-                if (config.end.mdc.enabled) {
-                    MDC.put(config.end.mdc.durationName, restContext.durationSec);
-                    restContext.mdcKeys.add(config.end.mdc.durationName);
+                if (config.end().mdc().enabled()) {
+                    MDC.put(config.end().mdc().durationName(), restContext.durationSec);
+                    restContext.mdcKeys.add(config.end().mdc().durationName());
 
-                    MDC.put(config.end.mdc.responseStatusName, status.getStatusCode());
-                    restContext.mdcKeys.add(config.end.mdc.responseStatusName);
+                    MDC.put(config.end().mdc().responseStatusName(), status.getStatusCode());
+                    restContext.mdcKeys.add(config.end().mdc().responseStatusName());
                 }
 
                 LoggerFactory.getLogger(restContext.logger)
-                        .info(String.format(config.end.template, restContext.method, restContext.path,
+                        .info(String.format(config.end().template(), restContext.method, restContext.path,
                                 restContext.durationString, status.getStatusCode(), status.getReasonPhrase(),
                                 restContext.uri));
             }

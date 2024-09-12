@@ -49,9 +49,9 @@
 
     <properties>
         <!-- Quarkus -->
-        <quarkus.version>3.13.2</quarkus.version>
+        <quarkus.version>3.14.3</quarkus.version>
         <quarkus.hibernate-orm.version>6.6.0.Final</quarkus.hibernate-orm.version>
-        <quarkiverse.mockserver.version>1.11.0</quarkiverse.mockserver.version>
+        <quarkiverse.mockserver.version>1.12.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.2.2</quarkus.jandex-plugin.version>
 
         <!-- build -->
@@ -70,7 +70,7 @@
         <maven.compiler-plugin.version>3.13.0</maven.compiler-plugin.version>
         <maven.surefire-plugin.version>3.5.0</maven.surefire-plugin.version>
         <maven.formatter-maven-plugin.version>2.24.1</maven.formatter-maven-plugin.version>
-        <maven.impsort-maven-plugin.version>1.11.0</maven.impsort-maven-plugin.version>
+        <maven.impsort-maven-plugin.version>1.12.0</maven.impsort-maven-plugin.version>
         <maven.enforcer-plugin.version>3.2.1</maven.enforcer-plugin.version>
         <maven.gpg-plugin.version>3.2.5</maven.gpg-plugin.version>
         <maven.source-plugin.version>3.3.1</maven.source-plugin.version>
@@ -132,6 +132,11 @@
                 <plugin>
                     <groupId>io.quarkus</groupId>
                     <artifactId>quarkus-maven-plugin</artifactId>
+                    <version>${quarkus.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-config-doc-maven-plugin</artifactId>
                     <version>${quarkus.version}</version>
                 </plugin>
                 <plugin>

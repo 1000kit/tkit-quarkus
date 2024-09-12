@@ -1,21 +1,19 @@
-
 :summaryTableId: tkit-quarkus-log-json
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[tkit-quarkus-log-json_configuration]]link:#tkit-quarkus-log-json_configuration[Configuration property]
-
+h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-log-json_tkit-log-json-enabled]]`link:#tkit-quarkus-log-json_tkit-log-json-enabled[tkit.log.json.enabled]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-enabled]] [.property-path]##`tkit.log.json.enabled`##
 
 [.description]
 --
 Determine whether to enable the JSON console formatting extension, which disables "normal" console formatting.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_ENABLED+++[]
@@ -23,16 +21,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--
+|boolean
 |`true`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-pretty-print]]`link:#tkit-quarkus-log-json_tkit-log-json-pretty-print[tkit.log.json.pretty-print]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-pretty-print]] [.property-path]##`tkit.log.json.pretty-print`##
 
 [.description]
 --
 Enable "pretty printing" of the JSON record. Note that some JSON parsers will fail to read pretty printed output.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_PRETTY_PRINT+++[]
@@ -40,16 +38,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_PRETTY_PRINT+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--
+|boolean
 |`false`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-date-format]]`link:#tkit-quarkus-log-json_tkit-log-json-date-format[tkit.log.json.date-format]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-date-format]] [.property-path]##`tkit.log.json.date-format`##
 
 [.description]
 --
 The date format to use. The special string "default" indicates that the default format should be used.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_DATE_FORMAT+++[]
@@ -57,16 +55,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_DATE_FORMAT+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--
+|string
 |`default`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-record-delimiter]]`link:#tkit-quarkus-log-json_tkit-log-json-record-delimiter[tkit.log.json.record-delimiter]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-record-delimiter]] [.property-path]##`tkit.log.json.record-delimiter`##
 
 [.description]
 --
 The special end-of-record delimiter to be used. By default, no delimiter is used.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_RECORD_DELIMITER+++[]
@@ -74,16 +72,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_RECORD_DELIMITER+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--
+|string
 |
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-zone-id]]`link:#tkit-quarkus-log-json_tkit-log-json-zone-id[tkit.log.json.zone-id]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-zone-id]] [.property-path]##`tkit.log.json.zone-id`##
 
 [.description]
 --
 The zone ID to use. The special string "default" indicates that the default zone should be used.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_ZONE_ID+++[]
@@ -91,16 +89,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_ZONE_ID+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--
+|string
 |`default`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-exception-output-type]]`link:#tkit-quarkus-log-json_tkit-log-json-exception-output-type[tkit.log.json.exception-output-type]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-exception-output-type]] [.property-path]##`tkit.log.json.exception-output-type`##
 
 [.description]
 --
 The exception output type to specify.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_EXCEPTION_OUTPUT_TYPE+++[]
@@ -108,13 +106,11 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_EXCEPTION_OUTPUT_TYPE+++`
 endif::add-copy-button-to-env-var[]
--- a|
-`detailed`, `formatted`, `formatted-brief`, `detailed-and-formatted` 
+--
+a|ExceptionOutputType
 |`formatted`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-print-details]]`link:#tkit-quarkus-log-json_tkit-log-json-print-details[tkit.log.json.print-details]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-print-details]] [.property-path]##`tkit.log.json.print-details`##
 
 [.description]
 --
@@ -122,22 +118,23 @@ Enable printing of more details in the log.
 
 Printing the details can be expensive as the values are retrieved from the caller. The details include the source class name, source file name, source method name and source line number.
 
+
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_PRINT_DETAILS+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_PRINT_DETAILS+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--
+|boolean
 |`false`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-mdc]]`link:#tkit-quarkus-log-json_tkit-log-json-keys-mdc[tkit.log.json.keys.mdc]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-mdc]] [.property-path]##`tkit.log.json.keys.mdc`##
 
 [.description]
 --
 Add MDC keys mapping.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_KEYS_MDC+++[]
@@ -145,16 +142,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_KEYS_MDC+++`
 endif::add-copy-button-to-env-var[]
---|list of string 
+--
+|list of string
 |`<EMPTY-LIST>`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-group]]`link:#tkit-quarkus-log-json_tkit-log-json-keys-group[tkit.log.json.keys.group]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-group]] [.property-path]##`tkit.log.json.keys.group`##
 
 [.description]
 --
 Add MDC prefix mapping.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_KEYS_GROUP+++[]
@@ -162,16 +159,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_KEYS_GROUP+++`
 endif::add-copy-button-to-env-var[]
---|list of string 
+--
+|list of string
 |`<EMPTY-LIST>`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-ignore]]`link:#tkit-quarkus-log-json_tkit-log-json-keys-ignore[tkit.log.json.keys.ignore]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-ignore]] [.property-path]##`tkit.log.json.keys.ignore`##
 
 [.description]
 --
 Ignore keys.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_KEYS_IGNORE+++[]
@@ -179,16 +176,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_KEYS_IGNORE+++`
 endif::add-copy-button-to-env-var[]
---|list of string 
+--
+|list of string
 |`<EMPTY-LIST>`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-override]]`link:#tkit-quarkus-log-json_tkit-log-json-keys-override[tkit.log.json.keys.override]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-override]] [.property-path]##`tkit.log.json.keys.override`##
 
 [.description]
 --
 Override keys.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_KEYS_OVERRIDE+++[]
@@ -196,16 +193,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_KEYS_OVERRIDE+++`
 endif::add-copy-button-to-env-var[]
---|list of string 
+--
+|list of string
 |`<EMPTY-LIST>`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-type]]`link:#tkit-quarkus-log-json_tkit-log-json-keys-type[tkit.log.json.keys.type]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-type]] [.property-path]##`tkit.log.json.keys.type`##
 
 [.description]
 --
 Override keys.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_KEYS_TYPE+++[]
@@ -213,16 +210,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_KEYS_TYPE+++`
 endif::add-copy-button-to-env-var[]
---|list of string 
+--
+|list of string
 |`<EMPTY-LIST>`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-env]]`link:#tkit-quarkus-log-json_tkit-log-json-keys-env[tkit.log.json.keys.env]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-env]] [.property-path]##`tkit.log.json.keys.env`##
 
 [.description]
 --
 Environment keys.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_KEYS_ENV+++[]
@@ -230,16 +227,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_KEYS_ENV+++`
 endif::add-copy-button-to-env-var[]
---|list of string 
+--
+|list of string
 |`<EMPTY-LIST>`
 
-
-a| [[tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after]]`link:#tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after[tkit.log.json.split-stacktrace-after]`
-
+a| [[tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after]] [.property-path]##`tkit.log.json.split-stacktrace-after`##
 
 [.description]
 --
 Number of characters after which the stacktrace is split. We produce linked messages.
+
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++TKIT_LOG_JSON_SPLIT_STACKTRACE_AFTER+++[]
@@ -247,7 +244,11 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++TKIT_LOG_JSON_SPLIT_STACKTRACE_AFTER+++`
 endif::add-copy-button-to-env-var[]
---|int 
+--
+|int
 |`12000`
 
 |===
+
+
+:!summaryTableId:

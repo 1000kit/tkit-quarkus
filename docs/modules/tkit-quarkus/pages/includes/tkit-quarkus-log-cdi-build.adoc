@@ -1,4 +1,4 @@
-:summaryTableId: tkit-quarkus-security
+:summaryTableId: tkit-quarkus-log-cdi-build
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
@@ -8,22 +8,22 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-security_tkit-security-auth-enabled]] [.property-path]##`tkit.security.auth.enabled`##
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-log-cdi_tkit-log-cdi-auto-discovery-packages]] [.property-path]##`tkit.log.cdi.auto-discovery.packages`##
 
 [.description]
 --
-Disable or enabled authentication
+Binding includes packages.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_AUTH_ENABLED+++[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_CDI_AUTO_DISCOVERY_PACKAGES+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++TKIT_SECURITY_AUTH_ENABLED+++`
+Environment variable: `+++TKIT_LOG_CDI_AUTO_DISCOVERY_PACKAGES+++`
 endif::add-copy-button-to-env-var[]
 --
-|boolean
-|`true`
+|list of string
+|`org.tkit`
 
 |===
 
