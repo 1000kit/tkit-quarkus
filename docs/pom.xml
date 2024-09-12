@@ -89,22 +89,6 @@
                         <configuration>
                             <outputDirectory>modules/tkit-quarkus/pages/includes/</outputDirectory>
                             <resources>
-<!--                                <resource>-->
-<!--                                    <directory>${project.basedir}/../target/asciidoc/generated/config/</directory>-->
-<!--                                    <includes>-->
-<!--                                        <include>tkit-quarkus-data-import.adoc</include>-->
-<!--                                        <include>tkit-quarkus-test-db-import.adoc</include>-->
-<!--                                        <include>tkit-quarkus-log-cdi.adoc</include>-->
-<!--                                        <include>tkit-quarkus-log-json.adoc</include>-->
-<!--                                        <include>tkit-quarkus-log-rs.adoc</include>-->
-<!--                                        <include>tkit-quarkus-jpa-tenant.adoc</include>-->
-<!--                                        <include>tkit-quarkus-rest-context.adoc</include>-->
-<!--                                        <include>tkit-quarkus-security.adoc</include>-->
-<!--                                        <include>tkit-quarkus-security-test.adoc</include>-->
-<!--                                        <include>tkit-quarkus-test.adoc</include>-->
-<!--                                    </includes>-->
-<!--                                    <filtering>false</filtering>-->
-<!--                                </resource>-->
                                 <resource>
                                     <directory>${project.basedir}/templates/includes</directory>
                                     <include>attributes.adoc</include>
