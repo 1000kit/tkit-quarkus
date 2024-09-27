@@ -8,7 +8,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default]] [.property-path]##`tkit.jpa.tenant.default`##
+a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default[`tkit.jpa.tenant.default`]##
 
 [.description]
 --

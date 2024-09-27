@@ -8,7 +8,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[tkit-quarkus-test-db-import_tkit-db-import-devservices-enabled]] [.property-path]##`tkit.db-import.devservices.enabled`##
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-test-db-import_tkit-db-import-devservices-enabled]] [.property-path]##link:#tkit-quarkus-test-db-import_tkit-db-import-devservices-enabled[`tkit.db-import.devservices.enabled`]##
 
 [.description]
 --
@@ -25,7 +25,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |
 
-a|icon:lock[title=Fixed at build time] [[tkit-quarkus-test-db-import_tkit-db-import-devservices-db-image-name]] [.property-path]##`tkit.db-import.devservices.db-image-name`##
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-test-db-import_tkit-db-import-devservices-db-image-name]] [.property-path]##link:#tkit-quarkus-test-db-import_tkit-db-import-devservices-db-image-name[`tkit.db-import.devservices.db-image-name`]##
 
 [.description]
 --

@@ -8,7 +8,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-log-json_tkit-log-json-enabled]] [.property-path]##`tkit.log.json.enabled`##
+a| [[tkit-quarkus-log-json_tkit-log-json-enabled]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-enabled[`tkit.log.json.enabled`]##
 
 [.description]
 --
@@ -25,7 +25,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`true`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-pretty-print]] [.property-path]##`tkit.log.json.pretty-print`##
+a| [[tkit-quarkus-log-json_tkit-log-json-pretty-print]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-pretty-print[`tkit.log.json.pretty-print`]##
 
 [.description]
 --
@@ -42,7 +42,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`false`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-date-format]] [.property-path]##`tkit.log.json.date-format`##
+a| [[tkit-quarkus-log-json_tkit-log-json-date-format]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-date-format[`tkit.log.json.date-format`]##
 
 [.description]
 --
@@ -59,7 +59,7 @@ endif::add-copy-button-to-env-var[]
 |string
 |`default`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-record-delimiter]] [.property-path]##`tkit.log.json.record-delimiter`##
+a| [[tkit-quarkus-log-json_tkit-log-json-record-delimiter]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-record-delimiter[`tkit.log.json.record-delimiter`]##
 
 [.description]
 --
@@ -76,7 +76,7 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[tkit-quarkus-log-json_tkit-log-json-zone-id]] [.property-path]##`tkit.log.json.zone-id`##
+a| [[tkit-quarkus-log-json_tkit-log-json-zone-id]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-zone-id[`tkit.log.json.zone-id`]##
 
 [.description]
 --
@@ -93,7 +93,7 @@ endif::add-copy-button-to-env-var[]
 |string
 |`default`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-exception-output-type]] [.property-path]##`tkit.log.json.exception-output-type`##
+a| [[tkit-quarkus-log-json_tkit-log-json-exception-output-type]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-exception-output-type[`tkit.log.json.exception-output-type`]##
 
 [.description]
 --
@@ -110,7 +110,7 @@ endif::add-copy-button-to-env-var[]
 a|ExceptionOutputType
 |`formatted`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-print-details]] [.property-path]##`tkit.log.json.print-details`##
+a| [[tkit-quarkus-log-json_tkit-log-json-print-details]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-print-details[`tkit.log.json.print-details`]##
 
 [.description]
 --
@@ -129,7 +129,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`false`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-mdc]] [.property-path]##`tkit.log.json.keys.mdc`##
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-mdc]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-mdc[`tkit.log.json.keys.mdc`]##
 
 [.description]
 --
@@ -146,7 +146,7 @@ endif::add-copy-button-to-env-var[]
 |list of string
 |`<EMPTY-LIST>`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-group]] [.property-path]##`tkit.log.json.keys.group`##
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-group]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-group[`tkit.log.json.keys.group`]##
 
 [.description]
 --
@@ -163,7 +163,7 @@ endif::add-copy-button-to-env-var[]
 |list of string
 |`<EMPTY-LIST>`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-ignore]] [.property-path]##`tkit.log.json.keys.ignore`##
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-ignore]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-ignore[`tkit.log.json.keys.ignore`]##
 
 [.description]
 --
@@ -180,7 +180,7 @@ endif::add-copy-button-to-env-var[]
 |list of string
 |`<EMPTY-LIST>`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-override]] [.property-path]##`tkit.log.json.keys.override`##
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-override]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-override[`tkit.log.json.keys.override`]##
 
 [.description]
 --
@@ -197,7 +197,7 @@ endif::add-copy-button-to-env-var[]
 |list of string
 |`<EMPTY-LIST>`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-type]] [.property-path]##`tkit.log.json.keys.type`##
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-type]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-type[`tkit.log.json.keys.type`]##
 
 [.description]
 --
@@ -214,7 +214,7 @@ endif::add-copy-button-to-env-var[]
 |list of string
 |`<EMPTY-LIST>`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-keys-env]] [.property-path]##`tkit.log.json.keys.env`##
+a| [[tkit-quarkus-log-json_tkit-log-json-keys-env]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-env[`tkit.log.json.keys.env`]##
 
 [.description]
 --
@@ -231,7 +231,7 @@ endif::add-copy-button-to-env-var[]
 |list of string
 |`<EMPTY-LIST>`
 
-a| [[tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after]] [.property-path]##`tkit.log.json.split-stacktrace-after`##
+a| [[tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after[`tkit.log.json.split-stacktrace-after`]##
 
 [.description]
 --

@@ -8,7 +8,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-security_tkit-security-auth-enabled]] [.property-path]##`tkit.security.auth.enabled`##
+a| [[tkit-quarkus-security_tkit-security-auth-enabled]] [.property-path]##link:#tkit-quarkus-security_tkit-security-auth-enabled[`tkit.security.auth.enabled`]##
 
 [.description]
 --
