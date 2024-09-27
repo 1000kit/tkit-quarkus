@@ -8,7 +8,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[tkit-quarkus-rest-context_tkit-rs-context-build-tenant-enabled]] [.property-path]##`tkit.rs.context.build.tenant.enabled`##
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-rest-context_tkit-rs-context-build-tenant-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-build-tenant-enabled[`tkit.rs.context.build.tenant.enabled`]##
 
 [.description]
 --

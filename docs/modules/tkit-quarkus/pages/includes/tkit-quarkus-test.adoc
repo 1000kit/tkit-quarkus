@@ -8,7 +8,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-test_tkit-test-integration-test-enabled]] [.property-path]##`tkit.test.integration-test-enabled`##
+a| [[tkit-quarkus-test_tkit-test-integration-test-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-integration-test-enabled[`tkit.test.integration-test-enabled`]##
 
 [.description]
 --
@@ -25,7 +25,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`false`
 
-a| [[tkit-quarkus-test_tkit-test-ci-enabled]] [.property-path]##`tkit.test.ci.enabled`##
+a| [[tkit-quarkus-test_tkit-test-ci-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-ci-enabled[`tkit.test.ci.enabled`]##
 
 [.description]
 --
@@ -42,7 +42,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`true`
 
-a| [[tkit-quarkus-test_tkit-test-ci-env-name]] [.property-path]##`tkit.test.ci.env-name`##
+a| [[tkit-quarkus-test_tkit-test-ci-env-name]] [.property-path]##link:#tkit-quarkus-test_tkit-test-ci-env-name[`tkit.test.ci.env-name`]##
 
 [.description]
 --
@@ -59,7 +59,7 @@ endif::add-copy-button-to-env-var[]
 |string
 |`GITLAB_CI`
 
-a| [[tkit-quarkus-test_tkit-test-rest-assured-enabled]] [.property-path]##`tkit.test.rest-assured.enabled`##
+a| [[tkit-quarkus-test_tkit-test-rest-assured-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-enabled[`tkit.test.rest-assured.enabled`]##
 
 [.description]
 --
@@ -76,7 +76,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`true`
 
-a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled]] [.property-path]##`tkit.test.rest-assured.overwrite-uri.enabled`##
+a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled[`tkit.test.rest-assured.overwrite-uri.enabled`]##
 
 [.description]
 --
@@ -93,7 +93,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`true`
 
-a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri]] [.property-path]##`tkit.test.rest-assured.overwrite-uri.uri`##
+a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri[`tkit.test.rest-assured.overwrite-uri.uri`]##
 
 [.description]
 --
