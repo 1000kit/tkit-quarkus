@@ -4,11 +4,13 @@ import org.tkit.quarkus.rs.context.RestContextException;
 
 public class PrincipalTokenRequiredException extends RestContextException {
 
-    public PrincipalTokenRequiredException() {
-        super(ErrorKeys.PRINCIPAL_TOKEN_REQUIRED, "Principal token is required");
+    public PrincipalTokenRequiredException(ErrorKeys errorKeys, String message) {
+        super(errorKeys, message);
     }
 
     public enum ErrorKeys {
+
+        PRINCIPAL_TOKEN_WRONG_ISSUER,
 
         PRINCIPAL_TOKEN_REQUIRED;
     }

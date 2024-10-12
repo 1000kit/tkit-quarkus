@@ -1,5 +1,7 @@
 package org.tkit.quarkus.rs.context.token;
 
+import java.util.Map;
+
 import io.quarkus.runtime.annotations.ConfigDocFilename;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
@@ -69,5 +71,73 @@ public interface TokenContextConfig {
         @WithName("header-param")
         @WithDefault("apm-principal-token")
         String tokenHeaderParam();
+
+        /**
+         * Token oidc configuration.
+         */
+        @WithName("issuers")
+        Map<String, IssuerConfig> issuers();
+
+        /**
+         * Throw Unauthorized exception for any parser error. Return StatusCode 401.
+         */
+        @WithName("parser-error-unauthorized")
+        @WithDefault("true")
+        boolean parserErrorUnauthorized();
+
+        /**
+         * Throw Unauthorized exception for required error. Return StatusCode 401.
+         */
+        @WithName("required-error-unauthorized")
+        @WithDefault("false")
+        boolean requiredErrorUnauthorized();
+
+        /**
+         * Throw Unauthorized exception if access token issuer does not equal to principal token issuer.
+         * Return StatusCode 401.
+         */
+        @WithName("check-tokens-issuer-error-unauthorized")
+        @WithDefault("true")
+        boolean checkTokensIssuerErrorUnauthorized();
+
+        /**
+         * Compare access token issuer with principal token issuer.
+         */
+        @WithName("check-tokens-issuer")
+        @WithDefault("true")
+        boolean checkTokensIssuer();
+    }
+
+    /**
+     * Token oidc configuration.
+     */
+    interface IssuerConfig {
+
+        /**
+         * Enable or disable oidc token config.
+         */
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
+
+        /**
+         * Token issuer value
+         */
+        @WithName("url")
+        String url();
+
+        /**
+         * Use token realm for the public key.
+         */
+        @WithName("public-key-location.enabled")
+        @WithDefault("true")
+        boolean publicKeyLocationEnabled();
+
+        /**
+         * Public key server suffix
+         */
+        @WithName("public-key-location.suffix")
+        @WithDefault("/protocol/openid-connect/certs")
+        String publicKeyLocationSuffix();
     }
 }

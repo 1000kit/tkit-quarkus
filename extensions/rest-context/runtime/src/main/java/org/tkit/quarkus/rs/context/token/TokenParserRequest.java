@@ -1,5 +1,8 @@
 package org.tkit.quarkus.rs.context.token;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TokenParserRequest {
 
     private final String rawToken;
@@ -11,6 +14,8 @@ public class TokenParserRequest {
     private String issuerSuffix;
 
     private String type;
+
+    private final Map<String, IssuerParserRequest> issuerParserRequests = new HashMap<>();
 
     public TokenParserRequest(String rawToken) {
         this.rawToken = rawToken;
@@ -70,5 +75,61 @@ public class TokenParserRequest {
     public TokenParserRequest verify(boolean verify) {
         setVerify(verify);
         return this;
+    }
+
+    public void addIssuerParserRequest(String name, IssuerParserRequest issuerParserRequest) {
+        issuerParserRequests.put(name, issuerParserRequest);
+    }
+
+    public Map<String, IssuerParserRequest> getIssuerParserRequests() {
+        return issuerParserRequests;
+    }
+
+    public static class IssuerParserRequest {
+
+        private String url;
+
+        private String publicKeyLocationSuffix;
+
+        private boolean publicKeyLocationEnabled;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public IssuerParserRequest url(String url) {
+            setUrl(url);
+            return this;
+        }
+
+        public void setPublicKeyLocationSuffix(String publicKeyLocationSuffix) {
+            this.publicKeyLocationSuffix = publicKeyLocationSuffix;
+        }
+
+        public String getPublicKeyLocationSuffix() {
+            return publicKeyLocationSuffix;
+        }
+
+        public IssuerParserRequest publicKeyLocationSuffix(String publicKeyLocationSuffix) {
+            setPublicKeyLocationSuffix(publicKeyLocationSuffix);
+            return this;
+        }
+
+        public boolean getPublicKeyLocationEnabled() {
+            return publicKeyLocationEnabled;
+        }
+
+        public void setPublicKeyLocationEnabled(boolean publicKeyLocationEnabled) {
+            this.publicKeyLocationEnabled = publicKeyLocationEnabled;
+        }
+
+        public IssuerParserRequest publicKeyLocationEnabled(boolean publicKeyLocationEnabled) {
+            setPublicKeyLocationEnabled(publicKeyLocationEnabled);
+            return this;
+        }
     }
 }
