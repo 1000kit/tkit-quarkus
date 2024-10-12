@@ -127,6 +127,23 @@ endif::add-copy-button-to-env-var[]
 |string
 |`apm-principal-token`
 
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-parser-error-unauthorized]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-parser-error-unauthorized[`tkit.rs.context.token.parser-error-unauthorized`]##
+
+[.description]
+--
+Throw Unauthorized exception for any parser error. Return StatusCode 401.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_PARSER_ERROR_UNAUTHORIZED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_PARSER_ERROR_UNAUTHORIZED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-enabled[`tkit.rs.context.principal.name.enabled`]##
 
 [.description]
@@ -602,6 +619,74 @@ endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`true`
+
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-enabled[`tkit.rs.context.token.issuers."issuers".enabled`]##
+
+[.description]
+--
+Enable or disable oidc token config.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-url]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-url[`tkit.rs.context.token.issuers."issuers".url`]##
+
+[.description]
+--
+Token issuer value
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__URL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|required icon:exclamation-circle[title=Configuration property is required]
+
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-enabled[`tkit.rs.context.token.issuers."issuers".public-key-location.enabled`]##
+
+[.description]
+--
+Use token realm for the public key.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__PUBLIC_KEY_LOCATION_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__PUBLIC_KEY_LOCATION_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-suffix]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-suffix[`tkit.rs.context.token.issuers."issuers".public-key-location.suffix`]##
+
+[.description]
+--
+Public key server suffix
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__PUBLIC_KEY_LOCATION_SUFFIX+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__PUBLIC_KEY_LOCATION_SUFFIX+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`/protocol/openid-connect/certs`
 
 |===
 
