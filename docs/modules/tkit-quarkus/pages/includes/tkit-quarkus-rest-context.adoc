@@ -144,6 +144,57 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`true`
 
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-required-error-unauthorized]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-required-error-unauthorized[`tkit.rs.context.token.required-error-unauthorized`]##
+
+[.description]
+--
+Throw Unauthorized exception for required error. Return StatusCode 401.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_REQUIRED_ERROR_UNAUTHORIZED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_REQUIRED_ERROR_UNAUTHORIZED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`false`
+
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer-error-unauthorized]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer-error-unauthorized[`tkit.rs.context.token.check-tokens-issuer-error-unauthorized`]##
+
+[.description]
+--
+Throw Unauthorized exception if access token issuer does not equal to principal token issuer. Return StatusCode 401.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_CHECK_TOKENS_ISSUER_ERROR_UNAUTHORIZED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_CHECK_TOKENS_ISSUER_ERROR_UNAUTHORIZED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer[`tkit.rs.context.token.check-tokens-issuer`]##
+
+[.description]
+--
+Compare access token issuer with principal token issuer.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_CHECK_TOKENS_ISSUER+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_CHECK_TOKENS_ISSUER+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`false`
+
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-enabled[`tkit.rs.context.principal.name.enabled`]##
 
 [.description]
