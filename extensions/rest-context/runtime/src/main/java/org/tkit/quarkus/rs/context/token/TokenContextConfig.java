@@ -82,7 +82,7 @@ public interface TokenContextConfig {
          * Throw Unauthorized exception for any parser error. Return StatusCode 401.
          */
         @WithName("parser-error-unauthorized")
-        @WithDefault("true")
+        @WithDefault("false")
         boolean parserErrorUnauthorized();
 
         /**
