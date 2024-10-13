@@ -142,7 +142,7 @@ Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_PARSER_ERROR_UNAUTHORIZED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-required-error-unauthorized]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-required-error-unauthorized[`tkit.rs.context.token.required-error-unauthorized`]##
 
