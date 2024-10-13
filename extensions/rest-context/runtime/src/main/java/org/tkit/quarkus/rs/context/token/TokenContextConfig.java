@@ -104,7 +104,7 @@ public interface TokenContextConfig {
          * Compare access token issuer with principal token issuer.
          */
         @WithName("check-tokens-issuer")
-        @WithDefault("true")
+        @WithDefault("false")
         boolean checkTokensIssuer();
     }
 
