@@ -23,7 +23,6 @@
         <module>panache</module>
         <module>panache-reactive</module>
         <module>rs-client</module>
-        <module>rs-client-reactive</module>
         <module>rest-context</module>
         <module>rest-context-multi-kc</module>
         <module>security-test</module>
