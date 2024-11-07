@@ -116,6 +116,14 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <!-- Build -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
