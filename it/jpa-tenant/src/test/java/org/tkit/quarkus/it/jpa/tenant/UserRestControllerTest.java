@@ -159,4 +159,103 @@ public class UserRestControllerTest extends AbstractTest {
         Assertions.assertNotNull(find);
         Assertions.assertEquals(tmp.getId(), find.getId());
     }
+
+    @Test
+    public void createUserTest2() {
+        User user = new User();
+        user.username = "RestName";
+
+        User tmp = given()
+                .contentType(ContentType.JSON)
+                .header(APM_HEADER_PARAM, createToken("*"))
+                .body(user)
+                .post()
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract().body().as(User.class);
+
+        var resp = given()
+                .header(APM_HEADER_PARAM, createToken("*"))
+                .get()
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract().as(UserListDTO.class);
+
+        Assertions.assertNotNull(resp);
+        Assertions.assertNotNull(resp.items);
+        Assertions.assertEquals(9, resp.items.size());
+
+        User find = given()
+                .contentType(ContentType.JSON)
+                .header(APM_HEADER_PARAM, createToken("*"))
+                .pathParam("id", tmp.getId())
+                .get("{id}")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract().body().as(User.class);
+
+        Assertions.assertNotNull(find);
+        Assertions.assertEquals(tmp.getId(), find.getId());
+    }
+
+    @Test
+    public void deleteAllTest() {
+
+        var resp = given()
+                .header(APM_HEADER_PARAM, createToken("*"))
+                .get()
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract().as(UserListDTO.class);
+
+        Assertions.assertNotNull(resp);
+        Assertions.assertNotNull(resp.items);
+        Assertions.assertEquals(8, resp.items.size());
+
+        given()
+                .header(APM_HEADER_PARAM, createToken("*"))
+                .delete()
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode());
+
+        resp = given()
+                .header(APM_HEADER_PARAM, createToken("*"))
+                .get()
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract().as(UserListDTO.class);
+
+        Assertions.assertNotNull(resp);
+        Assertions.assertNotNull(resp.items);
+        Assertions.assertEquals(0, resp.items.size());
+    }
+
+    @Test
+    public void createUserCustomTest() {
+        String tenantId = "999";
+
+        UserDTO user = new UserDTO();
+        user.username = "RestName";
+
+        UserDTO tmp = given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .post("custom/" + tenantId)
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract().body().as(UserDTO.class);
+
+        UserDTO find = given()
+                .contentType(ContentType.JSON)
+                .header(APM_HEADER_PARAM, createToken("*"))
+                .pathParam("id", tmp.id)
+                .get("{id}")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract().body().as(UserDTO.class);
+
+        Assertions.assertNotNull(find);
+        Assertions.assertEquals(tmp.id, find.id);
+        Assertions.assertEquals(tenantId, tmp.tenantId);
+    }
 }

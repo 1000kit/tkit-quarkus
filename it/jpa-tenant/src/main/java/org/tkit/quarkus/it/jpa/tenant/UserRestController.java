@@ -6,6 +6,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import org.tkit.quarkus.context.ApplicationContext;
+import org.tkit.quarkus.context.Context;
+
 @Path("users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,12 +24,7 @@ public class UserRestController {
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        UserDTO dto = new UserDTO();
-        dto.modificationCount = user.getModificationCount();
-        dto.id = user.getId();
-        dto.username = user.username;
-        dto.email = user.email;
-        return Response.ok(dto).build();
+        return Response.ok(map(user)).build();
     }
 
     @POST
@@ -37,6 +35,30 @@ public class UserRestController {
         dao.create(user);
 
         return Response.ok(user).build();
+    }
+
+    @POST
+    @Path("custom/{tenantId}")
+    public Response createCustom(@PathParam("tenantId") String tenantId, UserDTO dto) {
+
+        try {
+            var ctx = Context.builder()
+                    .principal("test")
+                    .tenantId(ApplicationContext.get().getTenantId())
+                    .build();
+
+            ApplicationContext.start(ctx);
+
+            User user = new User();
+            user.username = dto.username;
+            user.email = dto.email;
+            user.tenantId = tenantId;
+            user = dao.create(user);
+
+            return Response.ok(map(user)).build();
+        } finally {
+            ApplicationContext.close();
+        }
     }
 
     @PUT
@@ -54,26 +76,30 @@ public class UserRestController {
         } catch (OptimisticLockException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
-        UserDTO r = new UserDTO();
-        r.modificationCount = user.getModificationCount();
-        r.id = user.getId();
-        r.username = user.username;
-        r.email = user.email;
-
-        return Response.ok(r).build();
+        return Response.ok(map(user)).build();
     }
 
     @GET
     public Response all() {
         UserListDTO dto = new UserListDTO();
-        dto.items = dao.findAll().map(user -> {
-            UserDTO r = new UserDTO();
-            r.modificationCount = user.getModificationCount();
-            r.id = user.getId();
-            r.username = user.username;
-            r.email = user.email;
-            return r;
-        }).toList();
+        dto.items = dao.findAll().map(this::map).toList();
         return Response.ok(dto).build();
     }
+
+    @DELETE
+    public Response deleteAll() {
+        dao.deleteAll();
+        return Response.ok().build();
+    }
+
+    private UserDTO map(User user) {
+        UserDTO dto = new UserDTO();
+        dto.tenantId = user.tenantId;
+        dto.id = user.getId();
+        dto.email = user.email;
+        dto.username = user.username;
+        dto.modificationCount = user.getModificationCount();
+        return dto;
+    }
+
 }
