@@ -43,8 +43,8 @@ public class UserRestController {
 
         try {
             var ctx = Context.builder()
-                    .principal("test")
-                    .tenantId(ApplicationContext.get().getTenantId())
+                    .principal(ApplicationContext.get().getPrincipal())
+                    .tenantId(tenantId)
                     .build();
 
             ApplicationContext.start(ctx);
