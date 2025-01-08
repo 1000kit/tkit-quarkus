@@ -20,6 +20,7 @@
     <modules>
         <module>amqp</module>
         <module>jpa</module>
+        <module>jpa-tenant</module>
         <module>panache</module>
         <module>panache-reactive</module>
         <module>rs-client</module>

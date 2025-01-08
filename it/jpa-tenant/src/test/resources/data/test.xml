@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <T_USER guid="GUID_1" optlock="1" username="TestUser" email="test@test" tenant_id="default"/>
+    <T_USER guid="GUID_2" optlock="1" username="TestUser" email="test@test" tenant_id="default"/>
+    <T_USER guid="GUID_3" optlock="3" username="TestUser" email="test@test" tenant_id="default"/>
+    <T_USER guid="GUID_4" optlock="3" username="TestUser" email="test@test" tenant_id="default"/>
+    <T_USER guid="U_GUID_3" optlock="3" username="TestUser" email="test@test" tenant_id="default"/>
+    <T_USER guid="U_GUID_4" optlock="3" username="TestUser" email="test@test" tenant_id="default"/>
+
+    <T_USER guid="A_GUID_1" optlock="1" username="TestUser" email="test@test" tenant_id="100"/>
+    <T_USER guid="A_GUID_2" optlock="1" username="TestUser" email="test@test" tenant_id="100"/>
+</dataset>

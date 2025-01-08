@@ -25,6 +25,40 @@ endif::add-copy-button-to-env-var[]
 |string
 |`default`
 
+a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-enabled]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-enabled[`tkit.jpa.tenant.root.enabled`]##
+
+[.description]
+--
+Root tenant resolver enabled.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_JPA_TENANT_ROOT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_JPA_TENANT_ROOT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`false`
+
+a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-value]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-value[`tkit.jpa.tenant.root.value`]##
+
+[.description]
+--
+Root tenant resolver value.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_JPA_TENANT_ROOT_VALUE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_JPA_TENANT_ROOT_VALUE+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`*`
+
 |===
 
 
