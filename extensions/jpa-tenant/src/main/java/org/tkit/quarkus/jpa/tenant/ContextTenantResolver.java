@@ -49,6 +49,6 @@ public class ContextTenantResolver implements TenantResolver {
         if (config.root().enabled()) {
             return config.root().value().equals(tenantId);
         }
-        return TenantResolver.super.isRoot(tenantId);
+        return false;
     }
 }
