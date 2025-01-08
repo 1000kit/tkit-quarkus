@@ -20,4 +20,23 @@ public interface SecurityConfig {
     @WithName("auth.enabled")
     @WithDefault("true")
     boolean enabled();
+
+    /**
+     * Security events
+     */
+    @WithName("Events")
+    Events events();
+
+    /**
+     * Security events
+     */
+    interface Events {
+
+        /**
+         * Log security events
+         */
+        @WithName("log")
+        @WithDefault("true")
+        boolean log();
+    }
 }
