@@ -19,15 +19,13 @@ import io.restassured.http.ContentType;
 public class UserRestControllerLogTest {
 
     @Test
-    public void testUserRestClientUnauthorized() {
+    public void testSecurityLogEvents() {
+
         given().contentType(ContentType.JSON)
                 .get("/401")
                 .then()
                 .statusCode(Response.Status.UNAUTHORIZED.getStatusCode());
-    }
 
-    @Test
-    public void testUserRestClientForbidden() {
         given().contentType(ContentType.JSON)
                 .auth().oauth2(getKeycloakClientToken("log-client"))
                 .get("/403")
@@ -35,4 +33,28 @@ public class UserRestControllerLogTest {
                 .statusCode(Response.Status.FORBIDDEN.getStatusCode());
     }
 
+    @Test
+    public void testSecurityLogEvents2() {
+
+        given().contentType(ContentType.JSON)
+                .auth().oauth2(getKeycloakClientToken("log-client") + "a")
+                .get("/WRONG_TOKEN")
+                .then()
+                .statusCode(Response.Status.UNAUTHORIZED.getStatusCode());
+    }
+
+    @Test
+    public void testSecurityNoneLogEvents() {
+
+        given().contentType(ContentType.JSON)
+                .get("none/401")
+                .then()
+                .statusCode(Response.Status.UNAUTHORIZED.getStatusCode());
+
+        given().contentType(ContentType.JSON)
+                .auth().oauth2(getKeycloakClientToken("log-client"))
+                .get("none/403")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
 }
