@@ -25,6 +25,23 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`true`
 
+a| [[tkit-quarkus-security_tkit-security-events-log]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-log[`tkit.security.Events.log`]##
+
+[.description]
+--
+Log security events
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_EVENTS_LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_EVENTS_LOG+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
 |===
 
 

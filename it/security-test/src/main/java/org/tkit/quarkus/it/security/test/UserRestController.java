@@ -26,4 +26,10 @@ public class UserRestController {
     public Response createUser(@RestPath("id") String id, String data) {
         return Response.ok().build();
     }
+
+    @GET
+    @Path("none/{id}")
+    public Response getNone(@RestPath("id") String id) {
+        return Response.ok().build();
+    }
 }
