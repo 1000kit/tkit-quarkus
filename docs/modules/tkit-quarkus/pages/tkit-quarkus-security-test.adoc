@@ -37,21 +37,36 @@ e.g.
 *mvn clean verify -Dtkit.security-test.disabled=true*
 
 
-=== Security Tests
+=== OpenAPI Security Tests
 
-[source,java]
+To registry default security tests you need to add this library to the `maven-surefire-plugin` class-path.
+
+[source,xml,subs=attributes+]
 ----
-@QuarkusTest
-public class SecurityTest extends AbstractSecurityTest {
-    @Override
-    public SecurityTestConfig getConfig() {
-        SecurityTestConfig config = new SecurityTestConfig();
-        config.addConfig("write", "/users/1", 200, List.of("ocx-user:write"), "post");
-        config.addConfig("read", "/users/1", 200, List.of("ocx-user:read"), "get");
-        return config;
-    }
-}
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+        <dependenciesToScan>
+            <dependency>org.tkit.quarkus.lib:tkit-quarkus-security-test</dependency>
+        </dependenciesToScan>
+    </configuration>
+</plugin>
+----
 
+This will start `org.tkit.quarkus.security.test.openapi.SecurityDynamicTest` be default.
+
+To run this test as an integration test, you need to add this class to your project:
+
+[source,java,subs=attributes+]
+----
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+import org.tkit.quarkus.security.test.openapi.SecurityDynamicTest;
+
+@QuarkusIntegrationTest
+public class SecurityDynamicTestIT extends SecurityDynamicTest {
+
+}
 ----
 
 === Generate Keycloak clients via annotation
@@ -92,3 +107,7 @@ Generated for the annotated method
     }
 
 ----
+
+=== Configuration
+
+include::includes/tkit-quarkus-security-test.adoc[leveloffset=+1, opts=optional]
