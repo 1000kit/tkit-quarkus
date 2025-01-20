@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @deprecated the SecurityDynamicTest is used
+ */
 @Deprecated
 public abstract class AbstractSecurityTest {
     private static final Logger log = LoggerFactory.getLogger(AbstractSecurityTest.class);

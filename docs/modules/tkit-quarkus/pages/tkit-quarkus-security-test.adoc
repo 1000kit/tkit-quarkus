@@ -56,6 +56,18 @@ To registry default security tests you need to add this library to the `maven-su
 
 This will start `org.tkit.quarkus.security.test.openapi.SecurityDynamicTest` be default.
 
+To run this test as an integration test, you need to add this class to your project:
+
+[source,java,subs=attributes+]
+----
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+import org.tkit.quarkus.security.test.openapi.SecurityDynamicTest;
+
+@QuarkusIntegrationTest
+public class SecurityDynamicTestIT extends SecurityDynamicTest {
+
+}
+----
 
 === Generate Keycloak clients via annotation
 
