@@ -7,6 +7,7 @@ import java.util.Map;
 /**
  * Configurations for security tests
  */
+@Deprecated
 public class SecurityTestConfig {
 
     /**

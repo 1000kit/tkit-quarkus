@@ -37,22 +37,25 @@ e.g.
 *mvn clean verify -Dtkit.security-test.disabled=true*
 
 
-=== Security Tests
+=== OpenAPI Security Tests
 
-[source,java]
-----
-@QuarkusTest
-public class SecurityTest extends AbstractSecurityTest {
-    @Override
-    public SecurityTestConfig getConfig() {
-        SecurityTestConfig config = new SecurityTestConfig();
-        config.addConfig("write", "/users/1", 200, List.of("ocx-user:write"), "post");
-        config.addConfig("read", "/users/1", 200, List.of("ocx-user:read"), "get");
-        return config;
-    }
-}
+To registry default security tests you need to add this library to the `maven-surefire-plugin` class-path.
 
+[source,xml,subs=attributes+]
 ----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+        <dependenciesToScan>
+            <dependency>org.tkit.quarkus.lib:tkit-quarkus-security-test</dependency>
+        </dependenciesToScan>
+    </configuration>
+</plugin>
+----
+
+This will start `org.tkit.quarkus.security.test.openapi.SecurityDynamicTest` be default.
+
 
 === Generate Keycloak clients via annotation
 
@@ -92,3 +95,7 @@ Generated for the annotated method
     }
 
 ----
+
+=== Configuration
+
+include::includes/tkit-quarkus-security-test.adoc[leveloffset=+1, opts=optional]
