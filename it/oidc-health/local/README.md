@@ -16,7 +16,7 @@ curl -v -X GET -H "Authorization: Bearer $TKPR" -H "ContentType: application/jso
 ```
 
 ```shell
-docker compose start postgres keycloak-private keycloak-public
+docker compose start keycloak-public
 ```
 
 ```shell

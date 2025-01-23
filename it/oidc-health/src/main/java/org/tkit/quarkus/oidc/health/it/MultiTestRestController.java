@@ -1,4 +1,4 @@
-package org.tkit.quarkus.rs.context.it;
+package org.tkit.quarkus.oidc.health.it;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
