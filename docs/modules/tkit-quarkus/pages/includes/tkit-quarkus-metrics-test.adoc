@@ -1,0 +1,48 @@
+:summaryTableId: tkit-quarkus-metrics-test
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[.header-title]##Configuration property##
+h|Type
+h|Default
+
+a| [[tkit-quarkus-metrics-test_tkit-metrics-test-disabled]] [.property-path]##link:#tkit-quarkus-metrics-test_tkit-metrics-test-disabled[`tkit.metrics-test.disabled`]##
+
+[.description]
+--
+This property is used to disable MetricsDynamicTest and must be configured in the maven-surefire-plugin.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_METRICS_TEST_DISABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_METRICS_TEST_DISABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`false`
+
+a| [[tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys]] [.property-path]##link:#tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys[`tkit.metrics-test.keys."keys"`]##
+
+[.description]
+--
+This property is used to define a list of metric keys.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_METRICS_TEST_KEYS__KEYS_+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_METRICS_TEST_KEYS__KEYS_+++`
+endif::add-copy-button-to-env-var[]
+--
+|Map<String,List<String>>
+|
+
+|===
+
+
+:!summaryTableId:
