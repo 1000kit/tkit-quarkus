@@ -28,6 +28,7 @@
         <module>rest-context</module>
         <module>rest-context-multi-kc</module>
         <module>security-test</module>
+        <module>oidc-health</module>
     </modules>
 
     <profiles>
