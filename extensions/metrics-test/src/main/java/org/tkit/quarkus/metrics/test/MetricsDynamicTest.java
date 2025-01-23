@@ -25,7 +25,7 @@ public class MetricsDynamicTest {
     private static final String CONFIG_PREFIX = "tkit.metrics-test.keys";
 
     @TestFactory
-    Stream<DynamicTest> testMetric() throws Exception {
+    Stream<DynamicTest> testMetric() {
 
         // Parse metrics
         var metricNames = new String(loadMetrics()).lines()
@@ -67,5 +67,4 @@ public class MetricsDynamicTest {
         }
         return metricKeysToTest;
     }
-
 }
