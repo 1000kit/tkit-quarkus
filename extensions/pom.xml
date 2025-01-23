@@ -26,6 +26,7 @@
         <module>test-db-import</module>
         <module>security</module>
         <module>security-test</module>
+        <module>metrics-test</module>
         <module>test</module>
     </modules>
     <dependencies>

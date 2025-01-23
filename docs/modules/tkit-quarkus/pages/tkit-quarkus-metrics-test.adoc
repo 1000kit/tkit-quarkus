@@ -1,0 +1,74 @@
+== tkit-quarkus-metrics-test
+include::./includes/attributes.adoc[]
+
+
+Metrics test configuration
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-metrics-test` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-metrics-test</artifactId>
+    <version>{project-version}</version>
+    <scope>test</scope>
+</dependency>
+----
+
+=== Usage
+
+To work in @QuarkusIntegrationTest tests set the property
+
+**quarkus.test.enable-callbacks-for-integration-tests = true**
+
+in your application.properties.
+
+
+To deactivate the automated metrics tests use
+
+*-Dtkit.metrics-test.disabled=true* as system property
+
+e.g.
+*mvn clean verify -Dtkit.metrics-test.disabled=true*
+
+
+=== Metrics Tests
+
+To registry default metrics tests you need to add this library to the `maven-surefire-plugin` class-path.
+
+[source,xml,subs=attributes+]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+        <dependenciesToScan>
+            <dependency>org.tkit.quarkus.lib:tkit-quarkus-metrics-test</dependency>
+        </dependenciesToScan>
+    </configuration>
+</plugin>
+----
+
+This will start `org.tkit.quarkus.metrics.test.MetricsDynamicTest` be default.
+
+To run this test as an integration test, you need to add this class to your project:
+
+[source,java,subs=attributes+]
+----
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+import org.tkit.quarkus.metrics.test.MetricsDynamicTest;
+
+@QuarkusIntegrationTest
+public class MetricsDynamicTestIT extends MetricsDynamicTest {
+
+}
+----
+
+=== Configuration
+
+include::includes/tkit-quarkus-metrics-test.adoc[leveloffset=+1, opts=optional]
