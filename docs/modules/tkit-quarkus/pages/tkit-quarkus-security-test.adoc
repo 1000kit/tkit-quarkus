@@ -47,6 +47,12 @@ To registry default security tests you need to add this library to the `maven-su
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-surefire-plugin</artifactId>
     <configuration>
+        <systemPropertyVariables>
+            <tkit.metrics-test.keys.quarkus.datasource>agroal_awaiting_count,agroal_max_used_count,agroal_creation_time_max_milliseconds,agroal_destroy_count_total</tkit.metrics-test.keys.quarkus.datasource>
+            <tkit.metrics-test.keys.quarkus.hibernate-orm>hibernate_transactions_total,hibernate_query_executions_total</tkit.metrics-test.keys.quarkus.hibernate-orm>
+            <tkit.metrics-test.keys.quarkus.http>http_server_requests_seconds_count,http_server_requests_seconds_max</tkit.metrics-test.keys.quarkus.http>
+            <tkit.metrics-test.keys.quarkus.rest-client>http_client_requests_seconds_count,http_client_requests_seconds_max</tkit.metrics-test.keys.quarkus.rest-client>
+        </systemPropertyVariables>
         <dependenciesToScan>
             <dependency>org.tkit.quarkus.lib:tkit-quarkus-security-test</dependency>
         </dependenciesToScan>
@@ -55,6 +61,8 @@ To registry default security tests you need to add this library to the `maven-su
 ----
 
 This will start `org.tkit.quarkus.security.test.openapi.SecurityDynamicTest` be default.
+
+In this example, we also enable some metrics. For example `<tkit.metrics-test.keys.quarkus.hibernate-orm>` configuration. If the test finds a system property that starts with a `quarkus.hibernate-orm`, `hibernate_transactions_total` metric is mandatory, and if the test does not find this metric key, it fails.
 
 To run this test as an integration test, you need to add this class to your project:
 
