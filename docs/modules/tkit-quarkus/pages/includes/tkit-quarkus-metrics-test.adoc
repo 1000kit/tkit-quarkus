@@ -29,7 +29,7 @@ a| [[tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys]] [.property-path]##l
 
 [.description]
 --
-This property is used to define a list of metric keys.
+This property is used to define a list of metric keys. Key is prefix of the system property. Test will check if key exists with `startWith` method.
 
 
 ifdef::add-copy-button-to-env-var[]

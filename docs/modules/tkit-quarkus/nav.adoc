@@ -15,3 +15,4 @@
 * xref:tkit-quarkus-security-test.adoc[Rest Security Tests]
 * xref:tkit-quarkus-metrics-test.adoc[Metrics Tests]
 * xref:tkit-quarkus-test.adoc[Tests]
+* xref:tkit-quarkus-agroal.adoc[Agroal]

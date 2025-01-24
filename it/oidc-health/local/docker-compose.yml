@@ -1,6 +1,5 @@
 services:
   autoheal:
-    restart: always
     image: willfarrell/autoheal
     environment:
       - AUTOHEAL_CONTAINER_LABEL=all
@@ -8,7 +7,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
   app:
     image: tkit-quarkus-it-oidc-health:999-SNAPSHOT
-    restart: always
     ports:
       - "8080:8080"
     environment:

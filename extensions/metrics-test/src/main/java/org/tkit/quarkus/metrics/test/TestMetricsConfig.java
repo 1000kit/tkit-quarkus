@@ -27,6 +27,7 @@ public interface TestMetricsConfig {
 
     /**
      * This property is used to define a list of metric keys.
+     * Key is prefix of the system property. Test will check if key exists with {@code startWith} method.
      */
     @WithName("keys")
     Map<String, List<String>> keys();

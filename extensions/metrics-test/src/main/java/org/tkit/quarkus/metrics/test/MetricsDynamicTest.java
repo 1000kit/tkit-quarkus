@@ -28,7 +28,7 @@ public class MetricsDynamicTest {
     Stream<DynamicTest> testMetric() {
 
         // Parse metrics
-        var metricNames = new String(loadMetrics()).lines()
+        var metricNames = loadMetrics().lines()
                 .filter(s -> !s.startsWith("#"))
                 .map(s -> s.split("\\{")[0])
                 .map(s -> s.split(" ")[0])
@@ -36,31 +36,35 @@ public class MetricsDynamicTest {
 
         log.debug("MetricNames: {}", metricNames);
         return getMetricKeys().stream().map(s -> DynamicTest.dynamicTest("Metrics test " + s, () -> {
-            log.info("Test metric: {}", s);
-            assertTrue(metricNames.contains(s));
+            log.debug("Test metric: {}", s);
+            assertTrue(metricNames.contains(s), "Missing metric '" + s + "'");
         }));
 
     }
 
-    public byte[] loadMetrics() {
+    public String loadMetrics() {
         return given()
                 .when()
                 .get("/q/metrics")
                 .then()
                 .statusCode(200)
-                .extract().asByteArray();
+                .extract().asString();
     }
 
     public Set<String> getMetricKeys() {
         SmallRyeConfig config = ConfigProvider.getConfig().unwrap(SmallRyeConfig.class);
         var keys = config.getMapKeys(CONFIG_PREFIX)
                 .keySet();
-        log.info("Metric keys: {}", keys);
-        Set<String> metricKeysToTest = new HashSet<>();
 
+        if (log.isDebugEnabled()) {
+            log.debug("Metric keys: {}", keys);
+            log.debug("Property names: {}", config.getPropertyNames());
+        }
+
+        Set<String> metricKeysToTest = new HashSet<>();
         for (String entry : config.getPropertyNames()) {
             for (String key : keys) {
-                if (entry.contains(key)) {
+                if (entry.startsWith(key)) {
                     metricKeysToTest.addAll(config.getValues(CONFIG_PREFIX + "." + key, String.class));
                 }
             }
