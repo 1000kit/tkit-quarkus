@@ -10,6 +10,7 @@
 * xref:tkit-quarkus-log-rs.adoc[Rest Log Interceptor]
 * xref:tkit-quarkus-rest.adoc[Rest Extension]
 * xref:tkit-quarkus-rest-context.adoc[Rest Context Extension]
+* xref:tkit-quarkus-oidc-health.adoc[OIDC health check Extension]
 * xref:tkit-quarkus-security.adoc[Rest Security]
 * xref:tkit-quarkus-security-test.adoc[Rest Security Tests]
 * xref:tkit-quarkus-metrics-test.adoc[Metrics Tests]
