@@ -15,6 +15,7 @@
     <modules>
         <module>context</module>
         <module>oidc-health</module>
+        <module>agroal</module>
         <module>log</module>
         <module>jpa-models</module>
         <module>jpa</module>

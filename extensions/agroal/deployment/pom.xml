@@ -10,22 +10,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tkit-quarkus-jpa-deployment</artifactId>
-    <name>tkit-quarkus-jpa-deployment</name>
+    <artifactId>tkit-quarkus-agroal-deployment</artifactId>
+    <name>tkit-quarkus-agroal-deployment</name>
 
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-orm-deployment</artifactId>
+            <artifactId>quarkus-agroal-deployment</artifactId>
         </dependency>
         <dependency>
             <groupId>org.tkit.quarkus.lib</groupId>
-            <artifactId>tkit-quarkus-agroal-deployment</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tkit.quarkus.lib</groupId>
-            <artifactId>tkit-quarkus-jpa</artifactId>
+            <artifactId>tkit-quarkus-agroal</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
