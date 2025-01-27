@@ -92,8 +92,11 @@ public class SecurityDynamicTest {
         var data = loadOpenapi();
         OpenAPI openAPI = OpenApiParser.parse(new ByteArrayInputStream(data), Format.YAML);
 
-        List<DynamicTest> items = new ArrayList<>();
+        if (openAPI.getPaths() == null || openAPI.getPaths().getPathItems() == null) {
+            return Stream.empty();
+        }
 
+        List<DynamicTest> items = new ArrayList<>();
         for (var pathItem : openAPI.getPaths().getPathItems().entrySet()) {
 
             var path = pathItem.getKey();
@@ -112,6 +115,9 @@ public class SecurityDynamicTest {
                 }
             }
 
+            if (item.getOperations() == null) {
+                continue;
+            }
             for (var tmp : item.getOperations().entrySet()) {
 
                 var op = tmp.getValue();
