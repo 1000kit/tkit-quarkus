@@ -11,6 +11,7 @@ import org.tkit.quarkus.security.test.GenerateKeycloakClient;
 
 import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 @QuarkusTest
 @GenerateKeycloakClient(clientName = "testClient", scopes = { "ocx-user:read", "ocx-user:write" })
@@ -19,7 +20,7 @@ public class UserRestControllerTest {
 
     @Test
     public void testUserRestClient() {
-        given().header("Content-Type", "application/json")
+        given().contentType(ContentType.JSON)
                 .auth().oauth2(getKeycloakClientToken("testClient"))
                 .get("/1")
                 .then()
@@ -29,7 +30,7 @@ public class UserRestControllerTest {
     @Test
     @GenerateKeycloakClient(clientName = "methodLevelClient", scopes = { "ocx-user:read", "ocx-user:write" })
     public void testCreateUserRestClient() {
-        given().header("Content-Type", "application/json")
+        given().contentType(ContentType.JSON)
                 .body("{\"id\":\"2\"}")
                 .auth().oauth2(getKeycloakClientToken("methodLevelClient"))
                 .post("/2")
@@ -39,7 +40,7 @@ public class UserRestControllerTest {
 
     @Test
     public void testUserRestClient2() {
-        given().header("Content-Type", "application/json")
+        given().contentType(ContentType.JSON)
                 .auth().oauth2(getKeycloakClientToken("testClient"))
                 .get("/1")
                 .then()

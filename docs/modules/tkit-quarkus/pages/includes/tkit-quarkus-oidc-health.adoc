@@ -1,0 +1,62 @@
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[.header-title]##Configuration property##
+h|Type
+h|Default
+
+a| [[tkit-quarkus-oidc-health_tkit-oidc-health-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-enabled[`tkit.oidc.health.enabled`]##
+
+[.description]
+--
+Enable or disable oidc health check.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_OIDC_HEALTH_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_OIDC_HEALTH_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-oidc-health_tkit-oidc-health-default-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-default-enabled[`tkit.oidc.health.default.enabled`]##
+
+[.description]
+--
+Enable or disable default tenant oidc health check.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_OIDC_HEALTH_DEFAULT_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_OIDC_HEALTH_DEFAULT_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-oidc-health_tkit-oidc-health-static-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-static-enabled[`tkit.oidc.health.static.enabled`]##
+
+[.description]
+--
+Enable or disable static tenant oidc health check.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_OIDC_HEALTH_STATIC_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_OIDC_HEALTH_STATIC_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+|===
+

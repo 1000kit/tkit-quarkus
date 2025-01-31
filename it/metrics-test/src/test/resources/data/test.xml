@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <T_USER guid="GUID_3" optlock="3" username="TestUser" email="test@test"/>
+    <T_USER guid="GUID_4" optlock="3" username="TestUser" email="test@test"/>
+</dataset>

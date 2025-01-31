@@ -20,4 +20,30 @@ public interface ContextTenantResolverConfig {
     @WithName("default")
     @WithDefault("default")
     String defaultTenantValue();
+
+    /**
+     * Root tenant resolver.
+     */
+    @WithName("root")
+    RootConfig root();
+
+    /**
+     * Root tenant resolver.
+     */
+    interface RootConfig {
+
+        /**
+         * Root tenant resolver enabled.
+         */
+        @WithName("enabled")
+        @WithDefault("false")
+        boolean enabled();
+
+        /**
+         * Root tenant resolver value.
+         */
+        @WithName("value")
+        @WithDefault("*")
+        String value();
+    }
 }

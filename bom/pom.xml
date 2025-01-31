@@ -22,6 +22,16 @@
             </dependency>
             <dependency>
                 <groupId>org.tkit.quarkus.lib</groupId>
+                <artifactId>tkit-quarkus-agroal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus.lib</groupId>
+                <artifactId>tkit-quarkus-oidc-health</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -83,6 +93,11 @@
             <dependency>
                 <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus.lib</groupId>
+                <artifactId>tkit-quarkus-metrics-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

@@ -1,0 +1,25 @@
+== tkit-quarkus-test
+
+include::./includes/attributes.adoc[]
+
+Agroal extension
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-agroal` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-agroal</artifactId>
+    <version>{project-version}</version>
+    <scope>test</scope>
+</dependency>
+----
+
+=== Configuration
+
+include::includes/tkit-quarkus-agroal.adoc[leveloffset=+1, opts=optional]

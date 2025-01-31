@@ -14,6 +14,8 @@
 
     <modules>
         <module>context</module>
+        <module>oidc-health</module>
+        <module>agroal</module>
         <module>log</module>
         <module>jpa-models</module>
         <module>jpa</module>
@@ -24,6 +26,7 @@
         <module>test-db-import</module>
         <module>security</module>
         <module>security-test</module>
+        <module>metrics-test</module>
         <module>test</module>
     </modules>
     <dependencies>

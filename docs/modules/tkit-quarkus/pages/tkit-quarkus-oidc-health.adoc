@@ -1,0 +1,45 @@
+== tkit-quarkus-oidc-health
+
+include::./includes/attributes.adoc[]
+
+Enhanced OIDC health check.
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-oidc-health` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-oidc-health</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== Usage
+
+If any of the OIDC tenant configurations fail to initialize correctly, the health check status of the application is `DOWN`.
+
+[source,json,subs=attributes+]
+----
+{
+    "status": "DOWN",
+    "checks": [
+        {
+            "name": "OIDC tenant meta-data health check",
+            "status": "DOWN",
+            "data": {
+                "tenant": "kc1",
+                "status": "missing"
+            }
+        }
+    ]
+}
+----
+
+=== Configuration
+
+include::includes/tkit-quarkus-oidc-health.adoc[leveloffset=+1, opts=optional]

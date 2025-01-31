@@ -6,7 +6,10 @@ import java.util.Map;
 
 /**
  * Configurations for security tests
+ *
+ * @deprecated the SecurityDynamicTest is used
  */
+@Deprecated
 public class SecurityTestConfig {
 
     /**

@@ -20,6 +20,7 @@
     <modules>
         <module>amqp</module>
         <module>jpa</module>
+        <module>jpa-tenant</module>
         <module>panache</module>
         <module>panache-reactive</module>
         <module>rs-client</module>
@@ -27,6 +28,8 @@
         <module>rest-context</module>
         <module>rest-context-multi-kc</module>
         <module>security-test</module>
+        <module>metrics-test</module>
+        <module>oidc-health</module>
     </modules>
 
     <profiles>

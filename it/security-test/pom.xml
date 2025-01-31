@@ -20,6 +20,14 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest</artifactId>
         </dependency>
         <dependency>
@@ -44,8 +52,14 @@
         </dependency>
         <dependency>
             <groupId>org.tkit.quarkus.lib</groupId>
+            <artifactId>tkit-quarkus-security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tkit.quarkus.lib</groupId>
             <artifactId>tkit-quarkus-security-test</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -63,7 +77,11 @@
                         <com.arjuna.ats.arjuna.objectstore.objectStoreDir>${project.build.directory}/jta</com.arjuna.ats.arjuna.objectstore.objectStoreDir>
                         <ObjectStoreEnvironmentBean.objectStoreDir>${project.build.directory}/jta</ObjectStoreEnvironmentBean.objectStoreDir>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
+                    <dependenciesToScan>
+                        <dependency>org.tkit.quarkus.lib:tkit-quarkus-security-test</dependency>
+                    </dependenciesToScan>
                 </configuration>
             </plugin>
             <plugin>
@@ -78,6 +96,7 @@
                         <configuration>
                             <systemPropertyVariables>
                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                                <tkit.test.integration-test-enabled>true</tkit.test.integration-test-enabled>
                             </systemPropertyVariables>
                         </configuration>
                     </execution>

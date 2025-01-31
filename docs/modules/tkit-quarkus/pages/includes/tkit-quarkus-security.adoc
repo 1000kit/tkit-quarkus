@@ -24,5 +24,73 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`true`
 
+a| [[tkit-quarkus-security_tkit-security-events-authorization-log]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authorization-log[`tkit.security.events.authorization.log`]##
+
+[.description]
+--
+Log security events
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_EVENTS_AUTHORIZATION_LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_EVENTS_AUTHORIZATION_LOG+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-security_tkit-security-events-authorization-template]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authorization-template[`tkit.security.events.authorization.template`]##
+
+[.description]
+--
+Message template 1 - request method 2 - request path 3 - principal name
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_EVENTS_AUTHORIZATION_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_EVENTS_AUTHORIZATION_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`Authorization failed, response 403, request %1$s %2$s`
+
+a| [[tkit-quarkus-security_tkit-security-events-authentication-log]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authentication-log[`tkit.security.events.authentication.log`]##
+
+[.description]
+--
+Log security events
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_EVENTS_AUTHENTICATION_LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_EVENTS_AUTHENTICATION_LOG+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a| [[tkit-quarkus-security_tkit-security-events-authentication-template]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authentication-template[`tkit.security.events.authentication.template`]##
+
+[.description]
+--
+Message template 1 - request method 2 - request path
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_EVENTS_AUTHENTICATION_TEMPLATE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_EVENTS_AUTHENTICATION_TEMPLATE+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`Authentication failed, response 401, request %1$s %2$s`
+
 |===
 

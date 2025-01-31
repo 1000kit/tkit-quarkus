@@ -20,4 +20,74 @@ public interface SecurityConfig {
     @WithName("auth.enabled")
     @WithDefault("true")
     boolean enabled();
+
+    /**
+     * Security events
+     */
+    @WithName("events")
+    Events events();
+
+    /**
+     * Security events
+     */
+    interface Events {
+
+        /**
+         * Authorization events config.
+         */
+        @WithName("authorization")
+        Authorization authorization();
+
+        /**
+         * Authentication events config.
+         */
+        @WithName("authentication")
+        Authentication authentication();
+
+    }
+
+    /**
+     * Authorization events config.
+     */
+    interface Authorization {
+
+        /**
+         * Log security events
+         */
+        @WithName("log")
+        @WithDefault("true")
+        boolean log();
+
+        /**
+         * Message template
+         * 1 - request method
+         * 2 - request path
+         * 3 - principal name
+         */
+        @WithName("template")
+        @WithDefault("Authorization failed, response 403, request %1$s %2$s")
+        String template();
+    }
+
+    /**
+     * Authentication events config.
+     */
+    interface Authentication {
+
+        /**
+         * Log security events
+         */
+        @WithName("log")
+        @WithDefault("true")
+        boolean log();
+
+        /**
+         * Message template
+         * 1 - request method
+         * 2 - request path
+         */
+        @WithName("template")
+        @WithDefault("Authentication failed, response 401, request %1$s %2$s")
+        String template();
+    }
 }
