@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.rootPath;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,8 +20,8 @@ import org.slf4j.LoggerFactory;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.vertx.http.runtime.security.ImmutablePathMatcher;
 import io.smallrye.config.SmallRyeConfig;
-import io.smallrye.openapi.runtime.io.Format;
-import io.smallrye.openapi.runtime.io.OpenApiParser;
+import io.smallrye.openapi.api.OpenApiConfig;
+import io.smallrye.openapi.runtime.io.*;
 
 @QuarkusTest
 @DisableIfValue(valueProperty = "tkit.security-test.openapi.disable-value", regexProperty = "tkit.security-test.openapi.disable-regex")
@@ -90,7 +91,9 @@ public class SecurityDynamicTest {
         var excludePaths = excludePaths();
 
         var data = loadOpenapi();
-        OpenAPI openAPI = OpenApiParser.parse(new ByteArrayInputStream(data), Format.YAML);
+
+        OpenAPI openAPI = parse(new ByteArrayInputStream(data), Format.YAML,
+                OpenApiConfig.fromConfig(ConfigProvider.getConfig()));
 
         if (openAPI.getPaths() == null || openAPI.getPaths().getPathItems() == null) {
             return Stream.empty();
@@ -164,4 +167,14 @@ public class SecurityDynamicTest {
                 .extract().asByteArray();
     }
 
+    public static OpenAPI parse(InputStream stream, Format format, OpenApiConfig config) {
+        return parse(stream, format, JsonIO.newInstance(config));
+    }
+
+    private static <V, A extends V, O extends V, AB, OB> OpenAPI parse(InputStream stream, Format format,
+            JsonIO<V, A, O, AB, OB> jsonIO) {
+        IOContext<V, A, O, AB, OB> context = IOContext.forJson(jsonIO);
+        return new OpenAPIDefinitionIO<>(context).readValue(jsonIO.fromStream(stream, format));
+
+    }
 }

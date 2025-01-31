@@ -32,12 +32,6 @@ public interface OidcHealthCheckConfig {
     StaticTenantConfig staticTenant();
 
     /**
-     * Oidc dynamic tenant health check.
-     */
-    @WithName("dynamic")
-    DynamicTenantConfig dynamicTenant();
-
-    /**
      * Oidc default tenant health check.
      */
     interface DefaultTenantConfig {
@@ -63,16 +57,4 @@ public interface OidcHealthCheckConfig {
         boolean enabled();
     }
 
-    /**
-     * Oidc dynamic tenant health check.
-     */
-    interface DynamicTenantConfig {
-
-        /**
-         * Enable or disable dynamic tenant oidc health check.
-         */
-        @WithName("enabled")
-        @WithDefault("true")
-        boolean enabled();
-    }
 }

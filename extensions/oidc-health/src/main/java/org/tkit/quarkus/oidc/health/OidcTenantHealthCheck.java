@@ -51,13 +51,6 @@ public class OidcTenantHealthCheck implements HealthCheck {
             }
         }
 
-        if (config.dynamicTenant().enabled()) {
-            var result = down(KIND.DYNAMIC, builder, tenantConfigBean.getDynamicTenantsConfig());
-            if (result != null) {
-                return result;
-            }
-        }
-
         if (config.staticTenant().enabled()) {
             var result = down(KIND.STATIC, builder, tenantConfigBean.getStaticTenantsConfig());
             if (result != null) {
@@ -113,8 +106,7 @@ public class OidcTenantHealthCheck implements HealthCheck {
 
     enum KIND {
         DEFAULT,
-        STATIC,
-        DYNAMIC;
+        STATIC;
 
         private final String data;
 
