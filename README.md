@@ -11,22 +11,18 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Set of Quarkus extensions and libraries to speed up development of backend microservices.  
 
-## Compatibility
-
-Tkit-Quarkus provides two different version streams, one compatible with Quarkus 2.x and the other compatible with Quarkus 3.x.
-
-| Quarkus | Tkit-Quarkus     |
-|---------|------------------|
-| 2.x     | = 0.x            |
-| 3.2.x   | = 1.x            |
-| > 3.3.x | >= 2.x           |
-| > 3.9.x | >= 2.18.0 (main) |
-
-Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://search.maven.org/artifact/org.tkit.quarkus.lib/tkit-quarkus-bom).
-
 ## Documentation
 
 Please, see the latest released [documentation page](https://1000kit.github.io/tkit-quarkus/current/tkit-quarkus/index.html).
+
+## Version
+
+Branches:
+* `main` - Quarkus latest version
+* `2.x` - Quarkus 3.15 LTS
+
+Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://search.maven.org/artifact/org.tkit.quarkus.lib/tkit-quarkus-bom).
+
 
 ## Contributors ✨
 
