@@ -22,19 +22,7 @@ For instance, with Maven, add the following dependency to your POM file:
 
 === Usage
 
-To work in @QuarkusIntegrationTest tests set the property
-
-**quarkus.test.enable-callbacks-for-integration-tests = true**
-
-in your application.properties.
-
-
-To deactivate the automated security tests of AbstractSecurityTests use
-
-*-Dtkit.security-test.disabled=true* as system property
-
-e.g.
-*mvn clean verify -Dtkit.security-test.disabled=true*
+To work in `@QuarkusIntegrationTest` tests set the property `quarkus.test.enable-callbacks-for-integration-tests = true` in your application.properties.
 
 
 === OpenAPI Security Tests
@@ -47,12 +35,6 @@ To registry default security tests you need to add this library to the `maven-su
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-surefire-plugin</artifactId>
     <configuration>
-        <systemPropertyVariables>
-            <tkit.metrics-test.keys.quarkus.datasource>agroal_awaiting_count,agroal_max_used_count,agroal_creation_time_max_milliseconds,agroal_destroy_count_total</tkit.metrics-test.keys.quarkus.datasource>
-            <tkit.metrics-test.keys.quarkus.hibernate-orm>hibernate_transactions_total,hibernate_query_executions_total</tkit.metrics-test.keys.quarkus.hibernate-orm>
-            <tkit.metrics-test.keys.quarkus.http>http_server_requests_seconds_count,http_server_requests_seconds_max</tkit.metrics-test.keys.quarkus.http>
-            <tkit.metrics-test.keys.quarkus.rest-client>http_client_requests_seconds_count,http_client_requests_seconds_max</tkit.metrics-test.keys.quarkus.rest-client>
-        </systemPropertyVariables>
         <dependenciesToScan>
             <dependency>org.tkit.quarkus.lib:tkit-quarkus-security-test</dependency>
         </dependenciesToScan>
@@ -62,7 +44,6 @@ To registry default security tests you need to add this library to the `maven-su
 
 This will start `org.tkit.quarkus.security.test.openapi.SecurityDynamicTest` be default.
 
-In this example, we also enable some metrics. For example `<tkit.metrics-test.keys.quarkus.hibernate-orm>` configuration. If the test finds a system property that starts with a `quarkus.hibernate-orm`, `hibernate_transactions_total` metric is mandatory, and if the test does not find this metric key, it fails.
 
 To run this test as an integration test, you need to add this class to your project:
 
@@ -75,6 +56,24 @@ import org.tkit.quarkus.security.test.openapi.SecurityDynamicTest;
 public class SecurityDynamicTestIT extends SecurityDynamicTest {
 
 }
+----
+
+This test can be disabled if the value of the system property `tkit.security-test.openapi.disable-value` matches the regular expression of the system property `tkit.security-test.openapi.disable-regex`.
+
+For example, this test is only disabled for projects with the prefix `E`.
+
+[source,xml,subs=attributes+]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+        <systemPropertyVariables>
+            <tkit.security-test.openapi.disable-value>${project.artifactId}</tkit.security-test.openapi.disable-value>
+            <tkit.security-test.openapi.disable-regex>E.*</tkit.security-test.openapi.disable-regex>
+        </systemPropertyVariables>
+    </configuration>
+</plugin>
 ----
 
 === Generate Keycloak clients via annotation
