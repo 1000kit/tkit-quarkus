@@ -1,4 +1,4 @@
-== tkit-quarkus-test
+== tkit-quarkus-agroal
 
 include::./includes/attributes.adoc[]
 
