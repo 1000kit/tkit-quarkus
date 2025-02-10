@@ -130,68 +130,6 @@ public class QueryCriteriaUtil {
     }
 
     /**
-     * Create an IN clause in JPQL. If the size of the collection exceeds 1000 items, multiple queries are created and combined
-     * with OR.
-     *
-     * @param attribute the JPQL attribute
-     * @param attributeName the attribute name for the parameter replacement
-     * @param values the values for the IN clause
-     * @param parameters the parameters to be added from the IN clause
-     * @return the query string with the IN clause
-     */
-    @Deprecated
-    public static String inClause(String attribute, String attributeName, Collection<?> values,
-            Map<String, Object> parameters) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(").append(attribute).append(" IN (:").append(attributeName).append(")");
-        List<?> valuesList = new ArrayList<>(values);
-        if (values.size() > 1000) {
-            int i = 0;
-            while (valuesList.size() > 1000) {
-                List<?> subList = valuesList.subList(0, 1000);
-                sb.append(" OR ").append(attribute).append(" IN (:").append(attributeName).append(i).append(")");
-                parameters.put(attributeName + i, new ArrayList<>(subList));
-                subList.clear();
-                i++;
-            }
-        }
-        sb.append(")");
-        parameters.put(attributeName, valuesList);
-        return sb.toString();
-    }
-
-    /**
-     * Create a NOT IN clause in JPQL. If the size of the collection exceeds 1000 items, multiple queries are created and
-     * combined with AND.
-     *
-     * @param attribute the JPQL attribute
-     * @param attributeName the attribute name for the parameter replacement
-     * @param values the values for the NOT IN clause
-     * @param parameters the parameters to be added from the NOT IN clause
-     * @return the query string with the NOT IN clause
-     */
-    @Deprecated
-    public static String notInClause(String attribute, String attributeName, Collection<?> values,
-            Map<String, Object> parameters) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(").append(attribute).append(" NOT IN (:").append(attributeName).append(")");
-        List<?> valuesList = new ArrayList<>(values);
-        if (values.size() > 1000) {
-            int i = 0;
-            while (valuesList.size() > 1000) {
-                List<?> subList = valuesList.subList(0, 1000);
-                sb.append(" AND ").append(attribute).append(" NOT IN (:").append(attributeName).append(i).append(")");
-                parameters.put(attributeName + i, new ArrayList<>(subList));
-                subList.clear();
-                i++;
-            }
-        }
-        sb.append(")");
-        parameters.put(attributeName, valuesList);
-        return sb.toString();
-    }
-
-    /**
      * Add a search predicate to the list of predicates.
      *
      * @param predicates - list of predicates
