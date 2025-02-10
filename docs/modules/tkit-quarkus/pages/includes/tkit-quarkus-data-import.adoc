@@ -8,6 +8,10 @@ h|Type
 h|Default
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-enabled]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-enabled[`tkit.dataimport.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -25,6 +29,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-error-msg-length]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-error-msg-length[`tkit.dataimport.error-msg-length`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.error-msg-length+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -42,6 +50,10 @@ endif::add-copy-button-to-env-var[]
 |`255`
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-bean]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-bean[`tkit.dataimport.configurations."configurations".bean`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.configurations."configurations".bean+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -59,6 +71,10 @@ endif::add-copy-button-to-env-var[]
 |` `
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-file]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-file[`tkit.dataimport.configurations."configurations".file`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.configurations."configurations".file+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -76,6 +92,10 @@ endif::add-copy-button-to-env-var[]
 |required icon:exclamation-circle[title=Configuration property is required]
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-class-path]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-class-path[`tkit.dataimport.configurations."configurations".class-path`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.configurations."configurations".class-path+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -93,6 +113,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-metadata-metadata[`tkit.dataimport.configurations."configurations".metadata."metadata"`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.configurations."configurations".metadata."metadata"+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -110,6 +134,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-enabled]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-enabled[`tkit.dataimport.configurations."configurations".enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.configurations."configurations".enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -127,6 +155,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-stop-at-error]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-stop-at-error[`tkit.dataimport.configurations."configurations".stop-at-error`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.configurations."configurations".stop-at-error+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -144,6 +176,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-retry-error-import]] [.property-path]##link:#tkit-quarkus-data-import_tkit-dataimport-configurations-configurations-retry-error-import[`tkit.dataimport.configurations."configurations".retry-error-import`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.dataimport.configurations."configurations".retry-error-import+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --

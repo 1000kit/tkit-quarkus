@@ -8,6 +8,10 @@ h|Type
 h|Default
 
 a| [[tkit-quarkus-security-test_tkit-security-test-openapi-disable-value]] [.property-path]##link:#tkit-quarkus-security-test_tkit-security-test-openapi-disable-value[`tkit.security-test.openapi.disable-value`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-test.openapi.disable-value+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -25,6 +29,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-security-test_tkit-security-test-openapi-disable-regex]] [.property-path]##link:#tkit-quarkus-security-test_tkit-security-test-openapi-disable-regex[`tkit.security-test.openapi.disable-regex`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-test.openapi.disable-regex+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --

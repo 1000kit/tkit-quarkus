@@ -8,6 +8,10 @@ h|Type
 h|Default
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-enabled]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-enabled[`tkit.log.cdi.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -25,6 +29,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-custom-data-prefix]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-custom-data-prefix[`tkit.log.cdi.custom-data.prefix`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.custom-data.prefix+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -42,6 +50,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-start-enabled]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-start-enabled[`tkit.log.cdi.start.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.start.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -59,6 +71,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-start-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-start-template[`tkit.log.cdi.start.template`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.start.template+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -76,6 +92,10 @@ endif::add-copy-button-to-env-var[]
 |`%1$s(%2$s) started.`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-succeed-enabled]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-succeed-enabled[`tkit.log.cdi.succeed.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.succeed.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -93,6 +113,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-succeed-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-succeed-template[`tkit.log.cdi.succeed.template`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.succeed.template+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -110,6 +134,10 @@ endif::add-copy-button-to-env-var[]
 |`%1$s(%2$s):%3$s [%4$.3fs]`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-failed-enabled]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-failed-enabled[`tkit.log.cdi.failed.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.failed.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -127,6 +155,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-failed-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-failed-template[`tkit.log.cdi.failed.template`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.failed.template+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -144,6 +176,10 @@ endif::add-copy-button-to-env-var[]
 |`%1$s(%2$s) throw %3$s [%4$.3fs]`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-return-void-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-return-void-template[`tkit.log.cdi.return-void-template`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.return-void-template+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -161,6 +197,10 @@ endif::add-copy-button-to-env-var[]
 |`void`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-service-service-log]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-service-service-log[`tkit.log.cdi.service."service".log`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.service."service".log+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -178,6 +218,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-service-service-stacktrace]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-service-service-stacktrace[`tkit.log.cdi.service."service".stacktrace`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.service."service".stacktrace+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -195,6 +239,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-log]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-log[`tkit.log.cdi.service."service".method."method".log`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.service."service".method."method".log+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -212,6 +260,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-stacktrace]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-stacktrace[`tkit.log.cdi.service."service".method."method".stacktrace`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.service."service".method."method".stacktrace+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -229,6 +281,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-return-mask]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-return-mask[`tkit.log.cdi.service."service".method."method".return-mask`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.service."service".method."method".return-mask+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -246,6 +302,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-param-params]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-service-service-method-method-param-params[`tkit.log.cdi.service."service".method."method".param."params"`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.service."service".method."method".param."params"+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -263,6 +323,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-mdc-errorkey]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-mdc-errorkey[`tkit.log.cdi.mdc.errorKey`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.mdc.errorKey+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --

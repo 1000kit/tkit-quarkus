@@ -8,6 +8,10 @@ h|Type
 h|Default
 
 a|icon:lock[title=Fixed at build time] [[tkit-quarkus-agroal_tkit-agroal-metrics-enabled]] [.property-path]##link:#tkit-quarkus-agroal_tkit-agroal-metrics-enabled[`tkit.agroal.metrics.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.agroal.metrics.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
