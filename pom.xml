@@ -53,7 +53,7 @@
         <quarkus.hibernate-orm.version>6.6.6.Final</quarkus.hibernate-orm.version>
         <quarkiverse.mockserver.version>1.13.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.2.3</quarkus.jandex-plugin.version>
-
+        <quarkus.keycloak.version>26.0.7</quarkus.keycloak.version>
         <!-- build -->
         <format.skip>false</format.skip>
         <enforcer.skip>false</enforcer.skip>

@@ -47,7 +47,7 @@ public class UserRestControllerTest extends AbstractTest {
     @Test
     public void all3() {
         var resp = given()
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .get()
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
@@ -167,7 +167,7 @@ public class UserRestControllerTest extends AbstractTest {
 
         User tmp = given()
                 .contentType(ContentType.JSON)
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .body(user)
                 .post()
                 .then()
@@ -175,7 +175,7 @@ public class UserRestControllerTest extends AbstractTest {
                 .extract().body().as(User.class);
 
         var resp = given()
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .get()
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
@@ -187,7 +187,7 @@ public class UserRestControllerTest extends AbstractTest {
 
         User find = given()
                 .contentType(ContentType.JSON)
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .pathParam("id", tmp.getId())
                 .get("{id}")
                 .then()
@@ -202,7 +202,7 @@ public class UserRestControllerTest extends AbstractTest {
     public void deleteAllTest() {
 
         var resp = given()
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .get()
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
@@ -213,13 +213,13 @@ public class UserRestControllerTest extends AbstractTest {
         Assertions.assertEquals(8, resp.items.size());
 
         given()
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .delete()
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode());
 
         resp = given()
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .get()
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
@@ -247,7 +247,7 @@ public class UserRestControllerTest extends AbstractTest {
 
         UserDTO find = given()
                 .contentType(ContentType.JSON)
-                .header(APM_HEADER_PARAM, createToken("*"))
+                .header(APM_HEADER_PARAM, createToken("org0"))
                 .pathParam("id", tmp.id)
                 .get("{id}")
                 .then()

@@ -201,21 +201,6 @@ public class WithDBDataExtension
         if (file.endsWith(".xml")) {
             return FileType.XML;
         }
-        if (file.endsWith(".xls") || file.endsWith(".xlsx")) {
-            log.warn("\n" +
-                    """
-
-                                    ##################################
-                                    File: {}
-
-                                    !!! Excel XLS/XLSX format is not supported. Use flat xml format to import data
-                                    https://www.dbunit.org/apidocs/org/dbunit/dataset/xml/FlatXmlDataSet.html
-
-                                    Free excel to xml tool https://github.com/lorislab/dbx2x
-                                    ##################################
-                            """,
-                    file);
-        }
         throw new RuntimeException("Not supported file type!");
     }
 }

@@ -33,7 +33,7 @@ public class AbstractTest {
 
     protected static final String APM_HEADER_PARAM = "apm-principal-token";
     protected static final String CLAIMS_ORG_ID = ConfigProvider.getConfig()
-            .getValue("%test.tkit.rs.context.tenant-id.mock.claim-org-id", String.class);;
+            .getValue("%test.tkit.rs.context.tenant-id.mock.claim-org-id", String.class);
 
     protected static String createToken(String organizationId) {
         try {
