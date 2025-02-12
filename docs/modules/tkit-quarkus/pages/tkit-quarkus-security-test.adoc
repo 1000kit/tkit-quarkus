@@ -2,7 +2,14 @@
 
 include::./includes/attributes.adoc[]
 
-Enhanced security configuration
+The `tkit-quarkus-security-test` is a testing extension for the Quarkus framework designed to enhance security testing. It integrates security validation in Quarkus-based applications by providing automated OpenAPI security tests. To use the extension, you need to add it as a dependency in your Maven project.
+Key features:
+
+* It allows the registration and execution of security tests through QuarkusIntegrationTest.
+* It enables automated testing of security policies such as OAuth2 integration via Keycloak clients generated through annotations.
+* Custom configurations let users enable/disable tests based on project specifics.
+
+This tool helps automate security validation and integrates smoothly with Quarkus applications for secure testing workflows.
 
 === Installation
 
@@ -94,24 +101,6 @@ public class UserRestControllerTest {
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 }
-
-----
-
-==== Method Level
-Generated for the annotated method
-
-[source,java]
-----
-    @Test
-    @GenerateKeycloakClient(clientName = "methodLevelClient", scopes = { "ocx-user:read", "ocx-user:write" })
-    public void testCreateUserRestClient() {
-        given().header("Content-Type", "application/json")
-                .body("{\"id\":\"2\"}")
-                .auth().oauth2(getKeycloakClientToken("methodLevelClient"))
-                .post("/2")
-                .then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
 
 ----
 

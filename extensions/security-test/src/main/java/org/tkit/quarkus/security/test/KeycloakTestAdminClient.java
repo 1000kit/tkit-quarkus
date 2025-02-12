@@ -16,34 +16,18 @@ import org.slf4j.LoggerFactory;
 import io.quarkus.test.keycloak.client.KeycloakTestClient;
 import io.restassured.http.ContentType;
 
-public class SecurityTestUtils {
+public class KeycloakTestAdminClient {
 
-    private static final Logger log = LoggerFactory.getLogger(SecurityTestUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(KeycloakTestAdminClient.class);
 
-    final static String URL = new KeycloakTestClient().getAuthServerUrl();
+    private final KeycloakTestClient keycloakTestClient;
 
-    protected final static KeycloakTestClient keycloakTestClient = new KeycloakTestClient() {
-        @Override
-        public String getAuthServerUrl() {
-            //            Config config = ConfigProvider.getConfig();
-            System.out.println("###################################");
-            //            var result = config.getValue("tkit.security-test.oidc.auth-server-url", String.class);
-            //            System.out.println("### " + result);
-            System.out.println("### " + URL);
-            System.out.println("###################################");
-            //            for (var p : config.getPropertyNames()) {
-            //                if (p.contains("key")) {
-            //                    System.out.println("### " + p + " -> " + config.getConfigValue(p).getRawValue());
-            //                }
-            //            }
-            return URL;
-            //            try {
-            //                return super.getAuthServerUrl();
-            //            } catch (Exception ex) {
-            //
-            //            }
-        }
-    };
+    private final String adminUrl;
+
+    public KeycloakTestAdminClient() {
+        this.keycloakTestClient = new KeycloakTestClient();
+        adminUrl = keycloakTestClient.getAuthServerUrl().replace("realms", "admin/realms");
+    }
 
     /**
      * Method to manually add a new client with scopes to the default quarkus realm
@@ -52,7 +36,7 @@ public class SecurityTestUtils {
      * @param scopes list of scopes which should be created to the realm and add to the client
      *
      */
-    public static void addClient(String clientName, List<String> scopes) {
+    public void addClient(String clientName, List<String> scopes) {
         addClient(clientName, scopes, scopes);
     }
 
@@ -64,7 +48,7 @@ public class SecurityTestUtils {
      * @param clientScopes list of scopes which should be added to the realm and the given client
      *
      */
-    public static void addClient(String clientName, List<String> createScopes, List<String> clientScopes) {
+    public void addClient(String clientName, List<String> createScopes, List<String> clientScopes) {
 
         List<String> createdScopes = new ArrayList<>(clientScopes);
 
@@ -83,8 +67,8 @@ public class SecurityTestUtils {
                             .oauth2(keycloakTestClient.getAdminAccessToken())
                             .contentType(ContentType.JSON)
                             .body(JsonSerialization.writeValueAsBytes(scope)).when()
-                            .post(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes")
-                            .then()
+                            .post(adminUrl + "/client-scopes")
+                            .then().log().ifValidationFails()
                             .extract();
 
                     switch (response.statusCode()) {
@@ -103,6 +87,26 @@ public class SecurityTestUtils {
             });
         }
 
+        ClientRepresentation client = getClientRepresentation(clientName, createdScopes);
+
+        try {
+            given()
+                    .auth().oauth2(keycloakTestClient.getAdminAccessToken())
+                    .contentType(ContentType.JSON)
+                    .body(JsonSerialization.writeValueAsBytes(client))
+                    .when()
+                    .post(adminUrl + "/clients")
+                    .then().log().ifValidationFails()
+                    .onFailMessage("Error create client: " + clientName)
+                    .statusCode(201);
+            log.debug("Created client with id: {}", client.getId());
+        } catch (IOException var2) {
+            log.error("Error while creating client with id: {}", client.getClientId());
+            throw new RuntimeException(var2);
+        }
+    }
+
+    private static ClientRepresentation getClientRepresentation(String clientName, List<String> createdScopes) {
         ClientRepresentation client = new ClientRepresentation();
         client.setClientId(clientName);
         client.setId(clientName);
@@ -119,22 +123,7 @@ public class SecurityTestUtils {
         client.setFullScopeAllowed(true);
         client.setAttributes(Map.of("use.refresh.tokens", "true"));
         client.setDefaultClientScopes(createdScopes);
-
-        try {
-            given()
-                    .auth().oauth2(keycloakTestClient.getAdminAccessToken())
-                    .contentType(ContentType.JSON)
-                    .body(JsonSerialization.writeValueAsBytes(client))
-                    .when()
-                    .post(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/clients")
-                    .then()
-                    .onFailMessage("Error create client: " + clientName)
-                    .statusCode(201);
-            log.debug("Created client with id: {}", client.getId());
-        } catch (IOException var2) {
-            log.error("Error while creating client with id: {}", client.getClientId());
-            throw new RuntimeException(var2);
-        }
+        return client;
     }
 
     /**
@@ -142,12 +131,12 @@ public class SecurityTestUtils {
      *
      * @param clientName name of client which should be removed from realm
      */
-    public static void removeClient(String clientName) {
+    public void removeClient(String clientName) {
         given()
                 .auth().oauth2(keycloakTestClient.getAdminAccessToken())
                 .when()
-                .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/clients/" + clientName)
-                .then()
+                .delete(adminUrl + "/clients/" + clientName)
+                .then().log().ifValidationFails()
                 .onFailMessage("Error remove client with name: " + clientName)
                 .statusCode(204);
         log.debug("Removed client with name: {}", clientName);
@@ -158,13 +147,13 @@ public class SecurityTestUtils {
      *
      * @param scopes list of scopes which should be removed from realm
      */
-    public static void removeClientScopes(List<String> scopes) {
+    public void removeClientScopes(List<String> scopes) {
         scopes.forEach(id -> {
             given()
                     .auth().oauth2(keycloakTestClient.getAdminAccessToken())
                     .when()
-                    .delete(keycloakTestClient.getAuthServerBaseUrl() + "/admin/realms/quarkus/client-scopes/" + id)
-                    .then()
+                    .delete(adminUrl + "/client-scopes/" + id)
+                    .then().log().ifValidationFails()
                     .onFailMessage("Error remove client scopes: " + scopes)
                     .statusCode(204);
             log.debug("Removed scope with id: {}", id);
