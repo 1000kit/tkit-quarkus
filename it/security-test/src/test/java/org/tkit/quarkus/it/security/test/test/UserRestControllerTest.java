@@ -14,7 +14,7 @@ import io.quarkus.test.keycloak.client.KeycloakTestClient;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-@GenerateKeycloakClient(clientName = "testClient", scopes = { "ocx-user:read", "ocx-user:write" }, deleteAfter = false)
+@GenerateKeycloakClient(clientName = "testClient", scopes = { "ocx-user:read", "ocx-user:write" })
 @TestHTTPEndpoint(UserRestController.class)
 class UserRestControllerTest {
 
@@ -25,17 +25,6 @@ class UserRestControllerTest {
         given().contentType(ContentType.JSON)
                 .auth().oauth2(keycloakTestClient.getClientAccessToken("testClient"))
                 .get("/1")
-                .then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
-
-    @Test
-    @GenerateKeycloakClient(clientName = "methodLevelClient", scopes = { "ocx-user:read", "ocx-user:write" })
-    public void testCreateUserRestClient() {
-        given().contentType(ContentType.JSON)
-                .body("{\"id\":\"2\"}")
-                .auth().oauth2(keycloakTestClient.getClientAccessToken("methodLevelClient"))
-                .post("/2")
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }

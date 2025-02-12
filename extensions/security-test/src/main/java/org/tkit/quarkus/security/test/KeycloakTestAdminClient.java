@@ -20,19 +20,30 @@ public class SecurityTestUtils {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityTestUtils.class);
 
-    protected final static KeycloakTestClient keycloakTestClient = new KeycloakTestClient();
+    final static String URL = new KeycloakTestClient().getAuthServerUrl();
 
-    /**
-     * Method to fetch the access-token needed for oauth2 for a client by name
-     * used realm is "quarkus" by default
-     * used client-secret is "secret" by default
-     *
-     * @param clientName name of client to get the access token from.
-     * @return access-token for given client
-     */
-    public static String getKeycloakClientToken(String clientName) {
-        return keycloakTestClient.getRealmClientAccessToken("quarkus", clientName, "secret");
-    }
+    protected final static KeycloakTestClient keycloakTestClient = new KeycloakTestClient() {
+        @Override
+        public String getAuthServerUrl() {
+            //            Config config = ConfigProvider.getConfig();
+            System.out.println("###################################");
+            //            var result = config.getValue("tkit.security-test.oidc.auth-server-url", String.class);
+            //            System.out.println("### " + result);
+            System.out.println("### " + URL);
+            System.out.println("###################################");
+            //            for (var p : config.getPropertyNames()) {
+            //                if (p.contains("key")) {
+            //                    System.out.println("### " + p + " -> " + config.getConfigValue(p).getRawValue());
+            //                }
+            //            }
+            return URL;
+            //            try {
+            //                return super.getAuthServerUrl();
+            //            } catch (Exception ex) {
+            //
+            //            }
+        }
+    };
 
     /**
      * Method to manually add a new client with scopes to the default quarkus realm

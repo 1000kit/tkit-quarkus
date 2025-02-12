@@ -14,7 +14,7 @@ import io.quarkus.test.keycloak.client.KeycloakTestClient;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-@GenerateKeycloakClient(clientName = "log-client", scopes = { "ocx-user:write" }, deleteAfter = false)
+@GenerateKeycloakClient(clientName = "log-client", scopes = { "ocx-user:write" })
 @TestHTTPEndpoint(UserRestController.class)
 class UserRestControllerLogTest {
 
