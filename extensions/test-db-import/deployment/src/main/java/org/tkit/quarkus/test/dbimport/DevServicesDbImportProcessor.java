@@ -127,7 +127,6 @@ public class DevServicesDbImportProcessor {
                     reactiveUrlValue = e.getValue();
                 }
                 data.put("tkit-db-import." + e.getKey(), e.getValue());
-                System.setProperty("tkit-db-import." + e.getKey(), e.getValue());
             }
         }
 
