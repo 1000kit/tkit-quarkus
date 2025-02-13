@@ -8,6 +8,10 @@ h|Type
 h|Default
 
 a| [[tkit-quarkus-test_tkit-test-integration-test-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-integration-test-enabled[`tkit.test.integration-test-enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.test.integration-test-enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -25,6 +29,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-test_tkit-test-ci-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-ci-enabled[`tkit.test.ci.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.test.ci.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -42,6 +50,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-test_tkit-test-ci-env-name]] [.property-path]##link:#tkit-quarkus-test_tkit-test-ci-env-name[`tkit.test.ci.env-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.test.ci.env-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -59,6 +71,10 @@ endif::add-copy-button-to-env-var[]
 |`GITLAB_CI`
 
 a| [[tkit-quarkus-test_tkit-test-rest-assured-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-enabled[`tkit.test.rest-assured.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.test.rest-assured.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -76,6 +92,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled[`tkit.test.rest-assured.overwrite-uri.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.test.rest-assured.overwrite-uri.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -93,6 +113,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri[`tkit.test.rest-assured.overwrite-uri.uri`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.test.rest-assured.overwrite-uri.uri+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --

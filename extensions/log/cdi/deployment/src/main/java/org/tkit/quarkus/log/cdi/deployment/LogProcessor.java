@@ -5,11 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.jboss.jandex.*;
@@ -20,12 +16,10 @@ import org.tkit.quarkus.log.cdi.LogRecorder;
 import org.tkit.quarkus.log.cdi.LogService;
 import org.tkit.quarkus.log.cdi.ServiceValue;
 import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
-import org.tkit.quarkus.log.cdi.runtime.LogBuildTimeConfig;
 import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 import io.quarkus.arc.deployment.*;
 import io.quarkus.arc.processor.AnnotationStore;
-import io.quarkus.arc.processor.AnnotationsTransformer;
 import io.quarkus.arc.processor.BeanInfo;
 import io.quarkus.arc.processor.BuildExtension;
 import io.quarkus.deployment.annotations.*;
@@ -154,84 +148,6 @@ public class LogProcessor {
         if (!configKey.isBlank()) {
             item.configKey = configKey;
         }
-    }
-
-    /**
-     * Autodiscovery
-     */
-    @BuildStep
-    public AnnotationsTransformerBuildItem interceptorBinding(LogBuildTimeConfig buildConfig) {
-        if (!buildConfig.autoDiscover().enabled()) {
-            return null;
-        }
-
-        final Pattern ignorePattern = buildConfig.autoDiscover().ignorePattern().map(Pattern::compile).orElse(null);
-
-        Set<DotName> annotation = buildConfig.autoDiscover().annoBeans().stream()
-                .map(DotName::createSimple).collect(Collectors.toSet());
-
-        return new AnnotationsTransformerBuildItem(new AnnotationsTransformer() {
-
-            @Override
-            public boolean appliesTo(AnnotationTarget.Kind kind) {
-                return kind == AnnotationTarget.Kind.CLASS;
-            }
-
-            public void transform(TransformationContext context) {
-                ClassInfo target = context.getTarget().asClass();
-
-                // skip if annotation @LogService exists
-                AnnotationInstance classLogService = target.declaredAnnotation(LOG_SERVICE);
-                if (classLogService != null) {
-                    return;
-                }
-
-                String name = target.name().toString();
-
-                // skip log param value
-                if (LOG_BUILDER_SERVICE.equals(name)) {
-                    return;
-                }
-
-                // skip wrong package
-                Optional<String> add = buildConfig.autoDiscover().packages().stream().filter(name::startsWith).findFirst();
-                if (add.isEmpty()) {
-                    return;
-                }
-
-                // skip for none Bean class
-                Map<DotName, List<AnnotationInstance>> tmp = target.annotationsMap();
-                Optional<DotName> dot = annotation.stream().filter(tmp::containsKey).findFirst();
-                if (dot.isEmpty()) {
-                    return;
-                }
-
-                // ignore match to pattern
-                if (matchesIgnorePattern(name)) {
-                    return;
-                }
-
-                context.transform().add(LogService.class).done();
-            }
-
-            private boolean matchesIgnorePattern(String name) {
-                if (buildConfig.autoDiscover().ignorePattern().isEmpty()
-                        || buildConfig.autoDiscover().ignorePattern().get().isBlank()) {
-                    return false;
-                }
-                if (ignorePattern == null) {
-                    return false;
-                }
-                boolean matches = ignorePattern.matcher(name).matches();
-                if (matches) {
-                    log.info(
-                            "Disabling tkit logs on: {} because it matches the ignore pattern: '{}' (set via 'tkit.log.cdi.auto-discovery.ignore.pattern')",
-                            name,
-                            buildConfig.autoDiscover().ignorePattern());
-                }
-                return matches;
-            }
-        });
     }
 
     private static LogService createLogService(AnnotationInstance annotationInstance) {

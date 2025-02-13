@@ -7,8 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-
 /**
  * Declares that this test execution requires data import before it is started. This requires a test deployment with DBImport
  * enabled - @link DeploymentBuilder#withDBImportFeature()
@@ -16,18 +14,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * If you put this annotation on class, then by default the import will be executed before 1st test in this class, and cleanup
  * after last test. If you specify the <code>rinseAndRepeat</code> flag, then it will be executed for every test method.
  *
- * Value should be arrayed of string representing paths to {@code .xls} files with DBUnit data or directories with {@code .csv}
+ * Value should be arrayed of string representing paths to {@code .xml} files with DBUnit data
  * files, relative to maven class root(src/test/resources|src/test/java).
  *
- * Example: <code>@WithDBData("data/test.xls")</code> would try to find a file
- * <code>PROJECT_ROOT/src/test/resources/data/test.xls</code> or
- * <code>PROJECT_ROOT/src/test/java/data/test.xls</code>
+ * Example: <code>@WithDBData("data/test.xml")</code> would try to find a file
+ * <code>PROJECT_ROOT/src/test/resources/data/test.xml</code> or
+ * <code>PROJECT_ROOT/src/test/java/data/test.xml</code>
  *
- * If you want to import csv files, they must be stored in folder named "/csv". Apart form this remember about creating
+ * If you want to import csv files, they must be stored in folder named "/csv". A part form this remember about creating
  * table-ordering.txt file in "/csv" where you specify an order in which data should be imported
  *
  */
-@ExtendWith(WithDBDataExtension.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Documented

@@ -2,11 +2,8 @@ package org.tkit.quarkus.security.test;
 
 import java.lang.annotation.*;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-
-@ExtendWith(GenerateKeycloakClientExtension.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ ElementType.TYPE })
 @Documented
 @Inherited
 public @interface GenerateKeycloakClient {

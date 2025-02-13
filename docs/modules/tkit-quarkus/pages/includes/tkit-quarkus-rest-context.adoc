@@ -8,6 +8,10 @@ h|Type
 h|Default
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-enabled[`tkit.rs.context.token.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -25,6 +29,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-mandatory]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-mandatory[`tkit.rs.context.token.mandatory`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.mandatory+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -42,6 +50,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-type]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-type[`tkit.rs.context.token.type`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.type+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -59,6 +71,10 @@ endif::add-copy-button-to-env-var[]
 |`principal-token`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-verify]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-verify[`tkit.rs.context.token.verify`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.verify+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -76,6 +92,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-public-key-location-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-public-key-location-enabled[`tkit.rs.context.token.public-key-location.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.public-key-location.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -93,6 +113,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-public-key-location-suffix]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-public-key-location-suffix[`tkit.rs.context.token.public-key-location.suffix`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.public-key-location.suffix+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -110,6 +134,10 @@ endif::add-copy-button-to-env-var[]
 |`/protocol/openid-connect/certs`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-header-param]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-header-param[`tkit.rs.context.token.header-param`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.header-param+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -127,6 +155,10 @@ endif::add-copy-button-to-env-var[]
 |`apm-principal-token`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-parser-error-unauthorized]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-parser-error-unauthorized[`tkit.rs.context.token.parser-error-unauthorized`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.parser-error-unauthorized+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -144,6 +176,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-required-error-unauthorized]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-required-error-unauthorized[`tkit.rs.context.token.required-error-unauthorized`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.required-error-unauthorized+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -161,6 +197,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer-error-unauthorized]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer-error-unauthorized[`tkit.rs.context.token.check-tokens-issuer-error-unauthorized`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.check-tokens-issuer-error-unauthorized+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -178,6 +218,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-check-tokens-issuer[`tkit.rs.context.token.check-tokens-issuer`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.check-tokens-issuer+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -195,6 +239,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-enabled[`tkit.rs.context.principal.name.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -212,6 +260,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-mandatory]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-mandatory[`tkit.rs.context.principal.name.mandatory`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.mandatory+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -229,6 +281,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-custom-service-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-custom-service-enabled[`tkit.rs.context.principal.name.custom-service-enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.custom-service-enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -246,6 +302,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-security-context-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-security-context-enabled[`tkit.rs.context.principal.name.security-context.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.security-context.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -263,6 +323,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-default]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-default[`tkit.rs.context.principal.name.default`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.default+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -280,6 +344,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-token-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-token-enabled[`tkit.rs.context.principal.name.token-enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.token-enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -297,6 +365,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-token-claim-name]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-token-claim-name[`tkit.rs.context.principal.name.token-claim-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.token-claim-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -314,6 +386,10 @@ endif::add-copy-button-to-env-var[]
 |`sub`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-header-param-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-header-param-enabled[`tkit.rs.context.principal.name.header-param-enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.header-param-enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -331,6 +407,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-principal-name-header-param-name]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-principal-name-header-param-name[`tkit.rs.context.principal.name.header-param-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.principal.name.header-param-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -348,6 +428,10 @@ endif::add-copy-button-to-env-var[]
 |`x-principal-id`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-enabled[`tkit.rs.context.tenant-id.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -365,6 +449,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mandatory]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mandatory[`tkit.rs.context.tenant-id.mandatory`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.mandatory+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -382,6 +470,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-default]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-default[`tkit.rs.context.tenant-id.default`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.default+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -399,6 +491,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-header-param-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-header-param-enabled[`tkit.rs.context.tenant-id.header-param-enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.header-param-enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -416,6 +512,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-header-param-name]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-header-param-name[`tkit.rs.context.tenant-id.header-param-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.header-param-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -433,6 +533,10 @@ endif::add-copy-button-to-env-var[]
 |`x-tenant-id`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-custom-service-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-custom-service-enabled[`tkit.rs.context.tenant-id.custom-service-enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.custom-service-enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -450,6 +554,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-enabled[`tkit.rs.context.tenant-id.mock.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.mock.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -467,6 +575,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-default-tenant]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-default-tenant[`tkit.rs.context.tenant-id.mock.default-tenant`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.mock.default-tenant+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -484,6 +596,10 @@ endif::add-copy-button-to-env-var[]
 |`default`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-data-data]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-data-data[`tkit.rs.context.tenant-id.mock.data."data"`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.mock.data."data"+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -501,6 +617,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-claim-org-id]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-mock-claim-org-id[`tkit.rs.context.tenant-id.mock.claim-org-id`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.mock.claim-org-id+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -518,6 +638,10 @@ endif::add-copy-button-to-env-var[]
 |`orgId`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-token-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-token-enabled[`tkit.rs.context.tenant-id.token.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.token.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -535,6 +659,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-tenant-id-token-claim-tenant-param]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-tenant-id-token-claim-tenant-param[`tkit.rs.context.tenant-id.token.claim-tenant-param`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.tenant-id.token.claim-tenant-param+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -552,6 +680,10 @@ endif::add-copy-button-to-env-var[]
 |`tenantId`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-enabled[`tkit.rs.context.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -569,6 +701,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-correlation-id-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-correlation-id-enabled[`tkit.rs.context.correlation-id.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.correlation-id.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -586,6 +722,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-correlation-id-header-param-name]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-correlation-id-header-param-name[`tkit.rs.context.correlation-id.header-param-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.correlation-id.header-param-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -603,6 +743,10 @@ endif::add-copy-button-to-env-var[]
 |`x-correlation-id`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-business-context-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-business-context-enabled[`tkit.rs.context.business-context.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.business-context.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -620,6 +764,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-business-context-default]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-business-context-default[`tkit.rs.context.business-context.default`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.business-context.default+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -637,6 +785,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-business-context-header-param-name]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-business-context-header-param-name[`tkit.rs.context.business-context.header-param-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.business-context.header-param-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -654,6 +806,10 @@ endif::add-copy-button-to-env-var[]
 |`business-context`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-add-token-to-context]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-add-token-to-context[`tkit.rs.context.add-token-to-context`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.add-token-to-context+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -671,6 +827,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-enabled[`tkit.rs.context.token.issuers."issuers".enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.issuers."issuers".enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -688,6 +848,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-url]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-url[`tkit.rs.context.token.issuers."issuers".url`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.issuers."issuers".url+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -705,6 +869,10 @@ endif::add-copy-button-to-env-var[]
 |required icon:exclamation-circle[title=Configuration property is required]
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-enabled]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-enabled[`tkit.rs.context.token.issuers."issuers".public-key-location.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.issuers."issuers".public-key-location.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -722,6 +890,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-suffix]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-suffix[`tkit.rs.context.token.issuers."issuers".public-key-location.suffix`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.issuers."issuers".public-key-location.suffix+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --

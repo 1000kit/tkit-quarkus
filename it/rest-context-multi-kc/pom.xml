@@ -15,7 +15,7 @@
 
     <properties>
         <!-- IMPORTANT: Check quarkus version -->
-        <keycloak.version>25.0.6</keycloak.version>
+        <keycloak.version>${quarkus.keycloak.version}</keycloak.version>
         <keycloak.docker.image>quay.io/keycloak/keycloak:${keycloak.version}</keycloak.docker.image>
     </properties>
 

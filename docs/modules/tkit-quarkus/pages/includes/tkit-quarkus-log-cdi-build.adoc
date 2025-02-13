@@ -8,6 +8,10 @@ h|Type
 h|Default
 
 a|icon:lock[title=Fixed at build time] [[tkit-quarkus-log-cdi_tkit-log-cdi-auto-discovery-packages]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-auto-discovery-packages[`tkit.log.cdi.auto-discovery.packages`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.cdi.auto-discovery.packages+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --

@@ -10,12 +10,12 @@
     </parent>
 
     <artifactId>tkit-quarkus-it-oidc-health</artifactId>
-    <name>tkit-quarkus-it-multi-kc</name>
+    <name>tkit-quarkus-it-oidc-health</name>
     <packaging>jar</packaging>
 
     <properties>
         <!-- IMPORTANT: Check quarkus version -->
-        <keycloak.version>25.0.6</keycloak.version>
+        <keycloak.version>${quarkus.keycloak.version}</keycloak.version>
         <keycloak.docker.image>quay.io/keycloak/keycloak:${keycloak.version}</keycloak.docker.image>
     </properties>
 

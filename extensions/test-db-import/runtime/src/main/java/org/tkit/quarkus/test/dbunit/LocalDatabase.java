@@ -14,18 +14,17 @@ import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.test.WithDBData;
 
 public class LocalDatabase implements Database {
 
     private static final Logger log = LoggerFactory.getLogger(LocalDatabase.class);
 
     @Override
-    public void deleteData(WithDBData ano, FileType type, String file) throws Exception {
-        IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
+    public void deleteData(Request request) throws Exception {
+        IDataSet dataSet = getDataSet(request);
         IDatabaseConnection conn = null;
         try {
-            conn = getConnection(ano.datasource());
+            conn = getConnection(request.ano().datasource());
             DatabaseOperation.DELETE_ALL.execute(conn, dataSet);
         } finally {
             if (conn != null)
@@ -34,16 +33,16 @@ public class LocalDatabase implements Database {
     }
 
     @Override
-    public void insertData(WithDBData ano, FileType type, String file) throws Exception {
-        IDataSet dataSet = getDataSet(type, file, ano.columnSensing());
+    public void insertData(Request request) throws Exception {
+        IDataSet dataSet = getDataSet(request);
         DatabaseOperation op = DatabaseOperation.INSERT;
-        if (ano.deleteBeforeInsert()) {
+        if (request.ano().deleteBeforeInsert()) {
             op = DatabaseOperation.CLEAN_INSERT;
         }
         IDatabaseConnection conn = null;
         try {
-            conn = getConnection(ano.datasource());
-            op.execute(getConnection(ano.datasource()), dataSet);
+            conn = getConnection(request.ano().datasource());
+            op.execute(getConnection(request.ano().datasource()), dataSet);
         } finally {
             if (conn != null)
                 conn.close();
@@ -82,12 +81,13 @@ public class LocalDatabase implements Database {
         return DriverManager.getConnection(url, username, password);
     }
 
-    protected IDataSet getDataSet(FileType type, String file, boolean columnSensing) throws Exception {
+    protected IDataSet getDataSet(Request request) throws Exception {
+        boolean columnSensing = request.ano().columnSensing();
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        if (Objects.requireNonNull(type) == FileType.XML) {
-            return new FlatXmlDataSetBuilder().setColumnSensing(columnSensing).build(cl.getResourceAsStream(file));
+        if (Objects.requireNonNull(request.type()) == FileType.XML) {
+            return new FlatXmlDataSetBuilder().setColumnSensing(columnSensing).build(cl.getResourceAsStream(request.path()));
         }
-        throw new RuntimeException("No datasource found for the type " + type);
+        throw new RuntimeException("No datasource found for the type " + request.type());
     }
 
 }
