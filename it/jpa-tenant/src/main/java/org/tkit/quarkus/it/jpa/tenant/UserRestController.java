@@ -82,7 +82,7 @@ public class UserRestController {
     @GET
     public Response all() {
         UserListDTO dto = new UserListDTO();
-        dto.items = dao.findAll().map(this::map).toList();
+        dto.items = dao.findAllAsList().stream().map(this::map).toList();
         return Response.ok(dto).build();
     }
 

@@ -6,6 +6,7 @@ import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "TEST_USER")
+@NamedEntityGraph(name = "User.load", attributeNodes = { @NamedAttributeNode("address") })
 public class User extends TraceableEntity {
 
     private String name;

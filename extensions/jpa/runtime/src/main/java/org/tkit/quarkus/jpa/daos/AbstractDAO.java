@@ -9,9 +9,7 @@ import java.util.stream.Stream;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaDelete;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.CriteriaUpdate;
+import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
 
 import org.hibernate.exception.ConstraintViolationException;
@@ -124,23 +122,85 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     }
 
     /**
-     * Finds all entities.
+     *
+     * /**
+     *
+     * @deprecated As of version 3.0.0, replaced by {@link #findAllAsList()}
+     *             <p>
+     *             This method as it returns Stream which uses server side cursor, can produce incorrect data if rows are not
+     *             explicitly sorted
+     *             (@see <a href=
+     *             "https://docs.jboss.org/hibernate/orm/6.6/userguide/html_single/Hibernate_User_Guide.html#hql-api-scroll">Related
+     *             Hibernate doc</a>)
+     *             Use {@link #findAllAsList(EntityGraph)} which is safe without any sorting
+     *             <p>
+     *             Will be removed in version 3.0.0
+     *
+     *             Finds all entities.
      *
      * @return the stream of finds entities.
      * @throws DAOException if the method fails.
      */
+    @Deprecated(since = "3.0.0", forRemoval = true)
     public Stream<T> findAll() throws DAOException {
         return findAll(null);
+    }
+
+    /**
+     * @deprecated As of version 3.0.0, replaced by {@link #findAllAsList(EntityGraph)}
+     *             <p>
+     *             This method as it returns Stream which uses server side cursor, can produce incorrect data if rows are not
+     *             explicitly sorted
+     *             (@see <a href=
+     *             "https://docs.jboss.org/hibernate/orm/6.6/userguide/html_single/Hibernate_User_Guide.html#hql-api-scroll">Related
+     *             Hibernate doc</a>)
+     *             Use {@link #findAllAsList(EntityGraph)} which is safe without any sorting
+     *             <p>
+     *             Will be removed in version 3.0.0
+     *             Finds all entities.
+     *
+     * @param entityGraph the entity graph.
+     * @return stream of loaded entities.
+     * @throws DAOException if the method fails.
+     */
+    @Deprecated(since = "3.0.0", forRemoval = true)
+    public Stream<T> findAll(EntityGraph<?> entityGraph) throws DAOException {
+        try {
+            CriteriaQuery<T> cq = criteriaQuery();
+            Root<T> root = cq.from(entityClass);
+            cq.distinct(true);
+            cq.orderBy(em.getCriteriaBuilder().asc(root.get(idAttributeName)));
+            TypedQuery<T> query = getEntityManager().createQuery(cq);
+            if (entityGraph != null) {
+                query.setHint(HINT_LOAD_GRAPH, entityGraph);
+            }
+
+            return query.getResultStream();
+        } catch (Exception e) {
+            throw new DAOException(Errors.FIND_ALL_ENTITIES_FAILED, e, entityName,
+                    entityGraph == null ? null : entityGraph.getName());
+        }
+    }
+
+    /**
+     * Finds all entities
+     *
+     * @return the list of loaded entities.
+     * @throws DAOException if the method fails.
+     */
+    public List<T> findAllAsList() throws DAOException {
+        return findAllAsList(null);
     }
 
     /**
      * Finds all entities.
      *
      * @param entityGraph the entity graph.
-     * @return the list loaded entities.
+     * @return the list of loaded entities.
      * @throws DAOException if the method fails.
      */
-    public Stream<T> findAll(EntityGraph<?> entityGraph) throws DAOException {
+
+    public List<T> findAllAsList(EntityGraph<?> entityGraph) throws DAOException {
         try {
             CriteriaQuery<T> cq = criteriaQuery();
             cq.from(entityClass);
@@ -149,7 +209,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
             if (entityGraph != null) {
                 query.setHint(HINT_LOAD_GRAPH, entityGraph);
             }
-            return query.getResultStream();
+            return query.getResultList();
         } catch (Exception e) {
             throw new DAOException(Errors.FIND_ALL_ENTITIES_FAILED, e, entityName,
                     entityGraph == null ? null : entityGraph.getName());
@@ -423,7 +483,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = DAOException.class)
     public void deleteAll() throws DAOException {
         try {
-            Stream<T> tmp = findAll();
+            List<T> tmp = findAllAsList();
             delete(tmp);
         } catch (Exception e) {
             throw new DAOException(Errors.FAILED_TO_DELETE_ALL, e, entityName);
