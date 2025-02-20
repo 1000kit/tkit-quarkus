@@ -127,11 +127,13 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      *
      * @deprecated As of version 3.0.0, replaced by {@link #findAllAsList()}
      *             <p>
-     *             This method as it returns Stream which uses server side cursor, can produce incorrect data if rows are not
-     *             explicitly sorted
+     *             This method as it returns Stream and before used {@link Query#getResultStream()} which uses server side
+     *             cursor,
+     *             can produce incorrect data if rows are not explicitly sorted
      *             (@see <a href=
      *             "https://docs.jboss.org/hibernate/orm/6.6/userguide/html_single/Hibernate_User_Guide.html#hql-api-scroll">Related
      *             Hibernate doc</a>)
+     *             To avoid this problem it was changed just to wrap {@link #findAllAsList()} and convert it to stream
      *             Use {@link #findAllAsList(EntityGraph)} which is safe without any sorting
      *             <p>
      *             Will be removed in version 3.0.0
@@ -143,18 +145,20 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      */
     @Deprecated(since = "3.0.0", forRemoval = true)
     public Stream<T> findAll() throws DAOException {
-        return findAll(null);
+        return findAllAsList().stream();
     }
 
     /**
      * @deprecated As of version 3.0.0, replaced by {@link #findAllAsList(EntityGraph)}
      *             <p>
-     *             This method as it returns Stream which uses server side cursor, can produce incorrect data if rows are not
-     *             explicitly sorted
+     *             This method as it returns Stream and before used {@link Query#getResultStream()} which uses server side
+     *             cursor,
+     *             can produce incorrect data if rows are not explicitly sorted
      *             (@see <a href=
      *             "https://docs.jboss.org/hibernate/orm/6.6/userguide/html_single/Hibernate_User_Guide.html#hql-api-scroll">Related
-     *             Hibernate doc</a>)
-     *             Use {@link #findAllAsList(EntityGraph)} which is safe without any sorting
+     *             Hibernate doc</a>).
+     *             To avoid this problem it was changed just to wrap {@link #findAllAsList()} and convert it to stream
+     *             Use {@link #findAllAsList(EntityGraph)} which is safe without any sorting.
      *             <p>
      *             Will be removed in version 3.0.0
      *             Finds all entities.
@@ -165,21 +169,7 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
      */
     @Deprecated(since = "3.0.0", forRemoval = true)
     public Stream<T> findAll(EntityGraph<?> entityGraph) throws DAOException {
-        try {
-            CriteriaQuery<T> cq = criteriaQuery();
-            Root<T> root = cq.from(entityClass);
-            cq.distinct(true);
-            cq.orderBy(em.getCriteriaBuilder().asc(root.get(idAttributeName)));
-            TypedQuery<T> query = getEntityManager().createQuery(cq);
-            if (entityGraph != null) {
-                query.setHint(HINT_LOAD_GRAPH, entityGraph);
-            }
-
-            return query.getResultStream();
-        } catch (Exception e) {
-            throw new DAOException(Errors.FIND_ALL_ENTITIES_FAILED, e, entityName,
-                    entityGraph == null ? null : entityGraph.getName());
-        }
+        return findAllAsList(entityGraph).stream();
     }
 
     /**
