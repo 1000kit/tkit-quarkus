@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.OptimisticLockException;
 import jakarta.persistence.criteria.Order;
 import jakarta.transaction.Transactional;
@@ -35,6 +36,9 @@ public class UserDAOTest extends AbstractTest {
 
     @Inject
     AddressDAO addressDAO;
+
+    @Inject
+    protected EntityManager em;
 
     @Test
     public void updateUserTest() {
@@ -151,6 +155,43 @@ public class UserDAOTest extends AbstractTest {
     }
 
     @Test
+    public void findAllUsersTest() {
+        long countBefore = userDAO.findAll().count();
+        // create 150 users
+        userDAO.create(Stream.generate(() -> UserTestBuilder.createUserWithAddress(addressDAO)).limit(150));
+        Stream<User> usersStream = userDAO.findAll();
+        Assertions.assertEquals(countBefore + 150, usersStream.count());
+    }
+
+    @Test
+    public void findAllWithEntityGraphUsersTest() {
+        long countBefore = userDAO.findAll().count();
+        // create 150 users
+        userDAO.create(Stream.generate(() -> UserTestBuilder.createUserWithAddress(addressDAO)).limit(150));
+        Stream<User> usersStream = userDAO.findAll();
+        Assertions.assertEquals(countBefore + 150, usersStream.count());
+    }
+
+    @Test
+    public void findAllAsListUsersTest() {
+        long countBefore = userDAO.findAll().count();
+        // create 150 users
+        userDAO.create(Stream.generate(() -> UserTestBuilder.createUserWithAddress(addressDAO)).limit(150));
+        List<User> userAsList = userDAO.findAllAsList();
+        Assertions.assertEquals(countBefore + 150, userAsList.size());
+    }
+
+    @Test
+    public void findAllAsListWithEntityGraphUsersTest() {
+        long countBefore = userDAO.findAll().count();
+        // create 150 users
+        userDAO.create(Stream.generate(() -> UserTestBuilder.createUserWithAddress(addressDAO)).limit(150));
+        userDAO.findAllAsList(em.getEntityGraph("User.load"));
+        List<User> userAsList = userDAO.findAllAsList();
+        Assertions.assertEquals(countBefore + 150, userAsList.size());
+    }
+
+    @Test
     @Transactional
     public void deleteAllUsersTest() {
         User user = UserTestBuilder.createUser();
@@ -209,6 +250,15 @@ public class UserDAOTest extends AbstractTest {
             user.setName("Name_" + UUID.randomUUID());
             user.setEmail("Email_" + UUID.randomUUID());
             return user;
+        }
+
+        public static User createUserWithAddress(AddressDAO addressDAO) {
+            User usr = createUser();
+            Address address = new Address();
+            address.setCity("City_" + UUID.randomUUID());
+            addressDAO.create(address);
+            usr.setAddress(address);
+            return usr;
         }
 
         public static User createIndexUser(int index) {

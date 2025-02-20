@@ -27,7 +27,7 @@ public class UserRestController {
 
     @GET
     public Response all() {
-        return Response.ok(userDAO.findAll()).build();
+        return Response.ok(userDAO.findAllAsList()).build();
     }
 
     @GET
