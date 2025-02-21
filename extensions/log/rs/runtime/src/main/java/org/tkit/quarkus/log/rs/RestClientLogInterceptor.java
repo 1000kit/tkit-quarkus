@@ -42,10 +42,6 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
         if (!config.client().enabled()) {
             return;
         }
-        //propagate our log context if present
-        if (!ApplicationContext.isEmpty() && config.correlationIdEnabled()) {
-            requestContext.getHeaders().add(config.correlationIdHeader(), ApplicationContext.get().getCorrelationId());
-        }
 
         RestInterceptorContext context = new RestInterceptorContext();
         context.method = requestContext.getMethod();
@@ -60,6 +56,11 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
                     context.mdcKeys.add(v);
                 }
             });
+        }
+
+        //propagate our log context if present
+        if (!ApplicationContext.isEmpty() && config.correlationIdEnabled()) {
+            requestContext.getHeaders().add(config.correlationIdHeader(), ApplicationContext.get().getCorrelationId());
         }
 
         if (config.client().start().enabled()) {
@@ -95,6 +96,12 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
             context.close();
 
             if (config.client().end().mdc().enabled()) {
+
+                Object correlationId = requestContext.getHeaders().getFirst(config.correlationIdHeader());
+                if (correlationId != null) {
+                    MDC.put(config.client().end().mdc().correlationId(), correlationId);
+                }
+
                 MDC.put(config.client().end().mdc().durationName(), context.durationSec);
                 context.mdcKeys.add(config.client().end().mdc().durationName());
 
