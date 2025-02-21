@@ -405,6 +405,13 @@ public interface RestRuntimeConfig {
     interface RestClientMdcLogConfig {
 
         /**
+         * Correlation ID MDC key name
+         */
+        @WithName("correlation-id")
+        @WithDefault("X-Correlation-ID")
+        String correlationId();
+
+        /**
          * Enable duration time as MDC parameter
          */
         @WithName("enabled")

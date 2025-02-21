@@ -910,6 +910,27 @@ endif::add-copy-button-to-env-var[]
 |string
 |`%1$s %2$s [%4$s] [%3$ss]`
 
+a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-correlation-id]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-correlation-id[`tkit.log.rs.client.end.mdc.correlation-id`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.log.rs.client.end.mdc.correlation-id+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Correlation ID MDC key name
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_LOG_RS_CLIENT_END_MDC_CORRELATION_ID+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_CORRELATION_ID+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`X-Correlation-ID`
+
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-enabled[`tkit.log.rs.client.end.mdc.enabled`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.log.rs.client.end.mdc.enabled+++[]
