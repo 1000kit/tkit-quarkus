@@ -35,10 +35,23 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-client-jackson</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-oidc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-client-oidc-filter</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.tkit.quarkus.lib</groupId>
             <artifactId>tkit-quarkus-log-rs</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tkit.quarkus.lib</groupId>
+            <artifactId>tkit-quarkus-rest-context</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -56,11 +69,6 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-test-common</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkiverse.mockserver</groupId>
-            <artifactId>quarkus-mockserver-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

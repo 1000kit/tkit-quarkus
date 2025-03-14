@@ -24,6 +24,12 @@ public class UserRestController {
     UserRestsClient client;
 
     @GET
+    @Path("ping")
+    public Response ping() {
+        return Response.ok().build();
+    }
+
+    @GET
     @Path("{id}")
     public Response getUser(@PathParam("id") String id) {
         try (Response response = client.getUserById(id)) {

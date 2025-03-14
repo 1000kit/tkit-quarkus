@@ -14,7 +14,7 @@ import jakarta.ws.rs.core.Response;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Path("/users")
+@Path("/mock/users")
 @RegisterRestClient(configKey = "user")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
