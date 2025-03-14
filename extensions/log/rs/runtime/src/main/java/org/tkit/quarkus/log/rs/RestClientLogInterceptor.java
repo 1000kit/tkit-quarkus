@@ -11,7 +11,9 @@ import org.jboss.logging.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.ApplicationContext;
+import org.tkit.quarkus.context.ApplicationContextContainer;
 
+import io.quarkus.arc.Arc;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
@@ -56,6 +58,14 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
                     context.mdcKeys.add(v);
                 }
             });
+        }
+
+        // workaround for OIDC client interceptor
+        if (ApplicationContext.isEmpty()) {
+            var ctxRequest = Arc.container().instance(ApplicationContextContainer.class).get();
+            if (ctxRequest != null) {
+                ctxRequest.resume();
+            }
         }
 
         //propagate our log context if present

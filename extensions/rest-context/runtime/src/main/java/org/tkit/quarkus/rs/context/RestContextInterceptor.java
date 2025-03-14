@@ -9,6 +9,7 @@ import jakarta.ws.rs.ext.Provider;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.tkit.quarkus.context.ApplicationContext;
+import org.tkit.quarkus.context.ApplicationContextContainer;
 import org.tkit.quarkus.context.Context;
 import org.tkit.quarkus.rs.context.principal.RestContextPrincipalResolverService;
 import org.tkit.quarkus.rs.context.tenant.RestContextTenantResolverService;
@@ -36,8 +37,11 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
 
     private final RestContextHeaderContainer headerContainer;
 
+    private final ApplicationContextContainer contextContainer;
+
     public RestContextInterceptor() {
         headerContainer = Arc.container().instance(RestContextHeaderContainer.class).get();
+        contextContainer = Arc.container().instance(ApplicationContextContainer.class).get();
     }
 
     @Override
@@ -92,6 +96,10 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
         // start application context
         ApplicationContext.start(ctx);
 
+        // workaround fallback for OIDC interceptor
+        if (contextContainer != null) {
+            contextContainer.setContext(ctx);
+        }
     }
 
     @Override
