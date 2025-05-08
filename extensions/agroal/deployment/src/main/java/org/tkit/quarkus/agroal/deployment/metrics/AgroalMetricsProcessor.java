@@ -13,9 +13,17 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
+import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.metrics.MetricsFactoryConsumerBuildItem;
 
 public class AgroalMetricsProcessor {
+
+    private static final String FEATURE = "tkit-agroal-metrics";
+
+    @BuildStep
+    FeatureBuildItem feature() {
+        return new FeatureBuildItem(FEATURE);
+    }
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)

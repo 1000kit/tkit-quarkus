@@ -66,7 +66,7 @@ public class LogProcessor {
         for (BeanInfo bean : beanRegistrationPhase.getContext().beans().classBeans()) {
             ClassInfo ci = bean.getImplClazz();
 
-            AnnotationInstance ano = ci.classAnnotation(LOG_SERVICE);
+            AnnotationInstance ano = ci.declaredAnnotation(LOG_SERVICE);
             if (ano == null) {
                 ano = annotationStore.getAnnotation(ci, LOG_SERVICE);
             }
