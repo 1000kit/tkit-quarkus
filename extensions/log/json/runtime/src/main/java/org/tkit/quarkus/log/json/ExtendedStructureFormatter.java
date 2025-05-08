@@ -296,7 +296,7 @@ public abstract class ExtendedStructureFormatter extends ExtFormatter {
                 .add(getKey(Key.LOGGER_NAME), record.getLoggerName())
                 .add(getKey(Key.LEVEL), record.getLevel().getName())
                 .add(getKey(Key.THREAD_NAME), record.getThreadName())
-                .add(getKey(Key.THREAD_ID), record.getThreadID())
+                .add(getKey(Key.THREAD_ID), record.getLongThreadID())
                 .add(getKey(Key.MDC), record.getMdcCopy())
                 .add(getKey(Key.NDC), record.getNdc());
 

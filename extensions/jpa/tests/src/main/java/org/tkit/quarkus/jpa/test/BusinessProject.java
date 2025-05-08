@@ -5,14 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.generator.EventType;
 import org.tkit.quarkus.jpa.models.TraceableEntity;
 
 @Entity
 @Table(name = "BUSINESS_PROJECT")
 public class BusinessProject extends TraceableEntity {
 
-    @Generated(GenerationTime.INSERT)
+    @Generated(event = EventType.INSERT)
     @Column(name = "bid", columnDefinition = "SERIAL")
     private Long bid;
 

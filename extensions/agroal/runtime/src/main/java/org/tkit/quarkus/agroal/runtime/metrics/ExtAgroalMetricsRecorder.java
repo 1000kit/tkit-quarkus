@@ -4,8 +4,7 @@ import java.util.function.Consumer;
 
 import org.jboss.logging.Logger;
 
-import io.quarkus.agroal.runtime.DataSources;
-import io.quarkus.arc.Arc;
+import io.quarkus.agroal.runtime.AgroalDataSourceUtil;
 import io.quarkus.datasource.common.runtime.DataSourceUtil;
 import io.quarkus.runtime.annotations.Recorder;
 import io.quarkus.runtime.metrics.MetricsFactory;
@@ -20,15 +19,21 @@ public class ExtAgroalMetricsRecorder {
         return new Consumer<MetricsFactory>() {
             @Override
             public void accept(MetricsFactory metricsFactory) {
-                DataSources dataSources = Arc.container().instance(DataSources.class).get();
-                if (!dataSources.getActiveDataSourceNames().contains(dataSourceName)) {
+
+                if (!AgroalDataSourceUtil.activeDataSourceNames().contains(dataSourceName)) {
                     log.debug("Not registering metrics for datasource '" + dataSourceName + "'"
                             + " as the datasource has been deactivated in the configuration");
                     return;
                 }
 
+                var ds = AgroalDataSourceUtil.dataSourceIfActive(dataSourceName);
+                if (ds.isEmpty()) {
+                    log.warn("Data-source '" + dataSourceName + "' is not active for metrics");
+                    return;
+                }
+
                 String tagValue = DataSourceUtil.isDefault(dataSourceName) ? "default" : dataSourceName;
-                var config = dataSources.getDataSource(dataSourceName).getConfiguration().connectionPoolConfiguration();
+                var config = ds.get().getConfiguration().connectionPoolConfiguration();
 
                 metricsFactory.builder("agroal.config.pool.min.size")
                         .description("The minimum number of connections on the pool.")

@@ -88,12 +88,12 @@ public class OidcTenantHealthCheck implements HealthCheck {
         }
 
         log.error("OIDC {} tenant '{}' missing oidc meta-data. Issuer: {}", kind.getData(),
-                context.getOidcTenantConfig().tenantId.orElse(null),
-                context.getOidcTenantConfig().getAuthServerUrl().orElse("undefined"));
+                context.getOidcTenantConfig().tenantId().orElse(null),
+                context.getOidcTenantConfig().authServerUrl().orElse("undefined"));
 
         return builder
                 .down()
-                .withData("tenant", context.getOidcTenantConfig().tenantId.orElse(null))
+                .withData("tenant", context.getOidcTenantConfig().tenantId().orElse(null))
                 .withData("status", "missing").build();
     }
 
@@ -101,7 +101,7 @@ public class OidcTenantHealthCheck implements HealthCheck {
         boolean metadata = context.getOidcMetadata() != null;
         String issuer = metadata ? context.getOidcMetadata().getIssuer() : null;
         log.debug("OIDC {} tenant '{}' OidcMetadata exits? '{}' Issuer: '{}'.", kind.getData(),
-                context.getOidcTenantConfig().tenantId.orElse(null), metadata, issuer);
+                context.getOidcTenantConfig().tenantId().orElse(null), metadata, issuer);
     }
 
     enum KIND {
