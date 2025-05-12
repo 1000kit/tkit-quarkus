@@ -44,8 +44,6 @@ public class RolesRestController {
 
 The `@LogExclude` parameter annotation excludes the parameter from the logs. For more information, see the class's Javadoc documentation.
 
-CAUTION: The autodiscovery feature is deprecated and not recommend to use. Configuration `tkit.log.cdi.auto-discovery.*`
-
 === Configuration
 
 include::includes/tkit-quarkus-log-cdi.adoc[leveloffset=+1, opts=optional]
