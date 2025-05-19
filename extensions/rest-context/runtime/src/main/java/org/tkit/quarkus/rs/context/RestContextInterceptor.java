@@ -84,7 +84,7 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
             principalToken = null;
         }
 
-        // create a application context
+        // create an application context
         Context ctx = Context.builder()
                 .correlationId(correlationId)
                 .principal(principal)
