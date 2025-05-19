@@ -14,6 +14,7 @@ import org.tkit.quarkus.context.ApplicationContext;
 import org.tkit.quarkus.context.ApplicationContextContainer;
 
 import io.quarkus.arc.Arc;
+import io.quarkus.arc.ManagedContext;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
@@ -62,9 +63,12 @@ public class RestClientLogInterceptor implements ClientRequestFilter, ClientResp
 
         // workaround for OIDC client interceptor
         if (ApplicationContext.isEmpty()) {
-            var ctxRequest = Arc.container().instance(ApplicationContextContainer.class).get();
-            if (ctxRequest != null) {
-                ctxRequest.resume();
+            ManagedContext activeContext = Arc.container().requestContext();
+            if (activeContext.isActive()) {
+                var ctxRequest = Arc.container().instance(ApplicationContextContainer.class).get();
+                if (ctxRequest != null) {
+                    ctxRequest.resume();
+                }
             }
         }
 
