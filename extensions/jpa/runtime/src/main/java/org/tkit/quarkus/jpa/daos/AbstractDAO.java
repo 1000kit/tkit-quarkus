@@ -32,13 +32,13 @@ public abstract class AbstractDAO<T> extends EntityService<T> {
     private static final Logger log = LoggerFactory.getLogger(AbstractDAO.class);
 
     /**
-     * The property hint is jakarta.persistence.load-graph.
+     * The property hint is jakarta.persistence.loadgraph.
      * <p>
      * This hint will treat all the specified attributes in the Entity Graph as
      * FetchType.EAGER. Attributes that are not specified are treated as
      * FetchType.LAZY.
      */
-    protected static final String HINT_LOAD_GRAPH = "jakarta.persistence.load-graph";
+    protected static final String HINT_LOAD_GRAPH = "jakarta.persistence.loadgraph";
 
     /**
      * The entity manager.
