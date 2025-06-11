@@ -9,8 +9,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>tkit-quarkus-security-test</artifactId>'
-    <name>tkit-quarkus-security-test</name>'
+    <artifactId>tkit-quarkus-security-test</artifactId>
+    <name>tkit-quarkus-security-test</name>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
