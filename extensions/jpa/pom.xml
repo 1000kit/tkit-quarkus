@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-jpa-parent</artifactId>
+    <name>tkit-quarkus-jpa-parent</name>
     <packaging>pom</packaging>
 
     <modules>

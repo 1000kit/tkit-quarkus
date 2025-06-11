@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-docs</artifactId>
+    <name>tkit-quarkus-docs</name>
 
     <dependencies>
         <!-- Make sure the doc is build after the other artifacts -->

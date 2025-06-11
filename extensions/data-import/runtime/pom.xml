@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-data-import</artifactId>
+    <name>tkit-quarkus-data-import</name>
     <packaging>jar</packaging>
 
     <dependencies>

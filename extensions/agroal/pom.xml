@@ -10,6 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <name>tkit-quarkus-agroal-parent</name>
     <artifactId>tkit-quarkus-agroal-parent</artifactId>
     <packaging>pom</packaging>
 

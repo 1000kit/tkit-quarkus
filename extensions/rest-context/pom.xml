@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-rest-context-parent</artifactId>
+    <name>tkit-quarkus-rest-context-parent</name>
     <packaging>pom</packaging>
 
     <modules>
