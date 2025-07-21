@@ -1,4 +1,4 @@
-package org.tkit.quarkus.security.test.openapi;
+package org.tkit.quarkus.security.dynamic.test.openapi;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.rootPath;
@@ -17,14 +17,14 @@ import org.junit.jupiter.api.TestFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.vertx.http.runtime.security.ImmutablePathMatcher;
 import io.smallrye.config.SmallRyeConfig;
 import io.smallrye.openapi.api.OpenApiConfig;
-import io.smallrye.openapi.runtime.io.*;
+import io.smallrye.openapi.runtime.io.Format;
+import io.smallrye.openapi.runtime.io.IOContext;
+import io.smallrye.openapi.runtime.io.JsonIO;
+import io.smallrye.openapi.runtime.io.OpenAPIDefinitionIO;
 
-@QuarkusTest
-@DisableIfValue(valueProperty = "tkit.security-test.openapi.disable-value", regexProperty = "tkit.security-test.openapi.disable-regex")
 public class SecurityDynamicTest {
 
     static final String PERMISSION_CONFIG = "quarkus.http.auth.permission";
