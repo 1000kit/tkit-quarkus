@@ -70,9 +70,10 @@ public class TokenContextService {
 
         TokenParserRequest request = new TokenParserRequest(rawToken)
                 .issuerEnabled(tc.issuerEnabled())
+                .issuerSuffix(tc.issuerSuffix())
+                .issuerUrl(tc.issuerUrl().orElse(null))
                 .type(tc.type())
-                .verify(tc.verify())
-                .issuerSuffix(tc.issuerSuffix());
+                .verify(tc.verify());
 
         var issuers = tc.issuers();
         if (issuers != null && !issuers.isEmpty()) {
@@ -80,6 +81,7 @@ public class TokenContextService {
                 if (v.enabled()) {
                     request.addIssuerParserRequest(k, new TokenParserRequest.IssuerParserRequest()
                             .url(v.url())
+                            .publicKeyLocationUrl(v.publicKeyLocationUrl().orElse(null))
                             .publicKeyLocationEnabled(v.publicKeyLocationEnabled())
                             .publicKeyLocationSuffix(v.publicKeyLocationSuffix()));
                 }

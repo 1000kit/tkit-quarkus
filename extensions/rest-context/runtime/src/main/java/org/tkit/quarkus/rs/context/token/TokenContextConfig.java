@@ -1,6 +1,7 @@
 package org.tkit.quarkus.rs.context.token;
 
 import java.util.Map;
+import java.util.Optional;
 
 import io.quarkus.runtime.annotations.ConfigDocFilename;
 import io.quarkus.runtime.annotations.ConfigPhase;
@@ -64,6 +65,12 @@ public interface TokenContextConfig {
         @WithName("public-key-location.suffix")
         @WithDefault("/protocol/openid-connect/certs")
         String issuerSuffix();
+
+        /**
+         * Public key server url
+         */
+        @WithName("public-key-location.url")
+        Optional<String> issuerUrl();
 
         /**
          * Principal token header parameter.
@@ -139,5 +146,11 @@ public interface TokenContextConfig {
         @WithName("public-key-location.suffix")
         @WithDefault("/protocol/openid-connect/certs")
         String publicKeyLocationSuffix();
+
+        /**
+         * Public key server url
+         */
+        @WithName("public-key-location.url")
+        Optional<String> publicKeyLocationUrl();
     }
 }

@@ -13,6 +13,8 @@ public class TokenParserRequest {
 
     private String issuerSuffix;
 
+    private String issuerUrl;
+
     private String type;
 
     private final Map<String, IssuerParserRequest> issuerParserRequests = new HashMap<>();
@@ -23,6 +25,19 @@ public class TokenParserRequest {
 
     public String getRawToken() {
         return rawToken;
+    }
+
+    public String getIssuerUrl() {
+        return issuerUrl;
+    }
+
+    public void setIssuerUrl(String issuerUrl) {
+        this.issuerUrl = issuerUrl;
+    }
+
+    public TokenParserRequest issuerUrl(String issuerSuffix) {
+        setIssuerUrl(issuerSuffix);
+        return this;
     }
 
     public boolean isIssuerEnabled() {
@@ -89,6 +104,8 @@ public class TokenParserRequest {
 
         private String url;
 
+        private String publicKeyLocationUrl;
+
         private String publicKeyLocationSuffix;
 
         private boolean publicKeyLocationEnabled;
@@ -129,6 +146,19 @@ public class TokenParserRequest {
 
         public IssuerParserRequest publicKeyLocationEnabled(boolean publicKeyLocationEnabled) {
             setPublicKeyLocationEnabled(publicKeyLocationEnabled);
+            return this;
+        }
+
+        public String getPublicKeyLocationUrl() {
+            return publicKeyLocationUrl;
+        }
+
+        public void setPublicKeyLocationUrl(String publicKeyLocationUrl) {
+            this.publicKeyLocationUrl = publicKeyLocationUrl;
+        }
+
+        public IssuerParserRequest publicKeyLocationUrl(String publicKeyLocationUrl) {
+            setPublicKeyLocationUrl(publicKeyLocationUrl);
             return this;
         }
     }
