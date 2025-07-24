@@ -63,6 +63,7 @@ public class TokenParserService {
             var issuer = jwtClaims.getIssuer();
             var publicLocationSuffix = request.getIssuerSuffix();
             var publicLocationEnabled = request.isIssuerEnabled();
+            var publicLocationUrl = request.getIssuerUrl();
 
             if (!request.getIssuerParserRequests().isEmpty()) {
 
@@ -74,6 +75,7 @@ public class TokenParserService {
                     var pls = ir.get().getValue();
                     publicLocationSuffix = pls.getPublicKeyLocationSuffix();
                     publicLocationEnabled = pls.getPublicKeyLocationEnabled();
+                    publicLocationUrl = pls.getPublicKeyLocationUrl();
                 } else {
                     log.error("Undefined issuer found in token. Issuer: '{}'", issuer);
                     throw new TokenException(ErrorKeys.UNDEFINED_ISSUER_FOUND_IN_TOKEN, "Undefined issuer found in token");
@@ -83,8 +85,15 @@ public class TokenParserService {
 
             var info = authContextInfo;
             if (publicLocationEnabled) {
+                var url = issuer;
+                if (publicLocationUrl != null) {
+                    url = publicLocationUrl;
+                }
+                if (publicLocationSuffix != null) {
+                    url = url + publicLocationSuffix;
+                }
                 info = new JWTAuthContextInfo(authContextInfo);
-                info.setPublicKeyLocation(issuer + publicLocationSuffix);
+                info.setPublicKeyLocation(url);
             }
             return parser.parse(request.getRawToken(), info);
         }

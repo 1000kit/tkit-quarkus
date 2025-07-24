@@ -133,6 +133,27 @@ endif::add-copy-button-to-env-var[]
 |string
 |`/protocol/openid-connect/certs`
 
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-public-key-location-url]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-public-key-location-url[`tkit.rs.context.token.public-key-location.url`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.public-key-location.url+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Public key server url
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_PUBLIC_KEY_LOCATION_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_PUBLIC_KEY_LOCATION_URL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
 a| [[tkit-quarkus-rest-context_tkit-rs-context-token-header-param]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-header-param[`tkit.rs.context.token.header-param`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.rs.context.token.header-param+++[]
@@ -909,6 +930,27 @@ endif::add-copy-button-to-env-var[]
 --
 |string
 |`/protocol/openid-connect/certs`
+
+a| [[tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-url]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-token-issuers-issuers-public-key-location-url[`tkit.rs.context.token.issuers."issuers".public-key-location.url`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.context.token.issuers."issuers".public-key-location.url+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Public key server url
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__PUBLIC_KEY_LOCATION_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_CONTEXT_TOKEN_ISSUERS__ISSUERS__PUBLIC_KEY_LOCATION_URL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
 
 |===
 
