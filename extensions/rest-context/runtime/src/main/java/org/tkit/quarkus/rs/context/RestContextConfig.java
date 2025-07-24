@@ -81,7 +81,7 @@ public interface RestContextConfig {
          * Header parameter for business context.
          */
         @WithName("header-param-name")
-        @WithDefault("business-context")
+        @WithDefault("x-business-context")
         String headerParamName();
 
     }
