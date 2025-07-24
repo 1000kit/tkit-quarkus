@@ -43,6 +43,7 @@ class Test2RestControllerTest {
                 .statusCode(Response.Status.OK.getStatusCode())
                 .header("test-header-forward-1", "test-value-1")
                 .header("test-header-forward-2", "test-value-2")
+                .header("test-header-forward-3", Matchers.nullValue())
                 .header("test-header-no-forward", Matchers.nullValue());
     }
 }
