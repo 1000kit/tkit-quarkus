@@ -92,6 +92,11 @@
             </dependency>
             <dependency>
                 <groupId>org.tkit.quarkus.lib</groupId>
+                <artifactId>tkit-quarkus-security-dynamic-test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tkit.quarkus.lib</groupId>
                 <artifactId>tkit-quarkus-test</artifactId>
                 <version>${project.version}</version>
             </dependency>

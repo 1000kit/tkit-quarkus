@@ -31,58 +31,6 @@ For instance, with Maven, add the following dependency to your POM file:
 
 To work in `@QuarkusIntegrationTest` tests set the property `quarkus.test.enable-callbacks-for-integration-tests = true` in your application.properties.
 
-
-=== OpenAPI Security Tests
-
-To registry default security tests you need to add this library to the `maven-surefire-plugin` class-path.
-
-[source,xml,subs=attributes+]
-----
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <configuration>
-        <dependenciesToScan>
-            <dependency>org.tkit.quarkus.lib:tkit-quarkus-security-test</dependency>
-        </dependenciesToScan>
-    </configuration>
-</plugin>
-----
-
-This will start `org.tkit.quarkus.security.test.openapi.SecurityDynamicTest` be default.
-
-
-To run this test as an integration test, you need to add this class to your project:
-
-[source,java,subs=attributes+]
-----
-import io.quarkus.test.junit.QuarkusIntegrationTest;
-import org.tkit.quarkus.security.test.openapi.SecurityDynamicTest;
-
-@QuarkusIntegrationTest
-public class SecurityDynamicTestIT extends SecurityDynamicTest {
-
-}
-----
-
-This test can be disabled if the value of the system property `tkit.security-test.openapi.disable-value` matches the regular expression of the system property `tkit.security-test.openapi.disable-regex`.
-
-For example, this test is only disabled for projects with the prefix `E`.
-
-[source,xml,subs=attributes+]
-----
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <configuration>
-        <systemPropertyVariables>
-            <tkit.security-test.openapi.disable-value>${project.artifactId}</tkit.security-test.openapi.disable-value>
-            <tkit.security-test.openapi.disable-regex>E.*</tkit.security-test.openapi.disable-regex>
-        </systemPropertyVariables>
-    </configuration>
-</plugin>
-----
-
 === Generate Keycloak clients via annotation
 
 ==== Class Level
@@ -103,7 +51,3 @@ public class UserRestControllerTest {
 }
 
 ----
-
-=== Configuration
-
-include::includes/tkit-quarkus-security-test.adoc[leveloffset=+1, opts=optional]

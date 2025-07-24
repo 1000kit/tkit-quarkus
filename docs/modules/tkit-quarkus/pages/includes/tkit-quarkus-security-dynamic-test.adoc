@@ -1,0 +1,137 @@
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[.header-title]##Configuration property##
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-enabled]] [.property-path]##link:#tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-enabled[`tkit.security-dynamic-test.openapi.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-dynamic-test.openapi.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Enable or disable openapi dynamic security test and integration test.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-test-value]] [.property-path]##link:#tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-test-value[`tkit.security-dynamic-test.openapi.disable-test-value`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-dynamic-test.openapi.disable-test-value+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+This property is used to disable test SecurityDynamicTest. Value to be evaluated by regex. For example $++{++project.artifactId++}++
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_TEST_VALUE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_TEST_VALUE+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-test-regex]] [.property-path]##link:#tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-test-regex[`tkit.security-dynamic-test.openapi.disable-test-regex`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-dynamic-test.openapi.disable-test-regex+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+This property is used to disable test SecurityDynamicTest. Regex to evaluate value to disable. For example `.++*++(?<!-bff)$` enable only for project ending with -bff suffix.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_TEST_REGEX+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_TEST_REGEX+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-enabled-integration-test]] [.property-path]##link:#tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-enabled-integration-test[`tkit.security-dynamic-test.openapi.enabled-integration-test`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-dynamic-test.openapi.enabled-integration-test+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+This property is used to enabled or disable integration test SecurityDynamicIT.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_ENABLED_INTEGRATION_TEST+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_ENABLED_INTEGRATION_TEST+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-integration-test-value]] [.property-path]##link:#tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-integration-test-value[`tkit.security-dynamic-test.openapi.disable-integration-test-value`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-dynamic-test.openapi.disable-integration-test-value+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+This property is used to disable integration test SecurityDynamicIT Value to be evaluated by regex. For example $++{++project.artifactId++}++
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_INTEGRATION_TEST_VALUE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_INTEGRATION_TEST_VALUE+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-integration-test-regex]] [.property-path]##link:#tkit-quarkus-security-dynamic-test_tkit-security-dynamic-test-openapi-disable-integration-test-regex[`tkit.security-dynamic-test.openapi.disable-integration-test-regex`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.security-dynamic-test.openapi.disable-integration-test-regex+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+This property is used to disable integration test SecurityDynamicIT Regex to evaluate value to disable. For example `.++*++(?<!-bff)$` enable only for project ending with -bff suffix.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_INTEGRATION_TEST_REGEX+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_SECURITY_DYNAMIC_TEST_OPENAPI_DISABLE_INTEGRATION_TEST_REGEX+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+|===
+

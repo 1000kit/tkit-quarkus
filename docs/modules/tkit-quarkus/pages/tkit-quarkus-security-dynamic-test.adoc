@@ -1,0 +1,61 @@
+== tkit-quarkus-security-test
+
+include::./includes/attributes.adoc[]
+
+The `tkit-quarkus-security-dynamic-test` is a testing extension for the Quarkus framework designed to enhance security testing. It integrates security validation in Quarkus-based applications by providing automated OpenAPI security tests. To use the extension, you need to add it as a dependency in your Maven project.
+
+This tool helps automate security validation and integrates smoothly with Quarkus applications for secure testing workflows.
+
+=== Installation
+
+If you want to use this extension, you need to add the `org.tkit.quarkus.lib:tkit-quarkus-security-dynamic-test` extension first to your build file.
+
+For instance, with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>org.tkit.quarkus.lib</groupId>
+    <artifactId>tkit-quarkus-security-dynamic-test</artifactId>
+    <version>{project-version}</version>
+    <scope>test</scope>
+</dependency>
+----
+
+=== OpenAPI Security Tests
+
+This will start `org.tkit.quarkus.security.test.openapi.SecurityDynamicImplTest` and integration test `org.tkit.quarkus.security.test.openapi.SecurityDynamicImplIT` be default.
+
+This test can be disabled if the value of the system property `tkit.security-dynamic-test.openapi.disable-test-value` matches the regular expression of the system property `tkit.security-dynamic-test.openapi.disable-test-regex`.
+
+For example, this test is only disabled for projects with the prefix `E`.
+
+[source,xml,subs=attributes+]
+----
+<plugin>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-maven-plugin</artifactId>
+    <extensions>true</extensions>
+    <executions>
+        <execution>
+            <goals>
+                <goal>build</goal>
+                <goal>generate-code</goal>
+                <goal>generate-code-tests</goal>
+                <goal>native-image-agent</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <properties>
+            <tkit.security-dynamic-test.openapi.enabled>true</tkit.security-dynamic-test.openapi.enabled>
+            <tkit.security-dynamic-test.openapi.disable-test-value>${project.artifactId}</tkit.security-dynamic-test.openapi.disable-test-value>
+            <tkit.security-dynamic-test.openapi.disable-test-regex>E.*</tkit.security-dynamic-test.openapi.disable-test-regex>
+        </properties>
+    </configuration>
+</plugin>
+----
+
+=== Configuration
+
+include::includes/tkit-quarkus-security-dynamic-test.adoc[leveloffset=+1, opts=optional]
