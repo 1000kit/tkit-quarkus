@@ -1,0 +1,44 @@
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[.header-title]##Configuration property##
+h|Type
+h|Default
+
+a| [[tkit-quarkus-rest_tkit-rs-response-propagation-headers]] [.property-path]##link:#tkit-quarkus-rest_tkit-rs-response-propagation-headers[`tkit.rs.response.propagation.headers`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++tkit.rs.response.propagation.headers+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+List of HTTP headers to propagate from request to response.
+
+When specified, the `HeaderResponsePropagationFilter` will copy these headers from the incoming request to the outgoing response. Only headers that are present in the request and match the names in this list will be propagated.
+
+*Example configuration:*
+
+```
+tkit.rs.response.propagation.headers=X-Business-Context,X-Correlation-ID
+```
+
+
+
+By default, no headers are propagated.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++TKIT_RS_RESPONSE_PROPAGATION_HEADERS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++TKIT_RS_RESPONSE_PROPAGATION_HEADERS+++`
+endif::add-copy-button-to-env-var[]
+--
+|list of string
+|`[]`
+
+|===
+
