@@ -18,14 +18,7 @@ For instance, with Maven, add the following dependency to your POM file:
     <version>{project-version}</version>
 </dependency>
 ----
+
 === Configuration
 
-[cols="2,1,7"]
-|===
-|Configuration property |Default |Description
-
-|`tkit.rs.response.propagation.headers`
-|`[]`
-|List of HTTP headers to propagate from request to response. When specified, the `HeaderResponsePropagationFilter` will copy these headers from the incoming request to the outgoing response. Only headers that are present in the request and match the names in this list will be propagated. By default, no headers are propagated. +
-*Example:* `tkit.rs.response.propagation.headers=X-Business-Context,X-Correlation-ID`
-|===
+include::includes/tkit-rest.adoc[leveloffset=+1, opts=optional]
