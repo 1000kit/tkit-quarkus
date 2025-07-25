@@ -26,6 +26,11 @@
         </dependency>
         <dependency>
             <groupId>org.tkit.quarkus.lib</groupId>
+            <artifactId>tkit-quarkus-rest</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tkit.quarkus.lib</groupId>
             <artifactId>tkit-quarkus-rest-context</artifactId>
             <version>${project.version}</version>
         </dependency>
