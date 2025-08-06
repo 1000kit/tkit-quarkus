@@ -11,10 +11,7 @@ import java.util.stream.Collectors;
 import org.jboss.jandex.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tkit.quarkus.log.cdi.LogExclude;
-import org.tkit.quarkus.log.cdi.LogRecorder;
-import org.tkit.quarkus.log.cdi.LogService;
-import org.tkit.quarkus.log.cdi.ServiceValue;
+import org.tkit.quarkus.log.cdi.*;
 import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
 import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
@@ -144,6 +141,7 @@ public class LogProcessor {
     private static void updateValue(LogService ano, ServiceValue.LogServiceAnnotation item) {
         item.log = ano.log();
         item.stacktrace = ano.stacktrace();
+        item.logStart = ano.logStart();
         String configKey = ano.configKey();
         if (!configKey.isBlank()) {
             item.configKey = configKey;
@@ -184,6 +182,15 @@ public class LogProcessor {
                     return av.asBoolean();
                 }
                 return DEFAULT_LOG_SERVICE.stacktrace();
+            }
+
+            @Override
+            public LogService.Log logStart() {
+                AnnotationValue av = annotationInstance.value("logStart");
+                if (av != null) {
+                    return LogService.Log.valueOf(av.asEnum());
+                }
+                return DEFAULT_LOG_SERVICE.logStart();
             }
         };
     }
