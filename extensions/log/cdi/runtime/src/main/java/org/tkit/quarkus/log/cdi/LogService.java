@@ -53,4 +53,33 @@ public @interface LogService {
     @Nonbinding
     boolean stacktrace() default true;
 
+    /**
+     * Log start of the method if the flag is {@code ENABLED}, disable if flag is {@code DISABLED} or based on configuration if
+     * flag is {@code DEFAULT}
+     *
+     * @return the log start flag
+     */
+    @Nonbinding
+    Log logStart() default Log.DEFAULT;
+
+    /**
+     * Log start of the method based on flag value
+     */
+    public enum Log {
+
+        /**
+         * Log start of the method based on {@code tkit.log.cdi.start.enabled} configuration.
+         */
+        DEFAULT,
+
+        /**
+         * Enable log start of the method.
+         */
+        ENABLED,
+
+        /**
+         * Disable log start of the method.
+         */
+        DISABLED;
+    }
 }

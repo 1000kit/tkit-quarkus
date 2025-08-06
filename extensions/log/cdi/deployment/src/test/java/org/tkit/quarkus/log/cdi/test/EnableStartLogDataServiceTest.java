@@ -8,13 +8,13 @@ import org.tkit.quarkus.log.cdi.test.app.DataService;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class StartLogDataServiceTest extends AbstractTest {
+public class EnableStartLogDataServiceTest extends AbstractTest {
 
     @RegisterExtension
     static final QuarkusUnitTest config = new QuarkusUnitTest()
             .withApplicationRoot((jar) -> jar
                     .addClasses(DataService.class)
-                    .addAsResource("start-log.properties", "application.properties"));
+                    .addAsResource("default.properties", "application.properties"));
 
     @Inject
     DataService service;
@@ -22,9 +22,8 @@ public class StartLogDataServiceTest extends AbstractTest {
     @Test
     public void startLogTest() {
         service.getData1("input1");
-        assertLogs().assertLines(2)
-                .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) getData1(input1) started.")
-                .assertContains(1, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) getData1(input1):data1 input1");
+        assertLogs().assertLines(1)
+                .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) getData1(input1):data1 input1");
     }
 
     @Test
