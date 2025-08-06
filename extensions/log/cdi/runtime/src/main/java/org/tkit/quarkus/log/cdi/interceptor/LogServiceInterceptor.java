@@ -11,10 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.context.ApplicationContext;
 import org.tkit.quarkus.context.Context;
-import org.tkit.quarkus.log.cdi.LogFriendlyException;
-import org.tkit.quarkus.log.cdi.LogRecorder;
-import org.tkit.quarkus.log.cdi.LogService;
-import org.tkit.quarkus.log.cdi.ServiceValue;
+import org.tkit.quarkus.log.cdi.*;
 import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 /**
@@ -94,7 +91,8 @@ public class LogServiceInterceptor {
         long startTime = System.currentTimeMillis();
 
         try {
-            if (config.start().enabled()) {
+            if (LogService.Log.ENABLED == methodItem.config.logStart ||
+                    (LogService.Log.DEFAULT == methodItem.config.logStart && config.start().enabled())) {
                 parameters = getValuesString(methodItem, ic.getParameters(), method.getParameters());
                 logger.info(String.format(config.start().template(), methodName, parameters));
             }

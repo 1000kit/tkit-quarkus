@@ -30,4 +30,14 @@ public class DataService {
     public String maskReturn(String input) {
         return "data1 " + input;
     }
+
+    @LogService(logStart = LogService.Log.DISABLED)
+    public String disableLogStart(String input) {
+        return "data1 " + input;
+    }
+
+    @LogService(logStart = LogService.Log.ENABLED)
+    public String enableLogStart(String input) {
+        return "data1 " + input;
+    }
 }

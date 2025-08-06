@@ -95,6 +95,8 @@ public class ServiceValue {
         public boolean stacktrace;
 
         public String configKey;
+
+        public LogService.Log logStart;
     }
 
     public static class MethodItem {
@@ -107,6 +109,7 @@ public class ServiceValue {
             this.config = createConfig();
             this.config.log = config.log;
             this.config.stacktrace = config.stacktrace;
+            this.config.logStart = config.logStart;
         }
     }
 
@@ -129,6 +132,7 @@ public class ServiceValue {
         item.log = false;
         item.stacktrace = false;
         item.configKey = null;
+        item.logStart = LogService.Log.DEFAULT;
         return item;
     }
 
