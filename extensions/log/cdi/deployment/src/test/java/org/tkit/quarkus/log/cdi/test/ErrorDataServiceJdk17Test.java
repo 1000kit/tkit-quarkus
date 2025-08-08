@@ -58,7 +58,7 @@ public class ErrorDataServiceJdk17Test extends AbstractTest {
     @Test
     public void wrapperTest() {
         Assertions.assertThrows(RuntimeException.class, () -> wrapper.wrapperMethod("WrapperError"));
-        assertLogs().assertLines(116)
+        assertLogs().assertLines(111)
                 .assertContains(0,
                         "ERROR [org.tki.qua.log.cdi.tes.app.ErrorDataService] (main) error1(WrapperError) throw java.lang.RuntimeException: WrapperError");
     }
