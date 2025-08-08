@@ -201,7 +201,7 @@ public class PagedQuery<T> {
         // remove group by from the count
         part.setOrderByClause(null);
         r.setQueryPart(part);
-        r.getOrderList().clear();
+        r.orderBy();
         return result;
     }
 

@@ -102,7 +102,7 @@ public class UserRestControllerTest extends AbstractTest {
 
         Assertions.assertNotNull(msg);
         Assertions.assertEquals(
-                "Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect): [org.tkit.quarkus.it.jpa.User#U_GUID_3]",
+                "Row was already updated or deleted by another transaction for entity [org.tkit.quarkus.it.jpa.User with id 'U_GUID_3']",
                 msg);
     }
 

@@ -824,7 +824,7 @@ Environment variable: `+++TKIT_RS_CONTEXT_BUSINESS_CONTEXT_HEADER_PARAM_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`business-context`
+|`x-business-context`
 
 a| [[tkit-quarkus-rest-context_tkit-rs-context-add-token-to-context]] [.property-path]##link:#tkit-quarkus-rest-context_tkit-rs-context-add-token-to-context[`tkit.rs.context.add-token-to-context`]##
 ifdef::add-copy-button-to-config-props[]
