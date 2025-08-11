@@ -1,6 +1,7 @@
 package org.tkit.quarkus.rs.filter;
 
 import jakarta.annotation.Priority;
+import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Priorities;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -18,15 +19,15 @@ public class HeaderResponsePropagationFilter implements ContainerResponseFilter 
     private static final Logger log = Logger.getLogger(HeaderResponsePropagationFilter.class);
 
     @Inject
-    RestConfig config;
+    Instance<RestConfig> config;
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
-        if (config.responsePropagationHeaders() == null ||
-                config.responsePropagationHeaders().isEmpty()) {
+        if (config.get().responsePropagationHeaders() == null ||
+                config.get().responsePropagationHeaders().isEmpty()) {
             return;
         }
-        for (String header : config.responsePropagationHeaders()) {
+        for (String header : config.get().responsePropagationHeaders()) {
             try {
                 String value = requestContext.getHeaderString(header);
                 if (value != null) {

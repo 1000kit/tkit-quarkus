@@ -161,5 +161,15 @@ public class TokenParserRequest {
             setPublicKeyLocationUrl(publicKeyLocationUrl);
             return this;
         }
+
+        @Override
+        public String toString() {
+            return "IssuerParserRequest{" +
+                    "url='" + url + '\'' +
+                    ", publicKeyLocationUrl='" + publicKeyLocationUrl + '\'' +
+                    ", publicKeyLocationSuffix='" + publicKeyLocationSuffix + '\'' +
+                    ", publicKeyLocationEnabled=" + publicKeyLocationEnabled +
+                    '}';
+        }
     }
 }

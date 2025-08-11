@@ -3,6 +3,7 @@ package org.tkit.quarkus.rs.context;
 import java.io.IOException;
 
 import jakarta.annotation.Priority;
+import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.container.*;
 import jakarta.ws.rs.ext.Provider;
@@ -24,7 +25,7 @@ import io.quarkus.arc.Unremovable;
 public class RestContextInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
 
     @Inject
-    RestContextConfig config;
+    Instance<RestContextConfig> config;
 
     @Inject
     RestContextPrincipalResolverService principalResolverService;
@@ -47,7 +48,7 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
     @Override
     public void filter(ContainerRequestContext requestContext) {
 
-        if (!config.enabled()) {
+        if (!config.get().enabled()) {
             return;
         }
 
@@ -57,16 +58,16 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
 
         // start log scope/correlation ID
         String correlationId = null;
-        if (config.correlationId().enabled()) {
-            correlationId = requestContext.getHeaders().getFirst(config.correlationId().headerParamName());
+        if (config.get().correlationId().enabled()) {
+            correlationId = requestContext.getHeaders().getFirst(config.get().correlationId().headerParamName());
         }
 
         // get business context
         String businessContext = null;
-        if (config.businessContext().enabled()) {
-            businessContext = requestContext.getHeaders().getFirst(config.businessContext().headerParamName());
+        if (config.get().businessContext().enabled()) {
+            businessContext = requestContext.getHeaders().getFirst(config.get().businessContext().headerParamName());
             if (businessContext == null || businessContext.isBlank()) {
-                businessContext = config.businessContext().defaultBusinessParam().orElse(null);
+                businessContext = config.get().businessContext().defaultBusinessParam().orElse(null);
             }
         }
 
@@ -80,7 +81,7 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
         String tenantId = tenantResolverService.getTenantId(principalToken, requestContext);
 
         // disable or enable token in the context
-        if (!config.tokenContext()) {
+        if (!config.get().tokenContext()) {
             principalToken = null;
         }
 
@@ -104,10 +105,6 @@ public class RestContextInterceptor implements ContainerRequestFilter, Container
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-
-        if (!config.enabled()) {
-            return;
-        }
 
         // close application context
         ApplicationContext.close();
