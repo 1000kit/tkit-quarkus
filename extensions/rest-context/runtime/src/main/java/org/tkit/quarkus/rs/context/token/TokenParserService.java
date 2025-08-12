@@ -66,6 +66,7 @@ public class TokenParserService {
             var publicLocationUrl = request.getIssuerUrl();
 
             if (!request.getIssuerParserRequests().isEmpty()) {
+                log.debug("Issuer parser requests: {}", request.getIssuerParserRequests());
 
                 var ir = request.getIssuerParserRequests().entrySet().stream()
                         .filter(e -> issuer.equals(e.getValue().getUrl()))

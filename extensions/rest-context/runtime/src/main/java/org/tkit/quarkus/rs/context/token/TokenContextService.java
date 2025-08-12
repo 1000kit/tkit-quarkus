@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.quarkus.security.UnauthorizedException;
+import io.quarkus.security.identity.SecurityIdentity;
 
 @ApplicationScoped
 public class TokenContextService {
@@ -20,6 +21,9 @@ public class TokenContextService {
 
     @Inject
     TokenContextConfig config;
+
+    @Inject
+    SecurityIdentity securityIdentity;
 
     @Inject
     JsonWebToken accessToken;
@@ -34,7 +38,7 @@ public class TokenContextService {
 
         if (token == null) {
             // check if principal token is mandatory
-            if (config.token().mandatory()) {
+            if (config.token().mandatory() && !securityIdentity.isAnonymous()) {
                 log.error("Principal token is required for the request.");
                 if (config.token().requiredErrorUnauthorized()) {
                     throw new UnauthorizedException("Principal token is required");
