@@ -26,7 +26,7 @@ Environment variable: `+++TKIT_LOG_RS_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-principal-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-principal-enabled[`tkit.log.rs.principal.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -47,7 +47,7 @@ Environment variable: `+++TKIT_LOG_RS_PRINCIPAL_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-correlation-id-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-correlation-id-enabled[`tkit.log.rs.correlation-id-enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -68,7 +68,7 @@ Environment variable: `+++TKIT_LOG_RS_CORRELATION_ID_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-correlation-id-header]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-correlation-id-header[`tkit.log.rs.correlation-id-header`]##
 ifdef::add-copy-button-to-config-props[]
@@ -89,7 +89,7 @@ Environment variable: `+++TKIT_LOG_RS_CORRELATION_ID_HEADER+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`X-Correlation-ID`
+|`+++X-Correlation-ID+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-mdc-headers-mdc-headers[`tkit.log.rs.mdc-headers."mdc-headers"`]##
 ifdef::add-copy-button-to-config-props[]
@@ -131,7 +131,7 @@ Environment variable: `+++TKIT_LOG_RS_START_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-start-template]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-start-template[`tkit.log.rs.start.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -152,7 +152,7 @@ Environment variable: `+++TKIT_LOG_RS_START_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s %2$s started.`
+|`+++%1$s %2$s started.+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-end-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-end-enabled[`tkit.log.rs.end.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -173,7 +173,7 @@ Environment variable: `+++TKIT_LOG_RS_END_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-end-template]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-end-template[`tkit.log.rs.end.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -194,7 +194,7 @@ Environment variable: `+++TKIT_LOG_RS_END_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s %2$s [%4$s] [%3$ss]`
+|`+++%1$s %2$s [%4$s] [%3$ss]+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-end-mdc-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-end-mdc-enabled[`tkit.log.rs.end.mdc.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -215,7 +215,7 @@ Environment variable: `+++TKIT_LOG_RS_END_MDC_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-end-mdc-duration-name]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-end-mdc-duration-name[`tkit.log.rs.end.mdc.duration.name`]##
 ifdef::add-copy-button-to-config-props[]
@@ -236,7 +236,7 @@ Environment variable: `+++TKIT_LOG_RS_END_MDC_DURATION_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`rs-time`
+|`+++rs-time+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-end-mdc-response-status-name]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-end-mdc-response-status-name[`tkit.log.rs.end.mdc.response-status.name`]##
 ifdef::add-copy-button-to-config-props[]
@@ -257,7 +257,7 @@ Environment variable: `+++TKIT_LOG_RS_END_MDC_RESPONSE_STATUS_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`rs-status`
+|`+++rs-status+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-controller-controller-log]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-controller-controller-log[`tkit.log.rs.controller."controller".log`]##
 ifdef::add-copy-button-to-config-props[]
@@ -362,7 +362,7 @@ Environment variable: `+++TKIT_LOG_RS_ERROR_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-regex-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-regex-enabled[`tkit.log.rs.regex.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -383,7 +383,7 @@ Environment variable: `+++TKIT_LOG_RS_REGEX_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-regex-exclude]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-regex-exclude[`tkit.log.rs.regex.exclude`]##
 ifdef::add-copy-button-to-config-props[]
@@ -425,7 +425,7 @@ Environment variable: `+++TKIT_LOG_RS_PAYLOAD_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-template]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-payload-template[`tkit.log.rs.payload.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -446,7 +446,7 @@ Environment variable: `+++TKIT_LOG_RS_PAYLOAD_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s %2$s payload: %3$s`
+|`+++%1$s %2$s payload: %3$s+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-enabled[`tkit.log.rs.payload.empty-body-enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -467,7 +467,7 @@ Environment variable: `+++TKIT_LOG_RS_PAYLOAD_EMPTY_BODY_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-message]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-payload-empty-body-message[`tkit.log.rs.payload.empty-body-message`]##
 ifdef::add-copy-button-to-config-props[]
@@ -488,7 +488,7 @@ Environment variable: `+++TKIT_LOG_RS_PAYLOAD_EMPTY_BODY_MESSAGE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`<EMPTY BODY>`
+|`+++<EMPTY BODY>+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-page-message]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-payload-page-message[`tkit.log.rs.payload.page-message`]##
 ifdef::add-copy-button-to-config-props[]
@@ -509,7 +509,7 @@ Environment variable: `+++TKIT_LOG_RS_PAYLOAD_PAGE_MESSAGE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`...more...`
+|`+++...more...+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-max-entity-size]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-payload-max-entity-size[`tkit.log.rs.payload.max-entity-size`]##
 ifdef::add-copy-button-to-config-props[]
@@ -530,7 +530,7 @@ Environment variable: `+++TKIT_LOG_RS_PAYLOAD_MAX_ENTITY_SIZE+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
-|`1048576`
+|`+++1048576+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-regex-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-payload-regex-enabled[`tkit.log.rs.payload.regex.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -551,7 +551,7 @@ Environment variable: `+++TKIT_LOG_RS_PAYLOAD_REGEX_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-payload-regex-exclude]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-payload-regex-exclude[`tkit.log.rs.payload.regex.exclude`]##
 ifdef::add-copy-button-to-config-props[]
@@ -593,7 +593,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-regex-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-regex-enabled[`tkit.log.rs.client.regex.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -614,7 +614,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_REGEX_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-regex-exclude]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-regex-exclude[`tkit.log.rs.client.regex.exclude`]##
 ifdef::add-copy-button-to-config-props[]
@@ -656,7 +656,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-template]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-template[`tkit.log.rs.client.payload.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -677,7 +677,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s %2$s payload: %3$s`
+|`+++%1$s %2$s payload: %3$s+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-enabled[`tkit.log.rs.client.payload.empty-body-enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -698,7 +698,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_EMPTY_BODY_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-message]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-empty-body-message[`tkit.log.rs.client.payload.empty-body-message`]##
 ifdef::add-copy-button-to-config-props[]
@@ -719,7 +719,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_EMPTY_BODY_MESSAGE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`<EMPTY BODY>`
+|`+++<EMPTY BODY>+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-page-message]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-page-message[`tkit.log.rs.client.payload.page-message`]##
 ifdef::add-copy-button-to-config-props[]
@@ -740,7 +740,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_PAGE_MESSAGE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`...more...`
+|`+++...more...+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-max-entity-size]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-max-entity-size[`tkit.log.rs.client.payload.max-entity-size`]##
 ifdef::add-copy-button-to-config-props[]
@@ -761,7 +761,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_MAX_ENTITY_SIZE+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
-|`1048576`
+|`+++1048576+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-enabled[`tkit.log.rs.client.payload.regex.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -782,7 +782,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_PAYLOAD_REGEX_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-exclude]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-payload-regex-exclude[`tkit.log.rs.client.payload.regex.exclude`]##
 ifdef::add-copy-button-to-config-props[]
@@ -845,7 +845,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_START_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-start-template]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-start-template[`tkit.log.rs.client.start.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -866,7 +866,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_START_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s %2$s started.`
+|`+++%1$s %2$s started.+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-enabled[`tkit.log.rs.client.end.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -887,7 +887,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_END_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-template]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-template[`tkit.log.rs.client.end.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -908,7 +908,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_END_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s %2$s [%4$s] [%3$ss]`
+|`+++%1$s %2$s [%4$s] [%3$ss]+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-correlation-id]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-correlation-id[`tkit.log.rs.client.end.mdc.correlation-id`]##
 ifdef::add-copy-button-to-config-props[]
@@ -929,7 +929,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_CORRELATION_ID+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`X-Correlation-ID`
+|`+++X-Correlation-ID+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-enabled[`tkit.log.rs.client.end.mdc.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -950,7 +950,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-duration-name]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-duration-name[`tkit.log.rs.client.end.mdc.duration.name`]##
 ifdef::add-copy-button-to-config-props[]
@@ -971,7 +971,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_DURATION_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`rs-client-time`
+|`+++rs-client-time+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-response-status-name]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-end-mdc-response-status-name[`tkit.log.rs.client.end.mdc.response-status.name`]##
 ifdef::add-copy-button-to-config-props[]
@@ -992,7 +992,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_END_MDC_RESPONSE_STATUS_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`rs-client-status`
+|`+++rs-client-status+++`
 
 a| [[tkit-quarkus-log-rs_tkit-log-rs-client-error-enabled]] [.property-path]##link:#tkit-quarkus-log-rs_tkit-log-rs-client-error-enabled[`tkit.log.rs.client.error.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -1013,7 +1013,7 @@ Environment variable: `+++TKIT_LOG_RS_CLIENT_ERROR_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 |===
 

@@ -30,7 +30,8 @@ public class EnableStartLogDataServiceTest extends AbstractTest {
     public void disableLogStartTest() {
         service.disableLogStart("input1");
         assertLogs().assertLines(1)
-                .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) disableLogStart(input1):data1 input1");
+                .assertContains(0,
+                        "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) disableLogStart(input1):data1 input1");
     }
 
     @Test
@@ -38,6 +39,7 @@ public class EnableStartLogDataServiceTest extends AbstractTest {
         service.enableLogStart("input1");
         assertLogs().assertLines(2)
                 .assertContains(0, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) enableLogStart(input1) started.")
-                .assertContains(1, "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) enableLogStart(input1):data1 input1");
+                .assertContains(1,
+                        "INFO  [org.tki.qua.log.cdi.tes.app.DataService] (main) enableLogStart(input1):data1 input1");
     }
 }

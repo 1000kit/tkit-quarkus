@@ -26,7 +26,7 @@ Environment variable: `+++TKIT_TEST_INTEGRATION_TEST_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-test_tkit-test-ci-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-ci-enabled[`tkit.test.ci.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -47,7 +47,7 @@ Environment variable: `+++TKIT_TEST_CI_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-test_tkit-test-ci-env-name]] [.property-path]##link:#tkit-quarkus-test_tkit-test-ci-env-name[`tkit.test.ci.env-name`]##
 ifdef::add-copy-button-to-config-props[]
@@ -68,7 +68,7 @@ Environment variable: `+++TKIT_TEST_CI_ENV_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`GITLAB_CI`
+|`+++GITLAB_CI+++`
 
 a| [[tkit-quarkus-test_tkit-test-rest-assured-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-enabled[`tkit.test.rest-assured.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -89,7 +89,7 @@ Environment variable: `+++TKIT_TEST_REST_ASSURED_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-enabled[`tkit.test.rest-assured.overwrite-uri.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -110,7 +110,7 @@ Environment variable: `+++TKIT_TEST_REST_ASSURED_OVERWRITE_URI_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri]] [.property-path]##link:#tkit-quarkus-test_tkit-test-rest-assured-overwrite-uri-uri[`tkit.test.rest-assured.overwrite-uri.uri`]##
 ifdef::add-copy-button-to-config-props[]
@@ -131,7 +131,7 @@ Environment variable: `+++TKIT_TEST_REST_ASSURED_OVERWRITE_URI_URI+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`http://docker`
+|`+++http://docker+++`
 
 |===
 

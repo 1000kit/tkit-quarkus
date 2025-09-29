@@ -26,7 +26,7 @@ Environment variable: `+++TKIT_LOG_JSON_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-pretty-print]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-pretty-print[`tkit.log.json.pretty-print`]##
 ifdef::add-copy-button-to-config-props[]
@@ -47,7 +47,7 @@ Environment variable: `+++TKIT_LOG_JSON_PRETTY_PRINT+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-date-format]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-date-format[`tkit.log.json.date-format`]##
 ifdef::add-copy-button-to-config-props[]
@@ -68,7 +68,7 @@ Environment variable: `+++TKIT_LOG_JSON_DATE_FORMAT+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`default`
+|`+++default+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-record-delimiter]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-record-delimiter[`tkit.log.json.record-delimiter`]##
 ifdef::add-copy-button-to-config-props[]
@@ -110,7 +110,7 @@ Environment variable: `+++TKIT_LOG_JSON_ZONE_ID+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`default`
+|`+++default+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-exception-output-type]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-exception-output-type[`tkit.log.json.exception-output-type`]##
 ifdef::add-copy-button-to-config-props[]
@@ -131,7 +131,7 @@ Environment variable: `+++TKIT_LOG_JSON_EXCEPTION_OUTPUT_TYPE+++`
 endif::add-copy-button-to-env-var[]
 --
 a|`detailed`, `formatted`, `formatted-brief`, `detailed-and-formatted`
-|`formatted`
+|`+++formatted+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-print-details]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-print-details[`tkit.log.json.print-details`]##
 ifdef::add-copy-button-to-config-props[]
@@ -154,7 +154,7 @@ Environment variable: `+++TKIT_LOG_JSON_PRINT_DETAILS+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-keys-mdc]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-mdc[`tkit.log.json.keys.mdc`]##
 ifdef::add-copy-button-to-config-props[]
@@ -175,7 +175,7 @@ Environment variable: `+++TKIT_LOG_JSON_KEYS_MDC+++`
 endif::add-copy-button-to-env-var[]
 --
 |list of string
-|`<EMPTY-LIST>`
+|`+++<EMPTY-LIST>+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-keys-group]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-group[`tkit.log.json.keys.group`]##
 ifdef::add-copy-button-to-config-props[]
@@ -196,7 +196,7 @@ Environment variable: `+++TKIT_LOG_JSON_KEYS_GROUP+++`
 endif::add-copy-button-to-env-var[]
 --
 |list of string
-|`<EMPTY-LIST>`
+|`+++<EMPTY-LIST>+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-keys-ignore]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-ignore[`tkit.log.json.keys.ignore`]##
 ifdef::add-copy-button-to-config-props[]
@@ -217,7 +217,7 @@ Environment variable: `+++TKIT_LOG_JSON_KEYS_IGNORE+++`
 endif::add-copy-button-to-env-var[]
 --
 |list of string
-|`<EMPTY-LIST>`
+|`+++<EMPTY-LIST>+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-keys-override]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-override[`tkit.log.json.keys.override`]##
 ifdef::add-copy-button-to-config-props[]
@@ -238,7 +238,7 @@ Environment variable: `+++TKIT_LOG_JSON_KEYS_OVERRIDE+++`
 endif::add-copy-button-to-env-var[]
 --
 |list of string
-|`<EMPTY-LIST>`
+|`+++<EMPTY-LIST>+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-keys-type]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-type[`tkit.log.json.keys.type`]##
 ifdef::add-copy-button-to-config-props[]
@@ -259,7 +259,7 @@ Environment variable: `+++TKIT_LOG_JSON_KEYS_TYPE+++`
 endif::add-copy-button-to-env-var[]
 --
 |list of string
-|`<EMPTY-LIST>`
+|`+++<EMPTY-LIST>+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-keys-env]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-keys-env[`tkit.log.json.keys.env`]##
 ifdef::add-copy-button-to-config-props[]
@@ -280,7 +280,7 @@ Environment variable: `+++TKIT_LOG_JSON_KEYS_ENV+++`
 endif::add-copy-button-to-env-var[]
 --
 |list of string
-|`<EMPTY-LIST>`
+|`+++<EMPTY-LIST>+++`
 
 a| [[tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after]] [.property-path]##link:#tkit-quarkus-log-json_tkit-log-json-split-stacktrace-after[`tkit.log.json.split-stacktrace-after`]##
 ifdef::add-copy-button-to-config-props[]
@@ -301,7 +301,7 @@ Environment variable: `+++TKIT_LOG_JSON_SPLIT_STACKTRACE_AFTER+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
-|`12000`
+|`+++12000+++`
 
 |===
 

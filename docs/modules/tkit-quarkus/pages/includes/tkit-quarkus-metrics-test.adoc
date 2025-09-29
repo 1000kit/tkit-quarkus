@@ -26,7 +26,7 @@ Environment variable: `+++TKIT_METRICS_TEST_DISABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys]] [.property-path]##link:#tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys[`tkit.metrics-test.keys."keys"`]##
 ifdef::add-copy-button-to-config-props[]
