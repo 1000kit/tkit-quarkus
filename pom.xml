@@ -49,7 +49,7 @@
 
     <properties>
         <!-- Quarkus -->
-        <quarkus.version>3.26.3</quarkus.version>
+        <quarkus.version>3.27.0</quarkus.version>
         <quarkus.hibernate-orm.version>7.0.9.Final</quarkus.hibernate-orm.version>
         <quarkiverse.mockserver.version>1.14.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.4.0</quarkus.jandex-plugin.version>
@@ -68,14 +68,14 @@
         <maven.compiler.release>17</maven.compiler.release>
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <maven.compiler-plugin.version>3.14.1</maven.compiler-plugin.version>
-        <maven.surefire-plugin.version>3.5.3</maven.surefire-plugin.version>
+        <maven.surefire-plugin.version>3.5.4</maven.surefire-plugin.version>
         <maven.formatter-maven-plugin.version>2.29.0</maven.formatter-maven-plugin.version>
         <maven.impsort-maven-plugin.version>1.12.0</maven.impsort-maven-plugin.version>
         <maven.enforcer-plugin.version>3.2.1</maven.enforcer-plugin.version>
         <maven.gpg-plugin.version>3.2.8</maven.gpg-plugin.version>
         <maven.source-plugin.version>3.3.1</maven.source-plugin.version>
-        <maven.javadoc-plugin.version>3.11.3</maven.javadoc-plugin.version>
-        <maven.nexus-staging-maven-plugin.version>1.7.0</maven.nexus-staging-maven-plugin.version>
+        <maven.javadoc-plugin.version>3.12.0</maven.javadoc-plugin.version>
+        <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
 
         <!-- Documentation -->
         <asciidoctorj.version>3.0.0</asciidoctorj.version>
@@ -369,7 +369,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.8.0</version>
+                        <version>${central-publishing-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>

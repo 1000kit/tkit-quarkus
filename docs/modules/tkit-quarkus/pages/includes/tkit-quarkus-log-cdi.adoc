@@ -26,7 +26,7 @@ Environment variable: `+++TKIT_LOG_CDI_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-custom-data-prefix]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-custom-data-prefix[`tkit.log.cdi.custom-data.prefix`]##
 ifdef::add-copy-button-to-config-props[]
@@ -68,7 +68,7 @@ Environment variable: `+++TKIT_LOG_CDI_START_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-start-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-start-template[`tkit.log.cdi.start.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -89,7 +89,7 @@ Environment variable: `+++TKIT_LOG_CDI_START_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s(%2$s) started.`
+|`+++%1$s(%2$s) started.+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-succeed-enabled]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-succeed-enabled[`tkit.log.cdi.succeed.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -110,7 +110,7 @@ Environment variable: `+++TKIT_LOG_CDI_SUCCEED_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-succeed-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-succeed-template[`tkit.log.cdi.succeed.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -131,7 +131,7 @@ Environment variable: `+++TKIT_LOG_CDI_SUCCEED_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s(%2$s):%3$s [%4$.3fs]`
+|`+++%1$s(%2$s):%3$s [%4$.3fs]+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-failed-enabled]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-failed-enabled[`tkit.log.cdi.failed.enabled`]##
 ifdef::add-copy-button-to-config-props[]
@@ -152,7 +152,7 @@ Environment variable: `+++TKIT_LOG_CDI_FAILED_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-failed-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-failed-template[`tkit.log.cdi.failed.template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -173,7 +173,7 @@ Environment variable: `+++TKIT_LOG_CDI_FAILED_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`%1$s(%2$s) throw %3$s [%4$.3fs]`
+|`+++%1$s(%2$s) throw %3$s [%4$.3fs]+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-return-void-template]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-return-void-template[`tkit.log.cdi.return-void-template`]##
 ifdef::add-copy-button-to-config-props[]
@@ -194,7 +194,7 @@ Environment variable: `+++TKIT_LOG_CDI_RETURN_VOID_TEMPLATE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`void`
+|`+++void+++`
 
 a| [[tkit-quarkus-log-cdi_tkit-log-cdi-service-service-log]] [.property-path]##link:#tkit-quarkus-log-cdi_tkit-log-cdi-service-service-log[`tkit.log.cdi.service."service".log`]##
 ifdef::add-copy-button-to-config-props[]
@@ -341,7 +341,7 @@ Environment variable: `+++TKIT_LOG_CDI_MDC_ERRORKEY+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`errorNumber`
+|`+++errorNumber+++`
 
 |===
 

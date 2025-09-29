@@ -38,7 +38,7 @@ Environment variable: `+++TKIT_RS_RESPONSE_PROPAGATION_HEADERS+++`
 endif::add-copy-button-to-env-var[]
 --
 |list of string
-|`[]`
+|`+++[]+++`
 
 |===
 

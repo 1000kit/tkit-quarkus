@@ -47,7 +47,7 @@ Environment variable: `+++TKIT_DB_IMPORT_DEVSERVICES_DB_IMAGE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`docker.io/postgres`
+|`+++docker.io/postgres+++`
 
 |===
 
