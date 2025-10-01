@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-security</artifactId>
+    <name>tkit-quarkus-security</name>
     <packaging>jar</packaging>
 
     <dependencies>

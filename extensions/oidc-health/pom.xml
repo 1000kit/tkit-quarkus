@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-oidc-health</artifactId>
+    <name>tkit-quarkus-oidc-health</name>
     <packaging>jar</packaging>
 
     <dependencies>

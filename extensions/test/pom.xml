@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-test</artifactId>
+    <name>tkit-quarkus-test</name>
     <packaging>jar</packaging>
 
     <dependencies>

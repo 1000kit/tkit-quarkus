@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-test-db-import-parent</artifactId>
+    <name>tkit-quarkus-test-db-import-parent</name>
     <packaging>pom</packaging>
 
     <modules>
