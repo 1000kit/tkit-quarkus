@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-test-db-import-deployment</artifactId>
+    <name>tkit-quarkus-test-db-import-deployment</name>
     <packaging>jar</packaging>
 
     <dependencies>

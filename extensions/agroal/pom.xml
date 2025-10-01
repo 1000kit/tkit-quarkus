@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>tkit-quarkus-agroal-parent</artifactId>
+    <name>tkit-quarkus-agroal-parent</name>
     <packaging>pom</packaging>
 
     <modules>
