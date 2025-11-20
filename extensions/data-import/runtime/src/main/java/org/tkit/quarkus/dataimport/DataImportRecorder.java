@@ -2,22 +2,26 @@ package org.tkit.quarkus.dataimport;
 
 import java.util.Map;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.jboss.logging.Logger;
 
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.ArcContainer;
 import io.quarkus.arc.InstanceHandle;
+import io.quarkus.runtime.RuntimeValue;
 import io.quarkus.runtime.annotations.Recorder;
 
 @Recorder
-@ApplicationScoped
 public class DataImportRecorder {
 
     private static final Logger LOGGER = Logger.getLogger(DataImportRecorder.class);
+    private final RuntimeValue<DataImportRuntimeConfig> configValue;
 
-    public void createContext(DataImportRuntimeConfig config, Map<String, String> beans) {
+    public DataImportRecorder(RuntimeValue<DataImportRuntimeConfig> configValue) {
+        this.configValue = configValue;
+    }
+
+    public void createContext(Map<String, String> beans) {
+        DataImportRuntimeConfig config = configValue.getValue();
         if (!config.enabled()) {
             LOGGER.info("Data import is disabled.");
             return;
