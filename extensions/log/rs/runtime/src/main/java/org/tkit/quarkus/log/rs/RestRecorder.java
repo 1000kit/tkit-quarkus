@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import io.quarkus.runtime.RuntimeValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +27,8 @@ public class RestRecorder {
     static boolean REGEX_ENABLED = false;
     static boolean REGEX_PAYLOAD_ENABLED = false;
 
-    public void init(RestRuntimeConfig config, RestServiceValue values) {
-        CONFIG = config;
+    public void init(RuntimeValue<RestRuntimeConfig> config, RestServiceValue values) {
+        CONFIG = config.getValue();
         if (config.regex().enabled()) {
             List<String> items = config.regex().exclude().orElse(null);
             PATTERNS = createPatterns(items);

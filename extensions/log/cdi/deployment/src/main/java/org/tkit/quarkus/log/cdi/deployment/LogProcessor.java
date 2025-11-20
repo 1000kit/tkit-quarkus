@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import io.quarkus.runtime.RuntimeValue;
 import org.jboss.jandex.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,6 @@ public class LogProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(LogProcessor.class);
 
-    private static final String LOG_BUILDER_SERVICE = LogParamValueService.class.getName();
-
     private static final DotName LOG_SERVICE = DotName.createSimple(LogService.class.getName());
 
     private static final LogService DEFAULT_LOG_SERVICE = LogServiceImpl.class.getAnnotation(LogService.class);
@@ -47,7 +46,7 @@ public class LogProcessor {
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
     @Consume(RuntimeConfigSetupCompleteBuildItem.class)
-    void configureRuntimeProperties(LogRecorder recorder, LogRuntimeConfig config, ServiceBuildItem items) {
+    void configureRuntimeProperties(LogRecorder recorder, RuntimeValue<LogRuntimeConfig> config, ServiceBuildItem items) {
         recorder.init(items.values, config);
     }
 
