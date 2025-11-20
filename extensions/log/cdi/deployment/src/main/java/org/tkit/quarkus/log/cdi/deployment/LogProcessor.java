@@ -8,13 +8,10 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import io.quarkus.runtime.RuntimeValue;
 import org.jboss.jandex.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.quarkus.log.cdi.*;
-import org.tkit.quarkus.log.cdi.interceptor.LogParamValueService;
-import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 import io.quarkus.arc.deployment.*;
 import io.quarkus.arc.processor.AnnotationStore;
@@ -46,8 +43,8 @@ public class LogProcessor {
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
     @Consume(RuntimeConfigSetupCompleteBuildItem.class)
-    void configureRuntimeProperties(LogRecorder recorder, RuntimeValue<LogRuntimeConfig> config, ServiceBuildItem items) {
-        recorder.init(items.values, config);
+    void configureRuntimeProperties(LogRecorder recorder, ServiceBuildItem items) {
+        recorder.init(items.values);
     }
 
     @BuildStep

@@ -5,7 +5,6 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import io.quarkus.runtime.RuntimeValue;
 import org.jboss.jandex.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +35,8 @@ public class RestLogProcessor {
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    void init(RestRecorder recorder, RuntimeValue<RestRuntimeConfig> config, RestServiceBuildItem items) {
-        recorder.init(config, items.value);
+    void init(RestRecorder recorder, RestServiceBuildItem items) {
+        recorder.init(items.value);
     }
 
     @BuildStep

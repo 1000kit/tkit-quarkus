@@ -24,14 +24,21 @@ public class LogRecorder {
 
     static LogRuntimeConfig CONFIG;
 
+    private final RuntimeValue<LogRuntimeConfig> configValue;
+
     static ServiceValue SERVICE = new ServiceValue();
 
-    public void init(ServiceValue values, RuntimeValue<LogRuntimeConfig> config) {
+    public LogRecorder(RuntimeValue<LogRuntimeConfig> configValue) {
+        this.configValue = configValue;
+    }
+
+    public void init(ServiceValue values) {
 
         InjectableInstance<LogParam> it = Arc.container().select(LogParam.class, Any.Literal.INSTANCE);
         LogParamValueService.init(it.stream());
 
-        CONFIG = config.getValue();
+        LogRuntimeConfig config = configValue.getValue();
+        CONFIG = config;
         SERVICE = values;
 
         if (config.service() == null) {
