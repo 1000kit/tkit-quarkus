@@ -14,7 +14,6 @@ import org.jboss.jandex.DotName;
 import org.jboss.logging.Logger;
 import org.tkit.quarkus.dataimport.DataImport;
 import org.tkit.quarkus.dataimport.DataImportRecorder;
-import org.tkit.quarkus.dataimport.DataImportRuntimeConfig;
 import org.tkit.quarkus.dataimport.DataImportService;
 
 import io.quarkus.agroal.spi.JdbcDataSourceSchemaReadyBuildItem;
@@ -107,13 +106,13 @@ class QuarkusImportProcessor {
     @Consume(SyntheticBeansRuntimeInitBuildItem.class)
     public void build(@SuppressWarnings("unused") List<PersistenceProviderSetUpBuildItem> persistenceUnitsStarted,
             @SuppressWarnings("unused") List<JdbcDataSourceSchemaReadyBuildItem> schemaReadyBuildItems,
-            DataImportRuntimeConfig config, DataImportRecorder recorder,
+            DataImportRecorder recorder,
             List<DataImportBeanInfo> importDataBeans) {
 
         Map<String, String> items = new HashMap<>();
         for (DataImportBeanInfo bean : importDataBeans) {
             items.put(bean.getKey(), bean.getBean());
         }
-        recorder.createContext(config, items);
+        recorder.createContext(items);
     }
 }

@@ -11,6 +11,7 @@ import org.tkit.quarkus.log.cdi.runtime.LogRuntimeConfig;
 
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.InjectableInstance;
+import io.quarkus.runtime.RuntimeValue;
 import io.quarkus.runtime.annotations.Recorder;
 
 /**
@@ -23,13 +24,20 @@ public class LogRecorder {
 
     static LogRuntimeConfig CONFIG;
 
+    private final RuntimeValue<LogRuntimeConfig> configValue;
+
     static ServiceValue SERVICE = new ServiceValue();
 
-    public void init(ServiceValue values, LogRuntimeConfig config) {
+    public LogRecorder(RuntimeValue<LogRuntimeConfig> configValue) {
+        this.configValue = configValue;
+    }
+
+    public void init(ServiceValue values) {
 
         InjectableInstance<LogParam> it = Arc.container().select(LogParam.class, Any.Literal.INSTANCE);
         LogParamValueService.init(it.stream());
 
+        LogRuntimeConfig config = configValue.getValue();
         CONFIG = config;
         SERVICE = values;
 
