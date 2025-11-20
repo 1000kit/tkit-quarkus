@@ -35,8 +35,8 @@ public class RestLogProcessor {
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    void init(RestRecorder recorder, RestRuntimeConfig config, RestServiceBuildItem items) {
-        recorder.init(config, items.value);
+    void init(RestRecorder recorder, RestServiceBuildItem items) {
+        recorder.init(items.value);
     }
 
     @BuildStep

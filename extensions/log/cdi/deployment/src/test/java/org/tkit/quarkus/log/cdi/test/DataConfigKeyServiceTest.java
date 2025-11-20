@@ -25,7 +25,7 @@ public class DataConfigKeyServiceTest extends AbstractTest {
         assertLogs()
                 .assertNoEmpty()
                 .assertContains(0,
-                        "INFO  [org.tki.qua.log.cdi.tes.app.DataConfigKeyService] (main) noAnnotationMethod(no-annotation):out no-annotation");
+                        "INFO  [org.tkit.quarkus.log.cdi.test.app.DataConfigKeyService] (main) noAnnotationMethod(no-annotation):out no-annotation");
     }
 
     @Test
