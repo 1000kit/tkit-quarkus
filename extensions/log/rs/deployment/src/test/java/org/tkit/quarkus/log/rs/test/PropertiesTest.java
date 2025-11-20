@@ -30,7 +30,7 @@ public class PropertiesTest extends AbstractTest {
                 .body(is("OK"));
         assertLogs().assertLines(1)
                 .assertContains(0,
-                        "INFO  [org.tki.qua.log.rs.tes.app.PropertiesRestController] (executor-thread-1) GET /properties/test2 [200] [");
+                        "INFO  [org.tkit.quarkus.log.rs.test.app.PropertiesRestController] (executor-thread-1) GET /properties/test2 [200] [");
     }
 
 }

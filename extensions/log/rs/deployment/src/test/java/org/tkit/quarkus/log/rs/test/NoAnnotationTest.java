@@ -23,7 +23,7 @@ public class NoAnnotationTest extends AbstractTest {
                 .body(is("OK"));
         assertLogs().assertLines(1)
                 .assertContains(0,
-                        "INFO  [org.tki.qua.log.rs.tes.app.NoAnnotationRestController] (executor-thread-1) GET /no-anno/test1 [200] [");
+                        "INFO  [org.tkit.quarkus.log.rs.test.app.NoAnnotationRestController] (executor-thread-1) GET /no-anno/test1 [200] [");
     }
 
 }

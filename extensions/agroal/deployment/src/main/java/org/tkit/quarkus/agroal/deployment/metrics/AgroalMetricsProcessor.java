@@ -43,7 +43,7 @@ public class AgroalMetricsProcessor {
             if (!jdbcBuildTimeConfig.enabled()) {
                 continue;
             }
-            if (dataSourcesBuildTimeConfig.metricsEnabled() && jdbcBuildTimeConfig.enableMetrics().orElse(true)) {
+            if (dataSourcesBuildTimeConfig.metricsEnabled() && jdbcBuildTimeConfig.metrics().enabled().orElse(true)) {
                 datasourceMetrics.produce(new MetricsFactoryConsumerBuildItem(
                         recorder.registerDataSourceMetrics(entry.getKey())));
             }
