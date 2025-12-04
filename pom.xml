@@ -49,7 +49,7 @@
 
     <properties>
         <!-- Quarkus -->
-        <quarkus.version>3.30.0</quarkus.version>
+        <quarkus.version>3.30.2</quarkus.version>
         <quarkus.hibernate-orm.version>7.1.6.Final</quarkus.hibernate-orm.version>
         <quarkiverse.mockserver.version>1.15.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.5.2</quarkus.jandex-plugin.version>
