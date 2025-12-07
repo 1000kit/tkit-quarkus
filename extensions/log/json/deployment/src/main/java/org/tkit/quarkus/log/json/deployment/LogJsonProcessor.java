@@ -15,7 +15,6 @@
  */
 package org.tkit.quarkus.log.json.deployment;
 
-import org.tkit.quarkus.log.json.LogJsonConfig;
 import org.tkit.quarkus.log.json.LogJsonRecorder;
 
 import io.quarkus.deployment.annotations.BuildProducer;
@@ -36,7 +35,7 @@ public class LogJsonProcessor {
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    public LogConsoleFormatBuildItem setUpFormatter(LogJsonRecorder recorder, LogJsonConfig config) {
-        return new LogConsoleFormatBuildItem(recorder.initializeJsonLogging(config));
+    public LogConsoleFormatBuildItem setUpFormatter(LogJsonRecorder recorder) {
+        return new LogConsoleFormatBuildItem(recorder.initializeJsonLogging());
     }
 }
