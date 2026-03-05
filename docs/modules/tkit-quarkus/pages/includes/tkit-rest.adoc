@@ -7,7 +7,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-rest_tkit-rs-response-propagation-headers]] [.property-path]##link:#tkit-quarkus-rest_tkit-rs-response-propagation-headers[`tkit.rs.response.propagation.headers`]##
+a| [[tkit-quarkus-rest_tkit-rs-response-propagation-headers]] [.property-path]##link:#tkit-quarkus-rest_tkit-rs-response-propagation-headers[`+++tkit.rs.response.propagation.headers+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.rs.response.propagation.headers+++[]
 endif::add-copy-button-to-config-props[]
