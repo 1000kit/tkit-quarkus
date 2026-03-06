@@ -31,15 +31,15 @@ public class RestServiceValue {
         return mapClasses.stream().map(x -> classes.get(x)).collect(Collectors.toList());
     }
 
-    ClassItem get(String clazz) {
+    public ClassItem get(String clazz) {
         return classes.get(clazz);
     }
 
-    ClassItem getOrCreate(String clazz) {
+    public ClassItem getOrCreate(String clazz) {
         return classes.computeIfAbsent(clazz, c -> createClass(clazz));
     }
 
-    void updateMapping() {
+    public void updateMapping() {
         classes.forEach((k, v) -> {
             if (v.config != null && v.config.configKey != null) {
                 mapping.computeIfAbsent(v.config.configKey, t -> new HashSet<>()).add(k);
@@ -62,7 +62,7 @@ public class RestServiceValue {
         public Map<String, MethodItem> methods = new HashMap<>();
         public Map<String, Set<String>> mapping = new HashMap<>();
 
-        MethodItem getOrCreate(String method) {
+        public MethodItem getOrCreate(String method) {
             return methods.computeIfAbsent(method, c -> createMethod(method));
         }
 
@@ -121,7 +121,7 @@ public class RestServiceValue {
         return c;
     }
 
-    static RestServiceAnnotation createConfig() {
+    public static RestServiceAnnotation createConfig() {
         RestServiceAnnotation item = new RestServiceAnnotation();
         item.log = true;
         item.payload = false;
