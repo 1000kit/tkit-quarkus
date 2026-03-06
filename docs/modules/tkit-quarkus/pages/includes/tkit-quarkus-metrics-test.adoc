@@ -7,7 +7,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-metrics-test_tkit-metrics-test-disabled]] [.property-path]##link:#tkit-quarkus-metrics-test_tkit-metrics-test-disabled[`tkit.metrics-test.disabled`]##
+a| [[tkit-quarkus-metrics-test_tkit-metrics-test-disabled]] [.property-path]##link:#tkit-quarkus-metrics-test_tkit-metrics-test-disabled[`+++tkit.metrics-test.disabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.metrics-test.disabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -28,7 +28,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++false+++`
 
-a| [[tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys]] [.property-path]##link:#tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys[`tkit.metrics-test.keys."keys"`]##
+a| [[tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys]] [.property-path]##link:#tkit-quarkus-metrics-test_tkit-metrics-test-keys-keys[`+++tkit.metrics-test.keys."keys"+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.metrics-test.keys."keys"+++[]
 endif::add-copy-button-to-config-props[]

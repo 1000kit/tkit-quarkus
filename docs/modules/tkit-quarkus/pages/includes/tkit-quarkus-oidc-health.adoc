@@ -7,7 +7,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-oidc-health_tkit-oidc-health-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-enabled[`tkit.oidc.health.enabled`]##
+a| [[tkit-quarkus-oidc-health_tkit-oidc-health-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-enabled[`+++tkit.oidc.health.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.oidc.health.enabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -28,7 +28,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++true+++`
 
-a| [[tkit-quarkus-oidc-health_tkit-oidc-health-default-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-default-enabled[`tkit.oidc.health.default.enabled`]##
+a| [[tkit-quarkus-oidc-health_tkit-oidc-health-default-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-default-enabled[`+++tkit.oidc.health.default.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.oidc.health.default.enabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -49,7 +49,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++true+++`
 
-a| [[tkit-quarkus-oidc-health_tkit-oidc-health-static-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-static-enabled[`tkit.oidc.health.static.enabled`]##
+a| [[tkit-quarkus-oidc-health_tkit-oidc-health-static-enabled]] [.property-path]##link:#tkit-quarkus-oidc-health_tkit-oidc-health-static-enabled[`+++tkit.oidc.health.static.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.oidc.health.static.enabled+++[]
 endif::add-copy-button-to-config-props[]

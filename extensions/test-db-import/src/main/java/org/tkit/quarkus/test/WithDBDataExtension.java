@@ -13,9 +13,9 @@ import org.tkit.quarkus.test.dbunit.LocalDatabase;
 import io.quarkus.test.junit.callback.*;
 
 /**
- * This Quarkus Junit5 extension is using the db-import service to import data in the database.
+ * This Quarkus Junit extension is using the db-import service to import data in the database.
  * The data to for the import needs to be in the class-path.
- * Only the xml data formats are supported.
+ * Only the XML data formats are supported.
  *
  * @see WithDBData
  */

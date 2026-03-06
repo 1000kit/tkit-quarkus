@@ -38,7 +38,7 @@ public class ConstraintException extends DAOException {
      * @param params the exception parameters.
      */
     public ConstraintException(String constraints, Enum<?> messageKey, Throwable cause, Serializable... params) {
-        super(messageKey, cause, params);
+        super(messageKey, cause, new Object[] { params });
         addParameter(PARAMETER, constraints);
     }
 

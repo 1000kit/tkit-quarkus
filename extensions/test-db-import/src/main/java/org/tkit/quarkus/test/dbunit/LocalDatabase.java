@@ -1,5 +1,7 @@
 package org.tkit.quarkus.test.dbunit;
 
+import static org.tkit.quarkus.test.dbunit.ConfigurationConst.DEFAULT_DATASOURCE_VALUE;
+
 import java.sql.Connection;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,8 +62,7 @@ public class LocalDatabase implements Database {
 
     protected IDatabaseConnection getConnection(String dataSourceName) {
         try {
-            String dsKey = dataSourceName.equals("default") ? "default" : dataSourceName;
-            DataSource dataSource = dataSourceCache.computeIfAbsent(dsKey, this::createDataSource);
+            DataSource dataSource = dataSourceCache.computeIfAbsent(dataSourceName, this::createDataSource);
             Connection con = dataSource.getConnection();
             log.debug("[DB-IMPORT] Get connection from pooled datasource {}", dataSourceName);
             DatabaseConnection dbCon = new DatabaseConnection(con);
@@ -76,14 +77,14 @@ public class LocalDatabase implements Database {
 
     protected DataSource createDataSource(String name) {
         try {
-            String prefix = "tkit-db-import.quarkus.datasource.";
-            if (name != null && !name.equals("default")) {
+            String prefix = ConfigurationConst.DATASOURCE_PREFIX;
+            if (name != null && !name.equals(DEFAULT_DATASOURCE_VALUE)) {
                 prefix = prefix + name + ".";
             }
             Config config = ConfigProvider.getConfig();
-            String username = config.getValue(prefix + "username", String.class);
-            String password = config.getValue(prefix + "password", String.class);
-            String url = config.getValue(prefix + "jdbc.url", String.class);
+            String username = config.getValue(prefix + ConfigurationConst.USERNAME, String.class);
+            String password = config.getValue(prefix + ConfigurationConst.PASSWORD, String.class);
+            String url = config.getValue(prefix + ConfigurationConst.JDBC_URL, String.class);
 
             // Extract JDBC pool configuration
             Integer jdbcMaxSize = config.getOptionalValue(prefix + "jdbc.max-size", Integer.class).orElse(20);

@@ -7,7 +7,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default[`tkit.jpa.tenant.default`]##
+a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-default[`+++tkit.jpa.tenant.default+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.jpa.tenant.default+++[]
 endif::add-copy-button-to-config-props[]
@@ -28,7 +28,7 @@ endif::add-copy-button-to-env-var[]
 |string
 |`+++default+++`
 
-a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-enabled]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-enabled[`tkit.jpa.tenant.root.enabled`]##
+a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-enabled]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-enabled[`+++tkit.jpa.tenant.root.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.jpa.tenant.root.enabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -49,7 +49,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++false+++`
 
-a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-value]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-value[`tkit.jpa.tenant.root.value`]##
+a| [[tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-value]] [.property-path]##link:#tkit-quarkus-jpa-tenant_tkit-jpa-tenant-root-value[`+++tkit.jpa.tenant.root.value+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.jpa.tenant.root.value+++[]
 endif::add-copy-button-to-config-props[]

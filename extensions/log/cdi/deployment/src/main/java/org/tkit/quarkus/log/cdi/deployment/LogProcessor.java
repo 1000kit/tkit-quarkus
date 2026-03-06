@@ -20,7 +20,6 @@ import io.quarkus.arc.processor.BuildExtension;
 import io.quarkus.deployment.annotations.*;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
-import io.quarkus.deployment.builditem.RuntimeConfigSetupCompleteBuildItem;
 
 public class LogProcessor {
 
@@ -42,7 +41,6 @@ public class LogProcessor {
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    @Consume(RuntimeConfigSetupCompleteBuildItem.class)
     void configureRuntimeProperties(LogRecorder recorder, ServiceBuildItem items) {
         recorder.init(items.values);
     }

@@ -10,7 +10,7 @@ import io.quarkus.test.junit.callback.*;
 import io.quarkus.test.keycloak.client.KeycloakTestClient;
 
 /**
- * This junit5 extension is using the
+ * This junit extension is using the
  *
  * @see KeycloakTestClient
  *      to generate clients with scopes

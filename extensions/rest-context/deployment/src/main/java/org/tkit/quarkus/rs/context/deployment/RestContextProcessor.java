@@ -16,7 +16,6 @@ import io.quarkus.arc.processor.BeanInfo;
 import io.quarkus.deployment.annotations.*;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
-import io.quarkus.deployment.builditem.RuntimeConfigSetupCompleteBuildItem;
 
 public class RestContextProcessor {
 
@@ -30,7 +29,6 @@ public class RestContextProcessor {
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    @Consume(RuntimeConfigSetupCompleteBuildItem.class)
     public void restContextInit(RestContextTenantRecorder recorder, AnnotationDataBuildItem dataBuildItem) {
         recorder.init(dataBuildItem.data);
     }

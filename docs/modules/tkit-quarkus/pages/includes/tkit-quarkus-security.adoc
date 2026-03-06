@@ -7,7 +7,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[tkit-quarkus-security_tkit-security-auth-enabled]] [.property-path]##link:#tkit-quarkus-security_tkit-security-auth-enabled[`tkit.security.auth.enabled`]##
+a| [[tkit-quarkus-security_tkit-security-auth-enabled]] [.property-path]##link:#tkit-quarkus-security_tkit-security-auth-enabled[`+++tkit.security.auth.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.security.auth.enabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -28,7 +28,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++true+++`
 
-a| [[tkit-quarkus-security_tkit-security-events-authorization-log]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authorization-log[`tkit.security.events.authorization.log`]##
+a| [[tkit-quarkus-security_tkit-security-events-authorization-log]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authorization-log[`+++tkit.security.events.authorization.log+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.security.events.authorization.log+++[]
 endif::add-copy-button-to-config-props[]
@@ -49,7 +49,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++true+++`
 
-a| [[tkit-quarkus-security_tkit-security-events-authorization-template]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authorization-template[`tkit.security.events.authorization.template`]##
+a| [[tkit-quarkus-security_tkit-security-events-authorization-template]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authorization-template[`+++tkit.security.events.authorization.template+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.security.events.authorization.template+++[]
 endif::add-copy-button-to-config-props[]
@@ -70,7 +70,7 @@ endif::add-copy-button-to-env-var[]
 |string
 |`+++Authorization failed, response 403, request %1$s %2$s+++`
 
-a| [[tkit-quarkus-security_tkit-security-events-authentication-log]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authentication-log[`tkit.security.events.authentication.log`]##
+a| [[tkit-quarkus-security_tkit-security-events-authentication-log]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authentication-log[`+++tkit.security.events.authentication.log+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.security.events.authentication.log+++[]
 endif::add-copy-button-to-config-props[]
@@ -91,7 +91,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++true+++`
 
-a| [[tkit-quarkus-security_tkit-security-events-authentication-template]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authentication-template[`tkit.security.events.authentication.template`]##
+a| [[tkit-quarkus-security_tkit-security-events-authentication-template]] [.property-path]##link:#tkit-quarkus-security_tkit-security-events-authentication-template[`+++tkit.security.events.authentication.template+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++tkit.security.events.authentication.template+++[]
 endif::add-copy-button-to-config-props[]

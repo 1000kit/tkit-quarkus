@@ -1,4 +1,4 @@
-package org.tkit.quarkus.log.rs;
+package org.tkit.quarkus.log.rs.deployment;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import org.jboss.jandex.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.tkit.quarkus.log.rs.LogRestService;
+import org.tkit.quarkus.log.rs.RestRecorder;
+import org.tkit.quarkus.log.rs.RestServiceValue;
 
 import io.quarkus.arc.deployment.BeanArchiveIndexBuildItem;
 import io.quarkus.arc.deployment.BeanDiscoveryFinishedBuildItem;

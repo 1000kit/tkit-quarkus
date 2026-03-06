@@ -2,7 +2,7 @@
 
 include::./includes/attributes.adoc[]
 
-Test extension for data import from excel into database during unit tests.
+Test extension for data import from XML into database during unit tests.
 
 === Installation
 

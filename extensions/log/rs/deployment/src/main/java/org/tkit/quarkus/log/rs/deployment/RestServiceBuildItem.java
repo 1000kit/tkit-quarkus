@@ -1,4 +1,6 @@
-package org.tkit.quarkus.log.rs;
+package org.tkit.quarkus.log.rs.deployment;
+
+import org.tkit.quarkus.log.rs.RestServiceValue;
 
 import io.quarkus.builder.item.SimpleBuildItem;
 
