@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>org.tkit.quarkus.lib</groupId>
-            <artifactId>tkit-quarkus-test-db-import-deployment</artifactId>
+            <artifactId>tkit-quarkus-test-db-import</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
