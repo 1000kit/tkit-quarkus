@@ -81,7 +81,7 @@
         <!-- Documentation -->
         <asciidoctorj.version>3.0.1</asciidoctorj.version>
         <asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>9.0.2</git-commit-id-maven-plugin.version>
+        <git-commit-id-maven-plugin.version>9.1.0</git-commit-id-maven-plugin.version>
 
         <!-- Other -->
         <dbunit.version>3.0.0</dbunit.version>
