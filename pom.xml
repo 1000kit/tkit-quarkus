@@ -49,11 +49,11 @@
 
     <properties>
         <!-- Quarkus -->
-        <quarkus.version>3.32.3</quarkus.version>
-        <quarkus.hibernate-orm.version>7.2.4.Final</quarkus.hibernate-orm.version>
-        <quarkiverse.mockserver.version>1.16.0</quarkiverse.mockserver.version>
+        <quarkus.version>3.33.1</quarkus.version>
+        <quarkus.hibernate-orm.version>7.2.6.Final</quarkus.hibernate-orm.version>
+        <quarkiverse.mockserver.version>1.17.0</quarkiverse.mockserver.version>
         <quarkus.jandex-plugin.version>3.5.3</quarkus.jandex-plugin.version>
-        <quarkus.keycloak.version>26.4.5</quarkus.keycloak.version>
+        <quarkus.keycloak.version>26.5.4</quarkus.keycloak.version>
         <!-- build -->
         <format.skip>false</format.skip>
         <enforcer.skip>false</enforcer.skip>
