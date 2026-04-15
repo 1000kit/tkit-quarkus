@@ -19,9 +19,10 @@ Please, see the latest released [documentation page](https://1000kit.github.io/t
 
 Branches:
 * `main` - Quarkus latest version
-* `4.x` &nbsp;&nbsp;- Quarkus 3.27 LTS
-* `3.x` &nbsp;&nbsp;- Quarkus 3.20 LTS (deprecated)
-* `2.x` &nbsp;&nbsp;- Quarkus 3.15 LTS (deprecated)
+* `5.x` &nbsp;&nbsp;- Quarkus 3.33 LTS
+* `4.x` &nbsp;&nbsp;- Quarkus 3.27 LTS (deprecated)
+* `3.x` &nbsp;&nbsp;- Quarkus 3.20 LTS (archived)
+* `2.x` &nbsp;&nbsp;- Quarkus 3.15 LTS (archived)
 
 Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://search.maven.org/artifact/org.tkit.quarkus.lib/tkit-quarkus-bom).
 
