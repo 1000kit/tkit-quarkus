@@ -23,9 +23,6 @@ public class TokenParserService {
     @Inject
     JWTAuthContextInfo authContextInfo;
 
-    @Inject
-    JWTParser parser;
-
     /**
      * Parse RAW web token.
      *
