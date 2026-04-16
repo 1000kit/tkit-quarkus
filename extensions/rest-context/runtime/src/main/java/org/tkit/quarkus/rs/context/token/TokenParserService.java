@@ -1,6 +1,6 @@
 package org.tkit.quarkus.rs.context.token;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
@@ -13,12 +13,9 @@ import org.jose4j.lang.JoseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.smallrye.jwt.auth.principal.DefaultJWTCallerPrincipal;
-import io.smallrye.jwt.auth.principal.JWTAuthContextInfo;
-import io.smallrye.jwt.auth.principal.JWTParser;
-import io.smallrye.jwt.auth.principal.ParseException;
+import io.smallrye.jwt.auth.principal.*;
 
-@RequestScoped
+@ApplicationScoped
 public class TokenParserService {
 
     private static final Logger log = LoggerFactory.getLogger(TokenParserService.class);
@@ -96,7 +93,7 @@ public class TokenParserService {
                 info = new JWTAuthContextInfo(authContextInfo);
                 info.setPublicKeyLocation(url);
             }
-            return parser.parse(request.getRawToken(), info);
+            return JWTCallerPrincipalFactory.instance().parse(request.getRawToken(), info);
         }
         return new DefaultJWTCallerPrincipal(request.getRawToken(), request.getType(), jwtClaims);
     }
