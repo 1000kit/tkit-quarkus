@@ -3,10 +3,9 @@ package org.tkit.quarkus.test.dbunit;
 import static org.tkit.quarkus.test.dbunit.ConfigurationConst.DEFAULT_DATASOURCE_VALUE;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.sql.DataSource;
+import java.util.Properties;
 
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
@@ -19,16 +18,9 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.agroal.api.AgroalDataSource;
-import io.agroal.api.configuration.supplier.AgroalDataSourceConfigurationSupplier;
-import io.agroal.api.security.NamePrincipal;
-import io.agroal.api.security.SimplePassword;
-
 public class LocalDatabase implements Database {
 
     private static final Logger log = LoggerFactory.getLogger(LocalDatabase.class);
-
-    private static final ConcurrentHashMap<String, DataSource> dataSourceCache = new ConcurrentHashMap<>();
 
     @Override
     public void deleteData(Request request) throws Exception {
@@ -62,55 +54,27 @@ public class LocalDatabase implements Database {
 
     protected IDatabaseConnection getConnection(String dataSourceName) {
         try {
-            DataSource dataSource = dataSourceCache.computeIfAbsent(dataSourceName, this::createDataSource);
-            Connection con = dataSource.getConnection();
-            log.debug("[DB-IMPORT] Get connection from pooled datasource {}", dataSourceName);
-            DatabaseConnection dbCon = new DatabaseConnection(con);
-            dbCon.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
-            // support only postgresql
-            dbCon.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new CustomPostgresDataTypeFactory());
-            return dbCon;
-        } catch (Exception ex) {
-            throw new RuntimeException("Error create database connection", ex);
-        }
-    }
-
-    protected DataSource createDataSource(String name) {
-        try {
             String prefix = ConfigurationConst.DATASOURCE_PREFIX;
-            if (name != null && !name.equals(DEFAULT_DATASOURCE_VALUE)) {
-                prefix = prefix + name + ".";
+            if (dataSourceName != null && !dataSourceName.equals(DEFAULT_DATASOURCE_VALUE)) {
+                prefix = prefix + dataSourceName + ".";
             }
             Config config = ConfigProvider.getConfig();
             String username = config.getValue(prefix + ConfigurationConst.USERNAME, String.class);
             String password = config.getValue(prefix + ConfigurationConst.PASSWORD, String.class);
             String url = config.getValue(prefix + ConfigurationConst.JDBC_URL, String.class);
-
-            // Extract JDBC pool configuration
-            Integer jdbcMaxSize = config.getOptionalValue(prefix + "jdbc.max-size", Integer.class).orElse(20);
-            Integer jdbcMinSize = config.getOptionalValue(prefix + "jdbc.min-size", Integer.class).orElse(2);
-            Integer jdbcInitialSize = config.getOptionalValue(prefix + "jdbc.initial-size", Integer.class).orElse(2);
-            Integer acquisitionTimeoutSeconds = config.getOptionalValue(prefix + "jdbc.acquisition-timeout", Integer.class)
-                    .orElse(10);
-
-            log.info("[DB-IMPORT] Creating pooled datasource for {} with url: {} (pool size: {}-{})", name, url, jdbcMinSize,
-                    jdbcMaxSize);
-
-            AgroalDataSourceConfigurationSupplier configSupplier = new AgroalDataSourceConfigurationSupplier()
-                    .connectionPoolConfiguration(cp -> cp
-                            .maxSize(jdbcMaxSize)
-                            .minSize(jdbcMinSize)
-                            .initialSize(jdbcInitialSize)
-                            .acquisitionTimeout(java.time.Duration.ofSeconds(acquisitionTimeoutSeconds))
-                            .connectionFactoryConfiguration(cf -> cf
-                                    .jdbcUrl(url)
-                                    .principal(new NamePrincipal(username))
-                                    .credential(new SimplePassword(password))
-                                    .autoCommit(true)));
-
-            return AgroalDataSource.from(configSupplier);
+            Properties props = new Properties();
+            props.setProperty("user", username);
+            props.setProperty("password", password);
+            Connection con = DriverManager.getConnection(url, props);
+            log.debug("[DB-IMPORT] Get fresh JDBC connection for datasource {}", dataSourceName);
+            DatabaseConnection dbCon = new DatabaseConnection(con);
+            dbCon.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
+            // support only postgresql
+            dbCon.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY,
+                    new CustomPostgresDataTypeFactory());
+            return dbCon;
         } catch (Exception ex) {
-            throw new RuntimeException("Error creating datasource for: " + name, ex);
+            throw new RuntimeException("Error create database connection", ex);
         }
     }
 
@@ -118,7 +82,8 @@ public class LocalDatabase implements Database {
         boolean columnSensing = request.ano().columnSensing();
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         if (Objects.requireNonNull(request.type()) == FileType.XML) {
-            return new FlatXmlDataSetBuilder().setColumnSensing(columnSensing).build(cl.getResourceAsStream(request.path()));
+            return new FlatXmlDataSetBuilder().setColumnSensing(columnSensing)
+                    .build(cl.getResourceAsStream(request.path()));
         }
         throw new RuntimeException("No datasource found for the type " + request.type());
     }
