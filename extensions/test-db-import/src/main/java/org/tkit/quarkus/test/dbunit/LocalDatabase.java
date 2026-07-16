@@ -1,11 +1,7 @@
 package org.tkit.quarkus.test.dbunit;
 
-import static org.tkit.quarkus.test.dbunit.ConfigurationConst.DEFAULT_DATASOURCE_VALUE;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.Objects;
-import java.util.Properties;
 
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
@@ -13,8 +9,6 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
-import org.eclipse.microprofile.config.Config;
-import org.eclipse.microprofile.config.ConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,19 +48,8 @@ public class LocalDatabase implements Database {
 
     protected IDatabaseConnection getConnection(String dataSourceName) {
         try {
-            String prefix = ConfigurationConst.DATASOURCE_PREFIX;
-            if (dataSourceName != null && !dataSourceName.equals(DEFAULT_DATASOURCE_VALUE)) {
-                prefix = prefix + dataSourceName + ".";
-            }
-            Config config = ConfigProvider.getConfig();
-            String username = config.getValue(prefix + ConfigurationConst.USERNAME, String.class);
-            String password = config.getValue(prefix + ConfigurationConst.PASSWORD, String.class);
-            String url = config.getValue(prefix + ConfigurationConst.JDBC_URL, String.class);
-            Properties props = new Properties();
-            props.setProperty("user", username);
-            props.setProperty("password", password);
-            Connection con = DriverManager.getConnection(url, props);
-            log.debug("[DB-IMPORT] Get fresh JDBC connection for datasource {}", dataSourceName);
+            Connection con = DataSourcePool.getConnection(dataSourceName);
+            log.debug("[DB-IMPORT] Get connection from pooled datasource {}", dataSourceName);
             DatabaseConnection dbCon = new DatabaseConnection(con);
             dbCon.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
             // support only postgresql

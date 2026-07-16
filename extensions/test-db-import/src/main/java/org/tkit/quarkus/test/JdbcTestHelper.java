@@ -1,13 +1,8 @@
 package org.tkit.quarkus.test;
 
-import static org.tkit.quarkus.test.dbunit.ConfigurationConst.DATASOURCE_PREFIX;
 import static org.tkit.quarkus.test.dbunit.ConfigurationConst.DEFAULT_DATASOURCE_VALUE;
-import static org.tkit.quarkus.test.dbunit.ConfigurationConst.JDBC_URL;
-import static org.tkit.quarkus.test.dbunit.ConfigurationConst.PASSWORD;
-import static org.tkit.quarkus.test.dbunit.ConfigurationConst.USERNAME;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -17,10 +12,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Properties;
 
-import org.eclipse.microprofile.config.Config;
-import org.eclipse.microprofile.config.ConfigProvider;
+import org.tkit.quarkus.test.dbunit.DataSourcePool;
 
 /**
  * Helper class for direct JDBC operations in tests.
@@ -48,18 +41,7 @@ public class JdbcTestHelper {
     }
 
     protected Connection getConnection() throws SQLException {
-        String prefix = DATASOURCE_PREFIX;
-        if (datasourceName != null && !datasourceName.equals(DEFAULT_DATASOURCE_VALUE)) {
-            prefix = prefix + datasourceName + ".";
-        }
-        Config config = ConfigProvider.getConfig();
-        String url = config.getValue(prefix + JDBC_URL, String.class);
-        String username = config.getValue(prefix + USERNAME, String.class);
-        String password = config.getValue(prefix + PASSWORD, String.class);
-        Properties props = new Properties();
-        props.setProperty("user", username);
-        props.setProperty("password", password);
-        return DriverManager.getConnection(url, props);
+        return DataSourcePool.getConnection(datasourceName);
     }
 
     public long count(String sql, Object... params) {
