@@ -26,15 +26,34 @@ public class DataSourcePool {
     }
 
     public static Connection getConnection(String name) throws SQLException {
-        return CACHE.computeIfAbsent(name, DataSourcePool::create).getConnection();
+        String cacheKey = cacheKey(name);
+        return CACHE.computeIfAbsent(cacheKey, k -> create(name)).getConnection();
+    }
+
+    /**
+     * Builds a cache key that includes the current JDBC URL so that a stale pooled DataSource is
+     * never reused after the underlying database changed - e.g. when a Quarkus app reload
+     * (TestProfile switch) re-provisions the DevServices database on a new URL. A changed URL yields
+     * a new key and therefore a fresh DataSource.
+     */
+    private static String cacheKey(String name) {
+        String url = ConfigProvider.getConfig()
+                .getOptionalValue(prefix(name) + ConfigurationConst.JDBC_URL, String.class)
+                .orElse(name);
+        return name + "|" + url;
+    }
+
+    private static String prefix(String name) {
+        String prefix = ConfigurationConst.DATASOURCE_PREFIX;
+        if (name != null && !name.equals(ConfigurationConst.DEFAULT_DATASOURCE_VALUE)) {
+            prefix = prefix + name + ".";
+        }
+        return prefix;
     }
 
     private static DataSource create(String name) {
         try {
-            String prefix = ConfigurationConst.DATASOURCE_PREFIX;
-            if (name != null && !name.equals(ConfigurationConst.DEFAULT_DATASOURCE_VALUE)) {
-                prefix = prefix + name + ".";
-            }
+            String prefix = prefix(name);
             Config config = ConfigProvider.getConfig();
             String username = config.getValue(prefix + ConfigurationConst.USERNAME, String.class);
             String password = config.getValue(prefix + ConfigurationConst.PASSWORD, String.class);
