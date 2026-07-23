@@ -84,7 +84,7 @@
         <git-commit-id-maven-plugin.version>10.0.0</git-commit-id-maven-plugin.version>
 
         <!-- Other -->
-        <dbunit.version>3.2.0</dbunit.version>
+        <dbunit.version>3.3.0</dbunit.version>
     </properties>
 
 
