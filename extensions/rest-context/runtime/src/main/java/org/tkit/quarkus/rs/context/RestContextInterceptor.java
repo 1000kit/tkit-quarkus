@@ -9,6 +9,7 @@ import jakarta.ws.rs.container.*;
 import jakarta.ws.rs.ext.Provider;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.jboss.resteasy.reactive.server.Cancellable;
 import org.tkit.quarkus.context.ApplicationContext;
 import org.tkit.quarkus.context.ApplicationContextContainer;
 import org.tkit.quarkus.context.Context;
@@ -22,6 +23,7 @@ import io.quarkus.arc.Unremovable;
 @Provider
 @Unremovable
 @Priority(1)
+@Cancellable(false)
 public class RestContextInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
 
     @Inject

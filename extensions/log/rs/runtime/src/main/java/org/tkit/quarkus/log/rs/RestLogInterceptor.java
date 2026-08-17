@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
 
 import org.jboss.logging.MDC;
+import org.jboss.resteasy.reactive.server.Cancellable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 @Provider
 @Priority(5)
+@Cancellable(false)
 public class RestLogInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
 
     /**

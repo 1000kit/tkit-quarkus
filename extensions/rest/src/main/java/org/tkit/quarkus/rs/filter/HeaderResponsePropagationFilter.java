@@ -10,10 +10,12 @@ import jakarta.ws.rs.container.ContainerResponseFilter;
 import jakarta.ws.rs.ext.Provider;
 
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.reactive.server.Cancellable;
 import org.tkit.quarkus.rs.RestConfig;
 
 @Provider
 @Priority(Priorities.HEADER_DECORATOR)
+@Cancellable(false)
 public class HeaderResponsePropagationFilter implements ContainerResponseFilter {
 
     private static final Logger log = Logger.getLogger(HeaderResponsePropagationFilter.class);
