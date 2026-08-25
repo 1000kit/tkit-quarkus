@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
 
 import org.jboss.logging.MDC;
+import org.jboss.resteasy.reactive.server.Cancellable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 @Provider
 @Priority(5)
+@Cancellable(false)
 public class RestLogInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
 
     /**
@@ -98,10 +100,10 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
         // if we do not have context we are in error mode
         if (restContext == null) {
             if (config.error().enabled()) {
-                Response.StatusType status = responseContext.getStatusInfo();
+                Response.StatusType status = statusInfo(responseContext);
                 log.info(String.format(config.end().template(), requestContext.getMethod(),
                         requestContext.getUriInfo().getPath(), 0.000,
-                        status.getStatusCode(), status.getReasonPhrase(), requestContext.getUriInfo().getRequestUri()));
+                        statusCode(status), reasonPhrase(status), requestContext.getUriInfo().getRequestUri()));
             }
             return;
         }
@@ -122,19 +124,23 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             }
             if (config.end().enabled() && logMsg) {
 
-                Response.StatusType status = responseContext.getStatusInfo();
+                Response.StatusType status = statusInfo(responseContext);
 
                 if (config.end().mdc().enabled()) {
                     MDC.put(config.end().mdc().durationName(), restContext.durationSec);
                     restContext.mdcKeys.add(config.end().mdc().durationName());
 
-                    MDC.put(config.end().mdc().responseStatusName(), status.getStatusCode());
-                    restContext.mdcKeys.add(config.end().mdc().responseStatusName());
+                    // no status when the client dropped the connection, MDC does not accept null
+                    Integer statusCode = statusCode(status);
+                    if (statusCode != null) {
+                        MDC.put(config.end().mdc().responseStatusName(), statusCode);
+                        restContext.mdcKeys.add(config.end().mdc().responseStatusName());
+                    }
                 }
 
                 LoggerFactory.getLogger(restContext.logger)
                         .info(String.format(config.end().template(), restContext.method, restContext.path,
-                                restContext.durationString, status.getStatusCode(), status.getReasonPhrase(),
+                                restContext.durationString, statusCode(status), reasonPhrase(status),
                                 restContext.uri));
             }
         } finally {
@@ -142,6 +148,27 @@ public class RestLogInterceptor implements ContainerRequestFilter, ContainerResp
             restContext.mdcKeys.forEach(MDC::remove);
         }
 
+    }
+
+    /**
+     * Reads the response status. When the client dropped the connection, no response was ever
+     * produced and accessing it throws. In that case {@code null} is returned, so that the end
+     * log message - and with it the traceId - is still written.
+     */
+    private static Response.StatusType statusInfo(ContainerResponseContext responseContext) {
+        try {
+            return responseContext.getStatusInfo();
+        } catch (RuntimeException ex) {
+            return null;
+        }
+    }
+
+    private static Integer statusCode(Response.StatusType status) {
+        return status != null ? status.getStatusCode() : null;
+    }
+
+    private static String reasonPhrase(Response.StatusType status) {
+        return status != null ? status.getReasonPhrase() : null;
     }
 
 }
