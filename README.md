@@ -19,8 +19,9 @@ Please, see the latest released [documentation page](https://1000kit.github.io/t
 
 Branches:
 * `main` - Quarkus latest version
-* `5.x` &nbsp;&nbsp;- Quarkus 3.33 LTS
-* `4.x` &nbsp;&nbsp;- Quarkus 3.27 LTS (deprecated)
+* `6.x` &nbsp;&nbsp;- Quarkus 3.33 LTS
+* `5.x` &nbsp;&nbsp;- Quarkus 3.33 LTS (deprecated)
+* `4.x` &nbsp;&nbsp;- Quarkus 3.27 LTS (archived)
 * `3.x` &nbsp;&nbsp;- Quarkus 3.20 LTS (archived)
 * `2.x` &nbsp;&nbsp;- Quarkus 3.15 LTS (archived)
 
