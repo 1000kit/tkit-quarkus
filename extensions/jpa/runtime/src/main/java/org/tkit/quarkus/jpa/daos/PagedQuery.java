@@ -1,5 +1,6 @@
 package org.tkit.quarkus.jpa.daos;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import jakarta.persistence.EntityManager;
@@ -8,6 +9,7 @@ import jakarta.persistence.criteria.*;
 
 import org.hibernate.query.sqm.tree.SqmCopyContext;
 import org.hibernate.query.sqm.tree.select.SqmQueryPart;
+import org.hibernate.query.sqm.tree.select.SqmQuerySpec;
 import org.hibernate.query.sqm.tree.select.SqmSelectStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -198,7 +200,11 @@ public class PagedQuery<T> {
         SqmSelectStatement<T> copy = ((SqmSelectStatement<T>) from).copy(SqmCopyContext.simpleContext());
         SqmSelectStatement<T> r = (SqmSelectStatement<T>) result;
         SqmQueryPart<T> part = copy.getQueryPart();
-        // remove group by from the count
+        if (part instanceof SqmQuerySpec<T> querySpec) {
+            querySpec.setGroupByClauseExpressions(List.of());
+            querySpec.setGroupRestriction((jakarta.persistence.criteria.Predicate) null);
+            querySpec.setHavingClausePredicate(null);
+        }
         part.setOrderByClause(null);
         r.setQueryPart(part);
         r.orderBy();
