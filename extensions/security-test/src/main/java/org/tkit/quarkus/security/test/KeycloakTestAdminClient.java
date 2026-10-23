@@ -25,8 +25,10 @@ public class KeycloakTestAdminClient {
     private final String adminUrl;
 
     public KeycloakTestAdminClient() {
-        this.keycloakTestClient = new KeycloakTestClient();
-        adminUrl = keycloakTestClient.getAuthServerUrl().replace("realms", "admin/realms");
+        var tmp = new KeycloakTestClient();
+        var authServerUrl = tmp.getAuthServerUrl();
+        adminUrl = authServerUrl.replace("realms", "admin/realms");
+        this.keycloakTestClient = new KeycloakTestClient(authServerUrl);
     }
 
     /**
